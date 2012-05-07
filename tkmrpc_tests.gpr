@@ -4,7 +4,9 @@ with "tkmrpc_common";
 project TKMRPC_Tests is
 
    Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwal";
-   Linker_Switches   := ("tests/c/assert_request.o");
+   Linker_Switches   :=
+     ("tests/c/assert_request.o",
+      "tests/c/assert_response.o");
 
    for Main use ("test_runner.adb");
    for Source_Dirs use ("tests", "messages/ada");

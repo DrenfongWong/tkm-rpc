@@ -12,7 +12,7 @@
 #define ADA_DATA_CHAR  'b'
 #define ADA_DATA_END   'y'
 
-int assert_data(byte_t *byte)
+static int assert_data(byte_t *byte)
 {
 	int i;
 	for (i = 0; i < BODY_SIZE - 1; i++)
@@ -31,7 +31,7 @@ int assert_data(byte_t *byte)
 	return 1;
 }
 
-void set_data(request_t *req, char c, char end)
+static void set_data(request_t *req, char c, char end)
 {
 	int i;
 	for (i = 0; i < BODY_SIZE; i++)

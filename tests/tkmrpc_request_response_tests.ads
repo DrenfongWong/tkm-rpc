@@ -11,4 +11,8 @@ package TKMRPC_Request_Response_Tests is
    --  Assert that the Ada request type has the same memory layout as the C
    --  variant.
 
+   procedure Assert_Response_Compliance;
+   --  Assert that the Ada response type has the same memory layout as the C
+   --  variant.
+
 end TKMRPC_Request_Response_Tests;
