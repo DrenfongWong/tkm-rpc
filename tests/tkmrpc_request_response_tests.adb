@@ -5,7 +5,7 @@ with System;
 with TKMRPC.Request;
 with TKMRPC.Operations;
 
-package body TKMRPC_Request_Tests is
+package body TKMRPC_Request_Response_Tests is
 
    use Ahven;
    use TKMRPC;
@@ -17,7 +17,7 @@ package body TKMRPC_Request_Tests is
 
    -------------------------------------------------------------------------
 
-   procedure Assert_C_Compliance
+   procedure Assert_Request_Compliance
    is
       use type IC.int;
       use type Operations.Operation_Type;
@@ -42,17 +42,17 @@ package body TKMRPC_Request_Tests is
               Message   => "Request ID mismatch");
       Assert (Condition => My_Req.Data = Ref_Data,
               Message   => "Data mismatch");
-   end Assert_C_Compliance;
+   end Assert_Request_Compliance;
 
    -------------------------------------------------------------------------
 
    procedure Initialize (T : in out Testcase)
    is
    begin
-      T.Set_Name (Name => "Request tests");
+      T.Set_Name (Name => "Request/Response tests");
       T.Add_Test_Routine
-        (Routine => Assert_C_Compliance'Access,
-         Name    => "Assert C compliance");
+        (Routine => Assert_Request_Compliance'Access,
+         Name    => "Assert request compliance");
    end Initialize;
 
-end TKMRPC_Request_Tests;
+end TKMRPC_Request_Response_Tests;
