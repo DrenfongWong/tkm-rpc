@@ -1,0 +1,16 @@
+project TKMRPC_Common is
+
+   for Source_Dirs use ();
+
+   Compiler_Switches := ("-gnatygAdISuxo",
+                         "-gnatVa",
+                         "-gnat05",
+                         "-gnatf",
+                         "-fstack-check",
+                         "-gnato",
+                         "-g");
+
+   Binder_Switches   := ("-E");
+
+end TKMRPC_Common;
+

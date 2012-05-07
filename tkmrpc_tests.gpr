@@ -1,0 +1,26 @@
+with "ahven";
+with "tkmrpc_common";
+
+project TKMRPC_Tests is
+
+   Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwal";
+   Linker_Switches   := ("tests/c/assert_request.o");
+
+   for Main use ("test_runner.adb");
+   for Source_Dirs use ("tests", "messages/ada");
+   for Object_Dir use "obj/tests";
+
+   package Compiler is
+      for Default_Switches ("ada") use Compiler_Switches;
+   end Compiler;
+
+   package Linker is
+      for Default_Switches ("ada") use Linker_Switches;
+   end Linker;
+
+   package Binder is
+      for Default_Switches ("ada") use TKMRPC_Common.Binder_Switches;
+   end Binder;
+
+end TKMRPC_Tests;
+
