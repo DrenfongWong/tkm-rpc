@@ -2,6 +2,8 @@
 #include "operations.h"
 #include "response.h"
 
+#include "assert_utils.h"
+
 #define C_OPERATION  NONCE_CREATE
 #define C_REQUEST_ID 901213123123
 #define C_RESULT     7662524
@@ -13,35 +15,6 @@
 #define ADA_RESULT     33393933393
 #define ADA_DATA_CHAR  'd'
 #define ADA_DATA_END   'y'
-
-static int assert_data(byte_t *byte)
-{
-	int i;
-	for (i = 0; i < BODY_SIZE - 1; i++)
-	{
-		if (*byte != C_DATA_CHAR)
-		{
-			return 0;
-		}
-		byte++;
-	}
-
-	if (*byte != C_DATA_END)
-	{
-		return 0;
-	}
-	return 1;
-}
-
-static void set_data(response_t *res, char c, char end)
-{
-	int i;
-	for (i = 0; i < BODY_SIZE; i++)
-	{
-		res->data[i] = c;
-	}
-	res->data[BODY_SIZE - 1] = end;
-}
 
 int assert_response(response_t *res)
 {
@@ -57,7 +30,7 @@ int assert_response(response_t *res)
 	{
 		return 0;
 	}
-	if (!assert_data(res->data))
+	if (!assert_data(res->data, BODY_SIZE, C_DATA_CHAR, C_DATA_END))
 	{
 		return 0;
 	}
@@ -65,7 +38,7 @@ int assert_response(response_t *res)
 	res->header.operation = ADA_OPERATION;
 	res->header.request_id = ADA_REQUEST_ID;
 	res->header.result = ADA_RESULT;
-	set_data(res, ADA_DATA_CHAR, ADA_DATA_END);
+	set_data(res->data, BODY_SIZE, ADA_DATA_CHAR, ADA_DATA_END);
 
 	return 1;
 }
