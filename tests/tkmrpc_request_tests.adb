@@ -5,8 +5,8 @@ with System;
 with TKMRPC.Operations;
 with TKMRPC.Request.Convert;
 
-package body TKMRPC_Request_Tests is
-
+package body TKMRPC_Request_Tests
+is
    use Ahven;
    use TKMRPC;
 

@@ -6,7 +6,8 @@ with Ahven.Framework;
 with TKMRPC_Request_Tests;
 with TKMRPC_Response_Tests;
 
-procedure Test_Runner is
+procedure Test_Runner
+is
    use Ahven.Framework;
 
    Name : constant String            := "TKMRPC tests";

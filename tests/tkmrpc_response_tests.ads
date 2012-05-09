@@ -1,7 +1,7 @@
 with Ahven.Framework;
 
-package TKMRPC_Response_Tests is
-
+package TKMRPC_Response_Tests
+is
    type Testcase is new Ahven.Framework.Test_Case with null record;
 
    procedure Initialize (T : in out Testcase);
