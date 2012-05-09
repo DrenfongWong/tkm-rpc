@@ -3,7 +3,8 @@ with Ada.Text_IO;
 with Ahven.Text_Runner;
 with Ahven.Framework;
 
-with TKMRPC_Request_Response_Tests;
+with TKMRPC_Request_Tests;
+with TKMRPC_Response_Tests;
 
 procedure Test_Runner is
    use Ahven.Framework;
@@ -12,7 +13,9 @@ procedure Test_Runner is
    S    : constant Test_Suite_Access := Create_Suite (Suite_Name => Name);
 begin
    Add_Test (Suite => S.all,
-             T     => new TKMRPC_Request_Response_Tests.Testcase);
+             T     => new TKMRPC_Request_Tests.Testcase);
+   Add_Test (Suite => S.all,
+             T     => new TKMRPC_Response_Tests.Testcase);
 
    Ada.Text_IO.Put_Line ("Running " & Name & " ... please wait");
 
