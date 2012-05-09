@@ -27,15 +27,16 @@ package body TKMRPC_Request_Response_Tests is
       use type Operations.Operation_Type;
       use type Request.Padded_Data_Type;
 
-      My_Req   : Request.Request_Type
-        := (Header =>
+      My_Req   : Request.Data_Type
+        := (Header      =>
               (Operation  => TKMRPC.Operations.Nonce_Create,
                Request_ID => 234234234),
-            Data   => (others => Character'Pos ('a')));
+            Padded_Data => (others => Character'Pos ('a')));
       Ref_Data : Request.Padded_Data_Type
         := (others => Character'Pos ('b'));
    begin
-      My_Req.Data (Request.Padded_Data_Range'Last) := Character'Pos ('x');
+      My_Req.Padded_Data (Request.Padded_Data_Range'Last)
+        := Character'Pos ('x');
       Assert (Condition => C_Assert_Request (Req => My_Req'Address) = 1,
               Message   => "Not C compliant");
 
@@ -44,7 +45,7 @@ package body TKMRPC_Request_Response_Tests is
               Message   => "Operation mismatch");
       Assert (Condition => My_Req.Header.Request_ID = 896767676767612,
               Message   => "Request ID mismatch");
-      Assert (Condition => My_Req.Data = Ref_Data,
+      Assert (Condition => My_Req.Padded_Data = Ref_Data,
               Message   => "Data mismatch");
    end Assert_Request_Compliance;
 
