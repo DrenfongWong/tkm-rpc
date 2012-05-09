@@ -11,4 +11,7 @@ package TKMRPC_Request_Tests is
    --  Assert that the Ada request type has the same memory layout as the C
    --  variant.
 
+   procedure Stream_Conversion;
+   --  Verify request data to/from stream conversions.
+
 end TKMRPC_Request_Tests;
