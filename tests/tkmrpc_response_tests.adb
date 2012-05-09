@@ -2,8 +2,8 @@ with Interfaces.C;
 
 with System;
 
-with TKMRPC.Response;
 with TKMRPC.Operations;
+with TKMRPC.Response.Convert;
 
 package body TKMRPC_Response_Tests is
 
@@ -15,22 +15,23 @@ package body TKMRPC_Response_Tests is
    function C_Assert_Response (Res : System.Address) return IC.int;
    pragma Import (C, C_Assert_Response, "assert_response");
 
+   Test_Response : constant Response.Data_Type
+     := (Header      =>
+           (Operation  => TKMRPC.Operations.Nonce_Create,
+            Request_ID => 901213123123,
+            Result     => 7662524),
+         Padded_Data => (others => Character'Pos ('c')));
+
    -------------------------------------------------------------------------
 
    procedure Assert_Response_Compliance
    is
       use type IC.int;
-      use type Operations.Operation_Type;
-      use type Response.Padded_Data_Type;
+      use type TKMRPC.Operations.Operation_Type;
+      use type TKMRPC.Response.Padded_Data_Type;
 
-      My_Res   : Response.Data_Type
-        := (Header      =>
-              (Operation  => TKMRPC.Operations.Nonce_Create,
-               Request_ID => 901213123123,
-               Result     => 7662524),
-            Padded_Data => (others => Character'Pos ('c')));
-      Ref_Data : Response.Padded_Data_Type
-        := (others => Character'Pos ('d'));
+      My_Res   : Response.Data_Type        := Test_Response;
+      Ref_Data : Response.Padded_Data_Type := (others => Character'Pos ('d'));
    begin
       My_Res.Padded_Data (Response.Padded_Data_Range'Last)
         := Character'Pos ('x');
@@ -57,6 +58,30 @@ package body TKMRPC_Response_Tests is
       T.Add_Test_Routine
         (Routine => Assert_Response_Compliance'Access,
          Name    => "Assert response compliance");
+      T.Add_Test_Routine
+        (Routine => Stream_Conversion'Access,
+         Name    => "To/from stream conversions");
    end Initialize;
+
+   -------------------------------------------------------------------------
+
+   procedure Stream_Conversion
+   is
+      use TKMRPC.Response;
+      use type TKMRPC.Operations.Operation_Type;
+      use type TKMRPC.Response.Padded_Data_Type;
+
+      Stream : constant Convert.Stream_Type
+        := Convert.To_Stream (S => Test_Response);
+      Res    : constant Data_Type        := Convert.From_Stream (S => Stream);
+      Data   : constant Padded_Data_Type := (others => Character'Pos ('c'));
+   begin
+      Assert (Condition => Res.Header.Operation = Operations.Nonce_Create,
+              Message   => "Operation mismatch");
+      Assert (Condition => Res.Header.Request_ID = 901213123123,
+              Message   => "Request ID mismatch");
+      Assert (Condition => Res.Padded_Data = Data,
+              Message   => "Data mismatch");
+   end Stream_Conversion;
 
 end TKMRPC_Response_Tests;

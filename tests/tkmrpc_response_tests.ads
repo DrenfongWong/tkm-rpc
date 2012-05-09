@@ -11,4 +11,7 @@ package TKMRPC_Response_Tests is
    --  Assert that the Ada response type has the same memory layout as the C
    --  variant.
 
+   procedure Stream_Conversion;
+   --  Verify response data to/from stream conversions.
+
 end TKMRPC_Response_Tests;
