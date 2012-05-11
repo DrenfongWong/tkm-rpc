@@ -5,6 +5,8 @@ with System;
 with TKMRPC.Operations;
 with TKMRPC.Request.Convert;
 
+with Test_Utils;
+
 package body TKMRPC_Request_Tests
 is
    use Ahven;
@@ -15,12 +17,6 @@ is
    function C_Assert_Request (Req : System.Address) return IC.int;
    pragma Import (C, C_Assert_Request, "assert_request");
 
-   Test_Request : constant Request.Data_Type
-     := (Header      =>
-           (Operation  => TKMRPC.Operations.Nonce_Create,
-            Request_ID => 234234234),
-         Padded_Data => (others => Character'Pos ('a')));
-
    -------------------------------------------------------------------------
 
    procedure Assert_Request_Compliance
@@ -29,7 +25,7 @@ is
       use type TKMRPC.Operations.Operation_Type;
       use type TKMRPC.Request.Padded_Data_Type;
 
-      My_Req   : Request.Data_Type        := Test_Request;
+      My_Req   : Request.Data_Type        := Test_Utils.Test_Request;
       Ref_Data : Request.Padded_Data_Type := (others => Character'Pos ('b'));
    begin
       My_Req.Padded_Data (Request.Padded_Data_Range'Last)
@@ -69,7 +65,7 @@ is
       use type TKMRPC.Request.Padded_Data_Type;
 
       Stream : constant Convert.Stream_Type
-        := Convert.To_Stream (S => Test_Request);
+        := Convert.To_Stream (S => Test_Utils.Test_Request);
       Req    : constant Data_Type        := Convert.From_Stream (S => Stream);
       Data   : constant Padded_Data_Type := (others => Character'Pos ('a'));
    begin

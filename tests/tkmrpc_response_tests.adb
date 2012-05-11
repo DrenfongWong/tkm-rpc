@@ -5,6 +5,8 @@ with System;
 with TKMRPC.Operations;
 with TKMRPC.Response.Convert;
 
+with Test_Utils;
+
 package body TKMRPC_Response_Tests
 is
    use Ahven;
@@ -15,13 +17,6 @@ is
    function C_Assert_Response (Res : System.Address) return IC.int;
    pragma Import (C, C_Assert_Response, "assert_response");
 
-   Test_Response : constant Response.Data_Type
-     := (Header      =>
-           (Operation  => TKMRPC.Operations.Nonce_Create,
-            Request_ID => 901213123123,
-            Result     => 7662524),
-         Padded_Data => (others => Character'Pos ('c')));
-
    -------------------------------------------------------------------------
 
    procedure Assert_Response_Compliance
@@ -30,7 +25,7 @@ is
       use type TKMRPC.Operations.Operation_Type;
       use type TKMRPC.Response.Padded_Data_Type;
 
-      My_Res   : Response.Data_Type        := Test_Response;
+      My_Res   : Response.Data_Type        := Test_Utils.Test_Response;
       Ref_Data : Response.Padded_Data_Type := (others => Character'Pos ('d'));
    begin
       My_Res.Padded_Data (Response.Padded_Data_Range'Last)
@@ -72,7 +67,7 @@ is
       use type TKMRPC.Response.Padded_Data_Type;
 
       Stream : constant Convert.Stream_Type
-        := Convert.To_Stream (S => Test_Response);
+        := Convert.To_Stream (S => Test_Utils.Test_Response);
       Res    : constant Data_Type        := Convert.From_Stream (S => Stream);
       Data   : constant Padded_Data_Type := (others => Character'Pos ('c'));
    begin
