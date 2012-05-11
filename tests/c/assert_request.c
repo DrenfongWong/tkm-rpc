@@ -4,7 +4,7 @@
 
 #include "assert_utils.h"
 
-#define C_OPERATION  NONCE_CREATE
+#define C_OPERATION  999999
 #define C_REQUEST_ID 234234234
 #define C_DATA_CHAR  'a'
 #define C_DATA_END   'x'

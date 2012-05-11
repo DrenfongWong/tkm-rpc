@@ -69,7 +69,7 @@ is
       Req    : constant Data_Type        := Convert.From_Stream (S => Stream);
       Data   : constant Padded_Data_Type := (others => Character'Pos ('a'));
    begin
-      Assert (Condition => Req.Header.Operation = Operations.Nonce_Create,
+      Assert (Condition => Req.Header.Operation = Test_Utils.Test_Operation,
               Message   => "Operation mismatch");
       Assert (Condition => Req.Header.Request_ID = 234234234,
               Message   => "Request ID mismatch");
