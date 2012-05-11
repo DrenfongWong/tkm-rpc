@@ -1,4 +1,5 @@
 with "ahven";
+with "anet";
 with "tkmrpc_common";
 
 project TKMRPC_Tests is
