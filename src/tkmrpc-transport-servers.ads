@@ -5,7 +5,7 @@ with Anet.Sockets;
 with TKMRPC.Request;
 with TKMRPC.Response;
 
-package TKMRPC.Servers
+package TKMRPC.Transport.Servers
 is
 
    type Request_Callback is not null access procedure
@@ -104,4 +104,4 @@ private
       C_Task      : Connection_Task (Parent => Server_Type'Access);
    end record;
 
-end TKMRPC.Servers;
+end TKMRPC.Transport.Servers;

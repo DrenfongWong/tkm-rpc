@@ -2,7 +2,7 @@ with Ada.Exceptions;
 
 with TKMRPC.Request;
 with TKMRPC.Response;
-with TKMRPC.Servers;
+with TKMRPC.Transport.Servers;
 with TKMRPC.Transport.Client;
 
 with Test_Utils;
@@ -11,6 +11,7 @@ package body TKMRPC_Transport_Tests
 is
    use Ahven;
    use TKMRPC;
+   use TKMRPC.Transport;
 
    Socket_Path     : constant String := "/tmp/tkmrpc.socket";
    Request_Correct : Boolean         := False;
@@ -94,13 +95,13 @@ is
                       Receive => Receive_Cb'Access,
                       Respond => Respond_Cb'Access);
 
-      Transport.Client.Connect (Address => Socket_Path);
+      Client.Connect (Address => Socket_Path);
       select
          delay 3.0;
          Fail (Message => "Test aborted");
       then abort
-         Transport.Client.Send (Data => Test_Utils.Test_Request);
-         Transport.Client.Receive (Data => Res);
+         Client.Send (Data => Test_Utils.Test_Request);
+         Client.Receive (Data => Res);
       end select;
 
       Servers.Stop (Server => Server);
@@ -135,8 +136,8 @@ is
       Assert (Condition => Servers.Is_Listening (Server => RPC_Server),
               Message   => "Server not listening");
 
-      Transport.Client.Connect (Address => Socket_Path);
-      Transport.Client.Send (Data => Test_Utils.Test_Request);
+      Client.Connect (Address => Socket_Path);
+      Client.Send (Data => Test_Utils.Test_Request);
 
       --  Give the server some time to terminate
 

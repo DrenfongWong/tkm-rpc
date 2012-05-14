@@ -1,6 +1,6 @@
 with Ada.Containers.Indefinite_Ordered_Maps;
 
-with TKMRPC.Servers;
+with TKMRPC.Transport.Servers;
 with TKMRPC.Request;
 with TKMRPC.Response;
 with TKMRPC.Constants;
@@ -16,7 +16,7 @@ is
       Element_Type => Handler_Interface'Class);
    package MOO renames Map_Of_Ophandlers;
 
-   RPC_Server : Servers.Server_Type;
+   RPC_Server : Transport.Servers.Server_Type;
    Ophandlers : MOO.Map;
    Next_Reply : Response.Data_Type;
 
@@ -96,7 +96,7 @@ is
    procedure Start
    is
    begin
-      Servers.Listen
+      Transport.Servers.Listen
         (Server  => RPC_Server,
          Address => Communication_Socket,
          Receive => Request_Callback'Access,
@@ -108,7 +108,7 @@ is
    procedure Stop
    is
    begin
-      Servers.Stop (Server => RPC_Server);
+      Transport.Servers.Stop (Server => RPC_Server);
    end Stop;
 
 end TKMRPC.Operation_Dispatcher;

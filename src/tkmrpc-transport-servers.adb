@@ -3,7 +3,7 @@ with Ada.Streams;
 with TKMRPC.Request.Convert;
 with TKMRPC.Response.Convert;
 
-package body TKMRPC.Servers
+package body TKMRPC.Transport.Servers
 is
 
    --  Placeholder callbacks needed for request/response callback
@@ -194,4 +194,4 @@ is
       Server.Trigger.Wait_For_Termination;
    end Stop;
 
-end TKMRPC.Servers;
+end TKMRPC.Transport.Servers;
