@@ -12,14 +12,14 @@ is
 
    overriding
    procedure Nc_Reset
-     (Object : Test_Impl_Type;
-      Nc_Id  : Nonces.Nonce_Id_Type) is null;
+     (Object   : Test_Impl_Type;
+      Nonce_Id : Nonces.Nonce_Id_Type) is null;
    --  Reset a NC context.
 
    overriding
    function Nc_Create
      (Object       : Test_Impl_Type;
-      Nc_Id        : Nonces.Nonce_Id_Type;
+      Nonce_Id     : Nonces.Nonce_Id_Type;
       Nonce_Length : Nonces.Nonce_Length_Type)
       return Nonces.Nonce_Type;
    --  Create a test nonce.
@@ -42,11 +42,11 @@ is
 
    function Nc_Create
      (Object       : Test_Impl_Type;
-      Nc_Id        : Nonces.Nonce_Id_Type;
+      Nonce_Id     : Nonces.Nonce_Id_Type;
       Nonce_Length : Nonces.Nonce_Length_Type)
       return Nonces.Nonce_Type
    is
-      pragma Unreferenced (Object, Nc_Id);
+      pragma Unreferenced (Object, Nonce_Id);
    begin
       return Nonces.Nonce_Type'
         (Value  => (others => Character'Pos ('f')),
@@ -74,7 +74,7 @@ is
          use type TKMRPC.Nonces.Nonce_Length_Type;
 
          Nonce : constant Nonces.Nonce_Type := Ref.Nc_Create
-           (Nc_Id        => 123,
+           (Nonce_Id     => 123,
             Nonce_Length => 233);
       begin
          Assert (Condition => Nonce.Length = 233,
