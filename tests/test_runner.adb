@@ -6,6 +6,7 @@ with Ahven.Framework;
 with TKMRPC_Request_Tests;
 with TKMRPC_Response_Tests;
 with TKMRPC_Transport_Tests;
+with TKMRPC_Ophandlers_Tests;
 
 procedure Test_Runner
 is
@@ -20,6 +21,8 @@ begin
              T     => new TKMRPC_Response_Tests.Testcase);
    Add_Test (Suite => S.all,
              T     => new TKMRPC_Transport_Tests.Testcase);
+   Add_Test (Suite => S.all,
+             T     => new TKMRPC_Ophandlers_Tests.Testcase);
 
    Ada.Text_IO.Put_Line ("Running " & Name & " ... please wait");
 
