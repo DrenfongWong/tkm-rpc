@@ -1,6 +1,4 @@
 with Ada.Streams;
-with Ada.Text_IO;
-with Ada.Exceptions;
 
 with TKMRPC.Request.Convert;
 with TKMRPC.Response.Convert;
@@ -13,6 +11,9 @@ is
 
    procedure Empty_Recv_Cb (Data : Request.Data_Type) is null;
    procedure Empty_Resp_Cb (Data : out Response.Data_Type) is null;
+   procedure Empty_Err_Cb
+     (E         :        Ada.Exceptions.Exception_Occurrence;
+      Stop_Flag : in out Boolean) is null;
 
    -------------------------------------------------------------------------
 
@@ -26,6 +27,14 @@ is
       begin
          Is_Terminated := False;
       end Activate;
+
+      ----------------------------------------------------------------------
+
+      function Is_Listening return Boolean
+      is
+      begin
+         return not Is_Terminated;
+      end Is_Listening;
 
       ----------------------------------------------------------------------
 
@@ -65,8 +74,10 @@ is
 
    task body Connection_Task
    is
-      Recv_Cb : Request_Callback  := Empty_Recv_Cb'Access;
-      Resp_Cb : Response_Callback := Empty_Resp_Cb'Access;
+      Recv_Cb  : Request_Callback       := Empty_Recv_Cb'Access;
+      Resp_Cb  : Response_Callback      := Empty_Resp_Cb'Access;
+      Error_Cb : Error_Handler_Callback := Empty_Err_Cb'Access;
+      Stop     : Boolean                := False;
    begin
       Setup_Loop :
       loop
@@ -81,6 +92,11 @@ is
 
             exit Setup_Loop;
          or
+            accept Set_Error_Handler (Cb : Error_Handler_Callback)
+            do
+               Error_Cb := Cb;
+            end Set_Error_Handler;
+         or
             terminate;
          end select;
       end loop Setup_Loop;
@@ -90,7 +106,8 @@ is
       then abort
          Parent.Sock_Listen.Accept_Connection
            (New_Socket => Parent.Sock_Comm);
-         Reception_Loop :
+
+         Processing_Loop :
          loop
             declare
                Sender : Anet.Sockets.Socket_Addr_Type
@@ -116,14 +133,26 @@ is
                end;
 
             exception
-               when E : others =>
-                  Ada.Text_IO.Put_Line
-                    (Ada.Exceptions.Exception_Information (E));
+               when Ex : others =>
+                  Error_Cb (E         => Ex,
+                            Stop_Flag => Stop);
+                  if Stop then
+                     exit Processing_Loop;
+                  end if;
             end;
-         end loop Reception_Loop;
+         end loop Processing_Loop;
       end select;
+
       Parent.Trigger.Signal_Termination;
    end Connection_Task;
+
+   -------------------------------------------------------------------------
+
+   function Is_Listening (Server : Server_Type) return Boolean
+   is
+   begin
+      return Server.Trigger.Is_Listening;
+   end Is_Listening;
 
    -------------------------------------------------------------------------
 
@@ -145,6 +174,16 @@ is
       Server.C_Task.Listen (Request  => Receive,
                             Response => Respond);
    end Listen;
+
+   -------------------------------------------------------------------------
+
+   procedure Register_Error_Handler
+     (Server   : in out Server_Type;
+      Callback :        Error_Handler_Callback)
+   is
+   begin
+      Server.C_Task.Set_Error_Handler (Cb => Callback);
+   end Register_Error_Handler;
 
    -------------------------------------------------------------------------
 

@@ -10,4 +10,7 @@ is
    procedure Request_Response_Transport;
    --  Test RPC client/server transport layer: Receive request/send response.
 
+   procedure Server_Error_Callbacks;
+   --  Test RPC server error callback handling.
+
 end TKMRPC_Transport_Tests;
