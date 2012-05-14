@@ -3,6 +3,7 @@ with TKMRPC.Response;
 with TKMRPC.Client;
 with TKMRPC.Operation_Handlers;
 with TKMRPC.Operation_Dispatcher;
+with TKMRPC.Constants;
 
 with Test_Utils;
 
@@ -65,12 +66,37 @@ is
          Client.Receive (Data => Res);
       end select;
 
-      Operation_Dispatcher.Stop;
-
       Assert (Condition => Request_Correct,
               Message   => "Request mismatch");
       Assert (Condition => Res = Test_Utils.Test_Response,
               Message   => "Response mismatch");
+
+      --  Test behavior on unknown/invalid request
+
+      declare
+         Res             : Response.Data_Type;
+         Unknown_Request : constant Request.Data_Type
+           := (Header      =>
+                 (Operation  => 12345,
+                  Request_ID => 3464564),
+               Padded_Data => (others => Character'Pos ('g')));
+         Ref_Response    : Response.Data_Type
+           := Constants.Invalid_Operation;
+      begin
+         Ref_Response.Header.Request_ID := Unknown_Request.Header.Request_ID;
+         Client.Send (Data => Unknown_Request);
+         Client.Receive (Data => Res);
+
+         Assert (Condition => Res = Ref_Response,
+                 Message   => "Invalid operation expected");
+      end;
+
+      Operation_Dispatcher.Stop;
+
+   exception
+      when others =>
+         Operation_Dispatcher.Stop;
+         raise;
    end Handle_Requests;
 
    -------------------------------------------------------------------------

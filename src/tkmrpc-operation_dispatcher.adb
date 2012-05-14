@@ -3,6 +3,7 @@ with Ada.Containers.Indefinite_Ordered_Maps;
 with TKMRPC.Servers;
 with TKMRPC.Request;
 with TKMRPC.Response;
+with TKMRPC.Constants;
 
 package body TKMRPC.Operation_Dispatcher
 is
@@ -70,8 +71,9 @@ is
         (Key => Data.Header.Operation);
    begin
       if Cursor = MOO.No_Element then
-         raise No_Handler with "Handler for opcode" & Data.Header.Operation'Img
-           & " not found";
+         Next_Reply                   := Constants.Invalid_Operation;
+         Next_Reply.Header.Request_ID := Data.Header.Request_ID;
+         return;
       end if;
 
       MOO.Element (Position => Cursor).Handle
