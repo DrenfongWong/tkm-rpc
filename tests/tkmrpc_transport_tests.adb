@@ -3,7 +3,7 @@ with Ada.Exceptions;
 with TKMRPC.Request;
 with TKMRPC.Response;
 with TKMRPC.Servers;
-with TKMRPC.Client;
+with TKMRPC.Transport.Client;
 
 with Test_Utils;
 
@@ -94,13 +94,13 @@ is
                       Receive => Receive_Cb'Access,
                       Respond => Respond_Cb'Access);
 
-      Client.Connect (Address => Socket_Path);
+      Transport.Client.Connect (Address => Socket_Path);
       select
          delay 3.0;
          Fail (Message => "Test aborted");
       then abort
-         Client.Send (Data => Test_Utils.Test_Request);
-         Client.Receive (Data => Res);
+         Transport.Client.Send (Data => Test_Utils.Test_Request);
+         Transport.Client.Receive (Data => Res);
       end select;
 
       Servers.Stop (Server => Server);
@@ -135,8 +135,8 @@ is
       Assert (Condition => Servers.Is_Listening (Server => RPC_Server),
               Message   => "Server not listening");
 
-      Client.Connect (Address => Socket_Path);
-      Client.Send (Data => Test_Utils.Test_Request);
+      Transport.Client.Connect (Address => Socket_Path);
+      Transport.Client.Send (Data => Test_Utils.Test_Request);
 
       --  Give the server some time to terminate
 

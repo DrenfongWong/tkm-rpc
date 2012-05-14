@@ -6,7 +6,7 @@ with Anet.Sockets;
 with TKMRPC.Request.Convert;
 with TKMRPC.Response.Convert;
 
-package body TKMRPC.Client
+package body TKMRPC.Transport.Client
 is
 
    Socket : Anet.Sockets.Socket_Type;
@@ -50,4 +50,4 @@ is
       Socket.Send (Item => Request.Convert.To_Stream (S => Data));
    end Send;
 
-end TKMRPC.Client;
+end TKMRPC.Transport.Client;

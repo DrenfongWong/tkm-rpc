@@ -1,6 +1,6 @@
 with TKMRPC.Request;
 with TKMRPC.Response;
-with TKMRPC.Client;
+with TKMRPC.Transport.Client;
 with TKMRPC.Operation_Handlers;
 with TKMRPC.Operation_Dispatcher;
 with TKMRPC.Constants;
@@ -56,14 +56,14 @@ is
                                      Opcode  => Test_Utils.Test_Operation);
       Operation_Dispatcher.Start;
 
-      Client.Connect (Address => Communication_Socket);
+      Transport.Client.Connect (Address => Communication_Socket);
       select
          delay 3.0;
          Operation_Dispatcher.Stop;
          Fail (Message => "Test aborted");
       then abort
-         Client.Send (Data => Test_Utils.Test_Request);
-         Client.Receive (Data => Res);
+         Transport.Client.Send (Data => Test_Utils.Test_Request);
+         Transport.Client.Receive (Data => Res);
       end select;
 
       Assert (Condition => Request_Correct,
@@ -84,8 +84,8 @@ is
            := Constants.Invalid_Operation;
       begin
          Ref_Response.Header.Request_ID := Unknown_Request.Header.Request_ID;
-         Client.Send (Data => Unknown_Request);
-         Client.Receive (Data => Res);
+         Transport.Client.Send (Data => Unknown_Request);
+         Transport.Client.Receive (Data => Res);
 
          Assert (Condition => Res = Ref_Response,
                  Message   => "Invalid operation expected");

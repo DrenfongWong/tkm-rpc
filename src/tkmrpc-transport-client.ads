@@ -1,7 +1,7 @@
 with TKMRPC.Request;
 with TKMRPC.Response;
 
-package TKMRPC.Client
+package TKMRPC.Transport.Client
 is
 
    procedure Connect (Address : String);
@@ -14,4 +14,4 @@ is
    procedure Receive (Data : out Response.Data_Type);
    --  Receive response data from server.
 
-end TKMRPC.Client;
+end TKMRPC.Transport.Client;
