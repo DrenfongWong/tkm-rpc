@@ -21,6 +21,10 @@ is
      (H   :     My_Handler;
       Req :     Request.Data_Type;
       Res : out Response.Data_Type);
+   --  Test implementation of an operation handler. Asserts that the request
+   --  equals Test_Request and sets Res to Test_Response.
+
+   -------------------------------------------------------------------------
 
    procedure Handle
      (H   :     My_Handler;
