@@ -1,8 +1,7 @@
 with TKMRPC.Nonces;
 
-package TKMRPC.IKE
+package TKMRPC.Interfaces.IKE.Server
 is
-
    type IKE_Interface is interface;
    --  The TKM - IKE interface
 
@@ -21,4 +20,4 @@ is
       is abstract;
    --  Create a nonce.
 
-end TKMRPC.IKE;
+end TKMRPC.Interfaces.IKE.Server;

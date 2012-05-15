@@ -1,13 +1,13 @@
 package body TKMRPC.Implementation
 is
 
-   Impl : IKE.IKE_Access;
+   Impl : Interfaces.IKE.Server.IKE_Access;
 
    -------------------------------------------------------------------------
 
-   function Get_Impl return IKE.IKE_Access
+   function Get_Impl return Interfaces.IKE.Server.IKE_Access
    is
-      use type TKMRPC.IKE.IKE_Access;
+      use type TKMRPC.Interfaces.IKE.Server.IKE_Access;
    begin
       if Impl = null then
          raise Implementation_Error with "No implementation registered";
@@ -18,7 +18,7 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Register (Object : IKE.IKE_Access)
+   procedure Register (Object : Interfaces.IKE.Server.IKE_Access)
    is
    begin
       Impl := Object;

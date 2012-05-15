@@ -1,9 +1,9 @@
 with TKMRPC.Nonces;
-with TKMRPC.IKE;
+with TKMRPC.Interfaces.IKE.Server;
 
 package TKMRPC.Mock
 is
-   type TKM_Type is new IKE.IKE_Interface with private;
+   type TKM_Type is new Interfaces.IKE.Server.IKE_Interface with private;
    --  TKM implementation mock.
 
    overriding
@@ -27,6 +27,6 @@ is
 
 private
 
-   type TKM_Type is new IKE.IKE_Interface with null record;
+   type TKM_Type is new Interfaces.IKE.Server.IKE_Interface with null record;
 
 end TKMRPC.Mock;

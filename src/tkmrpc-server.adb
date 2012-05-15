@@ -9,7 +9,7 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Start (TKM : IKE.IKE_Access)
+   procedure Start (TKM : Interfaces.IKE.Server.IKE_Access)
    is
    begin
       Implementation.Register (Object => TKM);

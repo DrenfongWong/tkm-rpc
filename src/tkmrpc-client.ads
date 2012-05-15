@@ -1,9 +1,9 @@
-with TKMRPC.IKE;
 with TKMRPC.Nonces;
+with TKMRPC.Interfaces.IKE.Server;
 
 package TKMRPC.Client
 is
-   type IKE_Type is new IKE.IKE_Interface with private;
+   type IKE_Type is new Interfaces.IKE.Server.IKE_Interface with private;
    --  TKM IKE client ORB.
 
    procedure Init (Object : in out IKE_Type);
@@ -27,6 +27,6 @@ is
 
 private
 
-   type IKE_Type is new IKE.IKE_Interface with null record;
+   type IKE_Type is new Interfaces.IKE.Server.IKE_Interface with null record;
 
 end TKMRPC.Client;
