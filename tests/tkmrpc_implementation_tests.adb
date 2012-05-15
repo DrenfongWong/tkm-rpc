@@ -31,7 +31,7 @@ is
    begin
       begin
          Ref := Implementation.Get_Impl;
-         Fail (Message => "Exception expected");
+         Fail (Message => "Exception expected (1)");
 
       exception
          when Implementation.Implementation_Error => null;
@@ -42,13 +42,27 @@ is
 
       declare
          use type TKMRPC.Nonces.Nonce_Length_Type;
+         use type TKMRPC.Nonces.Nonce_Value_Type;
 
-         Nonce : constant Nonces.Nonce_Type := Ref.Nc_Create
+         Nonce     : constant Nonces.Nonce_Type := Ref.Nc_Create
            (Nonce_Id     => 123,
             Nonce_Length => 233);
+         Ref_Value : constant Nonces.Nonce_Value_Type
+           := (others => Character'Pos ('f'));
       begin
          Assert (Condition => Nonce.Length = 233,
                  Message   => "Length mismatch");
+         Assert (Condition => Nonce.Value = Ref_Value,
+                 Message   => "Value mismatch");
+      end;
+
+      Implementation.Unregister;
+      begin
+         Ref := Implementation.Get_Impl;
+         Fail (Message => "Exception expected (2)");
+
+      exception
+         when Implementation.Implementation_Error => null;
       end;
    end Register_Implementation;
 
