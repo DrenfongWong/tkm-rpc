@@ -8,11 +8,9 @@ is
       Nonce_Length : Nonces.Nonce_Length_Type)
       return Nonces.Nonce_Type
    is
-      pragma Unreferenced (Object, Nonce_Id);
+      pragma Unreferenced (Object, Nonce_Id, Nonce_Length);
    begin
-      return Nonces.Nonce_Type'
-        (Value  => (others => Character'Pos ('f')),
-         Length => Nonce_Length);
+      return Ref_Nonce;
    end Nc_Create;
 
 end TKMRPC.Mock;

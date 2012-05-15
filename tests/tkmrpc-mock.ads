@@ -20,6 +20,11 @@ is
       return Nonces.Nonce_Type;
    --  Create a new nonce.
 
+   Ref_Nonce : constant Nonces.Nonce_Type
+     := (Value  => (others => Character'Pos ('f')),
+         Length => 156);
+   --  Reference nonce returned by Nc_Create function.
+
 private
 
    type TKM_Type is new IKE.IKE_Interface with null record;

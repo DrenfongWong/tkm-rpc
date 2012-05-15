@@ -41,19 +41,14 @@ is
       Ref := Implementation.Get_Impl;
 
       declare
-         use type TKMRPC.Nonces.Nonce_Length_Type;
-         use type TKMRPC.Nonces.Nonce_Value_Type;
+         use type TKMRPC.Nonces.Nonce_Type;
 
-         Nonce     : constant Nonces.Nonce_Type := Ref.Nc_Create
+         Nonce : constant Nonces.Nonce_Type := Ref.Nc_Create
            (Nonce_Id     => 123,
             Nonce_Length => 233);
-         Ref_Value : constant Nonces.Nonce_Value_Type
-           := (others => Character'Pos ('f'));
       begin
-         Assert (Condition => Nonce.Length = 233,
-                 Message   => "Length mismatch");
-         Assert (Condition => Nonce.Value = Ref_Value,
-                 Message   => "Value mismatch");
+         Assert (Condition => Nonce = Mock.Ref_Nonce,
+                 Message   => "Nonce incorrect");
       end;
 
       Implementation.Unregister;
