@@ -2,30 +2,15 @@ with TKMRPC.IKE;
 with TKMRPC.Nonces;
 with TKMRPC.Implementation;
 
+with TKMRPC.Mock;
+
 package body TKMRPC_Implementation_Tests
 is
    use Ahven;
    use TKMRPC;
 
-   type Test_Impl_Type is new IKE.IKE_Interface with null record;
-   --  TKM test implementation.
-
-   overriding
-   procedure Nc_Reset
-     (Object   : Test_Impl_Type;
-      Nonce_Id : Nonces.Nonce_Id_Type) is null;
-   --  Reset a NC context.
-
-   overriding
-   function Nc_Create
-     (Object       : Test_Impl_Type;
-      Nonce_Id     : Nonces.Nonce_Id_Type;
-      Nonce_Length : Nonces.Nonce_Length_Type)
-      return Nonces.Nonce_Type;
-   --  Create a test nonce.
-
-   Impl : aliased Test_Impl_Type;
-   --  TKM test instance.
+   Impl : aliased Mock.TKM_Type;
+   --  TKM mock instance.
 
    -------------------------------------------------------------------------
 
@@ -37,21 +22,6 @@ is
         (Routine => Register_Implementation'Access,
          Name    => "Register TKM implementation");
    end Initialize;
-
-   -------------------------------------------------------------------------
-
-   function Nc_Create
-     (Object       : Test_Impl_Type;
-      Nonce_Id     : Nonces.Nonce_Id_Type;
-      Nonce_Length : Nonces.Nonce_Length_Type)
-      return Nonces.Nonce_Type
-   is
-      pragma Unreferenced (Object, Nonce_Id);
-   begin
-      return Nonces.Nonce_Type'
-        (Value  => (others => Character'Pos ('f')),
-         Length => Nonce_Length);
-   end Nc_Create;
 
    -------------------------------------------------------------------------
 
