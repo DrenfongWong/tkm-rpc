@@ -78,7 +78,7 @@ is
    procedure Receive_Cb_Raise (Data : Request.Data_Type)
    is
    begin
-      raise Program_Error;
+      raise Program_Error with "Don't PANIC: test exception";
    end Receive_Cb_Raise;
 
    -------------------------------------------------------------------------
