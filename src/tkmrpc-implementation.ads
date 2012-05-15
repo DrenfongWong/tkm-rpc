@@ -6,6 +6,9 @@ is
    procedure Register (Object : IKE.IKE_Access);
    --  Register TKM IKE implementation.
 
+   procedure Unregister;
+   --  Unregister current TKM IKE implementation;
+
    function Get_Impl return IKE.IKE_Access;
    --  Return registered TKM IKE implementation.
 

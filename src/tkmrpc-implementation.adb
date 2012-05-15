@@ -24,4 +24,12 @@ is
       Impl := Object;
    end Register;
 
+   -------------------------------------------------------------------------
+
+   procedure Unregister
+   is
+   begin
+      Impl := null;
+   end Unregister;
+
 end TKMRPC.Implementation;
