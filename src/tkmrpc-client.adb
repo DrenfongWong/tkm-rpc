@@ -8,9 +8,8 @@ package body TKMRPC.Client
 is
    -------------------------------------------------------------------------
 
-   procedure Init (Object : in out IKE_Type)
+   procedure Init
    is
-      pragma Unreferenced (Object);
    begin
       Transport.Client.Connect (Address => Communication_Socket);
    end Init;
@@ -18,13 +17,10 @@ is
    -------------------------------------------------------------------------
 
    function Nc_Create
-     (Object       : IKE_Type;
-      Nonce_Id     : Nonces.Nonce_Id_Type;
+     (Nonce_Id     : Nonces.Nonce_Id_Type;
       Nonce_Length : Nonces.Nonce_Length_Type)
       return Nonces.Nonce_Type
    is
-      pragma Unreferenced (Object);
-
       use type TKMRPC.Results.Result_Type;
 
       Req : Request.Nonce_Create.Request_Type;
@@ -54,5 +50,13 @@ is
          end return;
       end;
    end Nc_Create;
+
+   -------------------------------------------------------------------------
+
+   procedure Nc_Reset (Nonce_Id : Nonces.Nonce_Id_Type)
+   is
+   begin
+      null;
+   end Nc_Reset;
 
 end TKMRPC.Client;
