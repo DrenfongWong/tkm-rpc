@@ -1,4 +1,5 @@
 with Ada.Streams;
+with Ada.Text_IO;
 
 with TKMRPC.Request.Convert;
 with TKMRPC.Response.Convert;
@@ -134,6 +135,9 @@ is
 
             exception
                when Ex : others =>
+                  Ada.Text_IO.Put_Line ("Exception in RPC transport");
+                  Ada.Text_IO.Put_Line
+                    (Ada.Exceptions.Exception_Information (X => Ex));
                   Error_Cb (E         => Ex,
                             Stop_Flag => Stop);
                   if Stop then
