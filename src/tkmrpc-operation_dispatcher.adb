@@ -1,4 +1,5 @@
 with Ada.Containers.Indefinite_Ordered_Maps;
+with Ada.Unchecked_Deallocation;
 
 with TKMRPC.Transport.Servers;
 with TKMRPC.Request;
@@ -7,7 +8,6 @@ with TKMRPC.Constants;
 
 package body TKMRPC.Operation_Dispatcher
 is
-
    use TKMRPC.Operation_Handlers;
    use type TKMRPC.Operations.Operation_Type;
 
@@ -16,7 +16,15 @@ is
       Element_Type => Handler_Interface'Class);
    package MOO renames Map_Of_Ophandlers;
 
-   RPC_Server : Transport.Servers.Server_Type;
+   type Server_Access is access Transport.Servers.Server_Type;
+   --  Handle to RPC server.
+
+   procedure Free is new Ada.Unchecked_Deallocation
+     (Object => Transport.Servers.Server_Type,
+      Name   => Server_Access);
+   --  Free memory allocated for RPC server.
+
+   RPC_Server : Server_Access;
    Ophandlers : MOO.Map;
    Next_Reply : Response.Data_Type;
 
@@ -96,8 +104,10 @@ is
    procedure Start
    is
    begin
+      RPC_Server := new Transport.Servers.Server_Type;
+
       Transport.Servers.Listen
-        (Server  => RPC_Server,
+        (Server  => RPC_Server.all,
          Address => Communication_Socket,
          Receive => Request_Callback'Access,
          Respond => Response_Callback'Access);
@@ -108,7 +118,8 @@ is
    procedure Stop
    is
    begin
-      Transport.Servers.Stop (Server => RPC_Server);
+      Transport.Servers.Stop (Server => RPC_Server.all);
+      Free (X => RPC_Server);
    end Stop;
 
 end TKMRPC.Operation_Dispatcher;
