@@ -11,8 +11,8 @@ private
 
    Invalid_Operation : constant Response.Data_Type
      := (Header      =>
-           (Operation  => Results.Invalid_Operation,
-            others     => <>),
+           (Result => Results.Invalid_Operation,
+            others => <>),
          Padded_Data => (others => <>));
 
 end TKMRPC.Constants;
