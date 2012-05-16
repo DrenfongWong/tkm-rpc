@@ -137,6 +137,8 @@ is
       end;
 
       Operation_Dispatcher.Clear;
+      Assert (Condition => Operation_Dispatcher.Get_Handler_Count = 0,
+              Message   => "Handlers not cleared");
    end Register_Handlers;
 
 end TKMRPC_Ophandlers_Tests;
