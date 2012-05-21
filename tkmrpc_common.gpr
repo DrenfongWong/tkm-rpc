@@ -1,6 +1,9 @@
 project TKMRPC_Common is
 
    for Source_Dirs use ();
+   Source_Dirs := ("src",
+                   "messages/ada",
+                   "interfaces/ada");
 
    Compiler_Switches := ("-gnatygAdISuxo",
                          "-gnatVa",
@@ -10,7 +13,7 @@ project TKMRPC_Common is
                          "-gnato",
                          "-g");
 
-   Binder_Switches   := ("-E");
+   Binder_Switches := ("-E");
 
 end TKMRPC_Common;
 

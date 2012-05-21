@@ -11,10 +11,7 @@ project TKMRPC_Tests is
    Linker_Switches   := ("-Ltests/c", "-lassert");
 
    for Main use ("test_runner.adb");
-   for Source_Dirs use ("tests",
-                        "src",
-                        "messages/ada",
-                        "interfaces/ada");
+   for Source_Dirs use TKMRPC_Common.Source_Dirs & "tests";
 
    case Build is
       when "tests" =>
