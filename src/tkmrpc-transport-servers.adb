@@ -111,6 +111,8 @@ is
          Processing_Loop :
          loop
             declare
+               use type Ada.Streams.Stream_Element_Offset;
+
                Sender : Anet.Sockets.Socket_Addr_Type
                  (Family => Anet.Sockets.Family_Unix);
                Buffer : Ada.Streams.Stream_Element_Array (1 .. 2048);
@@ -119,6 +121,10 @@ is
                Parent.Sock_Comm.Receive (Src  => Sender,
                                          Item => Buffer,
                                          Last => Last);
+
+               --  Exit request processing loop on connection close.
+
+               exit Processing_Loop when Last = 0;
 
                declare
                   Req : constant Request.Data_Type
