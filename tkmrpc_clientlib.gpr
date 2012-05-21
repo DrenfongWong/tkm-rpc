@@ -1,0 +1,22 @@
+with "tkmrpc_common";
+
+library project TKMRPC_Clientlib is
+
+   for Source_Dirs use TKMRPC_Common.Source_Dirs;
+   for Object_Dir use "obj/clientlib";
+   for Library_Dir use "lib";
+   for Library_Kind use "static";
+   for Library_Name use "tkmrpc";
+
+   Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwale";
+
+   package Naming is
+      for Specification ("TKMRPC.Client") use "tkmrpc-interfaces-ike-client.ads";
+   end Naming;
+
+   package Compiler is
+      for Default_Switches ("ada") use Compiler_Switches;
+   end Compiler;
+
+end TKMRPC_Clientlib;
+

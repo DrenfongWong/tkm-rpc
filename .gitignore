@@ -1,3 +1,4 @@
+lib
 obj
 tests/c/*.o
 tests/c/*.a
