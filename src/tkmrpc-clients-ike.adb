@@ -4,7 +4,7 @@ with TKMRPC.Results;
 with TKMRPC.Request.Nonce_Create.Convert;
 with TKMRPC.Response.Nonce_Create.Convert;
 
-package body TKMRPC.Client
+package body TKMRPC.Clients.IKE
 is
    -------------------------------------------------------------------------
 
@@ -59,4 +59,4 @@ is
       null;
    end Nc_Reset;
 
-end TKMRPC.Client;
+end TKMRPC.Clients.IKE;

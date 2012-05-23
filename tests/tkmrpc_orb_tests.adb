@@ -1,5 +1,5 @@
 with TKMRPC.Nonces;
-with TKMRPC.Client;
+with TKMRPC.Clients.IKE;
 with TKMRPC.Server;
 with TKMRPC.Mock;
 with TKMRPC.Implementation;
@@ -60,9 +60,9 @@ is
       Ref_Nonce : Nonces.Nonce_Type := Mock.Ref_Nonce;
    begin
       Server.Start (TKM => Impl'Access);
-      Client.Init;
-      Nonce := Client.Nc_Create (Nonce_Id     => 123,
-                                 Nonce_Length => 243);
+      Clients.IKE.Init;
+      Nonce := Clients.IKE.Nc_Create (Nonce_Id     => 123,
+                                      Nonce_Length => 243);
 
       --  The client ORB fills in the nonce length, update ref nonce.
 
@@ -80,7 +80,7 @@ is
       Implementation.Unregister;
       begin
          declare
-            Dummy : Nonces.Nonce_Type := Client.Nc_Create
+            Dummy : Nonces.Nonce_Type := Clients.IKE.Nc_Create
               (Nonce_Id     => 123,
                Nonce_Length => 243);
             pragma Unreferenced (Dummy);
@@ -89,7 +89,7 @@ is
          end;
 
       exception
-         when Client.RPC_Error => null;
+         when Clients.IKE.RPC_Error => null;
       end;
 
       Server.Stop;

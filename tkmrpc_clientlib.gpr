@@ -10,10 +10,6 @@ library project TKMRPC_Clientlib is
 
    Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwale";
 
-   package Naming is
-      for Specification ("TKMRPC.Client") use "tkmrpc-interfaces-ike-client.ads";
-   end Naming;
-
    package Compiler is
       for Default_Switches ("ada") use Compiler_Switches;
    end Compiler;

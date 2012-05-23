@@ -1,6 +1,6 @@
 with TKMRPC.Nonces;
 
-package TKMRPC.Client
+package TKMRPC.Clients.IKE
 is
    procedure Init;
    pragma Export (C, Init, "tkm_init");
@@ -19,4 +19,4 @@ is
 
    RPC_Error : exception;
 
-end TKMRPC.Client;
+end TKMRPC.Clients.IKE;
