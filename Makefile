@@ -15,6 +15,9 @@ build_tests: build_tests_c
 build_clientlib:
 	@gprbuild $(BUILD_OPTS) -Ptkmrpc_clientlib
 
+build_testclient: build_clientlib
+	@gprbuild $(BUILD_OPTS) -Ptkmrpc_testclient
+
 tests: build_tests
 	@$(OBJDIR)/$(TESTDIR)/test_runner
 
@@ -30,4 +33,5 @@ clean:
 	@rm -rf $(OBJDIR)
 	$(MAKE) -C $(TESTDIR)/c clean
 
-.PHONY: build_clientlib build_tests build_tests_c clean cov tests
+.PHONY: build_clientlib build_testclient build_tests build_tests_c clean cov \
+	tests
