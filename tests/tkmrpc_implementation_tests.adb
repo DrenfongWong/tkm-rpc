@@ -1,6 +1,6 @@
 with TKMRPC.Nonces;
 with TKMRPC.Implementation;
-with TKMRPC.Interfaces.IKE.Server;
+with TKMRPC.Servers.IKE;
 
 with TKMRPC.Mock;
 
@@ -27,7 +27,7 @@ is
 
    procedure Register_Implementation
    is
-      Ref : Interfaces.IKE.Server.IKE_Access;
+      Ref : Servers.IKE.IKE_Access;
    begin
       begin
          Ref := Implementation.Get_Impl;

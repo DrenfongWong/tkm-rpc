@@ -1,7 +1,7 @@
 with TKMRPC.Implementation;
 with TKMRPC.Nonces;
 with TKMRPC.Constants;
-with TKMRPC.Interfaces.IKE.Server;
+with TKMRPC.Servers.IKE;
 with TKMRPC.Request.Nonce_Create.Convert;
 with TKMRPC.Response.Nonce_Create.Convert;
 
@@ -19,7 +19,7 @@ is
       Create_Req : Request.Nonce_Create.Request_Type;
       Create_Res : Response.Nonce_Create.Response_Type;
       Nonce      : Nonces.Nonce_Type;
-      Impl       : Interfaces.IKE.Server.IKE_Access;
+      Impl       : Servers.IKE.IKE_Access;
    begin
       Impl := Implementation.Get_Impl;
       Create_Req := Request.Nonce_Create.Convert.From_Request (S => Req);
