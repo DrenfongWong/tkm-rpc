@@ -25,6 +25,11 @@ is
          Length => 156);
    --  Reference nonce returned by Nc_Create function.
 
+   Last_Nonce_Id     : Nonces.Nonce_Id_Type     := 0;
+   Last_Nonce_Length : Nonces.Nonce_Length_Type := 16;
+   --  Calls to Nc_Create will set these vars to the last requested nonce Id
+   --  and length.
+
 private
 
    type TKM_Type is new Interfaces.IKE.Server.IKE_Interface with null record;

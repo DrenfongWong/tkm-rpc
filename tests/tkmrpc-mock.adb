@@ -8,8 +8,10 @@ is
       Nonce_Length : Nonces.Nonce_Length_Type)
       return Nonces.Nonce_Type
    is
-      pragma Unreferenced (Object, Nonce_Id, Nonce_Length);
+      pragma Unreferenced (Object);
    begin
+      Last_Nonce_Id     := Nonce_Id;
+      Last_Nonce_Length := Nonce_Length;
       return Ref_Nonce;
    end Nc_Create;
 

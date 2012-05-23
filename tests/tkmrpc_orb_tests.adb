@@ -17,6 +17,7 @@ is
    procedure Client_Server_ORBs
    is
       use type TKMRPC.Nonces.Nonce_Type;
+      use type TKMRPC.Nonces.Nonce_Id_Type;
 
       Nonce     : Nonces.Nonce_Type;
       Ref_Nonce : Nonces.Nonce_Type := Mock.Ref_Nonce;
@@ -32,6 +33,10 @@ is
 
       Assert (Condition => Nonce = Ref_Nonce,
               Message   => "Nonce incorrect");
+      Assert (Condition => Mock.Last_Nonce_Id = 123,
+              Message   => "Last nonce id mismatch");
+      Assert (Condition => Mock.Last_Nonce_Length = 243,
+              Message   => "Last nonce length mismatch");
 
       --  Provoke error on server side.
 
@@ -51,10 +56,14 @@ is
       end;
 
       Server.Stop;
+      Mock.Last_Nonce_Id     := 0;
+      Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
          Server.Stop;
+         Mock.Last_Nonce_Id     := 0;
+         Mock.Last_Nonce_Length := 16;
          raise;
    end Client_Server_ORBs;
 
