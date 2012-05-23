@@ -24,6 +24,7 @@ is
    is
    begin
       Operation_Dispatcher.Stop;
+      Operation_Dispatcher.Clear;
       Implementation.Unregister;
    end Stop;
 
