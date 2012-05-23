@@ -104,6 +104,10 @@ is
    procedure Start
    is
    begin
+      if RPC_Server /= null then
+         return;
+      end if;
+
       RPC_Server := new Transport.Servers.Server_Type;
 
       Transport.Servers.Listen
