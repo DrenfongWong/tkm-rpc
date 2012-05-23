@@ -10,4 +10,7 @@ is
    procedure Client_Server_ORBs;
    --  Test client/server ORB interaction.
 
+   procedure C_Test_Client;
+   --  Test interaction with client written in C.
+
 end TKMRPC_ORB_Tests;

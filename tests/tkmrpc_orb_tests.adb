@@ -4,6 +4,8 @@ with TKMRPC.Server;
 with TKMRPC.Mock;
 with TKMRPC.Implementation;
 
+with GNAT.OS_Lib;
+
 package body TKMRPC_ORB_Tests
 is
    use Ahven;
@@ -11,6 +13,41 @@ is
 
    Impl : aliased Mock.TKM_Type;
    --  TKM mock implementation.
+
+   -------------------------------------------------------------------------
+
+   procedure C_Test_Client
+   is
+      use type TKMRPC.Nonces.Nonce_Id_Type;
+
+      Args    : GNAT.OS_Lib.Argument_List (1 .. 0);
+      Success : Boolean := False;
+   begin
+      Server.Start (TKM => Impl'Access);
+      GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
+                         Args         => Args,
+                         Success      => Success);
+      Assert (Condition => Success,
+              Message   => "Spawning client failed");
+
+      --  The C test client requests a nonce with id 1 and length 128.
+
+      Assert (Condition => Mock.Last_Nonce_Id = 1,
+              Message   => "Last nonce id mismatch");
+      Assert (Condition => Mock.Last_Nonce_Length = 128,
+              Message   => "Last nonce length mismatch");
+
+      Server.Stop;
+      Mock.Last_Nonce_Id     := 0;
+      Mock.Last_Nonce_Length := 16;
+
+   exception
+      when others =>
+         Server.Stop;
+         Mock.Last_Nonce_Id     := 0;
+         Mock.Last_Nonce_Length := 16;
+         raise;
+   end C_Test_Client;
 
    -------------------------------------------------------------------------
 
@@ -75,7 +112,10 @@ is
       T.Set_Name (Name => "ORB tests");
       T.Add_Test_Routine
         (Routine => Client_Server_ORBs'Access,
-         Name    => "ORB interaction: client/server");
+         Name    => "Client/server interaction");
+      T.Add_Test_Routine
+        (Routine => C_Test_Client'Access,
+         Name    => "C test client");
    end Initialize;
 
 end TKMRPC_ORB_Tests;

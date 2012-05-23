@@ -9,7 +9,7 @@ all: build_tests
 build_tests_c:
 	$(MAKE) -C $(TESTDIR)/c
 
-build_tests: build_tests_c
+build_tests: build_tests_c build_testclient
 	@gprbuild $(BUILD_OPTS) -Ptkmrpc_tests
 
 build_clientlib:
