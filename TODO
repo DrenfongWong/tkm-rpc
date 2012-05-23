@@ -1,28 +1,14 @@
 TODO
 ====
 
-Specs
------
-- Should nonce length of the actually created nonce be set on the server
-  side? Currently the client ORB sets the length.
-
 Src
 ---
 - Make transport client a type
 - Implement request ID handling
 - Dispatcher: Make ophandler map protected
-
-- Data_Type/Request_Type/Response_Type naming is confusing
-  - See specific convert packages
+- No exceptions in TKMRPC.Client -> used in C
 
 Messages/Interfaces
 -------------------
-- Naming: interfaces -> _Interface not _Type
-- Primite ops of an interface must be declared abstract
 - Naming: nc -> nonce
-- Naming: ByteSequence... -> Byte_Sequence or Byte_Array
-- type IKE_Access is access all IKE_Interface'Class;
-  - missing 'Class
-  - not null is not feasible (e.g. see Implementation package)
-- Types package is not needed in Convert packages
 - Constants MUST be enums (see error messages etc)
