@@ -1,4 +1,4 @@
-CFLAGS = -I../../messages/c -W -Wall -Werror
+CFLAGS = -I../../interfaces/c -W -Wall -Werror
 
 ASSERT_SOURCES = $(wildcard assert_*.c)
 ASSERT_OBJECTS = $(ASSERT_SOURCES:.c=.o)

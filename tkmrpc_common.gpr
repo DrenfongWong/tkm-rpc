@@ -3,9 +3,7 @@ with "anet";
 project TKMRPC_Common is
 
    for Source_Dirs use ();
-   Source_Dirs := ("src",
-                   "messages/ada",
-                   "interfaces/ada");
+   Source_Dirs := ("src", "interfaces/ada");
 
    Compiler_Switches := ("-gnatygAdISuxo",
                          "-gnatVa",
