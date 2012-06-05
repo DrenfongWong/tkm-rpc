@@ -1,7 +1,6 @@
 with TKMRPC.Request;
 with TKMRPC.Response;
 with TKMRPC.Transport.Client;
-with TKMRPC.Operation_Handlers;
 with TKMRPC.Operation_Dispatcher;
 with TKMRPC.Constants;
 
@@ -14,26 +13,18 @@ is
 
    Request_Correct : Boolean := False;
 
-   type My_Handler is new
-     Operation_Handlers.Handler_Interface with null record;
-
-   overriding
    procedure Handle
-     (H   :     My_Handler;
-      Req :     Request.Data_Type;
+     (Req :     Request.Data_Type;
       Res : out Response.Data_Type);
-   --  Test implementation of an operation handler. Asserts that the request
-   --  equals Test_Request and sets Res to Test_Response.
+   --  Test implementation of an operation handler callback. Asserts that the
+   --  request equals Test_Request and sets Res to Test_Response.
 
    -------------------------------------------------------------------------
 
    procedure Handle
-     (H   :     My_Handler;
-      Req :     Request.Data_Type;
+     (Req :     Request.Data_Type;
       Res : out Response.Data_Type)
    is
-      pragma Unreferenced (H);
-
       use type TKMRPC.Request.Data_Type;
    begin
       if Req = Test_Utils.Test_Request then
@@ -50,9 +41,8 @@ is
       use type TKMRPC.Response.Data_Type;
 
       Res : Response.Data_Type;
-      H   : My_Handler;
    begin
-      Operation_Dispatcher.Register (Handler => H,
+      Operation_Dispatcher.Register (Handler => Handle'Access,
                                      Opcode  => Test_Utils.Test_Operation);
       Operation_Dispatcher.Start;
 
@@ -117,18 +107,17 @@ is
 
    procedure Register_Handlers
    is
-      H : My_Handler;
    begin
       Assert (Condition => Operation_Dispatcher.Get_Handler_Count = 0,
               Message   => "Handler count not 0");
 
-      Operation_Dispatcher.Register (Handler => H,
+      Operation_Dispatcher.Register (Handler => Handle'Access,
                                      Opcode  => 999);
       Assert (Condition => Operation_Dispatcher.Get_Handler_Count = 1,
               Message   => "Handler count not 1");
 
       begin
-         Operation_Dispatcher.Register (Handler => H,
+         Operation_Dispatcher.Register (Handler => Handle'Access,
                                         Opcode  => 999);
          Fail (Message => "Exception expected");
 

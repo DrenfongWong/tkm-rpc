@@ -8,12 +8,9 @@ is
    -------------------------------------------------------------------------
 
    procedure Handle
-     (H   :     Nonce_Create_Type;
-      Req :     Request.Data_Type;
+     (Req :     Request.Data_Type;
       Res : out Response.Data_Type)
    is
-      pragma Unreferenced (H);
-
       Create_Req : Request.IKE.nc_create.Request_Type;
       Create_Res : Response.IKE.nc_create.Response_Type;
       Impl       : Servers.IKE.IKE_Handle;

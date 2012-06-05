@@ -5,7 +5,7 @@ package TKMRPC.Operation_Dispatcher
 is
 
    procedure Register
-     (Handler : Operation_Handlers.Handler_Interface'Class;
+     (Handler : Operation_Handlers.Op_Handler;
       Opcode  : Operations.Operation_Type);
    --  Register handler for given operation code.
 
@@ -19,7 +19,7 @@ is
    --  Return number of registered handlers.
 
    procedure Clear;
-   --  Clear all registered operation handlers.
+   --  Clear all registered handler callbacks.
 
    No_Handler   : exception;
    Opcode_Taken : exception;

@@ -4,7 +4,6 @@ with TKMRPC.Operation_Handlers.Nonce_Create;
 
 package body TKMRPC.Server
 is
-   Nonce_Create : Operation_Handlers.Nonce_Create.Nonce_Create_Type;
 
    -------------------------------------------------------------------------
 
@@ -12,8 +11,9 @@ is
    is
    begin
       Servers.IKE.Register (Object => TKM);
-      Operation_Dispatcher.Register (Handler => Nonce_Create,
-                                     Opcode  => Operations.IKE.nc_create);
+      Operation_Dispatcher.Register
+        (Handler => Operation_Handlers.Nonce_Create.Handle'Access,
+         Opcode  => Operations.IKE.nc_create);
       Operation_Dispatcher.Start;
    end Start;
 

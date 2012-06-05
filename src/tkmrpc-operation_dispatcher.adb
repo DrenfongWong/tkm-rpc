@@ -13,7 +13,7 @@ is
 
    package Map_Of_Ophandlers is new Ada.Containers.Indefinite_Ordered_Maps
      (Key_Type     => Operations.Operation_Type,
-      Element_Type => Handler_Interface'Class);
+      Element_Type => Op_Handler);
    package MOO renames Map_Of_Ophandlers;
 
    type Server_Access is access Transport.Servers.Server_Type;
@@ -55,7 +55,7 @@ is
    -------------------------------------------------------------------------
 
    procedure Register
-     (Handler : Handler_Interface'Class;
+     (Handler : Op_Handler;
       Opcode  : Operations.Operation_Type)
    is
    begin
@@ -84,7 +84,7 @@ is
          return;
       end if;
 
-      MOO.Element (Position => Cursor).Handle
+      MOO.Element (Position => Cursor).all
         (Req => Data,
          Res => Reply);
 
