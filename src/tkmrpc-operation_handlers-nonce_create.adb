@@ -25,8 +25,7 @@ is
 
    exception
       when others =>
-         Res                   := Constants.Invalid_Operation;
-         Res.Header.Request_ID := Req.Header.Request_ID;
+         Res := Constants.Invalid_Operation;
    end Handle;
 
 end TKMRPC.Operation_Handlers.Nonce_Create;

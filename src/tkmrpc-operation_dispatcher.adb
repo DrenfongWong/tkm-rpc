@@ -78,9 +78,10 @@ is
       Cursor : constant MOO.Cursor := Ophandlers.Find
         (Key => Data.Header.Operation);
    begin
+      Next_Reply.Header.Request_ID := Data.Header.Request_ID;
+
       if Cursor = MOO.No_Element then
-         Next_Reply                   := Constants.Invalid_Operation;
-         Next_Reply.Header.Request_ID := Data.Header.Request_ID;
+         Next_Reply := Constants.Invalid_Operation;
          return;
       end if;
 
