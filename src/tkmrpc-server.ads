@@ -2,7 +2,7 @@ with TKMRPC.Servers.IKE;
 
 package TKMRPC.Server
 is
-   procedure Start (TKM : Servers.IKE.IKE_Access);
+   procedure Start (TKM : Servers.IKE.IKE_Handle);
    --  Start the server using the given TKM implementation.
 
    procedure Stop;

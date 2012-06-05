@@ -6,9 +6,7 @@ Src
 - Make transport client a type
 - Implement request ID handling
 - Dispatcher: Make ophandler map protected
-- No exceptions in TKMRPC.Client -> used in C
 
 Messages/Interfaces
 -------------------
 - Naming: nc -> nonce
-- Constants MUST be enums (see error messages etc)

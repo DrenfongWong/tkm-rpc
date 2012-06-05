@@ -1,8 +1,9 @@
-with TKMRPC.Nonces;
+with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
 with TKMRPC.Server;
 with TKMRPC.Mock;
 with TKMRPC.Implementation;
+with TKMRPC.Results;
 
 with GNAT.OS_Lib;
 
@@ -18,7 +19,8 @@ is
 
    procedure C_Test_Client
    is
-      use type TKMRPC.Nonces.Nonce_Id_Type;
+      use type TKMRPC.Types.nc_id_type;
+      use type TKMRPC.Types.nonce_length_type;
 
       Args    : GNAT.OS_Lib.Argument_List (1 .. 0);
       Success : Boolean := False;
@@ -53,22 +55,28 @@ is
 
    procedure Client_Server_ORBs
    is
-      use type TKMRPC.Nonces.Nonce_Type;
-      use type TKMRPC.Nonces.Nonce_Id_Type;
+      use type TKMRPC.Types.nonce_type;
+      use type TKMRPC.Types.nc_id_type;
+      use type TKMRPC.Types.nonce_length_type;
+      use type TKMRPC.Results.Result_Type;
 
-      Nonce     : Nonces.Nonce_Type;
-      Ref_Nonce : Nonces.Nonce_Type := Mock.Ref_Nonce;
+      Nonce  : Types.nonce_type;
+      Result : Results.Result_Type;
    begin
       Server.Start (TKM => Impl'Access);
-      Clients.IKE.Init;
-      Nonce := Clients.IKE.Nc_Create (Nonce_Id     => 123,
-                                      Nonce_Length => 243);
+      Clients.IKE.Init (Result => Result);
 
-      --  The client ORB fills in the nonce length, update ref nonce.
+      Assert (Condition => Result = Results.OK,
+              Message   => "IKE init failed");
 
-      Ref_Nonce.Length := 243;
+      Clients.IKE.nc_create (nc_id        => 123,
+                             nonce_length => 243,
+                             nonce        => Nonce,
+                             Result       => Result);
 
-      Assert (Condition => Nonce = Ref_Nonce,
+      Assert (Condition => Result = Results.OK,
+              Message   => "Remote call failed");
+      Assert (Condition => Nonce = Mock.Ref_Nonce,
               Message   => "Nonce incorrect");
       Assert (Condition => Mock.Last_Nonce_Id = 123,
               Message   => "Last nonce id mismatch");
@@ -78,19 +86,12 @@ is
       --  Provoke error on server side.
 
       Implementation.Unregister;
-      begin
-         declare
-            Dummy : Nonces.Nonce_Type := Clients.IKE.Nc_Create
-              (Nonce_Id     => 123,
-               Nonce_Length => 243);
-            pragma Unreferenced (Dummy);
-         begin
-            Fail (Message => "Exception expected");
-         end;
-
-      exception
-         when Clients.IKE.RPC_Error => null;
-      end;
+      Clients.IKE.nc_create (nc_id        => 123,
+                             nonce_length => 243,
+                             nonce        => Nonce,
+                             Result       => Result);
+      Assert (Condition => Result /= Results.OK,
+              Message   => "Error expected");
 
       Server.Stop;
       Mock.Last_Nonce_Id     := 0;

@@ -1,5 +1,6 @@
 with TKMRPC.Operations;
 with TKMRPC.Request.Convert;
+with TKMRPC.Types;
 
 with Test_Utils;
 
@@ -26,6 +27,7 @@ is
       use TKMRPC.Request;
       use type TKMRPC.Operations.Operation_Type;
       use type TKMRPC.Request.Padded_Data_Type;
+      use type TKMRPC.Types.request_id_type;
 
       Stream : constant Convert.Stream_Type
         := Convert.To_Stream (S => Test_Utils.Test_Request);

@@ -9,7 +9,7 @@ is
 
    type Header_Type is record
       Operation  : Operations.Operation_Type;
-      Request_ID : Types.Request_ID_Type;
+      Request_ID : Types.request_id_type;
    end record;
 
    for Header_Type use record
@@ -19,7 +19,7 @@ is
    for Header_Type'Size use Header_Size * 8;
 
    subtype Padded_Data_Range is Natural range 1 .. Body_Size;
-   subtype Padded_Data_Type is Types.Byte_Array (Padded_Data_Range);
+   subtype Padded_Data_Type is Types.Byte_Sequence (Padded_Data_Range);
 
    type Data_Type is record
       Header      : Header_Type;

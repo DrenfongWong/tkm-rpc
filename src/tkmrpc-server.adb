@@ -1,4 +1,4 @@
-with TKMRPC.Operations;
+with TKMRPC.Operations.IKE;
 with TKMRPC.Operation_Dispatcher;
 with TKMRPC.Operation_Handlers.Nonce_Create;
 with TKMRPC.Implementation;
@@ -9,12 +9,12 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Start (TKM : Servers.IKE.IKE_Access)
+   procedure Start (TKM : Servers.IKE.IKE_Handle)
    is
    begin
       Implementation.Register (Object => TKM);
       Operation_Dispatcher.Register (Handler => Nonce_Create,
-                                     Opcode  => Operations.Nonce_Create);
+                                     Opcode  => Operations.IKE.nc_create);
       Operation_Dispatcher.Start;
    end Start;
 

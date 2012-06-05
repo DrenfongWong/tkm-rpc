@@ -1,6 +1,7 @@
-with TKMRPC.Nonces;
+with TKMRPC.Types;
 with TKMRPC.Implementation;
 with TKMRPC.Servers.IKE;
+with TKMRPC.Results;
 
 with TKMRPC.Mock;
 
@@ -27,7 +28,7 @@ is
 
    procedure Register_Implementation
    is
-      Ref : Servers.IKE.IKE_Access;
+      Ref : Servers.IKE.IKE_Handle;
    begin
       begin
          Ref := Implementation.Get_Impl;
@@ -41,12 +42,18 @@ is
       Ref := Implementation.Get_Impl;
 
       declare
-         use type TKMRPC.Nonces.Nonce_Type;
+         use type TKMRPC.Types.nonce_type;
+         use type TKMRPC.Results.Result_Type;
 
-         Nonce : constant Nonces.Nonce_Type := Ref.Nc_Create
-           (Nonce_Id     => 123,
-            Nonce_Length => 233);
+         Nonce  : Types.nonce_type;
+         Result : Results.Result_Type;
       begin
+         Ref.nc_create (nc_id        => 123,
+                        nonce_length => 233,
+                        nonce        => Nonce,
+                        Result       => Result);
+         Assert (Condition => Result = Results.OK,
+                 Message   => "Result not OK");
          Assert (Condition => Nonce = Mock.Ref_Nonce,
                  Message   => "Nonce incorrect");
       end;
