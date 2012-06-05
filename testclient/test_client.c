@@ -31,7 +31,7 @@ int main()
 
 	/* The mock server responds with a test nonce of length 256 */
 	printf("client: remote call status %" PRId64 "\n", result);
-	printf("client: nonce received (lenght: %d)\n", nonce.size);
+	printf("client: nonce received (length: %d)\n", nonce.size);
 	printf("client: nonce first char '%c'\n", nonce.data[0]);
 
 	tkmlib_final();
