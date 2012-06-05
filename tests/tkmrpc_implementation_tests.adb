@@ -1,5 +1,4 @@
 with TKMRPC.Types;
-with TKMRPC.Implementation;
 with TKMRPC.Servers.IKE;
 with TKMRPC.Results;
 
@@ -31,15 +30,15 @@ is
       Ref : Servers.IKE.IKE_Handle;
    begin
       begin
-         Ref := Implementation.Get_Impl;
+         Ref := Servers.IKE.Get_Instance;
          Fail (Message => "Exception expected (1)");
 
       exception
-         when Implementation.Implementation_Error => null;
+         when Servers.Implementation_Error => null;
       end;
 
-      Implementation.Register (Object => Impl'Access);
-      Ref := Implementation.Get_Impl;
+      Servers.IKE.Register (Object => Impl'Access);
+      Ref := Servers.IKE.Get_Instance;
 
       declare
          use type TKMRPC.Types.nonce_type;
@@ -58,13 +57,13 @@ is
                  Message   => "Nonce incorrect");
       end;
 
-      Implementation.Unregister;
+      Servers.IKE.Unregister;
       begin
-         Ref := Implementation.Get_Impl;
+         Ref := Servers.IKE.Get_Instance;
          Fail (Message => "Exception expected (2)");
 
       exception
-         when Implementation.Implementation_Error => null;
+         when Servers.Implementation_Error => null;
       end;
    end Register_Implementation;
 

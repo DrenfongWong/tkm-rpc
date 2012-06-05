@@ -1,7 +1,6 @@
 with TKMRPC.Operations.IKE;
 with TKMRPC.Operation_Dispatcher;
 with TKMRPC.Operation_Handlers.Nonce_Create;
-with TKMRPC.Implementation;
 
 package body TKMRPC.Server
 is
@@ -12,7 +11,7 @@ is
    procedure Start (TKM : Servers.IKE.IKE_Handle)
    is
    begin
-      Implementation.Register (Object => TKM);
+      Servers.IKE.Register (Object => TKM);
       Operation_Dispatcher.Register (Handler => Nonce_Create,
                                      Opcode  => Operations.IKE.nc_create);
       Operation_Dispatcher.Start;
@@ -25,7 +24,7 @@ is
    begin
       Operation_Dispatcher.Stop;
       Operation_Dispatcher.Clear;
-      Implementation.Unregister;
+      Servers.IKE.Unregister;
    end Stop;
 
 end TKMRPC.Server;

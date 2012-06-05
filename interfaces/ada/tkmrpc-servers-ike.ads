@@ -239,4 +239,17 @@ is
       is abstract;
    --  Selects an ESA context for outgoing traffic.
 
+   --------------
+   -- Registry --
+   --------------
+
+   procedure Register (Object : IKE_Handle);
+   --  Register IKE implementation instance.
+
+   procedure Unregister;
+   --  Unregister current IKE implementation;
+
+   function Get_Instance return IKE_Handle;
+   --  Return registered TKM IKE implementation instance.
+
 end TKMRPC.Servers.IKE;

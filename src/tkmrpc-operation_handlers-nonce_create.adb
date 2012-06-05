@@ -1,4 +1,3 @@
-with TKMRPC.Implementation;
 with TKMRPC.Constants;
 with TKMRPC.Servers.IKE;
 with TKMRPC.Request.IKE.nc_create.Convert;
@@ -19,7 +18,7 @@ is
       Create_Res : Response.IKE.nc_create.Response_Type;
       Impl       : Servers.IKE.IKE_Handle;
    begin
-      Impl := Implementation.Get_Impl;
+      Impl := Servers.IKE.Get_Instance;
       Create_Req := Request.IKE.nc_create.Convert.From_Request (S => Req);
       Impl.nc_create (nc_id        => Create_Req.Data.nc_id,
                       nonce_length => Create_Req.Data.nonce_length,

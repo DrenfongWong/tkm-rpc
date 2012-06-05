@@ -1,8 +1,8 @@
 with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
+with TKMRPC.Servers.IKE;
 with TKMRPC.Server;
 with TKMRPC.Mock;
-with TKMRPC.Implementation;
 with TKMRPC.Results;
 
 with GNAT.OS_Lib;
@@ -85,7 +85,7 @@ is
 
       --  Provoke error on server side.
 
-      Implementation.Unregister;
+      Servers.IKE.Unregister;
       Clients.IKE.nc_create (nc_id        => 123,
                              nonce_length => 243,
                              nonce        => Nonce,
