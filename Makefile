@@ -6,10 +6,7 @@ BUILD_OPTS = -p
 
 all: build_tests
 
-build_tests_c:
-	$(MAKE) -C $(TESTDIR)/c
-
-build_tests: build_tests_c build_testclient
+build_tests: build_testclient
 	@gprbuild $(BUILD_OPTS) -Ptkmrpc_tests
 
 build_clientlib:
@@ -31,7 +28,5 @@ cov: build_tests
 
 clean:
 	@rm -rf $(OBJDIR)
-	$(MAKE) -C $(TESTDIR)/c clean
 
-.PHONY: build_clientlib build_testclient build_tests build_tests_c clean cov \
-	tests
+.PHONY: build_clientlib build_testclient build_tests clean cov tests

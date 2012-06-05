@@ -7,7 +7,7 @@ project TKMRPC_Tests is
    Build : Build_Type := external ("BUILD", "tests");
 
    Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwal";
-   Linker_Switches   := ("-Ltests/c", "-lassert");
+   Linker_Switches   := ();
 
    for Main use ("test_runner.adb");
    for Source_Dirs use TKMRPC_Common.Source_Dirs & "tests";
