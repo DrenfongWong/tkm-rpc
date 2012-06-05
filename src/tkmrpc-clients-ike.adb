@@ -90,9 +90,8 @@ is
          Transport.Client.Receive (Data => Data);
          Res := Response.IKE.nc_create.Convert.From_Response (S => Data);
 
-         nonce.Size := Res.Data.nonce.Size;
-         nonce.Data := Res.Data.nonce.Data;
-         Result     := Res.Header.Result;
+         nonce  := Res.Data.nonce;
+         Result := Res.Header.Result;
       end;
    end nc_create;
 
