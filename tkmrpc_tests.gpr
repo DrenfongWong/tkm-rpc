@@ -6,7 +6,7 @@ project TKMRPC_Tests is
    type Build_Type is ("tests", "coverage");
    Build : Build_Type := external ("BUILD", "tests");
 
-   Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwal";
+   Compiler_Switches := TKMRPC_Common.Ada_Compiler_Switches & "-gnatwal";
    Linker_Switches   := ();
 
    for Main use ("test_runner.adb");

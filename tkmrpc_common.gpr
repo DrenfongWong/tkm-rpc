@@ -5,13 +5,13 @@ project TKMRPC_Common is
    for Source_Dirs use ();
    Source_Dirs := ("src", "interfaces/ada");
 
-   Compiler_Switches := ("-gnatygAdISuxo",
-                         "-gnatVa",
-                         "-gnat05",
-                         "-gnatf",
-                         "-fstack-check",
-                         "-gnato",
-                         "-g");
+   Ada_Compiler_Switches := ("-gnatygAdISuxo",
+                             "-gnatVa",
+                             "-gnat05",
+                             "-gnatf",
+                             "-fstack-check",
+                             "-gnato",
+                             "-g");
 
    Binder_Switches := ("-E");
 

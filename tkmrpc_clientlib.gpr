@@ -9,10 +9,10 @@ library project TKMRPC_Clientlib is
    for Library_Kind use "static";
    for Library_Name use "tkmrpc";
 
-   Compiler_Switches := TKMRPC_Common.Compiler_Switches & "-gnatwale";
+   Ada_Compiler_Switches := TKMRPC_Common.Ada_Compiler_Switches & "-gnatwale";
 
    package Compiler is
-      for Default_Switches ("ada") use Compiler_Switches;
+      for Default_Switches ("ada") use Ada_Compiler_Switches;
    end Compiler;
 
 end TKMRPC_Clientlib;
