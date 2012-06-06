@@ -1,3 +1,4 @@
+with "tkmrpc_common";
 with "tkmrpc_clientlib";
 
 project TKMRCP_Testclient is
@@ -8,7 +9,7 @@ project TKMRCP_Testclient is
    for Object_Dir use "obj";
 
    package Compiler is
-      for Default_Switches ("c") use ("-W", "-Wall", "-Werror");
+      for Default_Switches ("c") use TKMRPC_Common.C_Compiler_Switches;
    end Compiler;
 
 end TKMRCP_Testclient;

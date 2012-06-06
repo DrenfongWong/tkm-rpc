@@ -13,6 +13,8 @@ project TKMRPC_Common is
                              "-gnato",
                              "-g");
 
+   C_Compiler_Switches := ("-W", "-Wall", "-Werror");
+
    Binder_Switches := ("-E");
 
 end TKMRPC_Common;
