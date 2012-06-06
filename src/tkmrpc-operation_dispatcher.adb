@@ -74,22 +74,18 @@ is
    is
       use type MOO.Cursor;
 
-      Reply  : Response.Data_Type;
       Cursor : constant MOO.Cursor := Ophandlers.Find
         (Key => Data.Header.Operation);
    begin
-      Next_Reply.Header.Request_ID := Data.Header.Request_ID;
-
       if Cursor = MOO.No_Element then
          Next_Reply := Constants.Invalid_Operation;
-         return;
+      else
+         MOO.Element (Position => Cursor).all
+           (Req => Data,
+            Res => Next_Reply);
       end if;
 
-      MOO.Element (Position => Cursor).all
-        (Req => Data,
-         Res => Reply);
-
-      Next_Reply := Reply;
+      Next_Reply.Header.Request_ID := Data.Header.Request_ID;
    end Request_Callback;
 
    -------------------------------------------------------------------------
