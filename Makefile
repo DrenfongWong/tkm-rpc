@@ -1,6 +1,9 @@
-TESTDIR = tests
-OBJDIR  = obj
-COVDIR  = $(OBJDIR)/cov
+PREFIX   ?= $(HOME)/libraries
+TESTDIR   = tests
+OBJDIR    = obj
+COVDIR    = $(OBJDIR)/cov
+LIBDIR    = lib
+GPR_FILES = gnat/*.gpr
 
 BUILD_OPTS = -p
 
@@ -18,6 +21,19 @@ build_testclient: build_clientlib
 tests: build_tests
 	@$(OBJDIR)/$(TESTDIR)/test_runner
 
+install: install_lib
+
+install_lib: build_clientlib
+	install -d $(PREFIX)/lib/gnat
+	install -d $(PREFIX)/lib/tkmrpc
+	install -d $(PREFIX)/include/tkmrpc
+	install -m 644 src/*.ad[bs] $(PREFIX)/include/tkmrpc
+	install -m 644 interfaces/ada/*.ad[bs] $(PREFIX)/include/tkmrpc
+	install -m 644 interfaces/c/*.[ch] $(PREFIX)/include/tkmrpc
+	install -m 444 $(LIBDIR)/*.ali $(PREFIX)/lib/tkmrpc
+	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
+	install -m 444 $(LIBDIR)/libtkmrpc.a $(PREFIX)/lib
+
 cov: build_tests
 	@rm -f $(COVDIR)/*.gcda
 	@gprbuild $(BUILD_OPTS) -Ptkmrpc_tests.gpr -XBUILD="coverage"
@@ -29,4 +45,5 @@ cov: build_tests
 clean:
 	@rm -rf $(OBJDIR)
 
-.PHONY: build_clientlib build_testclient build_tests clean cov tests
+.PHONY: build_clientlib build_testclient build_tests clean cov install \
+	install_lib tests
