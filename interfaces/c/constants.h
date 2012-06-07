@@ -1,6 +1,6 @@
 #pragma once
 
-enum result_type_t {
+enum result_type {
     OK = 0x0000000000000000,
     INVALID_OPERATION = 0x0000000000000101,
     INVALID_ID = 0x0000000000000102,
@@ -12,7 +12,7 @@ enum result_type_t {
     MATH_ERROR = 0x0000000000000401,
 };
 
-enum version_type_t {
+enum version_type {
     CFG_VERSION = 0x0000000000000000,
     IKE_VERSION = 0x0000000000000000,
 };

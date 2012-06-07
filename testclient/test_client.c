@@ -6,7 +6,7 @@
 #include "tkmclient.h"
 
 /* Check call result, exit on failure */
-static void check_result (const result_type_t res, const char const *name)
+static void check_result (const result_type res, const char const *name)
 {
 	if (res != OK)
 	{
@@ -21,11 +21,11 @@ int main()
 {
 	tkmlib_init();
 
-	result_type_t result;
+	result_type result;
 	ike_init(&result);
 	check_result(result, "ike_init");
 
-	nonce_type_t nonce;
+	nonce_type nonce;
 	ike_nc_create(1, 128, &nonce, &result);
 	check_result(result, "ike_nc_create");
 
