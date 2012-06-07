@@ -2,17 +2,10 @@ with Ada.Exceptions;
 
 with Anet.Sockets;
 
-with TKMRPC.Request;
-with TKMRPC.Response;
+with TKMRPC.Operation_Handlers;
 
 package TKMRPC.Transport.Servers
 is
-
-   type Process_Callback is not null access procedure
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
-   --  Request processing callback responsible to handle request from client.
-   --  Returned response data is sent back to client.
 
    type Error_Handler_Callback is not null access procedure
      (E         :        Ada.Exceptions.Exception_Occurrence;
@@ -27,7 +20,7 @@ is
    procedure Listen
      (Server  : in out Server_Type;
       Address :        String;
-      Process :        Process_Callback);
+      Process :        Operation_Handlers.Op_Handler);
    --  Initialize and start RPC server. The server will listen on the given
    --  socket address for client requests. An incoming request is handed to the
    --  specified process callback.
@@ -51,7 +44,7 @@ private
    task type Connection_Task (Parent : not null access Server_Type)
    is
 
-      entry Listen (Cb : Process_Callback);
+      entry Listen (Cb : Operation_Handlers.Op_Handler);
       --  Start listening for request data on parent's socket. The process
       --  callback procedure is called upon reception of a request.
 

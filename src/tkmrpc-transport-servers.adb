@@ -76,14 +76,14 @@ is
 
    task body Connection_Task
    is
-      Process_Cb : Process_Callback       := Empty_Process_Cb'Access;
-      Error_Cb   : Error_Handler_Callback := Empty_Err_Cb'Access;
-      Stop       : Boolean                := False;
+      Process_Cb : Operation_Handlers.Op_Handler := Empty_Process_Cb'Access;
+      Error_Cb   : Error_Handler_Callback        := Empty_Err_Cb'Access;
+      Stop       : Boolean                       := False;
    begin
       Setup_Loop :
       loop
          select
-            accept Listen (Cb : Process_Callback)
+            accept Listen (Cb : Operation_Handlers.Op_Handler)
             do
                Process_Cb := Cb;
             end Listen;
@@ -166,7 +166,7 @@ is
    procedure Listen
      (Server  : in out Server_Type;
       Address :        String;
-      Process :        Process_Callback)
+      Process :        Operation_Handlers.Op_Handler)
    is
    begin
       Server.Sock_Listen.Create
