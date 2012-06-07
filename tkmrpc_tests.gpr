@@ -1,5 +1,6 @@
 with "ahven";
 with "tkmrpc_common";
+with "tkmrpc_clientlib";
 
 project TKMRPC_Tests is
 
@@ -10,7 +11,7 @@ project TKMRPC_Tests is
    Linker_Switches   := ();
 
    for Main use ("test_runner.adb");
-   for Source_Dirs use TKMRPC_Common.Source_Dirs & "tests";
+   for Source_Dirs use ("tests");
 
    case Build is
       when "tests" =>

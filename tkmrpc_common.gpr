@@ -3,7 +3,6 @@ with "anet";
 project TKMRPC_Common is
 
    for Source_Dirs use ();
-   Source_Dirs := ("src", "interfaces/ada");
 
    Ada_Compiler_Switches := ("-gnatygAdISuxo",
                              "-gnatVa",
