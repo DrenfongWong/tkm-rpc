@@ -17,15 +17,17 @@ is
    Request_Correct : Boolean         := False;
    Ex_Correct      : Boolean         := False;
 
-   procedure Receive_Cb (Data : Request.Data_Type);
-   --  Receive callback; Sets the Request_Correct boolean to True if the given
-   --  request data matches the expected test request.
+   procedure Process_Cb
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type);
+   --  Process callback; Sets the Request_Correct boolean to True if the given
+   --  request data matches the expected test request. Return test response
+   --  data.
 
-   procedure Receive_Cb_Raise (Data : Request.Data_Type);
+   procedure Process_Cb_Raise
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type);
    --  Raises an exception on request reception.
-
-   procedure Respond_Cb (Data : out Response.Data_Type);
-   --  Response callback; Send test response data.
 
    procedure Error_Cb
      (E         :        Ada.Exceptions.Exception_Occurrence;
@@ -64,22 +66,27 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Receive_Cb (Data : Request.Data_Type)
+   procedure Process_Cb
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type)
    is
       use type TKMRPC.Request.Data_Type;
    begin
-      if Data = Test_Utils.Test_Request then
+      if Req = Test_Utils.Test_Request then
          Request_Correct := True;
       end if;
-   end Receive_Cb;
+      Res := Test_Utils.Test_Response;
+   end Process_Cb;
 
    -------------------------------------------------------------------------
 
-   procedure Receive_Cb_Raise (Data : Request.Data_Type)
+   procedure Process_Cb_Raise
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type)
    is
    begin
       raise Program_Error with "Don't PANIC: test exception";
-   end Receive_Cb_Raise;
+   end Process_Cb_Raise;
 
    -------------------------------------------------------------------------
 
@@ -92,8 +99,7 @@ is
    begin
       Servers.Listen (Server  => Server,
                       Address => Socket_Path,
-                      Receive => Receive_Cb'Access,
-                      Respond => Respond_Cb'Access);
+                      Process => Process_Cb'Access);
 
       Client.Connect (Address => Socket_Path);
       select
@@ -114,14 +120,6 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Respond_Cb (Data : out Response.Data_Type)
-   is
-   begin
-      Data := Test_Utils.Test_Response;
-   end Respond_Cb;
-
-   -------------------------------------------------------------------------
-
    procedure Server_Error_Callbacks
    is
       RPC_Server : Servers.Server_Type;
@@ -131,8 +129,7 @@ is
                                       Callback => Error_Cb'Access);
       Servers.Listen (Server  => RPC_Server,
                       Address => Socket_Path,
-                      Receive => Receive_Cb_Raise'Access,
-                      Respond => Respond_Cb'Access);
+                      Process => Process_Cb_Raise'Access);
       Assert (Condition => Servers.Is_Listening (Server => RPC_Server),
               Message   => "Server not listening");
 

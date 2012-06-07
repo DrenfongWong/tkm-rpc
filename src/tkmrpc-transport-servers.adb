@@ -7,11 +7,12 @@ with TKMRPC.Response.Convert;
 package body TKMRPC.Transport.Servers
 is
 
-   --  Placeholder callbacks needed for request/response callback
-   --  initialization.
+   --  Placeholder callbacks needed for callback initialization.
 
-   procedure Empty_Recv_Cb (Data : Request.Data_Type) is null;
-   procedure Empty_Resp_Cb (Data : out Response.Data_Type) is null;
+   procedure Empty_Process_Cb
+     (Req :    Request.Data_Type;
+      Res : out Response.Data_Type) is null;
+
    procedure Empty_Err_Cb
      (E         :        Ada.Exceptions.Exception_Occurrence;
       Stop_Flag : in out Boolean) is null;
@@ -75,20 +76,16 @@ is
 
    task body Connection_Task
    is
-      Recv_Cb  : Request_Callback       := Empty_Recv_Cb'Access;
-      Resp_Cb  : Response_Callback      := Empty_Resp_Cb'Access;
-      Error_Cb : Error_Handler_Callback := Empty_Err_Cb'Access;
-      Stop     : Boolean                := False;
+      Process_Cb : Process_Callback       := Empty_Process_Cb'Access;
+      Error_Cb   : Error_Handler_Callback := Empty_Err_Cb'Access;
+      Stop       : Boolean                := False;
    begin
       Setup_Loop :
       loop
          select
-            accept Listen
-              (Request  : Request_Callback;
-               Response : Response_Callback)
+            accept Listen (Cb : Process_Callback)
             do
-               Recv_Cb := Request;
-               Resp_Cb := Response;
+               Process_Cb := Cb;
             end Listen;
 
             exit Setup_Loop;
@@ -132,8 +129,8 @@ is
                       (S => Buffer (Buffer'First .. Last));
                   Res : Response.Data_Type;
                begin
-                  Recv_Cb (Data => Req);
-                  Resp_Cb (Data => Res);
+                  Process_Cb (Req => Req,
+                              Res => Res);
 
                   Parent.Sock_Comm.Send
                     (Item => Response.Convert.To_Stream (S => Res));
@@ -169,8 +166,7 @@ is
    procedure Listen
      (Server  : in out Server_Type;
       Address :        String;
-      Receive :        Request_Callback;
-      Respond :        Response_Callback)
+      Process :        Process_Callback)
    is
    begin
       Server.Sock_Listen.Create
@@ -181,8 +177,7 @@ is
       Server.Sock_Listen.Listen;
 
       Server.Trigger.Activate;
-      Server.C_Task.Listen (Request  => Receive,
-                            Response => Respond);
+      Server.C_Task.Listen (Cb => Process);
    end Listen;
 
    -------------------------------------------------------------------------

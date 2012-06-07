@@ -8,13 +8,11 @@ with TKMRPC.Response;
 package TKMRPC.Transport.Servers
 is
 
-   type Request_Callback is not null access procedure
-     (Data : Request.Data_Type);
-   --  Request callback responsible to handle request from client.
-
-   type Response_Callback is not null access procedure
-     (Data : out Response.Data_Type);
-   --  Response callback used to send response to client.
+   type Process_Callback is not null access procedure
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type);
+   --  Request processing callback responsible to handle request from client.
+   --  Returned response data is sent back to client.
 
    type Error_Handler_Callback is not null access procedure
      (E         :        Ada.Exceptions.Exception_Occurrence;
@@ -29,12 +27,10 @@ is
    procedure Listen
      (Server  : in out Server_Type;
       Address :        String;
-      Receive :        Request_Callback;
-      Respond :        Response_Callback);
+      Process :        Process_Callback);
    --  Initialize and start RPC server. The server will listen on the given
-   --  socket address for client requests. An incoming request is dispatched to
-   --  the specified request callback, the reponse callback is in charge of
-   --  response data creation.
+   --  socket address for client requests. An incoming request is handed to the
+   --  specified process callback.
 
    procedure Register_Error_Handler
      (Server   : in out Server_Type;
@@ -55,12 +51,9 @@ private
    task type Connection_Task (Parent : not null access Server_Type)
    is
 
-      entry Listen
-        (Request  : Request_Callback;
-         Response : Response_Callback);
-      --  Start listening for request data on parent's socket. The request
-      --  callback procedure is called upon reception of a request. The given
-      --  response callback is in charge of response data creation.
+      entry Listen (Cb : Process_Callback);
+      --  Start listening for request data on parent's socket. The process
+      --  callback procedure is called upon reception of a request.
 
       entry Set_Error_Handler (Cb : Error_Handler_Callback);
       --  Register given callback for error handling. The error handler will be

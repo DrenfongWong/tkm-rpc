@@ -26,15 +26,13 @@ is
 
    RPC_Server : Server_Access;
    Ophandlers : MOO.Map;
-   Next_Reply : Response.Data_Type;
 
-   procedure Request_Callback (Data : Request.Data_Type);
+   procedure Process_Callback
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type);
    --  Dispatch the given request to the registered operation handler for the
-   --  opcode. The procedure also initializes the response which is sent back
-   --  to the client.
-
-   procedure Response_Callback (Data : out Response.Data_Type);
-   --  Return the request reply (Next_Reply) to the RPC server for sending.
+   --  opcode. The procedure returns the response which is sent back to the
+   --  client.
 
    -------------------------------------------------------------------------
 
@@ -54,6 +52,28 @@ is
 
    -------------------------------------------------------------------------
 
+   procedure Process_Callback
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type)
+   is
+      use type MOO.Cursor;
+
+      Cursor : constant MOO.Cursor := Ophandlers.Find
+        (Key => Req.Header.Operation);
+   begin
+      if Cursor = MOO.No_Element then
+         Res := Constants.Invalid_Operation;
+      else
+         MOO.Element (Position => Cursor).all
+           (Req => Req,
+            Res => Res);
+      end if;
+
+      Res.Header.Request_ID := Req.Header.Request_ID;
+   end Process_Callback;
+
+   -------------------------------------------------------------------------
+
    procedure Register
      (Handler : Op_Handler;
       Opcode  : Operations.Operation_Type)
@@ -70,34 +90,6 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Request_Callback (Data : Request.Data_Type)
-   is
-      use type MOO.Cursor;
-
-      Cursor : constant MOO.Cursor := Ophandlers.Find
-        (Key => Data.Header.Operation);
-   begin
-      if Cursor = MOO.No_Element then
-         Next_Reply := Constants.Invalid_Operation;
-      else
-         MOO.Element (Position => Cursor).all
-           (Req => Data,
-            Res => Next_Reply);
-      end if;
-
-      Next_Reply.Header.Request_ID := Data.Header.Request_ID;
-   end Request_Callback;
-
-   -------------------------------------------------------------------------
-
-   procedure Response_Callback (Data : out Response.Data_Type)
-   is
-   begin
-      Data := Next_Reply;
-   end Response_Callback;
-
-   -------------------------------------------------------------------------
-
    procedure Start
    is
    begin
@@ -110,8 +102,7 @@ is
       Transport.Servers.Listen
         (Server  => RPC_Server.all,
          Address => Communication_Socket,
-         Receive => Request_Callback'Access,
-         Respond => Response_Callback'Access);
+         Process => Process_Callback'Access);
    end Start;
 
    -------------------------------------------------------------------------
