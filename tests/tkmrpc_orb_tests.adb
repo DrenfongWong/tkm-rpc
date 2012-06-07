@@ -3,7 +3,8 @@ with Interfaces.C.Strings;
 with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
 with TKMRPC.Servers.IKE;
-with TKMRPC.Server;
+with TKMRPC.Dispatchers.IKE;
+with TKMRPC.Transport.Servers;
 with TKMRPC.Mock;
 with TKMRPC.Results;
 
@@ -19,6 +20,8 @@ is
    Impl : aliased Mock.TKM_Type;
    --  TKM mock implementation.
 
+   Communication_Socket : constant String := "/tmp/tkm.rpc";
+
    -------------------------------------------------------------------------
 
    procedure C_Test_Client
@@ -26,10 +29,15 @@ is
       use type TKMRPC.Types.nc_id_type;
       use type TKMRPC.Types.nonce_length_type;
 
-      Args    : GNAT.OS_Lib.Argument_List (1 .. 0);
-      Success : Boolean := False;
+      RPC_Server : Transport.Servers.Server_Type;
+      Args       : GNAT.OS_Lib.Argument_List (1 .. 0);
+      Success    : Boolean := False;
    begin
-      Server.Start (TKM => Impl'Access);
+      Servers.IKE.Register (Object => Impl'Access);
+      Transport.Servers.Listen
+        (Server  => RPC_Server,
+         Address => Communication_Socket,
+         Process => Dispatchers.IKE.Dispatch'Access);
       GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
                          Args         => Args,
                          Success      => Success);
@@ -43,13 +51,15 @@ is
       Assert (Condition => Mock.Last_Nonce_Length = 128,
               Message   => "Last nonce length mismatch");
 
-      Server.Stop;
+      Transport.Servers.Stop (Server => RPC_Server);
+      Servers.IKE.Unregister;
       Mock.Last_Nonce_Id     := 0;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
-         Server.Stop;
+         Transport.Servers.Stop (Server => RPC_Server);
+         Servers.IKE.Unregister;
          Mock.Last_Nonce_Id     := 0;
          Mock.Last_Nonce_Length := 16;
          raise;
@@ -64,11 +74,18 @@ is
       use type TKMRPC.Types.nonce_length_type;
       use type TKMRPC.Results.Result_Type;
 
-      Address : ICS.chars_ptr := ICS.New_String (Str => Communication_Socket);
-      Nonce   : Types.nonce_type;
-      Result  : Results.Result_Type;
+      RPC_Server : Transport.Servers.Server_Type;
+      Nonce      : Types.nonce_type;
+      Result     : Results.Result_Type;
+      Address    : ICS.chars_ptr
+        := ICS.New_String (Str => Communication_Socket);
    begin
-      Server.Start (TKM => Impl'Access);
+      Servers.IKE.Register (Object => Impl'Access);
+      Transport.Servers.Listen
+        (Server  => RPC_Server,
+         Address => Communication_Socket,
+         Process => Dispatchers.IKE.Dispatch'Access);
+
       Clients.IKE.Init (Result  => Result,
                         Address => Address);
       ICS.Free (Item => Address);
@@ -100,13 +117,15 @@ is
       Assert (Condition => Result /= Results.OK,
               Message   => "Error expected");
 
-      Server.Stop;
+      Transport.Servers.Stop (Server => RPC_Server);
+      Servers.IKE.Unregister;
       Mock.Last_Nonce_Id     := 0;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
-         Server.Stop;
+         Transport.Servers.Stop (Server => RPC_Server);
+         Servers.IKE.Unregister;
          Mock.Last_Nonce_Id     := 0;
          Mock.Last_Nonce_Length := 16;
          raise;

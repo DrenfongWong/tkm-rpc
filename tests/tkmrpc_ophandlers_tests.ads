@@ -7,9 +7,6 @@ is
    procedure Initialize (T : in out Testcase);
    --  Initialize testcase.
 
-   procedure Register_Handlers;
-   --  Test operation handler registration.
-
    procedure Handle_Requests;
    --  Test operation dispatching.
 
