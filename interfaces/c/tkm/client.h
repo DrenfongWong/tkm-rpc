@@ -14,9 +14,9 @@ void tkmlib_final(void);
  */
 
 /**
- * Initialize CFG client
+ * Initialize CFG client with given address
  */
-extern void cfg_init(result_type *result);
+extern void cfg_init(result_type *result, char * address);
 
 /**
  * Returns the version of TKM.
@@ -52,9 +52,9 @@ extern void cfg_tkm_limits(active_requests_type *max_active_requests,
  */
 
 /**
- * Initialize IKE client
+ * Initialize IKE client with given address
  */
-extern void ike_init(result_type *result);
+extern void ike_init(result_type *result, char * address);
 
 /**
  * Returns the version of TKM.

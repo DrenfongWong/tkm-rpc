@@ -1,3 +1,5 @@
+with Interfaces.C.Strings;
+
 with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
 with TKMRPC.Servers.IKE;
@@ -11,6 +13,8 @@ package body TKMRPC_ORB_Tests
 is
    use Ahven;
    use TKMRPC;
+
+   package ICS renames Interfaces.C.Strings;
 
    Impl : aliased Mock.TKM_Type;
    --  TKM mock implementation.
@@ -60,11 +64,14 @@ is
       use type TKMRPC.Types.nonce_length_type;
       use type TKMRPC.Results.Result_Type;
 
-      Nonce  : Types.nonce_type;
-      Result : Results.Result_Type;
+      Address : ICS.chars_ptr := ICS.New_String (Str => Communication_Socket);
+      Nonce   : Types.nonce_type;
+      Result  : Results.Result_Type;
    begin
       Server.Start (TKM => Impl'Access);
-      Clients.IKE.Init (Result => Result);
+      Clients.IKE.Init (Result  => Result,
+                        Address => Address);
+      ICS.Free (Item => Address);
 
       Assert (Condition => Result = Results.OK,
               Message   => "IKE init failed");

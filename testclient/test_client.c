@@ -22,7 +22,7 @@ int main()
 	tkmlib_init();
 
 	result_type result;
-	ike_init(&result);
+	ike_init(&result, "/tmp/tkm.rpc");
 	check_result(result, "ike_init");
 
 	nonce_type nonce;

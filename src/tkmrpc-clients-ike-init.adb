@@ -1,9 +1,13 @@
 separate (TKMRPC.Clients.IKE)
 
-procedure Init (Result : out Results.Result_Type)
+procedure Init
+  (Result  : out Results.Result_Type;
+   Address :     Interfaces.C.Strings.chars_ptr)
 is
+   Socket_Address : constant String := Interfaces.C.Strings.Value
+     (Item => Address);
 begin
-   Transport.Client.Connect (Address => Communication_Socket);
+   Transport.Client.Connect (Address => Socket_Address);
    Result := Results.OK;
 
 exception

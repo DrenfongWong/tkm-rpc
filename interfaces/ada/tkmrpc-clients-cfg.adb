@@ -10,7 +10,9 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Init (Result : out Results.Result_Type) is separate;
+   procedure Init
+     (Result  : out Results.Result_Type;
+      Address :     Interfaces.C.Strings.chars_ptr) is separate;
 
    -------------------------------------------------------------------------
 

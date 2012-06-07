@@ -1,12 +1,16 @@
+with Interfaces.C.Strings;
+
 with TKMRPC.Types;
 with TKMRPC.Results;
 
 package TKMRPC.Clients.IKE
 is
 
-   procedure Init (Result : out Results.Result_Type);
+   procedure Init
+     (Result  : out Results.Result_Type;
+      Address :     Interfaces.C.Strings.chars_ptr);
    pragma Export (C, Init, "ike_init");
-   --  Initialize IKE client.
+   --  Initialize IKE client with given address.
 
    procedure tkm_version
      (version : out Types.version_type;
