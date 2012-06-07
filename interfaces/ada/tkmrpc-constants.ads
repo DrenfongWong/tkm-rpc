@@ -1,5 +1,3 @@
-with Interfaces;
-
 with TKMRPC.Types;
 
 package TKMRPC.Constants

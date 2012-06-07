@@ -1,22 +1,22 @@
-package body TKMRPC.Servers.IKE
+package body TKMRPC.Servers.CFG
 is
 
-   Instance : IKE_Handle;
+   Instance : CFG_Handle;
 
    -------------------------------------------------------------------------
 
-   function Get_Instance return IKE_Handle
+   function Get_Instance return CFG_Handle
    is
    begin
       if Instance = null then
-         raise Implementation_Error with "No IKE implementation registered";
+         raise Implementation_Error with "No CFG implementation registered";
       end if;
       return Instance;
    end Get_Instance;
 
    -------------------------------------------------------------------------
 
-   procedure Register (Object : IKE_Handle)
+   procedure Register (Object : CFG_Handle)
    is
    begin
       Instance := Object;
@@ -30,4 +30,4 @@ is
       Instance := null;
    end Unregister;
 
-end TKMRPC.Servers.IKE;
+end TKMRPC.Servers.CFG;

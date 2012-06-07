@@ -247,9 +247,9 @@ is
    --  Register IKE implementation instance.
 
    procedure Unregister;
-   --  Unregister current IKE implementation;
+   --  Unregister current IKE implementation instance.
 
    function Get_Instance return IKE_Handle;
-   --  Return registered TKM IKE implementation instance.
+   --  Return registerered IKE implementation instance.
 
 end TKMRPC.Servers.IKE;

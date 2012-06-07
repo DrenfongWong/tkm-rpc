@@ -39,4 +39,17 @@ is
       is abstract;
    --  Returns limits of fixed length of TKM.
 
+   --------------
+   -- Registry --
+   --------------
+
+   procedure Register (Object : CFG_Handle);
+   --  Register CFG implementation instance.
+
+   procedure Unregister;
+   --  Unregister current CFG implementation instance.
+
+   function Get_Instance return CFG_Handle;
+   --  Return registerered CFG implementation instance.
+
 end TKMRPC.Servers.CFG;

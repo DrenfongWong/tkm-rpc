@@ -35,4 +35,10 @@ is
    end record;
    for Data_Type'Size use Response_Size * 8;
 
+   Null_Data : constant Data_Type := Data_Type'
+     (Header      => Header_Type'
+        (Result => Results.Invalid_Operation,
+         others => <>),
+      Padded_Data => <>);
+
 end TKMRPC.Response;

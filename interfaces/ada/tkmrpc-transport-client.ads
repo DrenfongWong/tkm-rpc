@@ -5,13 +5,12 @@ package TKMRPC.Transport.Client
 is
 
    procedure Connect (Address : String);
-   --  Initialize RPC client package and connect to RPC server given by socket
-   --  address.
+   --  Connect to the RPC server given by socket address.
 
    procedure Send (Data : Request.Data_Type);
-   --  Send request data to server.
+   --  Send request data to RPC server.
 
    procedure Receive (Data : out Response.Data_Type);
-   --  Receive response data from server.
+   --  Receive response data from RPC server.
 
 end TKMRPC.Transport.Client;
