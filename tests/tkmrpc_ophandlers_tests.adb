@@ -2,7 +2,6 @@ with TKMRPC.Request;
 with TKMRPC.Response;
 with TKMRPC.Transport.Client;
 with TKMRPC.Operation_Dispatcher;
-with TKMRPC.Constants;
 
 with Test_Utils;
 
@@ -70,8 +69,7 @@ is
                  (Operation  => 12345,
                   Request_ID => 3464564),
                Padded_Data => (others => Character'Pos ('g')));
-         Ref_Response    : Response.Data_Type
-           := Constants.Invalid_Operation;
+         Ref_Response    : Response.Data_Type := Response.Null_Data;
       begin
          Ref_Response.Header.Request_ID := Unknown_Request.Header.Request_ID;
          Transport.Client.Send (Data => Unknown_Request);

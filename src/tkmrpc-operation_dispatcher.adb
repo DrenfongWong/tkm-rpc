@@ -4,7 +4,6 @@ with Ada.Unchecked_Deallocation;
 with TKMRPC.Transport.Servers;
 with TKMRPC.Request;
 with TKMRPC.Response;
-with TKMRPC.Constants;
 
 package body TKMRPC.Operation_Dispatcher
 is
@@ -62,7 +61,7 @@ is
         (Key => Req.Header.Operation);
    begin
       if Cursor = MOO.No_Element then
-         Res := Constants.Invalid_Operation;
+         Res := Response.Null_Data;
       else
          MOO.Element (Position => Cursor).all
            (Req => Req,
