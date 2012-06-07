@@ -1,7 +1,7 @@
 with "tkmrpc_common";
 with "tkmrpc_clientlib";
 
-project TKMRCP_Testclient is
+project TKMRPC_Testclient is
 
    for Languages use ("C");
    for Main use ("test_client.c");
@@ -12,5 +12,5 @@ project TKMRCP_Testclient is
       for Default_Switches ("c") use TKMRPC_Common.C_Compiler_Switches;
    end Compiler;
 
-end TKMRCP_Testclient;
+end TKMRPC_Testclient;
 
