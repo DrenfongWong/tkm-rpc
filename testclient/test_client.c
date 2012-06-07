@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-#include "constants.h"
-#include "tkmclient.h"
+#include "tkm/constants.h"
+#include "tkm/client.h"
 
 /* Check call result, exit on failure */
 static void check_result (const result_type res, const char const *name)
