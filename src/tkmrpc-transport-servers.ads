@@ -1,3 +1,5 @@
+pragma Detect_Blocking;
+
 with Ada.Exceptions;
 
 with Anet.Sockets;
