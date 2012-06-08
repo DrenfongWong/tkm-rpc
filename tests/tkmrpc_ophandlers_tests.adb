@@ -18,8 +18,6 @@ is
    --  Test implementation of an operation handler callback. Asserts that the
    --  request equals Test_Request and sets Res to Test_Response.
 
-   Communication_Socket : constant String := "/tmp/tkm.rpc";
-
    -------------------------------------------------------------------------
 
    procedure Handle
@@ -46,10 +44,10 @@ is
    begin
       Transport.Servers.Listen
         (Server  => RPC_Server,
-         Address => Communication_Socket,
+         Address => Test_Utils.Communication_Socket,
          Process => Handle'Access);
 
-      Transport.Client.Connect (Address => Communication_Socket);
+      Transport.Client.Connect (Address => Test_Utils.Communication_Socket);
       select
          delay 3.0;
          Transport.Servers.Stop (Server => RPC_Server);

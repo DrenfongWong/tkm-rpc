@@ -23,4 +23,7 @@ is
          Padded_Data => (others => Character'Pos ('c')));
    --  Response data used in tests.
 
+   Communication_Socket : constant String := "/tmp/tkm.rpc";
+   --  Communication socket used during testing.
+
 end Test_Utils;

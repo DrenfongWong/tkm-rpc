@@ -1,5 +1,7 @@
 with Interfaces.C.Strings;
 
+with GNAT.OS_Lib;
+
 with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
 with TKMRPC.Servers.IKE;
@@ -8,7 +10,7 @@ with TKMRPC.Transport.Servers;
 with TKMRPC.Mock;
 with TKMRPC.Results;
 
-with GNAT.OS_Lib;
+with Test_Utils;
 
 package body TKMRPC_ORB_Tests
 is
@@ -19,8 +21,6 @@ is
 
    Impl : aliased Mock.TKM_Type;
    --  TKM mock implementation.
-
-   Communication_Socket : constant String := "/tmp/tkm.rpc";
 
    -------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ is
       Servers.IKE.Register (Object => Impl'Access);
       Transport.Servers.Listen
         (Server  => RPC_Server,
-         Address => Communication_Socket,
+         Address => Test_Utils.Communication_Socket,
          Process => Dispatchers.IKE.Dispatch'Access);
       GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
                          Args         => Args,
@@ -78,12 +78,12 @@ is
       Nonce      : Types.nonce_type;
       Result     : Results.Result_Type;
       Address    : ICS.chars_ptr
-        := ICS.New_String (Str => Communication_Socket);
+        := ICS.New_String (Str => Test_Utils.Communication_Socket);
    begin
       Servers.IKE.Register (Object => Impl'Access);
       Transport.Servers.Listen
         (Server  => RPC_Server,
-         Address => Communication_Socket,
+         Address => Test_Utils.Communication_Socket,
          Process => Dispatchers.IKE.Dispatch'Access);
 
       Clients.IKE.Init (Result  => Result,
