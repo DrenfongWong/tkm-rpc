@@ -3,9 +3,7 @@ TODO
 
 Src
 ---
-- Make transport client a type
 - Implement request ID handling
-- Dispatcher: Make ophandler map protected
 
 Messages/Interfaces
 -------------------
