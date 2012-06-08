@@ -26,10 +26,10 @@ install: install_lib
 install_lib: build_clientlib
 	install -d $(PREFIX)/lib/gnat
 	install -d $(PREFIX)/lib/tkmrpc
-	install -d $(PREFIX)/include/tkmrpc
+	install -d $(PREFIX)/include/tkmrpc/tkm
 	install -m 644 src/*.ad[bs] $(PREFIX)/include/tkmrpc
 	install -m 644 interfaces/ada/*.ad[bs] $(PREFIX)/include/tkmrpc
-	install -m 644 interfaces/c/*.[ch] $(PREFIX)/include/tkmrpc
+	install -m 644 interfaces/c/tkm/*.[ch] $(PREFIX)/include/tkmrpc/tkm
 	install -m 444 $(LIBDIR)/*.ali $(PREFIX)/lib/tkmrpc
 	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
 	install -m 444 $(LIBDIR)/libtkmrpc.a $(PREFIX)/lib
