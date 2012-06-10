@@ -102,52 +102,55 @@ is
       select
          Parent.Trigger.Stop;
       then abort
-         Parent.Sock_Listen.Accept_Connection
-           (New_Socket => Parent.Sock_Comm);
-
-         Processing_Loop :
+         Main_Loop :
          loop
-            declare
-               use type Ada.Streams.Stream_Element_Offset;
+            Parent.Sock_Listen.Accept_Connection
+              (New_Socket => Parent.Sock_Comm);
 
-               Sender : Anet.Sockets.Socket_Addr_Type
-                 (Family => Anet.Sockets.Family_Unix);
-               Buffer : Ada.Streams.Stream_Element_Array (1 .. 2048);
-               Last   : Ada.Streams.Stream_Element_Offset;
-            begin
-               Parent.Sock_Comm.Receive (Src  => Sender,
-                                         Item => Buffer,
-                                         Last => Last);
-
-               --  Exit request processing loop on connection close.
-
-               exit Processing_Loop when Last = 0;
-
+            Processing_Loop :
+            loop
                declare
-                  Req : constant Request.Data_Type
-                    := Request.Convert.From_Stream
-                      (S => Buffer (Buffer'First .. Last));
-                  Res : Response.Data_Type;
+                  use type Ada.Streams.Stream_Element_Offset;
+
+                  Sender : Anet.Sockets.Socket_Addr_Type
+                    (Family => Anet.Sockets.Family_Unix);
+                  Buffer : Ada.Streams.Stream_Element_Array (1 .. 2048);
+                  Last   : Ada.Streams.Stream_Element_Offset;
                begin
-                  Process_Cb (Req => Req,
-                              Res => Res);
+                  Parent.Sock_Comm.Receive (Src  => Sender,
+                                            Item => Buffer,
+                                            Last => Last);
 
-                  Parent.Sock_Comm.Send
-                    (Item => Response.Convert.To_Stream (S => Res));
+                  --  Exit request processing loop on connection close.
+
+                  exit Processing_Loop when Last = 0;
+
+                  declare
+                     Req : constant Request.Data_Type
+                       := Request.Convert.From_Stream
+                         (S => Buffer (Buffer'First .. Last));
+                     Res : Response.Data_Type;
+                  begin
+                     Process_Cb (Req => Req,
+                                 Res => Res);
+
+                     Parent.Sock_Comm.Send
+                       (Item => Response.Convert.To_Stream (S => Res));
+                  end;
+
+               exception
+                  when Ex : others =>
+                     Ada.Text_IO.Put_Line ("Exception in RPC transport");
+                     Ada.Text_IO.Put_Line
+                       (Ada.Exceptions.Exception_Information (X => Ex));
+                     Error_Cb (E         => Ex,
+                               Stop_Flag => Stop);
+                     if Stop then
+                        exit Main_Loop;
+                     end if;
                end;
-
-            exception
-               when Ex : others =>
-                  Ada.Text_IO.Put_Line ("Exception in RPC transport");
-                  Ada.Text_IO.Put_Line
-                    (Ada.Exceptions.Exception_Information (X => Ex));
-                  Error_Cb (E         => Ex,
-                            Stop_Flag => Stop);
-                  if Stop then
-                     exit Processing_Loop;
-                  end if;
-            end;
-         end loop Processing_Loop;
+            end loop Processing_Loop;
+         end loop Main_Loop;
       end select;
 
       Parent.Trigger.Signal_Termination;
