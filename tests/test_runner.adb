@@ -7,7 +7,6 @@ with TKMRPC_Request_Tests;
 with TKMRPC_Response_Tests;
 with TKMRPC_Transport_Tests;
 with TKMRPC_Ophandlers_Tests;
-with TKMRPC_Implementation_Tests;
 with TKMRPC_ORB_Tests;
 
 procedure Test_Runner
@@ -25,8 +24,6 @@ begin
              T     => new TKMRPC_Transport_Tests.Testcase);
    Add_Test (Suite => S.all,
              T     => new TKMRPC_Ophandlers_Tests.Testcase);
-   Add_Test (Suite => S.all,
-             T     => new TKMRPC_Implementation_Tests.Testcase);
    Add_Test (Suite => S.all,
              T     => new TKMRPC_ORB_Tests.Testcase);
 

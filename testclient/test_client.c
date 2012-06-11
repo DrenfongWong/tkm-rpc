@@ -8,7 +8,7 @@
 /* Check call result, exit on failure */
 static void check_result (const result_type res, const char const *name)
 {
-	if (res != OK)
+	if (res != TKM_OK)
 	{
 		printf("client: error calling '%s', aborting (status %" PRId64 ")\n",
 				name, res);
@@ -22,11 +22,11 @@ int main()
 	tkmlib_init();
 
 	result_type result;
-	ike_init(&result, "/tmp/tkm.rpc");
+	result = ike_init("/tmp/tkm.rpc");
 	check_result(result, "ike_init");
 
 	nonce_type nonce;
-	ike_nc_create(1, 128, &nonce, &result);
+	result = ike_nc_create(1, 128, &nonce);
 	check_result(result, "ike_nc_create");
 
 	/* The mock server responds with a test nonce of length 256 */

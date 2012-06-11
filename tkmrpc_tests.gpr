@@ -11,7 +11,7 @@ project TKMRPC_Tests is
    Linker_Switches   := ();
 
    for Main use ("test_runner.adb");
-   for Source_Dirs use ("tests");
+   for Source_Dirs use ("tests", "src/server", "interfaces/ada/server");
 
    case Build is
       when "tests" =>
@@ -24,6 +24,11 @@ project TKMRPC_Tests is
          Linker_Switches   := Linker_Switches
            & ("-fprofile-generate");
    end case;
+
+   package Naming is
+      for Implementation ("TKMRPC.Servers.IKE") use
+        "tkmrpc-servers-ike__mock.adb";
+   end Naming;
 
    package Compiler is
       for Default_Switches ("ada") use Compiler_Switches;

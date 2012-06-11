@@ -16,18 +16,17 @@ void tkmlib_final(void);
 /**
  * Initialize CFG client with given address
  */
-extern void cfg_init(result_type *result, char * address);
+extern result_type cfg_init(const char const *address);
 
 /**
  * Returns the version of TKM.
  */
-extern void cfg_tkm_version(version_type *version,
-                result_type *result);
+extern result_type cfg_tkm_version(version_type *version);
 
 /**
  * Returns limits of fixed length  of TKM.
  */
-extern void cfg_tkm_limits(active_requests_type *max_active_requests,
+extern result_type cfg_tkm_limits(active_requests_type *max_active_requests,
                 authag_id_type *authag_contexts,
                 cag_id_type *cag_contexts,
                 li_id_type *li_contexts,
@@ -43,8 +42,7 @@ extern void cfg_tkm_limits(active_requests_type *max_active_requests,
                 lc_id_type *lc_contexts,
                 ia_id_type *ia_contexts,
                 ea_id_type *ea_contexts,
-                dha_id_type *dha_contexts,
-                result_type *result);
+                dha_id_type *dha_contexts);
 
 /**
  * Interface : IKE
@@ -54,107 +52,94 @@ extern void cfg_tkm_limits(active_requests_type *max_active_requests,
 /**
  * Initialize IKE client with given address
  */
-extern void ike_init(result_type *result, char * address);
+extern result_type ike_init(const char const *address);
 
 /**
  * Returns the version of TKM.
  */
-extern void ike_tkm_version(version_type *version,
-                result_type *result);
+extern result_type ike_tkm_version(version_type *version);
 
 /**
  * Returns limits of fixed length  of TKM.
  */
-extern void ike_tkm_limits(active_requests_type *max_active_requests,
+extern result_type ike_tkm_limits(active_requests_type *max_active_requests,
                 nc_id_type *nc_contexts,
                 dh_id_type *dh_contexts,
                 cc_id_type *cc_contexts,
                 ae_id_type *ae_contexts,
                 isa_id_type *isa_contexts,
-                esa_id_type *esa_contexts,
-                result_type *result);
+                esa_id_type *esa_contexts);
 
 /**
  * Reset a NC context.
  */
-extern void ike_nc_reset(const nc_id_type nc_id,
-                result_type *result);
+extern result_type ike_nc_reset(const nc_id_type nc_id);
 
 /**
  * Create a nonce.
  */
-extern void ike_nc_create(const nc_id_type nc_id,
+extern result_type ike_nc_create(const nc_id_type nc_id,
                 const nonce_length_type nonce_length,
-                nonce_type *nonce,
-                result_type *result);
+                nonce_type *nonce);
 
 /**
  * Reset a DH context.
  */
-extern void ike_dh_reset(const dh_id_type dh_id,
-                result_type *result);
+extern result_type ike_dh_reset(const dh_id_type dh_id);
 
 /**
  * Create a DH secret and return its public value.
  */
-extern void ike_dh_create(const dh_id_type dh_id,
+extern result_type ike_dh_create(const dh_id_type dh_id,
                 const dha_id_type dha_id,
-                dh_pubvalue_type *pubvalue,
-                result_type *result);
+                dh_pubvalue_type *pubvalue);
 
 /**
  * Create a nonce.
  */
-extern void ike_dh_generate_key(const dh_id_type dh_id,
-                const dh_pubvalue_type pubvalue,
-                result_type *result);
+extern result_type ike_dh_generate_key(const dh_id_type dh_id,
+                const dh_pubvalue_type pubvalue);
 
 /**
  * Reset a CC context.
  */
-extern void ike_cc_reset(const cc_id_type cc_id,
-                result_type *result);
+extern result_type ike_cc_reset(const cc_id_type cc_id);
 
 /**
  * Initiates a certificate chain starting from the user certificate.
  */
-extern void ike_cc_set_user_certificate(const cc_id_type cc_id,
+extern result_type ike_cc_set_user_certificate(const cc_id_type cc_id,
                 const ri_id_type ri_id,
                 const autha_id_type autha_id,
-                const certificate_type certificate,
-                result_type *result);
+                const certificate_type certificate);
 
 /**
  * Add a certificate to a certificate chain.
  */
-extern void ike_cc_add_certificate(const cc_id_type cc_id,
+extern result_type ike_cc_add_certificate(const cc_id_type cc_id,
                 const autha_id_type autha_id,
-                const certificate_type certificate,
-                result_type *result);
+                const certificate_type certificate);
 
 /**
  * Checks if a cc is based on a trusted CA
  */
-extern void ike_cc_check_ca(const cc_id_type cc_id,
-                const ca_id_type ca_id,
-                result_type *result);
+extern result_type ike_cc_check_ca(const cc_id_type cc_id,
+                const ca_id_type ca_id);
 
 /**
  * Reset an AE context.
  */
-extern void ike_ae_reset(const ae_id_type ae_id,
-                result_type *result);
+extern result_type ike_ae_reset(const ae_id_type ae_id);
 
 /**
  * Reset an ISA context.
  */
-extern void ike_isa_reset(const isa_id_type isa_id,
-                result_type *result);
+extern result_type ike_isa_reset(const isa_id_type isa_id);
 
 /**
  * Create an IKE SA context.
  */
-extern void ike_isa_create(const isa_id_type isa_id,
+extern result_type ike_isa_create(const isa_id_type isa_id,
                 const ae_id_type ae_id,
                 const ia_id_type ia_id,
                 const dh_id_type dh_id,
@@ -166,31 +151,28 @@ extern void ike_isa_create(const isa_id_type isa_id,
                 key_type *sk_ai,
                 key_type *sk_ar,
                 key_type *sk_ei,
-                key_type *sk_er,
-                result_type *result);
+                key_type *sk_er);
 
 /**
  * Provide authentication to the remote endpoint.
  */
-extern void ike_isa_sign(const isa_id_type isa_id,
+extern result_type ike_isa_sign(const isa_id_type isa_id,
                 const lc_id_type lc_id,
                 const init_message_type init_message,
-                signature_type *signature,
-                result_type *result);
+                signature_type *signature);
 
 /**
  * Authenticate the remote endpoint.
  */
-extern void ike_isa_auth(const isa_id_type isa_id,
+extern result_type ike_isa_auth(const isa_id_type isa_id,
                 const cc_id_type cc_id,
                 const init_message_type init_message,
-                const signature_type signature,
-                result_type *result);
+                const signature_type signature);
 
 /**
  * Derive an IKE SA context from an existing SA.
  */
-extern void ike_isa_create_child(const isa_id_type isa_id,
+extern result_type ike_isa_create_child(const isa_id_type isa_id,
                 const isa_id_type parent_isa_id,
                 const ia_id_type ia_id,
                 const dh_id_type dh_id,
@@ -202,25 +184,22 @@ extern void ike_isa_create_child(const isa_id_type isa_id,
                 key_type *sk_ai,
                 key_type *sk_ar,
                 key_type *sk_ei,
-                key_type *sk_er,
-                result_type *result);
+                key_type *sk_er);
 
 /**
  * Don't create a first child.
  */
-extern void ike_isa_skip_create_first(const isa_id_type isa_id,
-                result_type *result);
+extern result_type ike_isa_skip_create_first(const isa_id_type isa_id);
 
 /**
  * Reset an ESA context.
  */
-extern void ike_esa_reset(const esa_id_type esa_id,
-                result_type *result);
+extern result_type ike_esa_reset(const esa_id_type esa_id);
 
 /**
  * Creates an ESP SA.
  */
-extern void ike_esa_create(const esa_id_type esa_id,
+extern result_type ike_esa_create(const esa_id_type esa_id,
                 const isa_id_type isa_id,
                 const sp_id_type sp_id,
                 const ea_id_type ea_id,
@@ -229,13 +208,12 @@ extern void ike_esa_create(const esa_id_type esa_id,
                 const nonce_type nonce_rem,
                 const init_type initiator,
                 const esp_spi_type esp_spi_loc,
-                const esp_spi_type esp_spi_rem,
-                result_type *result);
+                const esp_spi_type esp_spi_rem);
 
 /**
  * Creates an ESP SA without PFS.
  */
-extern void ike_esa_create_no_pfs(const esa_id_type esa_id,
+extern result_type ike_esa_create_no_pfs(const esa_id_type esa_id,
                 const isa_id_type isa_id,
                 const sp_id_type sp_id,
                 const ea_id_type ea_id,
@@ -243,23 +221,20 @@ extern void ike_esa_create_no_pfs(const esa_id_type esa_id,
                 const nonce_type nonce_rem,
                 const init_type initiator,
                 const esp_spi_type esp_spi_loc,
-                const esp_spi_type esp_spi_rem,
-                result_type *result);
+                const esp_spi_type esp_spi_rem);
 
 /**
  * Creates the first ESP SA for an AE.
  */
-extern void ike_esa_create_first(const esa_id_type esa_id,
+extern result_type ike_esa_create_first(const esa_id_type esa_id,
                 const isa_id_type isa_id,
                 const sp_id_type sp_id,
                 const ea_id_type ea_id,
                 const esp_spi_type esp_spi_loc,
-                const esp_spi_type esp_spi_rem,
-                result_type *result);
+                const esp_spi_type esp_spi_rem);
 
 /**
  * Selects an ESA context for outgoing traffic.
  */
-extern void ike_esa_select(const esa_id_type esa_id,
-                result_type *result);
+extern result_type ike_esa_select(const esa_id_type esa_id);
 

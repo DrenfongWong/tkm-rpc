@@ -4,7 +4,6 @@ with GNAT.OS_Lib;
 
 with TKMRPC.Types;
 with TKMRPC.Clients.IKE;
-with TKMRPC.Servers.IKE;
 with TKMRPC.Dispatchers.IKE;
 with TKMRPC.Transport.Servers;
 with TKMRPC.Mock;
@@ -19,9 +18,6 @@ is
 
    package ICS renames Interfaces.C.Strings;
 
-   Impl : aliased Mock.TKM_Type;
-   --  TKM mock implementation.
-
    -------------------------------------------------------------------------
 
    procedure C_Test_Client
@@ -33,7 +29,6 @@ is
       Args       : GNAT.OS_Lib.Argument_List (1 .. 0);
       Success    : Boolean := False;
    begin
-      Servers.IKE.Register (Object => Impl'Access);
       Transport.Servers.Listen
         (Server  => RPC_Server,
          Address => Test_Utils.Communication_Socket,
@@ -52,14 +47,12 @@ is
               Message   => "Last nonce length mismatch");
 
       Transport.Servers.Stop (Server => RPC_Server);
-      Servers.IKE.Unregister;
       Mock.Last_Nonce_Id     := 0;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
          Transport.Servers.Stop (Server => RPC_Server);
-         Servers.IKE.Unregister;
          Mock.Last_Nonce_Id     := 0;
          Mock.Last_Nonce_Length := 16;
          raise;
@@ -80,7 +73,6 @@ is
       Address    : ICS.chars_ptr
         := ICS.New_String (Str => Test_Utils.Communication_Socket);
    begin
-      Servers.IKE.Register (Object => Impl'Access);
       Transport.Servers.Listen
         (Server  => RPC_Server,
          Address => Test_Utils.Communication_Socket,
@@ -107,25 +99,13 @@ is
       Assert (Condition => Mock.Last_Nonce_Length = 243,
               Message   => "Last nonce length mismatch");
 
-      --  Provoke error on server side.
-
-      Servers.IKE.Unregister;
-      Clients.IKE.nc_create (nc_id        => 123,
-                             nonce_length => 243,
-                             nonce        => Nonce,
-                             Result       => Result);
-      Assert (Condition => Result /= Results.OK,
-              Message   => "Error expected");
-
       Transport.Servers.Stop (Server => RPC_Server);
-      Servers.IKE.Unregister;
       Mock.Last_Nonce_Id     := 0;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
          Transport.Servers.Stop (Server => RPC_Server);
-         Servers.IKE.Unregister;
          Mock.Last_Nonce_Id     := 0;
          Mock.Last_Nonce_Length := 16;
          raise;
