@@ -50,6 +50,7 @@ cov: build_tests
 
 clean:
 	@rm -rf $(OBJDIR)
+	@rm -rf $(LIBDIR)
 
 .PHONY: build_clientlib build_testclient build_tests clean cov install \
 	install_lib tests
