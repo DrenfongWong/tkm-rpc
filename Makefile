@@ -26,7 +26,7 @@ install: install_lib
 install_lib: build_clientlib
 	install -d $(PREFIX)/lib/gnat
 	install -d $(PREFIX)/lib/tkmrpc
-	install -d $(PREFIX)/include/tkmrpc/tkm
+	install -d $(PREFIX)/include/tkmrpc/c/tkm
 	install -d $(PREFIX)/include/tkmrpc/common
 	install -d $(PREFIX)/include/tkmrpc/client
 	install -d $(PREFIX)/include/tkmrpc/server
@@ -35,7 +35,7 @@ install_lib: build_clientlib
 	install -m 644 specs/ada/common/* $(PREFIX)/include/tkmrpc/common
 	install -m 644 specs/ada/client/* $(PREFIX)/include/tkmrpc/client
 	install -m 644 specs/ada/server/* $(PREFIX)/include/tkmrpc/server
-	install -m 644 specs/c/tkm/*.[ch] $(PREFIX)/include/tkmrpc/tkm
+	install -m 644 specs/c/tkm/*.[ch] $(PREFIX)/include/tkmrpc/c/tkm
 	install -m 444 $(LIBDIR)/*.ali $(PREFIX)/lib/tkmrpc
 	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
 	install -m 444 $(LIBDIR)/libtkmrpc.a $(PREFIX)/lib
