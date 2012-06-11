@@ -1,6 +1,6 @@
 with Ahven.Framework;
 
-package TKMRPC_ORB_Tests
+package Tkmrpc_ORB_Tests
 is
    type Testcase is new Ahven.Framework.Test_Case with null record;
 
@@ -13,4 +13,4 @@ is
    procedure C_Test_Client;
    --  Test interaction with client written in C.
 
-end TKMRPC_ORB_Tests;
+end Tkmrpc_ORB_Tests;

@@ -1,4 +1,3 @@
-package TKMRPC
-is
+package Tkmrpc is
 
-end TKMRPC;
+end Tkmrpc;

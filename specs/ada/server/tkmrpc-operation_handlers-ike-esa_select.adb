@@ -1,32 +1,26 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.esa_select.Convert;
-with TKMRPC.Response.IKE.esa_select.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Esa_Select.Convert;
+with Tkmrpc.Response.Ike.Esa_Select.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.esa_select
-is
+package body Tkmrpc.Operation_Handlers.Ike.Esa_Select is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.esa_select.Request_Type;
-      Specific_Res   : Response.IKE.esa_select.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Esa_Select.Request_Type;
+      Specific_Res : Response.Ike.Esa_Select.Response_Type;
    begin
-      Specific_Req := Request.IKE.esa_select.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Esa_Select.Convert.From_Request (S => Req);
 
-      Servers.IKE.esa_select
+      Servers.Ike.Esa_Select
         (Result => Specific_Res.Header.Result,
-         esa_id => Specific_Req.Data.esa_id);
+         Esa_Id => Specific_Req.Data.Esa_Id);
 
-      Res := Response.IKE.esa_select.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Esa_Select.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.esa_select;
+end Tkmrpc.Operation_Handlers.Ike.Esa_Select;

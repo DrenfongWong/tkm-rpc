@@ -1,14 +1,14 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
-with TKMRPC.Transport.Client;
-with TKMRPC.Transport.Servers;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
+with Tkmrpc.Transport.Client;
+with Tkmrpc.Transport.Servers;
 
 with Test_Utils;
 
-package body TKMRPC_Ophandlers_Tests
+package body Tkmrpc_Ophandlers_Tests
 is
    use Ahven;
-   use TKMRPC;
+   use Tkmrpc;
 
    Request_Correct : Boolean := False;
 
@@ -24,7 +24,7 @@ is
      (Req :     Request.Data_Type;
       Res : out Response.Data_Type)
    is
-      use type TKMRPC.Request.Data_Type;
+      use type Tkmrpc.Request.Data_Type;
    begin
       if Req = Test_Utils.Test_Request then
          Request_Correct := True;
@@ -37,7 +37,7 @@ is
 
    procedure Handle_Requests
    is
-      use type TKMRPC.Response.Data_Type;
+      use type Tkmrpc.Response.Data_Type;
 
       Res        : Response.Data_Type;
       RPC_Server : Transport.Servers.Server_Type;
@@ -83,4 +83,4 @@ is
          Name    => "Handle operation requests");
    end Initialize;
 
-end TKMRPC_Ophandlers_Tests;
+end Tkmrpc_Ophandlers_Tests;

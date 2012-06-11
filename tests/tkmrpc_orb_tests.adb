@@ -2,19 +2,19 @@ with Interfaces.C.Strings;
 
 with GNAT.OS_Lib;
 
-with TKMRPC.Types;
-with TKMRPC.Clients.IKE;
-with TKMRPC.Dispatchers.IKE;
-with TKMRPC.Transport.Servers;
-with TKMRPC.Mock;
-with TKMRPC.Results;
+with Tkmrpc.Types;
+with Tkmrpc.Clients.Ike;
+with Tkmrpc.Dispatchers.Ike;
+with Tkmrpc.Transport.Servers;
+with Tkmrpc.Mock;
+with Tkmrpc.Results;
 
 with Test_Utils;
 
-package body TKMRPC_ORB_Tests
+package body Tkmrpc_ORB_Tests
 is
    use Ahven;
-   use TKMRPC;
+   use Tkmrpc;
 
    package ICS renames Interfaces.C.Strings;
 
@@ -22,8 +22,8 @@ is
 
    procedure C_Test_Client
    is
-      use type TKMRPC.Types.nc_id_type;
-      use type TKMRPC.Types.nonce_length_type;
+      use type Tkmrpc.Types.Nc_Id_Type;
+      use type Tkmrpc.Types.Nonce_Length_Type;
 
       RPC_Server : Transport.Servers.Server_Type;
       Args       : GNAT.OS_Lib.Argument_List (1 .. 0);
@@ -32,7 +32,7 @@ is
       Transport.Servers.Listen
         (Server  => RPC_Server,
          Address => Test_Utils.Communication_Socket,
-         Process => Dispatchers.IKE.Dispatch'Access);
+         Process => Dispatchers.Ike.Dispatch'Access);
       GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
                          Args         => Args,
                          Success      => Success);
@@ -62,13 +62,13 @@ is
 
    procedure Client_Server_ORBs
    is
-      use type TKMRPC.Types.nonce_type;
-      use type TKMRPC.Types.nc_id_type;
-      use type TKMRPC.Types.nonce_length_type;
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Types.Nonce_Type;
+      use type Tkmrpc.Types.Nc_Id_Type;
+      use type Tkmrpc.Types.Nonce_Length_Type;
+      use type Tkmrpc.Results.Result_Type;
 
       RPC_Server : Transport.Servers.Server_Type;
-      Nonce      : Types.nonce_type;
+      Nonce      : Types.Nonce_Type;
       Result     : Results.Result_Type;
       Address    : ICS.chars_ptr
         := ICS.New_String (Str => Test_Utils.Communication_Socket);
@@ -76,21 +76,21 @@ is
       Transport.Servers.Listen
         (Server  => RPC_Server,
          Address => Test_Utils.Communication_Socket,
-         Process => Dispatchers.IKE.Dispatch'Access);
+         Process => Dispatchers.Ike.Dispatch'Access);
 
-      Clients.IKE.Init (Result  => Result,
+      Clients.Ike.Init (Result  => Result,
                         Address => Address);
       ICS.Free (Item => Address);
 
-      Assert (Condition => Result = Results.OK,
+      Assert (Condition => Result = Results.Ok,
               Message   => "IKE init failed");
 
-      Clients.IKE.nc_create (nc_id        => 123,
-                             nonce_length => 243,
-                             nonce        => Nonce,
+      Clients.Ike.Nc_Create (Nc_Id        => 123,
+                             Nonce_Length => 243,
+                             Nonce        => Nonce,
                              Result       => Result);
 
-      Assert (Condition => Result = Results.OK,
+      Assert (Condition => Result = Results.Ok,
               Message   => "Remote call failed");
       Assert (Condition => Nonce = Mock.Ref_Nonce,
               Message   => "Nonce incorrect");
@@ -125,4 +125,4 @@ is
          Name    => "C test client");
    end Initialize;
 
-end TKMRPC_ORB_Tests;
+end Tkmrpc_ORB_Tests;

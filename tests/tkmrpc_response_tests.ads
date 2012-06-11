@@ -1,6 +1,6 @@
 with Ahven.Framework;
 
-package TKMRPC_Response_Tests
+package Tkmrpc_Response_Tests
 is
    type Testcase is new Ahven.Framework.Test_Case with null record;
 
@@ -10,4 +10,4 @@ is
    procedure Stream_Conversion;
    --  Verify response data to/from stream conversions.
 
-end TKMRPC_Response_Tests;
+end Tkmrpc_Response_Tests;

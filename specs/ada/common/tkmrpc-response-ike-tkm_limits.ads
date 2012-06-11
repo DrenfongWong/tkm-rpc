@@ -1,28 +1,27 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Response.IKE.tkm_limits
-is
+package Tkmrpc.Response.Ike.Tkm_Limits is
 
    Data_Size : constant := 56;
 
    type Data_Type is record
-      max_active_requests : Types.active_requests_type;
-      nc_contexts : Types.nc_id_type;
-      dh_contexts : Types.dh_id_type;
-      cc_contexts : Types.cc_id_type;
-      ae_contexts : Types.ae_id_type;
-      isa_contexts : Types.isa_id_type;
-      esa_contexts : Types.esa_id_type;
+      Max_Active_Requests : Types.Active_Requests_Type;
+      Nc_Contexts         : Types.Nc_Id_Type;
+      Dh_Contexts         : Types.Dh_Id_Type;
+      Cc_Contexts         : Types.Cc_Id_Type;
+      Ae_Contexts         : Types.Ae_Id_Type;
+      Isa_Contexts        : Types.Isa_Id_Type;
+      Esa_Contexts        : Types.Esa_Id_Type;
    end record;
 
    for Data_Type use record
-      max_active_requests at 0 range 0 .. (8 * 8) - 1;
-      nc_contexts at 8 range 0 .. (8 * 8) - 1;
-      dh_contexts at 16 range 0 .. (8 * 8) - 1;
-      cc_contexts at 24 range 0 .. (8 * 8) - 1;
-      ae_contexts at 32 range 0 .. (8 * 8) - 1;
-      isa_contexts at 40 range 0 .. (8 * 8) - 1;
-      esa_contexts at 48 range 0 .. (8 * 8) - 1;
+      Max_Active_Requests at 0 range 0 .. (8 * 8) - 1;
+      Nc_Contexts         at 8 range 0 .. (8 * 8) - 1;
+      Dh_Contexts         at 16 range 0 .. (8 * 8) - 1;
+      Cc_Contexts         at 24 range 0 .. (8 * 8) - 1;
+      Ae_Contexts         at 32 range 0 .. (8 * 8) - 1;
+      Isa_Contexts        at 40 range 0 .. (8 * 8) - 1;
+      Esa_Contexts        at 48 range 0 .. (8 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -37,10 +36,10 @@ is
    end record;
 
    for Response_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
 
-end TKMRPC.Response.IKE.tkm_limits;
+end Tkmrpc.Response.Ike.Tkm_Limits;

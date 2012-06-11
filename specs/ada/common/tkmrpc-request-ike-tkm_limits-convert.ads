@@ -1,16 +1,13 @@
 with Ada.Unchecked_Conversion;
 
-package TKMRPC.Request.IKE.tkm_limits.Convert
-is
+package Tkmrpc.Request.Ike.Tkm_Limits.Convert is
 
-   function To_Request is new
-     Ada.Unchecked_Conversion
-       (Source => tkm_limits.Request_Type,
-        Target => Request.Data_Type);
+   function To_Request is new Ada.Unchecked_Conversion (
+      Source => Tkm_Limits.Request_Type,
+      Target => Request.Data_Type);
 
-   function From_Request is new
-     Ada.Unchecked_Conversion
-       (Source => Request.Data_Type,
-        Target => tkm_limits.Request_Type);
+   function From_Request is new Ada.Unchecked_Conversion (
+      Source => Request.Data_Type,
+      Target => Tkm_Limits.Request_Type);
 
-end TKMRPC.Request.IKE.tkm_limits.Convert;
+end Tkmrpc.Request.Ike.Tkm_Limits.Convert;

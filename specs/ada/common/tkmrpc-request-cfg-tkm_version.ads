@@ -1,7 +1,6 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Request.CFG.tkm_version
-is
+package Tkmrpc.Request.Cfg.Tkm_Version is
 
    Data_Size : constant := 0;
 
@@ -19,10 +18,10 @@ is
    end record;
 
    for Request_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
 
-end TKMRPC.Request.CFG.tkm_version;
+end Tkmrpc.Request.Cfg.Tkm_Version;

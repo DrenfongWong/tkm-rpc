@@ -1,4 +1,3 @@
-package TKMRPC.Operation_Handlers.IKE
-is
+package Tkmrpc.Operation_Handlers.Ike is
 
-end TKMRPC.Operation_Handlers.IKE;
+end Tkmrpc.Operation_Handlers.Ike;

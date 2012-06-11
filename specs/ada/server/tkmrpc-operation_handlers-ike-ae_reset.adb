@@ -1,32 +1,26 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.ae_reset.Convert;
-with TKMRPC.Response.IKE.ae_reset.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Ae_Reset.Convert;
+with Tkmrpc.Response.Ike.Ae_Reset.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.ae_reset
-is
+package body Tkmrpc.Operation_Handlers.Ike.Ae_Reset is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.ae_reset.Request_Type;
-      Specific_Res   : Response.IKE.ae_reset.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Ae_Reset.Request_Type;
+      Specific_Res : Response.Ike.Ae_Reset.Response_Type;
    begin
-      Specific_Req := Request.IKE.ae_reset.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Ae_Reset.Convert.From_Request (S => Req);
 
-      Servers.IKE.ae_reset
+      Servers.Ike.Ae_Reset
         (Result => Specific_Res.Header.Result,
-         ae_id => Specific_Req.Data.ae_id);
+         Ae_Id  => Specific_Req.Data.Ae_Id);
 
-      Res := Response.IKE.ae_reset.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Ae_Reset.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.ae_reset;
+end Tkmrpc.Operation_Handlers.Ike.Ae_Reset;

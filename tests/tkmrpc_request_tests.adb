@@ -1,13 +1,13 @@
-with TKMRPC.Operations;
-with TKMRPC.Request.Convert;
-with TKMRPC.Types;
+with Tkmrpc.Operations;
+with Tkmrpc.Request.Convert;
+with Tkmrpc.Types;
 
 with Test_Utils;
 
-package body TKMRPC_Request_Tests
+package body Tkmrpc_Request_Tests
 is
    use Ahven;
-   use TKMRPC;
+   use Tkmrpc;
 
    -------------------------------------------------------------------------
 
@@ -24,10 +24,10 @@ is
 
    procedure Stream_Conversion
    is
-      use TKMRPC.Request;
-      use type TKMRPC.Operations.Operation_Type;
-      use type TKMRPC.Request.Padded_Data_Type;
-      use type TKMRPC.Types.request_id_type;
+      use Tkmrpc.Request;
+      use type Tkmrpc.Operations.Operation_Type;
+      use type Tkmrpc.Request.Padded_Data_Type;
+      use type Tkmrpc.Types.Request_Id_Type;
 
       Stream : constant Convert.Stream_Type
         := Convert.To_Stream (S => Test_Utils.Test_Request);
@@ -36,10 +36,10 @@ is
    begin
       Assert (Condition => Req.Header.Operation = Test_Utils.Test_Operation,
               Message   => "Operation mismatch");
-      Assert (Condition => Req.Header.Request_ID = 234234234,
+      Assert (Condition => Req.Header.Request_Id = 234234234,
               Message   => "Request ID mismatch");
       Assert (Condition => Req.Padded_Data = Data,
               Message   => "Data mismatch");
    end Stream_Conversion;
 
-end TKMRPC_Request_Tests;
+end Tkmrpc_Request_Tests;

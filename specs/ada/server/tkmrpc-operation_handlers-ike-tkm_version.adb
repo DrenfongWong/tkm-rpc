@@ -1,29 +1,24 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Response.IKE.tkm_version.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Response.Ike.Tkm_Version.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.tkm_version
-is
+package body Tkmrpc.Operation_Handlers.Ike.Tkm_Version is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
       pragma Unreferenced (Req);
 
-      Specific_Res   : Response.IKE.tkm_version.Response_Type;
+      Specific_Res : Response.Ike.Tkm_Version.Response_Type;
    begin
-      Servers.IKE.tkm_version
-        (Result => Specific_Res.Header.Result,
-         version => Specific_Res.Data.version);
+      Servers.Ike.Tkm_Version
+        (Result  => Specific_Res.Header.Result,
+         Version => Specific_Res.Data.Version);
 
-      Res := Response.IKE.tkm_version.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Tkm_Version.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.tkm_version;
+end Tkmrpc.Operation_Handlers.Ike.Tkm_Version;

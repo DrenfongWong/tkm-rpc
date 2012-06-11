@@ -1,4 +1,3 @@
-package TKMRPC.Transport
-is
+package Tkmrpc.Transport is
 
-end TKMRPC.Transport;
+end Tkmrpc.Transport;

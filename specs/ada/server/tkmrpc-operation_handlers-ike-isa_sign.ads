@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.isa_sign
-is
+package Tkmrpc.Operation_Handlers.Ike.Isa_Sign is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the isa_sign operation.
 
-end TKMRPC.Operation_Handlers.IKE.isa_sign;
+end Tkmrpc.Operation_Handlers.Ike.Isa_Sign;

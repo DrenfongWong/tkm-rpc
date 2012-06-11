@@ -3,10 +3,10 @@ with Ada.Strings.Unbounded;
 
 with Anet.Sockets;
 
-with TKMRPC.Request.Convert;
-with TKMRPC.Response.Convert;
+with Tkmrpc.Request.Convert;
+with Tkmrpc.Response.Convert;
 
-package body TKMRPC.Transport.Client
+package body Tkmrpc.Transport.Client
 is
 
    Socket : Anet.Sockets.Socket_Type;
@@ -50,4 +50,4 @@ is
       Socket.Send (Item => Request.Convert.To_Stream (S => Data));
    end Send;
 
-end TKMRPC.Transport.Client;
+end Tkmrpc.Transport.Client;

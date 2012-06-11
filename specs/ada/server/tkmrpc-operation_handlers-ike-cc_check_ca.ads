@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.cc_check_ca
-is
+package Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the cc_check_ca operation.
 
-end TKMRPC.Operation_Handlers.IKE.cc_check_ca;
+end Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca;

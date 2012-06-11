@@ -1,99 +1,94 @@
-with TKMRPC.Transport.Client;
-with TKMRPC.Operations.CFG;
-with TKMRPC.Request.CFG.tkm_version.Convert;
-with TKMRPC.Request.CFG.tkm_limits.Convert;
-with TKMRPC.Response.CFG.tkm_version.Convert;
-with TKMRPC.Response.CFG.tkm_limits.Convert;
+with Tkmrpc.Transport.Client;
+with Tkmrpc.Operations.Cfg;
+with Tkmrpc.Request.Cfg.Tkm_Version.Convert;
+with Tkmrpc.Request.Cfg.Tkm_Limits.Convert;
+with Tkmrpc.Response.Cfg.Tkm_Version.Convert;
+with Tkmrpc.Response.Cfg.Tkm_Limits.Convert;
 
-package body TKMRPC.Clients.CFG
-is
+package body Tkmrpc.Clients.Cfg is
 
    -------------------------------------------------------------------------
 
    procedure Init
      (Result  : out Results.Result_Type;
-      Address :     Interfaces.C.Strings.chars_ptr) is separate;
+      Address : Interfaces.C.Strings.chars_ptr) is separate;
 
    -------------------------------------------------------------------------
 
-   procedure tkm_limits
-     (Result : out Results.Result_Type;
-      max_active_requests : out Types.active_requests_type;
-      authag_contexts : out Types.authag_id_type;
-      cag_contexts : out Types.cag_id_type;
-      li_contexts : out Types.li_id_type;
-      ri_contexts : out Types.ri_id_type;
-      iag_contexts : out Types.iag_id_type;
-      eag_contexts : out Types.eag_id_type;
-      dhag_contexts : out Types.dhag_id_type;
-      sp_contexts : out Types.sp_id_type;
-      authp_contexts : out Types.authp_id_type;
-      dhp_contexts : out Types.dhp_id_type;
-      autha_contexts : out Types.autha_id_type;
-      ca_contexts : out Types.ca_id_type;
-      lc_contexts : out Types.lc_id_type;
-      ia_contexts : out Types.ia_id_type;
-      ea_contexts : out Types.ea_id_type;
-      dha_contexts : out Types.dha_id_type)
+   procedure Tkm_Limits
+     (Result              : out Results.Result_Type;
+      Max_Active_Requests : out Types.Active_Requests_Type;
+      Authag_Contexts     : out Types.Authag_Id_Type;
+      Cag_Contexts        : out Types.Cag_Id_Type;
+      Li_Contexts         : out Types.Li_Id_Type;
+      Ri_Contexts         : out Types.Ri_Id_Type;
+      Iag_Contexts        : out Types.Iag_Id_Type;
+      Eag_Contexts        : out Types.Eag_Id_Type;
+      Dhag_Contexts       : out Types.Dhag_Id_Type;
+      Sp_Contexts         : out Types.Sp_Id_Type;
+      Authp_Contexts      : out Types.Authp_Id_Type;
+      Dhp_Contexts        : out Types.Dhp_Id_Type;
+      Autha_Contexts      : out Types.Autha_Id_Type;
+      Ca_Contexts         : out Types.Ca_Id_Type;
+      Lc_Contexts         : out Types.Lc_Id_Type;
+      Ia_Contexts         : out Types.Ia_Id_Type;
+      Ea_Contexts         : out Types.Ea_Id_Type;
+      Dha_Contexts        : out Types.Dha_Id_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.CFG.tkm_limits.Request_Type;
-      Res  : Response.CFG.tkm_limits.Response_Type;
+      Req  : Request.Cfg.Tkm_Limits.Request_Type;
+      Res  : Response.Cfg.Tkm_Limits.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.CFG.tkm_limits;
+      Req.Header.Operation := Operations.Cfg.Tkm_Limits;
 
       Transport.Client.Send
-        (Data => Request.CFG.tkm_limits.Convert.To_Request
-           (S => Req));
+        (Data => Request.Cfg.Tkm_Limits.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.CFG.tkm_limits.Convert.From_Response
-        (S => Data);
+      Res := Response.Cfg.Tkm_Limits.Convert.From_Response (S => Data);
 
-      max_active_requests := Res.Data.max_active_requests;
-      authag_contexts := Res.Data.authag_contexts;
-      cag_contexts := Res.Data.cag_contexts;
-      li_contexts := Res.Data.li_contexts;
-      ri_contexts := Res.Data.ri_contexts;
-      iag_contexts := Res.Data.iag_contexts;
-      eag_contexts := Res.Data.eag_contexts;
-      dhag_contexts := Res.Data.dhag_contexts;
-      sp_contexts := Res.Data.sp_contexts;
-      authp_contexts := Res.Data.authp_contexts;
-      dhp_contexts := Res.Data.dhp_contexts;
-      autha_contexts := Res.Data.autha_contexts;
-      ca_contexts := Res.Data.ca_contexts;
-      lc_contexts := Res.Data.lc_contexts;
-      ia_contexts := Res.Data.ia_contexts;
-      ea_contexts := Res.Data.ea_contexts;
-      dha_contexts := Res.Data.dha_contexts;
-      Result := Res.Header.Result;
-   end tkm_limits;
+      Max_Active_Requests := Res.Data.Max_Active_Requests;
+      Authag_Contexts     := Res.Data.Authag_Contexts;
+      Cag_Contexts        := Res.Data.Cag_Contexts;
+      Li_Contexts         := Res.Data.Li_Contexts;
+      Ri_Contexts         := Res.Data.Ri_Contexts;
+      Iag_Contexts        := Res.Data.Iag_Contexts;
+      Eag_Contexts        := Res.Data.Eag_Contexts;
+      Dhag_Contexts       := Res.Data.Dhag_Contexts;
+      Sp_Contexts         := Res.Data.Sp_Contexts;
+      Authp_Contexts      := Res.Data.Authp_Contexts;
+      Dhp_Contexts        := Res.Data.Dhp_Contexts;
+      Autha_Contexts      := Res.Data.Autha_Contexts;
+      Ca_Contexts         := Res.Data.Ca_Contexts;
+      Lc_Contexts         := Res.Data.Lc_Contexts;
+      Ia_Contexts         := Res.Data.Ia_Contexts;
+      Ea_Contexts         := Res.Data.Ea_Contexts;
+      Dha_Contexts        := Res.Data.Dha_Contexts;
+      Result              := Res.Header.Result;
+   end Tkm_Limits;
 
    -------------------------------------------------------------------------
 
-   procedure tkm_version
-     (Result : out Results.Result_Type;
-      version : out Types.version_type)
+   procedure Tkm_Version
+     (Result  : out Results.Result_Type;
+      Version : out Types.Version_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.CFG.tkm_version.Request_Type;
-      Res  : Response.CFG.tkm_version.Response_Type;
+      Req  : Request.Cfg.Tkm_Version.Request_Type;
+      Res  : Response.Cfg.Tkm_Version.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.CFG.tkm_version;
+      Req.Header.Operation := Operations.Cfg.Tkm_Version;
 
       Transport.Client.Send
-        (Data => Request.CFG.tkm_version.Convert.To_Request
-           (S => Req));
+        (Data => Request.Cfg.Tkm_Version.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.CFG.tkm_version.Convert.From_Response
-        (S => Data);
+      Res := Response.Cfg.Tkm_Version.Convert.From_Response (S => Data);
 
-      version := Res.Data.version;
-      Result := Res.Header.Result;
-   end tkm_version;
+      Version := Res.Data.Version;
+      Result  := Res.Header.Result;
+   end Tkm_Version;
 
-end TKMRPC.Clients.CFG;
+end Tkmrpc.Clients.Cfg;

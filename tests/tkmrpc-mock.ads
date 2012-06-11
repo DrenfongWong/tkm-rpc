@@ -1,16 +1,16 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Mock
+package Tkmrpc.Mock
 is
 
-   Ref_Nonce : constant Types.nonce_type
+   Ref_Nonce : constant Types.Nonce_Type
      := (Size => 156,
          Data => (others => Character'Pos ('f')));
    --  Reference nonce returned by Nc_Create function.
 
-   Last_Nonce_Id     : Types.nc_id_type        := 0;
-   Last_Nonce_Length : Types.nonce_length_type := 16;
+   Last_Nonce_Id     : Types.Nc_Id_Type        := 0;
+   Last_Nonce_Length : Types.Nonce_Length_Type := 16;
    --  Calls to Nc_Create will set these vars to the last requested nonce Id
    --  and length.
 
-end TKMRPC.Mock;
+end Tkmrpc.Mock;

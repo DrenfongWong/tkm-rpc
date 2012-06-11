@@ -1,46 +1,45 @@
 with Interfaces.C.Strings;
 
-with TKMRPC.Types;
-with TKMRPC.Results;
+with Tkmrpc.Types;
+with Tkmrpc.Results;
 
-package TKMRPC.Clients.CFG
-is
+package Tkmrpc.Clients.Cfg is
 
    procedure Init
      (Result  : out Results.Result_Type;
-      Address :     Interfaces.C.Strings.chars_ptr);
+      Address : Interfaces.C.Strings.chars_ptr);
    pragma Export (C, Init, "cfg_init");
    pragma Export_Valued_Procedure (Init);
    --  Initialize CFG client with given address.
 
-   procedure tkm_version
-     (Result : out Results.Result_Type;
-      version : out Types.version_type);
-   pragma Export (C, tkm_version, "cfg_tkm_version");
-   pragma Export_Valued_Procedure (tkm_version);
+   procedure Tkm_Version
+     (Result  : out Results.Result_Type;
+      Version : out Types.Version_Type);
+   pragma Export (C, Tkm_Version, "cfg_tkm_version");
+   pragma Export_Valued_Procedure (Tkm_Version);
    --  Returns the version of TKM.
 
-   procedure tkm_limits
-     (Result : out Results.Result_Type;
-      max_active_requests : out Types.active_requests_type;
-      authag_contexts : out Types.authag_id_type;
-      cag_contexts : out Types.cag_id_type;
-      li_contexts : out Types.li_id_type;
-      ri_contexts : out Types.ri_id_type;
-      iag_contexts : out Types.iag_id_type;
-      eag_contexts : out Types.eag_id_type;
-      dhag_contexts : out Types.dhag_id_type;
-      sp_contexts : out Types.sp_id_type;
-      authp_contexts : out Types.authp_id_type;
-      dhp_contexts : out Types.dhp_id_type;
-      autha_contexts : out Types.autha_id_type;
-      ca_contexts : out Types.ca_id_type;
-      lc_contexts : out Types.lc_id_type;
-      ia_contexts : out Types.ia_id_type;
-      ea_contexts : out Types.ea_id_type;
-      dha_contexts : out Types.dha_id_type);
-   pragma Export (C, tkm_limits, "cfg_tkm_limits");
-   pragma Export_Valued_Procedure (tkm_limits);
+   procedure Tkm_Limits
+     (Result              : out Results.Result_Type;
+      Max_Active_Requests : out Types.Active_Requests_Type;
+      Authag_Contexts     : out Types.Authag_Id_Type;
+      Cag_Contexts        : out Types.Cag_Id_Type;
+      Li_Contexts         : out Types.Li_Id_Type;
+      Ri_Contexts         : out Types.Ri_Id_Type;
+      Iag_Contexts        : out Types.Iag_Id_Type;
+      Eag_Contexts        : out Types.Eag_Id_Type;
+      Dhag_Contexts       : out Types.Dhag_Id_Type;
+      Sp_Contexts         : out Types.Sp_Id_Type;
+      Authp_Contexts      : out Types.Authp_Id_Type;
+      Dhp_Contexts        : out Types.Dhp_Id_Type;
+      Autha_Contexts      : out Types.Autha_Id_Type;
+      Ca_Contexts         : out Types.Ca_Id_Type;
+      Lc_Contexts         : out Types.Lc_Id_Type;
+      Ia_Contexts         : out Types.Ia_Id_Type;
+      Ea_Contexts         : out Types.Ea_Id_Type;
+      Dha_Contexts        : out Types.Dha_Id_Type);
+   pragma Export (C, Tkm_Limits, "cfg_tkm_limits");
+   pragma Export_Valued_Procedure (Tkm_Limits);
    --  Returns limits of fixed length of TKM.
 
-end TKMRPC.Clients.CFG;
+end Tkmrpc.Clients.Cfg;

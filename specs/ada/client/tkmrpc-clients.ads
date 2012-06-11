@@ -1,4 +1,3 @@
-package TKMRPC.Clients
-is
+package Tkmrpc.Clients is
 
-end TKMRPC.Clients;
+end Tkmrpc.Clients;

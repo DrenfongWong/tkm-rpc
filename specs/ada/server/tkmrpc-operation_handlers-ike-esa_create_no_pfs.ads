@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.esa_create_no_pfs
-is
+package Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the esa_create_no_pfs operation.
 
-end TKMRPC.Operation_Handlers.IKE.esa_create_no_pfs;
+end Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs;

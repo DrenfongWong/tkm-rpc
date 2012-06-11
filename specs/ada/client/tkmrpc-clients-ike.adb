@@ -1,772 +1,731 @@
-with TKMRPC.Transport.Client;
-with TKMRPC.Operations.IKE;
-with TKMRPC.Request.IKE.tkm_version.Convert;
-with TKMRPC.Request.IKE.tkm_limits.Convert;
-with TKMRPC.Request.IKE.nc_reset.Convert;
-with TKMRPC.Request.IKE.nc_create.Convert;
-with TKMRPC.Request.IKE.dh_reset.Convert;
-with TKMRPC.Request.IKE.dh_create.Convert;
-with TKMRPC.Request.IKE.dh_generate_key.Convert;
-with TKMRPC.Request.IKE.cc_reset.Convert;
-with TKMRPC.Request.IKE.cc_set_user_certificate.Convert;
-with TKMRPC.Request.IKE.cc_add_certificate.Convert;
-with TKMRPC.Request.IKE.cc_check_ca.Convert;
-with TKMRPC.Request.IKE.ae_reset.Convert;
-with TKMRPC.Request.IKE.isa_reset.Convert;
-with TKMRPC.Request.IKE.isa_create.Convert;
-with TKMRPC.Request.IKE.isa_sign.Convert;
-with TKMRPC.Request.IKE.isa_auth.Convert;
-with TKMRPC.Request.IKE.isa_create_child.Convert;
-with TKMRPC.Request.IKE.isa_skip_create_first.Convert;
-with TKMRPC.Request.IKE.esa_reset.Convert;
-with TKMRPC.Request.IKE.esa_create.Convert;
-with TKMRPC.Request.IKE.esa_create_no_pfs.Convert;
-with TKMRPC.Request.IKE.esa_create_first.Convert;
-with TKMRPC.Request.IKE.esa_select.Convert;
-with TKMRPC.Response.IKE.tkm_version.Convert;
-with TKMRPC.Response.IKE.tkm_limits.Convert;
-with TKMRPC.Response.IKE.nc_reset.Convert;
-with TKMRPC.Response.IKE.nc_create.Convert;
-with TKMRPC.Response.IKE.dh_reset.Convert;
-with TKMRPC.Response.IKE.dh_create.Convert;
-with TKMRPC.Response.IKE.dh_generate_key.Convert;
-with TKMRPC.Response.IKE.cc_reset.Convert;
-with TKMRPC.Response.IKE.cc_set_user_certificate.Convert;
-with TKMRPC.Response.IKE.cc_add_certificate.Convert;
-with TKMRPC.Response.IKE.cc_check_ca.Convert;
-with TKMRPC.Response.IKE.ae_reset.Convert;
-with TKMRPC.Response.IKE.isa_reset.Convert;
-with TKMRPC.Response.IKE.isa_create.Convert;
-with TKMRPC.Response.IKE.isa_sign.Convert;
-with TKMRPC.Response.IKE.isa_auth.Convert;
-with TKMRPC.Response.IKE.isa_create_child.Convert;
-with TKMRPC.Response.IKE.isa_skip_create_first.Convert;
-with TKMRPC.Response.IKE.esa_reset.Convert;
-with TKMRPC.Response.IKE.esa_create.Convert;
-with TKMRPC.Response.IKE.esa_create_no_pfs.Convert;
-with TKMRPC.Response.IKE.esa_create_first.Convert;
-with TKMRPC.Response.IKE.esa_select.Convert;
+with Tkmrpc.Transport.Client;
+with Tkmrpc.Operations.Ike;
+with Tkmrpc.Request.Ike.Tkm_Version.Convert;
+with Tkmrpc.Request.Ike.Tkm_Limits.Convert;
+with Tkmrpc.Request.Ike.Nc_Reset.Convert;
+with Tkmrpc.Request.Ike.Nc_Create.Convert;
+with Tkmrpc.Request.Ike.Dh_Reset.Convert;
+with Tkmrpc.Request.Ike.Dh_Create.Convert;
+with Tkmrpc.Request.Ike.Dh_Generate_Key.Convert;
+with Tkmrpc.Request.Ike.Cc_Reset.Convert;
+with Tkmrpc.Request.Ike.Cc_Set_User_Certificate.Convert;
+with Tkmrpc.Request.Ike.Cc_Add_Certificate.Convert;
+with Tkmrpc.Request.Ike.Cc_Check_Ca.Convert;
+with Tkmrpc.Request.Ike.Ae_Reset.Convert;
+with Tkmrpc.Request.Ike.Isa_Reset.Convert;
+with Tkmrpc.Request.Ike.Isa_Create.Convert;
+with Tkmrpc.Request.Ike.Isa_Sign.Convert;
+with Tkmrpc.Request.Ike.Isa_Auth.Convert;
+with Tkmrpc.Request.Ike.Isa_Create_Child.Convert;
+with Tkmrpc.Request.Ike.Isa_Skip_Create_First.Convert;
+with Tkmrpc.Request.Ike.Esa_Reset.Convert;
+with Tkmrpc.Request.Ike.Esa_Create.Convert;
+with Tkmrpc.Request.Ike.Esa_Create_No_Pfs.Convert;
+with Tkmrpc.Request.Ike.Esa_Create_First.Convert;
+with Tkmrpc.Request.Ike.Esa_Select.Convert;
+with Tkmrpc.Response.Ike.Tkm_Version.Convert;
+with Tkmrpc.Response.Ike.Tkm_Limits.Convert;
+with Tkmrpc.Response.Ike.Nc_Reset.Convert;
+with Tkmrpc.Response.Ike.Nc_Create.Convert;
+with Tkmrpc.Response.Ike.Dh_Reset.Convert;
+with Tkmrpc.Response.Ike.Dh_Create.Convert;
+with Tkmrpc.Response.Ike.Dh_Generate_Key.Convert;
+with Tkmrpc.Response.Ike.Cc_Reset.Convert;
+with Tkmrpc.Response.Ike.Cc_Set_User_Certificate.Convert;
+with Tkmrpc.Response.Ike.Cc_Add_Certificate.Convert;
+with Tkmrpc.Response.Ike.Cc_Check_Ca.Convert;
+with Tkmrpc.Response.Ike.Ae_Reset.Convert;
+with Tkmrpc.Response.Ike.Isa_Reset.Convert;
+with Tkmrpc.Response.Ike.Isa_Create.Convert;
+with Tkmrpc.Response.Ike.Isa_Sign.Convert;
+with Tkmrpc.Response.Ike.Isa_Auth.Convert;
+with Tkmrpc.Response.Ike.Isa_Create_Child.Convert;
+with Tkmrpc.Response.Ike.Isa_Skip_Create_First.Convert;
+with Tkmrpc.Response.Ike.Esa_Reset.Convert;
+with Tkmrpc.Response.Ike.Esa_Create.Convert;
+with Tkmrpc.Response.Ike.Esa_Create_No_Pfs.Convert;
+with Tkmrpc.Response.Ike.Esa_Create_First.Convert;
+with Tkmrpc.Response.Ike.Esa_Select.Convert;
 
-package body TKMRPC.Clients.IKE
-is
+package body Tkmrpc.Clients.Ike is
+
+   -------------------------------------------------------------------------
+
+   procedure Ae_Reset
+     (Result : out Results.Result_Type;
+      Ae_Id  : Types.Ae_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Ae_Reset.Request_Type;
+      Res  : Response.Ike.Ae_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Ae_Reset;
+      Req.Data.Ae_Id       := Ae_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Ae_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Ae_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Ae_Reset;
+
+   -------------------------------------------------------------------------
+
+   procedure Cc_Add_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Cc_Add_Certificate.Request_Type;
+      Res  : Response.Ike.Cc_Add_Certificate.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Cc_Add_Certificate;
+      Req.Data.Cc_Id       := Cc_Id;
+      Req.Data.Autha_Id    := Autha_Id;
+      Req.Data.Certificate := Certificate;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Cc_Add_Certificate.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res :=
+         Response.Ike.Cc_Add_Certificate.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Cc_Add_Certificate;
+
+   -------------------------------------------------------------------------
+
+   procedure Cc_Check_Ca
+     (Result : out Results.Result_Type;
+      Cc_Id  : Types.Cc_Id_Type;
+      Ca_Id  : Types.Ca_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Cc_Check_Ca.Request_Type;
+      Res  : Response.Ike.Cc_Check_Ca.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Cc_Check_Ca;
+      Req.Data.Cc_Id       := Cc_Id;
+      Req.Data.Ca_Id       := Ca_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Cc_Check_Ca.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Cc_Check_Ca.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Cc_Check_Ca;
+
+   -------------------------------------------------------------------------
+
+   procedure Cc_Reset
+     (Result : out Results.Result_Type;
+      Cc_Id  : Types.Cc_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Cc_Reset.Request_Type;
+      Res  : Response.Ike.Cc_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Cc_Reset;
+      Req.Data.Cc_Id       := Cc_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Cc_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Cc_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Cc_Reset;
+
+   -------------------------------------------------------------------------
+
+   procedure Cc_Set_User_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Ri_Id       : Types.Ri_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Cc_Set_User_Certificate.Request_Type;
+      Res  : Response.Ike.Cc_Set_User_Certificate.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Cc_Set_User_Certificate;
+      Req.Data.Cc_Id       := Cc_Id;
+      Req.Data.Ri_Id       := Ri_Id;
+      Req.Data.Autha_Id    := Autha_Id;
+      Req.Data.Certificate := Certificate;
+
+      Transport.Client.Send
+        (Data =>
+            Request.Ike.Cc_Set_User_Certificate.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res :=
+         Response.Ike.Cc_Set_User_Certificate.Convert.From_Response
+           (S => Data);
+
+      Result := Res.Header.Result;
+   end Cc_Set_User_Certificate;
+
+   -------------------------------------------------------------------------
+
+   procedure Dh_Create
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Dha_Id   : Types.Dha_Id_Type;
+      Pubvalue : out Types.Dh_Pubvalue_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Dh_Create.Request_Type;
+      Res  : Response.Ike.Dh_Create.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Dh_Create;
+      Req.Data.Dh_Id       := Dh_Id;
+      Req.Data.Dha_Id      := Dha_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Dh_Create.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Dh_Create.Convert.From_Response (S => Data);
+
+      Pubvalue := Res.Data.Pubvalue;
+      Result   := Res.Header.Result;
+   end Dh_Create;
+
+   -------------------------------------------------------------------------
+
+   procedure Dh_Generate_Key
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Pubvalue : Types.Dh_Pubvalue_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Dh_Generate_Key.Request_Type;
+      Res  : Response.Ike.Dh_Generate_Key.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Dh_Generate_Key;
+      Req.Data.Dh_Id       := Dh_Id;
+      Req.Data.Pubvalue    := Pubvalue;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Dh_Generate_Key.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Dh_Generate_Key.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Dh_Generate_Key;
+
+   -------------------------------------------------------------------------
+
+   procedure Dh_Reset
+     (Result : out Results.Result_Type;
+      Dh_Id  : Types.Dh_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Dh_Reset.Request_Type;
+      Res  : Response.Ike.Dh_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Dh_Reset;
+      Req.Data.Dh_Id       := Dh_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Dh_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Dh_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Dh_Reset;
+
+   -------------------------------------------------------------------------
+
+   procedure Esa_Create
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Dh_Id       : Types.Dh_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Esa_Create.Request_Type;
+      Res  : Response.Ike.Esa_Create.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Esa_Create;
+      Req.Data.Esa_Id      := Esa_Id;
+      Req.Data.Isa_Id      := Isa_Id;
+      Req.Data.Sp_Id       := Sp_Id;
+      Req.Data.Ea_Id       := Ea_Id;
+      Req.Data.Dh_Id       := Dh_Id;
+      Req.Data.Nc_Loc_Id   := Nc_Loc_Id;
+      Req.Data.Nonce_Rem   := Nonce_Rem;
+      Req.Data.Initiator   := Initiator;
+      Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
+      Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Esa_Create.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Esa_Create.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Esa_Create;
+
+   -------------------------------------------------------------------------
+
+   procedure Esa_Create_First
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Esa_Create_First.Request_Type;
+      Res  : Response.Ike.Esa_Create_First.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Esa_Create_First;
+      Req.Data.Esa_Id      := Esa_Id;
+      Req.Data.Isa_Id      := Isa_Id;
+      Req.Data.Sp_Id       := Sp_Id;
+      Req.Data.Ea_Id       := Ea_Id;
+      Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
+      Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Esa_Create_First.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Esa_Create_First.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Esa_Create_First;
+
+   -------------------------------------------------------------------------
+
+   procedure Esa_Create_No_Pfs
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Esa_Create_No_Pfs.Request_Type;
+      Res  : Response.Ike.Esa_Create_No_Pfs.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Esa_Create_No_Pfs;
+      Req.Data.Esa_Id      := Esa_Id;
+      Req.Data.Isa_Id      := Isa_Id;
+      Req.Data.Sp_Id       := Sp_Id;
+      Req.Data.Ea_Id       := Ea_Id;
+      Req.Data.Nc_Loc_Id   := Nc_Loc_Id;
+      Req.Data.Nonce_Rem   := Nonce_Rem;
+      Req.Data.Initiator   := Initiator;
+      Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
+      Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Esa_Create_No_Pfs.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Esa_Create_No_Pfs.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Esa_Create_No_Pfs;
+
+   -------------------------------------------------------------------------
+
+   procedure Esa_Reset
+     (Result : out Results.Result_Type;
+      Esa_Id : Types.Esa_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Esa_Reset.Request_Type;
+      Res  : Response.Ike.Esa_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Esa_Reset;
+      Req.Data.Esa_Id      := Esa_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Esa_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Esa_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Esa_Reset;
+
+   -------------------------------------------------------------------------
+
+   procedure Esa_Select
+     (Result : out Results.Result_Type;
+      Esa_Id : Types.Esa_Id_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Esa_Select.Request_Type;
+      Res  : Response.Ike.Esa_Select.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Esa_Select;
+      Req.Data.Esa_Id      := Esa_Id;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Esa_Select.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Esa_Select.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Esa_Select;
 
    -------------------------------------------------------------------------
 
    procedure Init
      (Result  : out Results.Result_Type;
-      Address :     Interfaces.C.Strings.chars_ptr) is separate;
+      Address : Interfaces.C.Strings.chars_ptr) is separate;
 
    -------------------------------------------------------------------------
 
-   procedure ae_reset
-     (Result : out Results.Result_Type;
-      ae_id : Types.ae_id_type)
+   procedure Isa_Auth
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Cc_Id        : Types.Cc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : Types.Signature_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.ae_reset.Request_Type;
-      Res  : Response.IKE.ae_reset.Response_Type;
+      Req  : Request.Ike.Isa_Auth.Request_Type;
+      Res  : Response.Ike.Isa_Auth.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.ae_reset;
-      Req.Data.ae_id := ae_id;
+      Req.Header.Operation  := Operations.Ike.Isa_Auth;
+      Req.Data.Isa_Id       := Isa_Id;
+      Req.Data.Cc_Id        := Cc_Id;
+      Req.Data.Init_Message := Init_Message;
+      Req.Data.Signature    := Signature;
 
       Transport.Client.Send
-        (Data => Request.IKE.ae_reset.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Isa_Auth.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.ae_reset.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Isa_Auth.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
-   end ae_reset;
+   end Isa_Auth;
 
    -------------------------------------------------------------------------
 
-   procedure cc_add_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type)
+   procedure Isa_Create
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Ae_Id     : Types.Ae_Id_Type;
+      Ia_Id     : Types.Ia_Id_Type;
+      Dh_Id     : Types.Dh_Id_Type;
+      Nc_Loc_Id : Types.Nc_Id_Type;
+      Nonce_Rem : Types.Nonce_Type;
+      Initiator : Types.Init_Type;
+      Spi_Loc   : Types.Ike_Spi_Type;
+      Spi_Rem   : Types.Ike_Spi_Type;
+      Sk_Ai     : out Types.Key_Type;
+      Sk_Ar     : out Types.Key_Type;
+      Sk_Ei     : out Types.Key_Type;
+      Sk_Er     : out Types.Key_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.cc_add_certificate.Request_Type;
-      Res  : Response.IKE.cc_add_certificate.Response_Type;
+      Req  : Request.Ike.Isa_Create.Request_Type;
+      Res  : Response.Ike.Isa_Create.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.cc_add_certificate;
-      Req.Data.cc_id := cc_id;
-      Req.Data.autha_id := autha_id;
-      Req.Data.certificate := certificate;
+      Req.Header.Operation := Operations.Ike.Isa_Create;
+      Req.Data.Isa_Id      := Isa_Id;
+      Req.Data.Ae_Id       := Ae_Id;
+      Req.Data.Ia_Id       := Ia_Id;
+      Req.Data.Dh_Id       := Dh_Id;
+      Req.Data.Nc_Loc_Id   := Nc_Loc_Id;
+      Req.Data.Nonce_Rem   := Nonce_Rem;
+      Req.Data.Initiator   := Initiator;
+      Req.Data.Spi_Loc     := Spi_Loc;
+      Req.Data.Spi_Rem     := Spi_Rem;
 
       Transport.Client.Send
-        (Data => Request.IKE.cc_add_certificate.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Isa_Create.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.cc_add_certificate.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Isa_Create.Convert.From_Response (S => Data);
 
+      Sk_Ai  := Res.Data.Sk_Ai;
+      Sk_Ar  := Res.Data.Sk_Ar;
+      Sk_Ei  := Res.Data.Sk_Ei;
+      Sk_Er  := Res.Data.Sk_Er;
       Result := Res.Header.Result;
-   end cc_add_certificate;
+   end Isa_Create;
 
    -------------------------------------------------------------------------
 
-   procedure cc_check_ca
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ca_id : Types.ca_id_type)
+   procedure Isa_Create_Child
+     (Result        : out Results.Result_Type;
+      Isa_Id        : Types.Isa_Id_Type;
+      Parent_Isa_Id : Types.Isa_Id_Type;
+      Ia_Id         : Types.Ia_Id_Type;
+      Dh_Id         : Types.Dh_Id_Type;
+      Nc_Loc_Id     : Types.Nc_Id_Type;
+      Nonce_Rem     : Types.Nonce_Type;
+      Initiator     : Types.Init_Type;
+      Spi_Loc       : Types.Ike_Spi_Type;
+      Spi_Rem       : Types.Ike_Spi_Type;
+      Sk_Ai         : out Types.Key_Type;
+      Sk_Ar         : out Types.Key_Type;
+      Sk_Ei         : out Types.Key_Type;
+      Sk_Er         : out Types.Key_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.cc_check_ca.Request_Type;
-      Res  : Response.IKE.cc_check_ca.Response_Type;
+      Req  : Request.Ike.Isa_Create_Child.Request_Type;
+      Res  : Response.Ike.Isa_Create_Child.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.cc_check_ca;
-      Req.Data.cc_id := cc_id;
-      Req.Data.ca_id := ca_id;
+      Req.Header.Operation   := Operations.Ike.Isa_Create_Child;
+      Req.Data.Isa_Id        := Isa_Id;
+      Req.Data.Parent_Isa_Id := Parent_Isa_Id;
+      Req.Data.Ia_Id         := Ia_Id;
+      Req.Data.Dh_Id         := Dh_Id;
+      Req.Data.Nc_Loc_Id     := Nc_Loc_Id;
+      Req.Data.Nonce_Rem     := Nonce_Rem;
+      Req.Data.Initiator     := Initiator;
+      Req.Data.Spi_Loc       := Spi_Loc;
+      Req.Data.Spi_Rem       := Spi_Rem;
 
       Transport.Client.Send
-        (Data => Request.IKE.cc_check_ca.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Isa_Create_Child.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.cc_check_ca.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Isa_Create_Child.Convert.From_Response (S => Data);
 
+      Sk_Ai  := Res.Data.Sk_Ai;
+      Sk_Ar  := Res.Data.Sk_Ar;
+      Sk_Ei  := Res.Data.Sk_Ei;
+      Sk_Er  := Res.Data.Sk_Er;
       Result := Res.Header.Result;
-   end cc_check_ca;
+   end Isa_Create_Child;
 
    -------------------------------------------------------------------------
 
-   procedure cc_reset
+   procedure Isa_Reset
      (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type)
+      Isa_Id : Types.Isa_Id_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.cc_reset.Request_Type;
-      Res  : Response.IKE.cc_reset.Response_Type;
+      Req  : Request.Ike.Isa_Reset.Request_Type;
+      Res  : Response.Ike.Isa_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.cc_reset;
-      Req.Data.cc_id := cc_id;
+      Req.Header.Operation := Operations.Ike.Isa_Reset;
+      Req.Data.Isa_Id      := Isa_Id;
 
       Transport.Client.Send
-        (Data => Request.IKE.cc_reset.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Isa_Reset.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.cc_reset.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Isa_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
-   end cc_reset;
+   end Isa_Reset;
 
    -------------------------------------------------------------------------
 
-   procedure cc_set_user_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ri_id : Types.ri_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type)
+   procedure Isa_Sign
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Lc_Id        : Types.Lc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : out Types.Signature_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.cc_set_user_certificate.Request_Type;
-      Res  : Response.IKE.cc_set_user_certificate.Response_Type;
+      Req  : Request.Ike.Isa_Sign.Request_Type;
+      Res  : Response.Ike.Isa_Sign.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.cc_set_user_certificate;
-      Req.Data.cc_id := cc_id;
-      Req.Data.ri_id := ri_id;
-      Req.Data.autha_id := autha_id;
-      Req.Data.certificate := certificate;
+      Req.Header.Operation  := Operations.Ike.Isa_Sign;
+      Req.Data.Isa_Id       := Isa_Id;
+      Req.Data.Lc_Id        := Lc_Id;
+      Req.Data.Init_Message := Init_Message;
 
       Transport.Client.Send
-        (Data => Request.IKE.cc_set_user_certificate.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Isa_Sign.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.cc_set_user_certificate.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Isa_Sign.Convert.From_Response (S => Data);
 
-      Result := Res.Header.Result;
-   end cc_set_user_certificate;
+      Signature := Res.Data.Signature;
+      Result    := Res.Header.Result;
+   end Isa_Sign;
 
    -------------------------------------------------------------------------
 
-   procedure dh_create
+   procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      dha_id : Types.dha_id_type;
-      pubvalue : out Types.dh_pubvalue_type)
+      Isa_Id : Types.Isa_Id_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.dh_create.Request_Type;
-      Res  : Response.IKE.dh_create.Response_Type;
+      Req  : Request.Ike.Isa_Skip_Create_First.Request_Type;
+      Res  : Response.Ike.Isa_Skip_Create_First.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.dh_create;
-      Req.Data.dh_id := dh_id;
-      Req.Data.dha_id := dha_id;
+      Req.Header.Operation := Operations.Ike.Isa_Skip_Create_First;
+      Req.Data.Isa_Id      := Isa_Id;
 
       Transport.Client.Send
-        (Data => Request.IKE.dh_create.Convert.To_Request
-           (S => Req));
+        (Data =>
+            Request.Ike.Isa_Skip_Create_First.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.dh_create.Convert.From_Response
-        (S => Data);
+      Res :=
+         Response.Ike.Isa_Skip_Create_First.Convert.From_Response (S => Data);
 
-      pubvalue := Res.Data.pubvalue;
       Result := Res.Header.Result;
-   end dh_create;
+   end Isa_Skip_Create_First;
 
    -------------------------------------------------------------------------
 
-   procedure dh_generate_key
-     (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      pubvalue : Types.dh_pubvalue_type)
+   procedure Nc_Create
+     (Result       : out Results.Result_Type;
+      Nc_Id        : Types.Nc_Id_Type;
+      Nonce_Length : Types.Nonce_Length_Type;
+      Nonce        : out Types.Nonce_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.dh_generate_key.Request_Type;
-      Res  : Response.IKE.dh_generate_key.Response_Type;
+      Req  : Request.Ike.Nc_Create.Request_Type;
+      Res  : Response.Ike.Nc_Create.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.dh_generate_key;
-      Req.Data.dh_id := dh_id;
-      Req.Data.pubvalue := pubvalue;
+      Req.Header.Operation  := Operations.Ike.Nc_Create;
+      Req.Data.Nc_Id        := Nc_Id;
+      Req.Data.Nonce_Length := Nonce_Length;
 
       Transport.Client.Send
-        (Data => Request.IKE.dh_generate_key.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Nc_Create.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.dh_generate_key.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Nc_Create.Convert.From_Response (S => Data);
 
+      Nonce  := Res.Data.Nonce;
       Result := Res.Header.Result;
-   end dh_generate_key;
+   end Nc_Create;
 
    -------------------------------------------------------------------------
 
-   procedure dh_reset
+   procedure Nc_Reset
      (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type)
+      Nc_Id  : Types.Nc_Id_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.dh_reset.Request_Type;
-      Res  : Response.IKE.dh_reset.Response_Type;
+      Req  : Request.Ike.Nc_Reset.Request_Type;
+      Res  : Response.Ike.Nc_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.dh_reset;
-      Req.Data.dh_id := dh_id;
+      Req.Header.Operation := Operations.Ike.Nc_Reset;
+      Req.Data.Nc_Id       := Nc_Id;
 
       Transport.Client.Send
-        (Data => Request.IKE.dh_reset.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Nc_Reset.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.dh_reset.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Nc_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
-   end dh_reset;
+   end Nc_Reset;
 
    -------------------------------------------------------------------------
 
-   procedure esa_create
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type)
+   procedure Tkm_Limits
+     (Result              : out Results.Result_Type;
+      Max_Active_Requests : out Types.Active_Requests_Type;
+      Nc_Contexts         : out Types.Nc_Id_Type;
+      Dh_Contexts         : out Types.Dh_Id_Type;
+      Cc_Contexts         : out Types.Cc_Id_Type;
+      Ae_Contexts         : out Types.Ae_Id_Type;
+      Isa_Contexts        : out Types.Isa_Id_Type;
+      Esa_Contexts        : out Types.Esa_Id_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.esa_create.Request_Type;
-      Res  : Response.IKE.esa_create.Response_Type;
+      Req  : Request.Ike.Tkm_Limits.Request_Type;
+      Res  : Response.Ike.Tkm_Limits.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.esa_create;
-      Req.Data.esa_id := esa_id;
-      Req.Data.isa_id := isa_id;
-      Req.Data.sp_id := sp_id;
-      Req.Data.ea_id := ea_id;
-      Req.Data.dh_id := dh_id;
-      Req.Data.nc_loc_id := nc_loc_id;
-      Req.Data.nonce_rem := nonce_rem;
-      Req.Data.initiator := initiator;
-      Req.Data.esp_spi_loc := esp_spi_loc;
-      Req.Data.esp_spi_rem := esp_spi_rem;
+      Req.Header.Operation := Operations.Ike.Tkm_Limits;
 
       Transport.Client.Send
-        (Data => Request.IKE.esa_create.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Tkm_Limits.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.esa_create.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Tkm_Limits.Convert.From_Response (S => Data);
 
-      Result := Res.Header.Result;
-   end esa_create;
+      Max_Active_Requests := Res.Data.Max_Active_Requests;
+      Nc_Contexts         := Res.Data.Nc_Contexts;
+      Dh_Contexts         := Res.Data.Dh_Contexts;
+      Cc_Contexts         := Res.Data.Cc_Contexts;
+      Ae_Contexts         := Res.Data.Ae_Contexts;
+      Isa_Contexts        := Res.Data.Isa_Contexts;
+      Esa_Contexts        := Res.Data.Esa_Contexts;
+      Result              := Res.Header.Result;
+   end Tkm_Limits;
 
    -------------------------------------------------------------------------
 
-   procedure esa_create_first
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type)
+   procedure Tkm_Version
+     (Result  : out Results.Result_Type;
+      Version : out Types.Version_Type)
    is
-      use type TKMRPC.Results.Result_Type;
+      use type Tkmrpc.Results.Result_Type;
 
-      Req  : Request.IKE.esa_create_first.Request_Type;
-      Res  : Response.IKE.esa_create_first.Response_Type;
+      Req  : Request.Ike.Tkm_Version.Request_Type;
+      Res  : Response.Ike.Tkm_Version.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.IKE.esa_create_first;
-      Req.Data.esa_id := esa_id;
-      Req.Data.isa_id := isa_id;
-      Req.Data.sp_id := sp_id;
-      Req.Data.ea_id := ea_id;
-      Req.Data.esp_spi_loc := esp_spi_loc;
-      Req.Data.esp_spi_rem := esp_spi_rem;
+      Req.Header.Operation := Operations.Ike.Tkm_Version;
 
       Transport.Client.Send
-        (Data => Request.IKE.esa_create_first.Convert.To_Request
-           (S => Req));
+        (Data => Request.Ike.Tkm_Version.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.esa_create_first.Convert.From_Response
-        (S => Data);
+      Res := Response.Ike.Tkm_Version.Convert.From_Response (S => Data);
 
-      Result := Res.Header.Result;
-   end esa_create_first;
+      Version := Res.Data.Version;
+      Result  := Res.Header.Result;
+   end Tkm_Version;
 
-   -------------------------------------------------------------------------
-
-   procedure esa_create_no_pfs
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.esa_create_no_pfs.Request_Type;
-      Res  : Response.IKE.esa_create_no_pfs.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.esa_create_no_pfs;
-      Req.Data.esa_id := esa_id;
-      Req.Data.isa_id := isa_id;
-      Req.Data.sp_id := sp_id;
-      Req.Data.ea_id := ea_id;
-      Req.Data.nc_loc_id := nc_loc_id;
-      Req.Data.nonce_rem := nonce_rem;
-      Req.Data.initiator := initiator;
-      Req.Data.esp_spi_loc := esp_spi_loc;
-      Req.Data.esp_spi_rem := esp_spi_rem;
-
-      Transport.Client.Send
-        (Data => Request.IKE.esa_create_no_pfs.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.esa_create_no_pfs.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end esa_create_no_pfs;
-
-   -------------------------------------------------------------------------
-
-   procedure esa_reset
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.esa_reset.Request_Type;
-      Res  : Response.IKE.esa_reset.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.esa_reset;
-      Req.Data.esa_id := esa_id;
-
-      Transport.Client.Send
-        (Data => Request.IKE.esa_reset.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.esa_reset.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end esa_reset;
-
-   -------------------------------------------------------------------------
-
-   procedure esa_select
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.esa_select.Request_Type;
-      Res  : Response.IKE.esa_select.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.esa_select;
-      Req.Data.esa_id := esa_id;
-
-      Transport.Client.Send
-        (Data => Request.IKE.esa_select.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.esa_select.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end esa_select;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_auth
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      cc_id : Types.cc_id_type;
-      init_message : Types.init_message_type;
-      signature : Types.signature_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_auth.Request_Type;
-      Res  : Response.IKE.isa_auth.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_auth;
-      Req.Data.isa_id := isa_id;
-      Req.Data.cc_id := cc_id;
-      Req.Data.init_message := init_message;
-      Req.Data.signature := signature;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_auth.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_auth.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end isa_auth;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_create
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      ae_id : Types.ae_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_create.Request_Type;
-      Res  : Response.IKE.isa_create.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_create;
-      Req.Data.isa_id := isa_id;
-      Req.Data.ae_id := ae_id;
-      Req.Data.ia_id := ia_id;
-      Req.Data.dh_id := dh_id;
-      Req.Data.nc_loc_id := nc_loc_id;
-      Req.Data.nonce_rem := nonce_rem;
-      Req.Data.initiator := initiator;
-      Req.Data.spi_loc := spi_loc;
-      Req.Data.spi_rem := spi_rem;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_create.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_create.Convert.From_Response
-        (S => Data);
-
-      sk_ai := Res.Data.sk_ai;
-      sk_ar := Res.Data.sk_ar;
-      sk_ei := Res.Data.sk_ei;
-      sk_er := Res.Data.sk_er;
-      Result := Res.Header.Result;
-   end isa_create;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_create_child
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      parent_isa_id : Types.isa_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_create_child.Request_Type;
-      Res  : Response.IKE.isa_create_child.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_create_child;
-      Req.Data.isa_id := isa_id;
-      Req.Data.parent_isa_id := parent_isa_id;
-      Req.Data.ia_id := ia_id;
-      Req.Data.dh_id := dh_id;
-      Req.Data.nc_loc_id := nc_loc_id;
-      Req.Data.nonce_rem := nonce_rem;
-      Req.Data.initiator := initiator;
-      Req.Data.spi_loc := spi_loc;
-      Req.Data.spi_rem := spi_rem;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_create_child.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_create_child.Convert.From_Response
-        (S => Data);
-
-      sk_ai := Res.Data.sk_ai;
-      sk_ar := Res.Data.sk_ar;
-      sk_ei := Res.Data.sk_ei;
-      sk_er := Res.Data.sk_er;
-      Result := Res.Header.Result;
-   end isa_create_child;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_reset
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_reset.Request_Type;
-      Res  : Response.IKE.isa_reset.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_reset;
-      Req.Data.isa_id := isa_id;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_reset.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_reset.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end isa_reset;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_sign
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      lc_id : Types.lc_id_type;
-      init_message : Types.init_message_type;
-      signature : out Types.signature_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_sign.Request_Type;
-      Res  : Response.IKE.isa_sign.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_sign;
-      Req.Data.isa_id := isa_id;
-      Req.Data.lc_id := lc_id;
-      Req.Data.init_message := init_message;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_sign.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_sign.Convert.From_Response
-        (S => Data);
-
-      signature := Res.Data.signature;
-      Result := Res.Header.Result;
-   end isa_sign;
-
-   -------------------------------------------------------------------------
-
-   procedure isa_skip_create_first
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.isa_skip_create_first.Request_Type;
-      Res  : Response.IKE.isa_skip_create_first.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.isa_skip_create_first;
-      Req.Data.isa_id := isa_id;
-
-      Transport.Client.Send
-        (Data => Request.IKE.isa_skip_create_first.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.isa_skip_create_first.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end isa_skip_create_first;
-
-   -------------------------------------------------------------------------
-
-   procedure nc_create
-     (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type;
-      nonce_length : Types.nonce_length_type;
-      nonce : out Types.nonce_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.nc_create.Request_Type;
-      Res  : Response.IKE.nc_create.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.nc_create;
-      Req.Data.nc_id := nc_id;
-      Req.Data.nonce_length := nonce_length;
-
-      Transport.Client.Send
-        (Data => Request.IKE.nc_create.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.nc_create.Convert.From_Response
-        (S => Data);
-
-      nonce := Res.Data.nonce;
-      Result := Res.Header.Result;
-   end nc_create;
-
-   -------------------------------------------------------------------------
-
-   procedure nc_reset
-     (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.nc_reset.Request_Type;
-      Res  : Response.IKE.nc_reset.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.nc_reset;
-      Req.Data.nc_id := nc_id;
-
-      Transport.Client.Send
-        (Data => Request.IKE.nc_reset.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.nc_reset.Convert.From_Response
-        (S => Data);
-
-      Result := Res.Header.Result;
-   end nc_reset;
-
-   -------------------------------------------------------------------------
-
-   procedure tkm_limits
-     (Result : out Results.Result_Type;
-      max_active_requests : out Types.active_requests_type;
-      nc_contexts : out Types.nc_id_type;
-      dh_contexts : out Types.dh_id_type;
-      cc_contexts : out Types.cc_id_type;
-      ae_contexts : out Types.ae_id_type;
-      isa_contexts : out Types.isa_id_type;
-      esa_contexts : out Types.esa_id_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.tkm_limits.Request_Type;
-      Res  : Response.IKE.tkm_limits.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.tkm_limits;
-
-      Transport.Client.Send
-        (Data => Request.IKE.tkm_limits.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.tkm_limits.Convert.From_Response
-        (S => Data);
-
-      max_active_requests := Res.Data.max_active_requests;
-      nc_contexts := Res.Data.nc_contexts;
-      dh_contexts := Res.Data.dh_contexts;
-      cc_contexts := Res.Data.cc_contexts;
-      ae_contexts := Res.Data.ae_contexts;
-      isa_contexts := Res.Data.isa_contexts;
-      esa_contexts := Res.Data.esa_contexts;
-      Result := Res.Header.Result;
-   end tkm_limits;
-
-   -------------------------------------------------------------------------
-
-   procedure tkm_version
-     (Result : out Results.Result_Type;
-      version : out Types.version_type)
-   is
-      use type TKMRPC.Results.Result_Type;
-
-      Req  : Request.IKE.tkm_version.Request_Type;
-      Res  : Response.IKE.tkm_version.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.IKE.tkm_version;
-
-      Transport.Client.Send
-        (Data => Request.IKE.tkm_version.Convert.To_Request
-           (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.IKE.tkm_version.Convert.From_Response
-        (S => Data);
-
-      version := Res.Data.version;
-      Result := Res.Header.Result;
-   end tkm_version;
-
-end TKMRPC.Clients.IKE;
+end Tkmrpc.Clients.Ike;

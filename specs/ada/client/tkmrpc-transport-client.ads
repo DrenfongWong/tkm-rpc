@@ -1,8 +1,7 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Transport.Client
-is
+package Tkmrpc.Transport.Client is
 
    procedure Connect (Address : String);
    --  Connect to the RPC server given by socket address.
@@ -13,4 +12,4 @@ is
    procedure Receive (Data : out Response.Data_Type);
    --  Receive response data from RPC server.
 
-end TKMRPC.Transport.Client;
+end Tkmrpc.Transport.Client;

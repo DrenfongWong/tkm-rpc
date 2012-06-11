@@ -1,4 +1,3 @@
-package TKMRPC.Response.CFG
-is
+package Tkmrpc.Response.Cfg is
 
-end TKMRPC.Response.CFG;
+end Tkmrpc.Response.Cfg;

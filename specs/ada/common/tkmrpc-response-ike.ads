@@ -1,4 +1,3 @@
-package TKMRPC.Response.IKE
-is
+package Tkmrpc.Response.Ike is
 
-end TKMRPC.Response.IKE;
+end Tkmrpc.Response.Ike;

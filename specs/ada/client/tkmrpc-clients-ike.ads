@@ -1,246 +1,245 @@
 with Interfaces.C.Strings;
 
-with TKMRPC.Types;
-with TKMRPC.Results;
+with Tkmrpc.Types;
+with Tkmrpc.Results;
 
-package TKMRPC.Clients.IKE
-is
+package Tkmrpc.Clients.Ike is
 
    procedure Init
      (Result  : out Results.Result_Type;
-      Address :     Interfaces.C.Strings.chars_ptr);
+      Address : Interfaces.C.Strings.chars_ptr);
    pragma Export (C, Init, "ike_init");
    pragma Export_Valued_Procedure (Init);
    --  Initialize IKE client with given address.
 
-   procedure tkm_version
-     (Result : out Results.Result_Type;
-      version : out Types.version_type);
-   pragma Export (C, tkm_version, "ike_tkm_version");
-   pragma Export_Valued_Procedure (tkm_version);
+   procedure Tkm_Version
+     (Result  : out Results.Result_Type;
+      Version : out Types.Version_Type);
+   pragma Export (C, Tkm_Version, "ike_tkm_version");
+   pragma Export_Valued_Procedure (Tkm_Version);
    --  Returns the version of TKM.
 
-   procedure tkm_limits
-     (Result : out Results.Result_Type;
-      max_active_requests : out Types.active_requests_type;
-      nc_contexts : out Types.nc_id_type;
-      dh_contexts : out Types.dh_id_type;
-      cc_contexts : out Types.cc_id_type;
-      ae_contexts : out Types.ae_id_type;
-      isa_contexts : out Types.isa_id_type;
-      esa_contexts : out Types.esa_id_type);
-   pragma Export (C, tkm_limits, "ike_tkm_limits");
-   pragma Export_Valued_Procedure (tkm_limits);
+   procedure Tkm_Limits
+     (Result              : out Results.Result_Type;
+      Max_Active_Requests : out Types.Active_Requests_Type;
+      Nc_Contexts         : out Types.Nc_Id_Type;
+      Dh_Contexts         : out Types.Dh_Id_Type;
+      Cc_Contexts         : out Types.Cc_Id_Type;
+      Ae_Contexts         : out Types.Ae_Id_Type;
+      Isa_Contexts        : out Types.Isa_Id_Type;
+      Esa_Contexts        : out Types.Esa_Id_Type);
+   pragma Export (C, Tkm_Limits, "ike_tkm_limits");
+   pragma Export_Valued_Procedure (Tkm_Limits);
    --  Returns limits of fixed length of TKM.
 
-   procedure nc_reset
+   procedure Nc_Reset
      (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type);
-   pragma Export (C, nc_reset, "ike_nc_reset");
-   pragma Export_Valued_Procedure (nc_reset);
+      Nc_Id  : Types.Nc_Id_Type);
+   pragma Export (C, Nc_Reset, "ike_nc_reset");
+   pragma Export_Valued_Procedure (Nc_Reset);
    --  Reset a NC context.
 
-   procedure nc_create
-     (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type;
-      nonce_length : Types.nonce_length_type;
-      nonce : out Types.nonce_type);
-   pragma Export (C, nc_create, "ike_nc_create");
-   pragma Export_Valued_Procedure (nc_create);
+   procedure Nc_Create
+     (Result       : out Results.Result_Type;
+      Nc_Id        : Types.Nc_Id_Type;
+      Nonce_Length : Types.Nonce_Length_Type;
+      Nonce        : out Types.Nonce_Type);
+   pragma Export (C, Nc_Create, "ike_nc_create");
+   pragma Export_Valued_Procedure (Nc_Create);
    --  Create a nonce.
 
-   procedure dh_reset
+   procedure Dh_Reset
      (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type);
-   pragma Export (C, dh_reset, "ike_dh_reset");
-   pragma Export_Valued_Procedure (dh_reset);
+      Dh_Id  : Types.Dh_Id_Type);
+   pragma Export (C, Dh_Reset, "ike_dh_reset");
+   pragma Export_Valued_Procedure (Dh_Reset);
    --  Reset a DH context.
 
-   procedure dh_create
-     (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      dha_id : Types.dha_id_type;
-      pubvalue : out Types.dh_pubvalue_type);
-   pragma Export (C, dh_create, "ike_dh_create");
-   pragma Export_Valued_Procedure (dh_create);
+   procedure Dh_Create
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Dha_Id   : Types.Dha_Id_Type;
+      Pubvalue : out Types.Dh_Pubvalue_Type);
+   pragma Export (C, Dh_Create, "ike_dh_create");
+   pragma Export_Valued_Procedure (Dh_Create);
    --  Create a DH secret and return its public value.
 
-   procedure dh_generate_key
-     (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      pubvalue : Types.dh_pubvalue_type);
-   pragma Export (C, dh_generate_key, "ike_dh_generate_key");
-   pragma Export_Valued_Procedure (dh_generate_key);
+   procedure Dh_Generate_Key
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Pubvalue : Types.Dh_Pubvalue_Type);
+   pragma Export (C, Dh_Generate_Key, "ike_dh_generate_key");
+   pragma Export_Valued_Procedure (Dh_Generate_Key);
    --  Create a nonce.
 
-   procedure cc_reset
+   procedure Cc_Reset
      (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type);
-   pragma Export (C, cc_reset, "ike_cc_reset");
-   pragma Export_Valued_Procedure (cc_reset);
+      Cc_Id  : Types.Cc_Id_Type);
+   pragma Export (C, Cc_Reset, "ike_cc_reset");
+   pragma Export_Valued_Procedure (Cc_Reset);
    --  Reset a CC context.
 
-   procedure cc_set_user_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ri_id : Types.ri_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type);
-   pragma Export (C, cc_set_user_certificate, "ike_cc_set_user_certificate");
-   pragma Export_Valued_Procedure (cc_set_user_certificate);
+   procedure Cc_Set_User_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Ri_Id       : Types.Ri_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type);
+   pragma Export (C, Cc_Set_User_Certificate, "ike_cc_set_user_certificate");
+   pragma Export_Valued_Procedure (Cc_Set_User_Certificate);
    --  Initiates a certificate chain starting from the user certificate.
 
-   procedure cc_add_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type);
-   pragma Export (C, cc_add_certificate, "ike_cc_add_certificate");
-   pragma Export_Valued_Procedure (cc_add_certificate);
+   procedure Cc_Add_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type);
+   pragma Export (C, Cc_Add_Certificate, "ike_cc_add_certificate");
+   pragma Export_Valued_Procedure (Cc_Add_Certificate);
    --  Add a certificate to a certificate chain.
 
-   procedure cc_check_ca
+   procedure Cc_Check_Ca
      (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ca_id : Types.ca_id_type);
-   pragma Export (C, cc_check_ca, "ike_cc_check_ca");
-   pragma Export_Valued_Procedure (cc_check_ca);
+      Cc_Id  : Types.Cc_Id_Type;
+      Ca_Id  : Types.Ca_Id_Type);
+   pragma Export (C, Cc_Check_Ca, "ike_cc_check_ca");
+   pragma Export_Valued_Procedure (Cc_Check_Ca);
    --  Checks if a cc is based on a trusted CA
 
-   procedure ae_reset
+   procedure Ae_Reset
      (Result : out Results.Result_Type;
-      ae_id : Types.ae_id_type);
-   pragma Export (C, ae_reset, "ike_ae_reset");
-   pragma Export_Valued_Procedure (ae_reset);
+      Ae_Id  : Types.Ae_Id_Type);
+   pragma Export (C, Ae_Reset, "ike_ae_reset");
+   pragma Export_Valued_Procedure (Ae_Reset);
    --  Reset an AE context.
 
-   procedure isa_reset
+   procedure Isa_Reset
      (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type);
-   pragma Export (C, isa_reset, "ike_isa_reset");
-   pragma Export_Valued_Procedure (isa_reset);
+      Isa_Id : Types.Isa_Id_Type);
+   pragma Export (C, Isa_Reset, "ike_isa_reset");
+   pragma Export_Valued_Procedure (Isa_Reset);
    --  Reset an ISA context.
 
-   procedure isa_create
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      ae_id : Types.ae_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type);
-   pragma Export (C, isa_create, "ike_isa_create");
-   pragma Export_Valued_Procedure (isa_create);
+   procedure Isa_Create
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Ae_Id     : Types.Ae_Id_Type;
+      Ia_Id     : Types.Ia_Id_Type;
+      Dh_Id     : Types.Dh_Id_Type;
+      Nc_Loc_Id : Types.Nc_Id_Type;
+      Nonce_Rem : Types.Nonce_Type;
+      Initiator : Types.Init_Type;
+      Spi_Loc   : Types.Ike_Spi_Type;
+      Spi_Rem   : Types.Ike_Spi_Type;
+      Sk_Ai     : out Types.Key_Type;
+      Sk_Ar     : out Types.Key_Type;
+      Sk_Ei     : out Types.Key_Type;
+      Sk_Er     : out Types.Key_Type);
+   pragma Export (C, Isa_Create, "ike_isa_create");
+   pragma Export_Valued_Procedure (Isa_Create);
    --  Create an IKE SA context.
 
-   procedure isa_sign
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      lc_id : Types.lc_id_type;
-      init_message : Types.init_message_type;
-      signature : out Types.signature_type);
-   pragma Export (C, isa_sign, "ike_isa_sign");
-   pragma Export_Valued_Procedure (isa_sign);
+   procedure Isa_Sign
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Lc_Id        : Types.Lc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : out Types.Signature_Type);
+   pragma Export (C, Isa_Sign, "ike_isa_sign");
+   pragma Export_Valued_Procedure (Isa_Sign);
    --  Provide authentication to the remote endpoint.
 
-   procedure isa_auth
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      cc_id : Types.cc_id_type;
-      init_message : Types.init_message_type;
-      signature : Types.signature_type);
-   pragma Export (C, isa_auth, "ike_isa_auth");
-   pragma Export_Valued_Procedure (isa_auth);
+   procedure Isa_Auth
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Cc_Id        : Types.Cc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : Types.Signature_Type);
+   pragma Export (C, Isa_Auth, "ike_isa_auth");
+   pragma Export_Valued_Procedure (Isa_Auth);
    --  Authenticate the remote endpoint.
 
-   procedure isa_create_child
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      parent_isa_id : Types.isa_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type);
-   pragma Export (C, isa_create_child, "ike_isa_create_child");
-   pragma Export_Valued_Procedure (isa_create_child);
+   procedure Isa_Create_Child
+     (Result        : out Results.Result_Type;
+      Isa_Id        : Types.Isa_Id_Type;
+      Parent_Isa_Id : Types.Isa_Id_Type;
+      Ia_Id         : Types.Ia_Id_Type;
+      Dh_Id         : Types.Dh_Id_Type;
+      Nc_Loc_Id     : Types.Nc_Id_Type;
+      Nonce_Rem     : Types.Nonce_Type;
+      Initiator     : Types.Init_Type;
+      Spi_Loc       : Types.Ike_Spi_Type;
+      Spi_Rem       : Types.Ike_Spi_Type;
+      Sk_Ai         : out Types.Key_Type;
+      Sk_Ar         : out Types.Key_Type;
+      Sk_Ei         : out Types.Key_Type;
+      Sk_Er         : out Types.Key_Type);
+   pragma Export (C, Isa_Create_Child, "ike_isa_create_child");
+   pragma Export_Valued_Procedure (Isa_Create_Child);
    --  Derive an IKE SA context from an existing SA.
 
-   procedure isa_skip_create_first
+   procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type);
-   pragma Export (C, isa_skip_create_first, "ike_isa_skip_create_first");
-   pragma Export_Valued_Procedure (isa_skip_create_first);
+      Isa_Id : Types.Isa_Id_Type);
+   pragma Export (C, Isa_Skip_Create_First, "ike_isa_skip_create_first");
+   pragma Export_Valued_Procedure (Isa_Skip_Create_First);
    --  Don't create a first child.
 
-   procedure esa_reset
+   procedure Esa_Reset
      (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type);
-   pragma Export (C, esa_reset, "ike_esa_reset");
-   pragma Export_Valued_Procedure (esa_reset);
+      Esa_Id : Types.Esa_Id_Type);
+   pragma Export (C, Esa_Reset, "ike_esa_reset");
+   pragma Export_Valued_Procedure (Esa_Reset);
    --  Reset an ESA context.
 
-   procedure esa_create
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
-   pragma Export (C, esa_create, "ike_esa_create");
-   pragma Export_Valued_Procedure (esa_create);
+   procedure Esa_Create
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Dh_Id       : Types.Dh_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
+   pragma Export (C, Esa_Create, "ike_esa_create");
+   pragma Export_Valued_Procedure (Esa_Create);
    --  Creates an ESP SA.
 
-   procedure esa_create_no_pfs
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
-   pragma Export (C, esa_create_no_pfs, "ike_esa_create_no_pfs");
-   pragma Export_Valued_Procedure (esa_create_no_pfs);
+   procedure Esa_Create_No_Pfs
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
+   pragma Export (C, Esa_Create_No_Pfs, "ike_esa_create_no_pfs");
+   pragma Export_Valued_Procedure (Esa_Create_No_Pfs);
    --  Creates an ESP SA without PFS.
 
-   procedure esa_create_first
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
-   pragma Export (C, esa_create_first, "ike_esa_create_first");
-   pragma Export_Valued_Procedure (esa_create_first);
+   procedure Esa_Create_First
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
+   pragma Export (C, Esa_Create_First, "ike_esa_create_first");
+   pragma Export_Valued_Procedure (Esa_Create_First);
    --  Creates the first ESP SA for an AE.
 
-   procedure esa_select
+   procedure Esa_Select
      (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type);
-   pragma Export (C, esa_select, "ike_esa_select");
-   pragma Export_Valued_Procedure (esa_select);
+      Esa_Id : Types.Esa_Id_Type);
+   pragma Export (C, Esa_Select, "ike_esa_select");
+   pragma Export_Valued_Procedure (Esa_Select);
    --  Selects an ESA context for outgoing traffic.
 
-end TKMRPC.Clients.IKE;
+end Tkmrpc.Clients.Ike;

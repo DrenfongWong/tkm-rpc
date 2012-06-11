@@ -1,9 +1,8 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Constants
-is
+package Tkmrpc.Constants is
 
-   CFG_Version : constant Types.version_type := 16#0000000000000000#;
-   IKE_Version : constant Types.version_type := 16#0000000000000000#;
+   Cfg_Version : constant Types.Version_Type := 16#0000000000000000#;
+   Ike_Version : constant Types.Version_Type := 16#0000000000000000#;
 
-end TKMRPC.Constants;
+end Tkmrpc.Constants;

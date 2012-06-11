@@ -1,22 +1,21 @@
-with TKMRPC.Types;
-with TKMRPC.Results;
-with TKMRPC.Operations;
+with Tkmrpc.Types;
+with Tkmrpc.Results;
+with Tkmrpc.Operations;
 
-package TKMRPC.Response
-is
+package Tkmrpc.Response is
    Response_Size : constant := 1024;
    Header_Size   : constant := 24;
    Body_Size     : constant := Response_Size - Header_Size;
 
    type Header_Type is record
       Operation  : Operations.Operation_Type;
-      Request_ID : Types.request_id_type;
+      Request_Id : Types.Request_Id_Type;
       Result     : Results.Result_Type;
    end record;
 
    for Header_Type use record
-      Operation  at  0 range 0 .. (8 * 8) - 1;
-      Request_ID at  8 range 0 .. (8 * 8) - 1;
+      Operation  at 0 range 0 .. (8 * 8) - 1;
+      Request_Id at 8 range 0 .. (8 * 8) - 1;
       Result     at 16 range 0 .. (8 * 8) - 1;
    end record;
    for Header_Type'Size use Header_Size * 8;
@@ -30,15 +29,15 @@ is
    end record;
 
    for Data_Type use record
-      Header      at 0           range 0 .. (Header_Size * 8) - 1;
+      Header      at 0 range 0 .. (Header_Size * 8) - 1;
       Padded_Data at Header_Size range 0 .. (Body_Size * 8) - 1;
    end record;
    for Data_Type'Size use Response_Size * 8;
 
-   Null_Data : constant Data_Type := Data_Type'
-     (Header      => Header_Type'
-        (Result => Results.Invalid_Operation,
-         others => <>),
+   Null_Data : constant Data_Type :=
+      Data_Type'
+     (Header      =>
+     Header_Type'(Result => Results.Invalid_Operation, others => <>),
       Padded_Data => <>);
 
-end TKMRPC.Response;
+end Tkmrpc.Response;

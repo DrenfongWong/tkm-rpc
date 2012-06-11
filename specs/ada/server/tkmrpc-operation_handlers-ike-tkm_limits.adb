@@ -1,35 +1,30 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Response.IKE.tkm_limits.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Response.Ike.Tkm_Limits.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.tkm_limits
-is
+package body Tkmrpc.Operation_Handlers.Ike.Tkm_Limits is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
       pragma Unreferenced (Req);
 
-      Specific_Res   : Response.IKE.tkm_limits.Response_Type;
+      Specific_Res : Response.Ike.Tkm_Limits.Response_Type;
    begin
-      Servers.IKE.tkm_limits
-        (Result => Specific_Res.Header.Result,
-         max_active_requests => Specific_Res.Data.max_active_requests,
-         nc_contexts => Specific_Res.Data.nc_contexts,
-         dh_contexts => Specific_Res.Data.dh_contexts,
-         cc_contexts => Specific_Res.Data.cc_contexts,
-         ae_contexts => Specific_Res.Data.ae_contexts,
-         isa_contexts => Specific_Res.Data.isa_contexts,
-         esa_contexts => Specific_Res.Data.esa_contexts);
+      Servers.Ike.Tkm_Limits
+        (Result              => Specific_Res.Header.Result,
+         Max_Active_Requests => Specific_Res.Data.Max_Active_Requests,
+         Nc_Contexts         => Specific_Res.Data.Nc_Contexts,
+         Dh_Contexts         => Specific_Res.Data.Dh_Contexts,
+         Cc_Contexts         => Specific_Res.Data.Cc_Contexts,
+         Ae_Contexts         => Specific_Res.Data.Ae_Contexts,
+         Isa_Contexts        => Specific_Res.Data.Isa_Contexts,
+         Esa_Contexts        => Specific_Res.Data.Esa_Contexts);
 
-      Res := Response.IKE.tkm_limits.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Tkm_Limits.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.tkm_limits;
+end Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;

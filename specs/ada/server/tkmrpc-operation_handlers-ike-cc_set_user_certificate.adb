@@ -1,35 +1,32 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.cc_set_user_certificate.Convert;
-with TKMRPC.Response.IKE.cc_set_user_certificate.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Cc_Set_User_Certificate.Convert;
+with Tkmrpc.Response.Ike.Cc_Set_User_Certificate.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.cc_set_user_certificate
-is
+package body Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.cc_set_user_certificate.Request_Type;
-      Specific_Res   : Response.IKE.cc_set_user_certificate.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Cc_Set_User_Certificate.Request_Type;
+      Specific_Res : Response.Ike.Cc_Set_User_Certificate.Response_Type;
    begin
-      Specific_Req := Request.IKE.cc_set_user_certificate.Convert.From_Request
-        (S => Req);
+      Specific_Req :=
+         Request.Ike.Cc_Set_User_Certificate.Convert.From_Request (S => Req);
 
-      Servers.IKE.cc_set_user_certificate
-        (Result => Specific_Res.Header.Result,
-         cc_id => Specific_Req.Data.cc_id,
-         ri_id => Specific_Req.Data.ri_id,
-         autha_id => Specific_Req.Data.autha_id,
-         certificate => Specific_Req.Data.certificate);
+      Servers.Ike.Cc_Set_User_Certificate
+        (Result      => Specific_Res.Header.Result,
+         Cc_Id       => Specific_Req.Data.Cc_Id,
+         Ri_Id       => Specific_Req.Data.Ri_Id,
+         Autha_Id    => Specific_Req.Data.Autha_Id,
+         Certificate => Specific_Req.Data.Certificate);
 
-      Res := Response.IKE.cc_set_user_certificate.Convert.To_Response
-        (S => Specific_Res);
+      Res :=
+         Response.Ike.Cc_Set_User_Certificate.Convert.To_Response
+           (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.cc_set_user_certificate;
+end Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate;

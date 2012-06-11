@@ -1,16 +1,13 @@
 with Ada.Unchecked_Conversion;
 
-package TKMRPC.Request.IKE.nc_reset.Convert
-is
+package Tkmrpc.Request.Ike.Nc_Reset.Convert is
 
-   function To_Request is new
-     Ada.Unchecked_Conversion
-       (Source => nc_reset.Request_Type,
-        Target => Request.Data_Type);
+   function To_Request is new Ada.Unchecked_Conversion (
+      Source => Nc_Reset.Request_Type,
+      Target => Request.Data_Type);
 
-   function From_Request is new
-     Ada.Unchecked_Conversion
-       (Source => Request.Data_Type,
-        Target => nc_reset.Request_Type);
+   function From_Request is new Ada.Unchecked_Conversion (
+      Source => Request.Data_Type,
+      Target => Nc_Reset.Request_Type);
 
-end TKMRPC.Request.IKE.nc_reset.Convert;
+end Tkmrpc.Request.Ike.Nc_Reset.Convert;

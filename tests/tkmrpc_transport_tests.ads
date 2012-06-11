@@ -1,6 +1,6 @@
 with Ahven.Framework;
 
-package TKMRPC_Transport_Tests
+package Tkmrpc_Transport_Tests
 is
    type Testcase is new Ahven.Framework.Test_Case with null record;
 
@@ -13,4 +13,4 @@ is
    procedure Server_Error_Callbacks;
    --  Test RPC server error callback handling.
 
-end TKMRPC_Transport_Tests;
+end Tkmrpc_Transport_Tests;

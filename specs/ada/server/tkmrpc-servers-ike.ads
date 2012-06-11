@@ -1,191 +1,190 @@
-with TKMRPC.Types;
-with TKMRPC.Results;
+with Tkmrpc.Types;
+with Tkmrpc.Results;
 
-package TKMRPC.Servers.IKE
-is
+package Tkmrpc.Servers.Ike is
 
-   procedure tkm_version
-     (Result : out Results.Result_Type;
-      version : out Types.version_type);
+   procedure Tkm_Version
+     (Result  : out Results.Result_Type;
+      Version : out Types.Version_Type);
    --  Returns the version of TKM.
 
-   procedure tkm_limits
-     (Result : out Results.Result_Type;
-      max_active_requests : out Types.active_requests_type;
-      nc_contexts : out Types.nc_id_type;
-      dh_contexts : out Types.dh_id_type;
-      cc_contexts : out Types.cc_id_type;
-      ae_contexts : out Types.ae_id_type;
-      isa_contexts : out Types.isa_id_type;
-      esa_contexts : out Types.esa_id_type);
+   procedure Tkm_Limits
+     (Result              : out Results.Result_Type;
+      Max_Active_Requests : out Types.Active_Requests_Type;
+      Nc_Contexts         : out Types.Nc_Id_Type;
+      Dh_Contexts         : out Types.Dh_Id_Type;
+      Cc_Contexts         : out Types.Cc_Id_Type;
+      Ae_Contexts         : out Types.Ae_Id_Type;
+      Isa_Contexts        : out Types.Isa_Id_Type;
+      Esa_Contexts        : out Types.Esa_Id_Type);
    --  Returns limits of fixed length of TKM.
 
-   procedure nc_reset
+   procedure Nc_Reset
      (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type);
+      Nc_Id  : Types.Nc_Id_Type);
    --  Reset a NC context.
 
-   procedure nc_create
-     (Result : out Results.Result_Type;
-      nc_id : Types.nc_id_type;
-      nonce_length : Types.nonce_length_type;
-      nonce : out Types.nonce_type);
+   procedure Nc_Create
+     (Result       : out Results.Result_Type;
+      Nc_Id        : Types.Nc_Id_Type;
+      Nonce_Length : Types.Nonce_Length_Type;
+      Nonce        : out Types.Nonce_Type);
    --  Create a nonce.
 
-   procedure dh_reset
+   procedure Dh_Reset
      (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type);
+      Dh_Id  : Types.Dh_Id_Type);
    --  Reset a DH context.
 
-   procedure dh_create
-     (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      dha_id : Types.dha_id_type;
-      pubvalue : out Types.dh_pubvalue_type);
+   procedure Dh_Create
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Dha_Id   : Types.Dha_Id_Type;
+      Pubvalue : out Types.Dh_Pubvalue_Type);
    --  Create a DH secret and return its public value.
 
-   procedure dh_generate_key
-     (Result : out Results.Result_Type;
-      dh_id : Types.dh_id_type;
-      pubvalue : Types.dh_pubvalue_type);
+   procedure Dh_Generate_Key
+     (Result   : out Results.Result_Type;
+      Dh_Id    : Types.Dh_Id_Type;
+      Pubvalue : Types.Dh_Pubvalue_Type);
    --  Create a nonce.
 
-   procedure cc_reset
+   procedure Cc_Reset
      (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type);
+      Cc_Id  : Types.Cc_Id_Type);
    --  Reset a CC context.
 
-   procedure cc_set_user_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ri_id : Types.ri_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type);
+   procedure Cc_Set_User_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Ri_Id       : Types.Ri_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type);
    --  Initiates a certificate chain starting from the user certificate.
 
-   procedure cc_add_certificate
-     (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type);
+   procedure Cc_Add_Certificate
+     (Result      : out Results.Result_Type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type);
    --  Add a certificate to a certificate chain.
 
-   procedure cc_check_ca
+   procedure Cc_Check_Ca
      (Result : out Results.Result_Type;
-      cc_id : Types.cc_id_type;
-      ca_id : Types.ca_id_type);
+      Cc_Id  : Types.Cc_Id_Type;
+      Ca_Id  : Types.Ca_Id_Type);
    --  Checks if a cc is based on a trusted CA
 
-   procedure ae_reset
+   procedure Ae_Reset
      (Result : out Results.Result_Type;
-      ae_id : Types.ae_id_type);
+      Ae_Id  : Types.Ae_Id_Type);
    --  Reset an AE context.
 
-   procedure isa_reset
+   procedure Isa_Reset
      (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type);
+      Isa_Id : Types.Isa_Id_Type);
    --  Reset an ISA context.
 
-   procedure isa_create
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      ae_id : Types.ae_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type);
+   procedure Isa_Create
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Ae_Id     : Types.Ae_Id_Type;
+      Ia_Id     : Types.Ia_Id_Type;
+      Dh_Id     : Types.Dh_Id_Type;
+      Nc_Loc_Id : Types.Nc_Id_Type;
+      Nonce_Rem : Types.Nonce_Type;
+      Initiator : Types.Init_Type;
+      Spi_Loc   : Types.Ike_Spi_Type;
+      Spi_Rem   : Types.Ike_Spi_Type;
+      Sk_Ai     : out Types.Key_Type;
+      Sk_Ar     : out Types.Key_Type;
+      Sk_Ei     : out Types.Key_Type;
+      Sk_Er     : out Types.Key_Type);
    --  Create an IKE SA context.
 
-   procedure isa_sign
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      lc_id : Types.lc_id_type;
-      init_message : Types.init_message_type;
-      signature : out Types.signature_type);
+   procedure Isa_Sign
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Lc_Id        : Types.Lc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : out Types.Signature_Type);
    --  Provide authentication to the remote endpoint.
 
-   procedure isa_auth
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      cc_id : Types.cc_id_type;
-      init_message : Types.init_message_type;
-      signature : Types.signature_type);
+   procedure Isa_Auth
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Cc_Id        : Types.Cc_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Signature    : Types.Signature_Type);
    --  Authenticate the remote endpoint.
 
-   procedure isa_create_child
-     (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type;
-      parent_isa_id : Types.isa_id_type;
-      ia_id : Types.ia_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      spi_loc : Types.ike_spi_type;
-      spi_rem : Types.ike_spi_type;
-      sk_ai : out Types.key_type;
-      sk_ar : out Types.key_type;
-      sk_ei : out Types.key_type;
-      sk_er : out Types.key_type);
+   procedure Isa_Create_Child
+     (Result        : out Results.Result_Type;
+      Isa_Id        : Types.Isa_Id_Type;
+      Parent_Isa_Id : Types.Isa_Id_Type;
+      Ia_Id         : Types.Ia_Id_Type;
+      Dh_Id         : Types.Dh_Id_Type;
+      Nc_Loc_Id     : Types.Nc_Id_Type;
+      Nonce_Rem     : Types.Nonce_Type;
+      Initiator     : Types.Init_Type;
+      Spi_Loc       : Types.Ike_Spi_Type;
+      Spi_Rem       : Types.Ike_Spi_Type;
+      Sk_Ai         : out Types.Key_Type;
+      Sk_Ar         : out Types.Key_Type;
+      Sk_Ei         : out Types.Key_Type;
+      Sk_Er         : out Types.Key_Type);
    --  Derive an IKE SA context from an existing SA.
 
-   procedure isa_skip_create_first
+   procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
-      isa_id : Types.isa_id_type);
+      Isa_Id : Types.Isa_Id_Type);
    --  Don't create a first child.
 
-   procedure esa_reset
+   procedure Esa_Reset
      (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type);
+      Esa_Id : Types.Esa_Id_Type);
    --  Reset an ESA context.
 
-   procedure esa_create
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      dh_id : Types.dh_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
+   procedure Esa_Create
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Dh_Id       : Types.Dh_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
    --  Creates an ESP SA.
 
-   procedure esa_create_no_pfs
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      nc_loc_id : Types.nc_id_type;
-      nonce_rem : Types.nonce_type;
-      initiator : Types.init_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
+   procedure Esa_Create_No_Pfs
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Nc_Loc_Id   : Types.Nc_Id_Type;
+      Nonce_Rem   : Types.Nonce_Type;
+      Initiator   : Types.Init_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
    --  Creates an ESP SA without PFS.
 
-   procedure esa_create_first
-     (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type;
-      isa_id : Types.isa_id_type;
-      sp_id : Types.sp_id_type;
-      ea_id : Types.ea_id_type;
-      esp_spi_loc : Types.esp_spi_type;
-      esp_spi_rem : Types.esp_spi_type);
+   procedure Esa_Create_First
+     (Result      : out Results.Result_Type;
+      Esa_Id      : Types.Esa_Id_Type;
+      Isa_Id      : Types.Isa_Id_Type;
+      Sp_Id       : Types.Sp_Id_Type;
+      Ea_Id       : Types.Ea_Id_Type;
+      Esp_Spi_Loc : Types.Esp_Spi_Type;
+      Esp_Spi_Rem : Types.Esp_Spi_Type);
    --  Creates the first ESP SA for an AE.
 
-   procedure esa_select
+   procedure Esa_Select
      (Result : out Results.Result_Type;
-      esa_id : Types.esa_id_type);
+      Esa_Id : Types.Esa_Id_Type);
    --  Selects an ESA context for outgoing traffic.
 
-end TKMRPC.Servers.IKE;
+end Tkmrpc.Servers.Ike;

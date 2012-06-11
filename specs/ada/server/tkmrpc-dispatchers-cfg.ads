@@ -1,12 +1,11 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Dispatchers.CFG
-is
+package Tkmrpc.Dispatchers.Cfg is
 
    procedure Dispatch
-     (Req :     Request.Data_Type;
+     (Req : Request.Data_Type;
       Res : out Response.Data_Type);
    --  Dispatch CFG  request to concrete operation handler.
 
-end TKMRPC.Dispatchers.CFG;
+end Tkmrpc.Dispatchers.Cfg;

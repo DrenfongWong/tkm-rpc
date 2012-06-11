@@ -1,32 +1,26 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.nc_reset.Convert;
-with TKMRPC.Response.IKE.nc_reset.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Nc_Reset.Convert;
+with Tkmrpc.Response.Ike.Nc_Reset.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.nc_reset
-is
+package body Tkmrpc.Operation_Handlers.Ike.Nc_Reset is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.nc_reset.Request_Type;
-      Specific_Res   : Response.IKE.nc_reset.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Nc_Reset.Request_Type;
+      Specific_Res : Response.Ike.Nc_Reset.Response_Type;
    begin
-      Specific_Req := Request.IKE.nc_reset.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Nc_Reset.Convert.From_Request (S => Req);
 
-      Servers.IKE.nc_reset
+      Servers.Ike.Nc_Reset
         (Result => Specific_Res.Header.Result,
-         nc_id => Specific_Req.Data.nc_id);
+         Nc_Id  => Specific_Req.Data.Nc_Id);
 
-      Res := Response.IKE.nc_reset.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Nc_Reset.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.nc_reset;
+end Tkmrpc.Operation_Handlers.Ike.Nc_Reset;

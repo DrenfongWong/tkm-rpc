@@ -1,18 +1,17 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Request.IKE.cc_check_ca
-is
+package Tkmrpc.Request.Ike.Cc_Check_Ca is
 
    Data_Size : constant := 16;
 
    type Data_Type is record
-      cc_id : Types.cc_id_type;
-      ca_id : Types.ca_id_type;
+      Cc_Id : Types.Cc_Id_Type;
+      Ca_Id : Types.Ca_Id_Type;
    end record;
 
    for Data_Type use record
-      cc_id at 0 range 0 .. (8 * 8) - 1;
-      ca_id at 8 range 0 .. (8 * 8) - 1;
+      Cc_Id at 0 range 0 .. (8 * 8) - 1;
+      Ca_Id at 8 range 0 .. (8 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -27,10 +26,10 @@ is
    end record;
 
    for Request_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
 
-end TKMRPC.Request.IKE.cc_check_ca;
+end Tkmrpc.Request.Ike.Cc_Check_Ca;

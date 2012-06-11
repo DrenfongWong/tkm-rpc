@@ -1,4 +1,3 @@
-package TKMRPC.Servers
-is
+package Tkmrpc.Servers is
 
-end TKMRPC.Servers;
+end Tkmrpc.Servers;

@@ -1,4 +1,3 @@
-package TKMRPC.Request.IKE
-is
+package Tkmrpc.Request.Ike is
 
-end TKMRPC.Request.IKE;
+end Tkmrpc.Request.Ike;

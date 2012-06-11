@@ -1,17 +1,17 @@
 with Ada.Exceptions;
 
-with TKMRPC.Request;
-with TKMRPC.Response;
-with TKMRPC.Transport.Servers;
-with TKMRPC.Transport.Client;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
+with Tkmrpc.Transport.Servers;
+with Tkmrpc.Transport.Client;
 
 with Test_Utils;
 
-package body TKMRPC_Transport_Tests
+package body Tkmrpc_Transport_Tests
 is
    use Ahven;
-   use TKMRPC;
-   use TKMRPC.Transport;
+   use Tkmrpc;
+   use Tkmrpc.Transport;
 
    Socket_Path     : constant String := "/tmp/tkmrpc.socket";
    Request_Correct : Boolean         := False;
@@ -70,7 +70,7 @@ is
      (Req :     Request.Data_Type;
       Res : out Response.Data_Type)
    is
-      use type TKMRPC.Request.Data_Type;
+      use type Tkmrpc.Request.Data_Type;
    begin
       if Req = Test_Utils.Test_Request then
          Request_Correct := True;
@@ -92,7 +92,7 @@ is
 
    procedure Request_Response_Transport
    is
-      use type TKMRPC.Response.Data_Type;
+      use type Tkmrpc.Response.Data_Type;
 
       Server : Servers.Server_Type;
       Res    : Response.Data_Type;
@@ -158,4 +158,4 @@ is
          raise;
    end Server_Error_Callbacks;
 
-end TKMRPC_Transport_Tests;
+end Tkmrpc_Transport_Tests;

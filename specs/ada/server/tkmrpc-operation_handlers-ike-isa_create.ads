@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.isa_create
-is
+package Tkmrpc.Operation_Handlers.Ike.Isa_Create is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the isa_create operation.
 
-end TKMRPC.Operation_Handlers.IKE.isa_create;
+end Tkmrpc.Operation_Handlers.Ike.Isa_Create;

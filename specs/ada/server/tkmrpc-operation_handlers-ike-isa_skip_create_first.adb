@@ -1,32 +1,29 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.isa_skip_create_first.Convert;
-with TKMRPC.Response.IKE.isa_skip_create_first.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Isa_Skip_Create_First.Convert;
+with Tkmrpc.Response.Ike.Isa_Skip_Create_First.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.isa_skip_create_first
-is
+package body Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.isa_skip_create_first.Request_Type;
-      Specific_Res   : Response.IKE.isa_skip_create_first.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Isa_Skip_Create_First.Request_Type;
+      Specific_Res : Response.Ike.Isa_Skip_Create_First.Response_Type;
    begin
-      Specific_Req := Request.IKE.isa_skip_create_first.Convert.From_Request
-        (S => Req);
+      Specific_Req :=
+         Request.Ike.Isa_Skip_Create_First.Convert.From_Request (S => Req);
 
-      Servers.IKE.isa_skip_create_first
+      Servers.Ike.Isa_Skip_Create_First
         (Result => Specific_Res.Header.Result,
-         isa_id => Specific_Req.Data.isa_id);
+         Isa_Id => Specific_Req.Data.Isa_Id);
 
-      Res := Response.IKE.isa_skip_create_first.Convert.To_Response
-        (S => Specific_Res);
+      Res :=
+         Response.Ike.Isa_Skip_Create_First.Convert.To_Response
+           (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.isa_skip_create_first;
+end Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First;

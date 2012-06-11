@@ -1,4 +1,3 @@
-package TKMRPC.Operation_Handlers.CFG
-is
+package Tkmrpc.Operation_Handlers.Cfg is
 
-end TKMRPC.Operation_Handlers.CFG;
+end Tkmrpc.Operation_Handlers.Cfg;

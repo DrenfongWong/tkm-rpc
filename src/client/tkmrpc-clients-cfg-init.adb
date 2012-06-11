@@ -1,4 +1,4 @@
-separate (TKMRPC.Clients.CFG)
+separate (Tkmrpc.Clients.Cfg)
 
 procedure Init
   (Result  : out Results.Result_Type;

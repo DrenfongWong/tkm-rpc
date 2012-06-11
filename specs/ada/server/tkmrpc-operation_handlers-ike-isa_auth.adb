@@ -1,35 +1,29 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.isa_auth.Convert;
-with TKMRPC.Response.IKE.isa_auth.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Isa_Auth.Convert;
+with Tkmrpc.Response.Ike.Isa_Auth.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.isa_auth
-is
+package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.isa_auth.Request_Type;
-      Specific_Res   : Response.IKE.isa_auth.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Isa_Auth.Request_Type;
+      Specific_Res : Response.Ike.Isa_Auth.Response_Type;
    begin
-      Specific_Req := Request.IKE.isa_auth.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Isa_Auth.Convert.From_Request (S => Req);
 
-      Servers.IKE.isa_auth
-        (Result => Specific_Res.Header.Result,
-         isa_id => Specific_Req.Data.isa_id,
-         cc_id => Specific_Req.Data.cc_id,
-         init_message => Specific_Req.Data.init_message,
-         signature => Specific_Req.Data.signature);
+      Servers.Ike.Isa_Auth
+        (Result       => Specific_Res.Header.Result,
+         Isa_Id       => Specific_Req.Data.Isa_Id,
+         Cc_Id        => Specific_Req.Data.Cc_Id,
+         Init_Message => Specific_Req.Data.Init_Message,
+         Signature    => Specific_Req.Data.Signature);
 
-      Res := Response.IKE.isa_auth.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Isa_Auth.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.isa_auth;
+end Tkmrpc.Operation_Handlers.Ike.Isa_Auth;

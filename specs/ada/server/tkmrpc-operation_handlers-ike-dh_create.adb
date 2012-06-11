@@ -1,34 +1,28 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.dh_create.Convert;
-with TKMRPC.Response.IKE.dh_create.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Dh_Create.Convert;
+with Tkmrpc.Response.Ike.Dh_Create.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.dh_create
-is
+package body Tkmrpc.Operation_Handlers.Ike.Dh_Create is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.dh_create.Request_Type;
-      Specific_Res   : Response.IKE.dh_create.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Dh_Create.Request_Type;
+      Specific_Res : Response.Ike.Dh_Create.Response_Type;
    begin
-      Specific_Req := Request.IKE.dh_create.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Dh_Create.Convert.From_Request (S => Req);
 
-      Servers.IKE.dh_create
-        (Result => Specific_Res.Header.Result,
-         dh_id => Specific_Req.Data.dh_id,
-         dha_id => Specific_Req.Data.dha_id,
-         pubvalue => Specific_Res.Data.pubvalue);
+      Servers.Ike.Dh_Create
+        (Result   => Specific_Res.Header.Result,
+         Dh_Id    => Specific_Req.Data.Dh_Id,
+         Dha_Id   => Specific_Req.Data.Dha_Id,
+         Pubvalue => Specific_Res.Data.Pubvalue);
 
-      Res := Response.IKE.dh_create.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Dh_Create.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.dh_create;
+end Tkmrpc.Operation_Handlers.Ike.Dh_Create;

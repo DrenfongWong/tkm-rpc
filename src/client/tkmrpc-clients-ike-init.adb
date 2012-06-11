@@ -1,4 +1,4 @@
-separate (TKMRPC.Clients.IKE)
+separate (Tkmrpc.Clients.Ike)
 
 procedure Init
   (Result  : out Results.Result_Type;
@@ -8,7 +8,7 @@ is
      (Item => Address);
 begin
    Transport.Client.Connect (Address => Socket_Address);
-   Result := Results.OK;
+   Result := Results.Ok;
 
 exception
    when others =>

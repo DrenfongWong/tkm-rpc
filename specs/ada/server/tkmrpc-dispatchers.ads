@@ -1,4 +1,3 @@
-package TKMRPC.Dispatchers
-is
+package Tkmrpc.Dispatchers is
 
-end TKMRPC.Dispatchers;
+end Tkmrpc.Dispatchers;

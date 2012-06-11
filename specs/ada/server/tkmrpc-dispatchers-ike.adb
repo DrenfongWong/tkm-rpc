@@ -1,136 +1,103 @@
-with TKMRPC.Operations.IKE;
-with TKMRPC.Operation_Handlers.IKE.tkm_version;
-with TKMRPC.Operation_Handlers.IKE.tkm_limits;
-with TKMRPC.Operation_Handlers.IKE.nc_reset;
-with TKMRPC.Operation_Handlers.IKE.nc_create;
-with TKMRPC.Operation_Handlers.IKE.dh_reset;
-with TKMRPC.Operation_Handlers.IKE.dh_create;
-with TKMRPC.Operation_Handlers.IKE.dh_generate_key;
-with TKMRPC.Operation_Handlers.IKE.cc_reset;
-with TKMRPC.Operation_Handlers.IKE.cc_set_user_certificate;
-with TKMRPC.Operation_Handlers.IKE.cc_add_certificate;
-with TKMRPC.Operation_Handlers.IKE.cc_check_ca;
-with TKMRPC.Operation_Handlers.IKE.ae_reset;
-with TKMRPC.Operation_Handlers.IKE.isa_reset;
-with TKMRPC.Operation_Handlers.IKE.isa_create;
-with TKMRPC.Operation_Handlers.IKE.isa_sign;
-with TKMRPC.Operation_Handlers.IKE.isa_auth;
-with TKMRPC.Operation_Handlers.IKE.isa_create_child;
-with TKMRPC.Operation_Handlers.IKE.isa_skip_create_first;
-with TKMRPC.Operation_Handlers.IKE.esa_reset;
-with TKMRPC.Operation_Handlers.IKE.esa_create;
-with TKMRPC.Operation_Handlers.IKE.esa_create_no_pfs;
-with TKMRPC.Operation_Handlers.IKE.esa_create_first;
-with TKMRPC.Operation_Handlers.IKE.esa_select;
+with Tkmrpc.Operations.Ike;
+with Tkmrpc.Operation_Handlers.Ike.Tkm_Version;
+with Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;
+with Tkmrpc.Operation_Handlers.Ike.Nc_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Nc_Create;
+with Tkmrpc.Operation_Handlers.Ike.Dh_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Dh_Create;
+with Tkmrpc.Operation_Handlers.Ike.Dh_Generate_Key;
+with Tkmrpc.Operation_Handlers.Ike.Cc_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate;
+with Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate;
+with Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca;
+with Tkmrpc.Operation_Handlers.Ike.Ae_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Create;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Sign;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Auth;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Create_Child;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First;
+with Tkmrpc.Operation_Handlers.Ike.Esa_Reset;
+with Tkmrpc.Operation_Handlers.Ike.Esa_Create;
+with Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs;
+with Tkmrpc.Operation_Handlers.Ike.Esa_Create_First;
+with Tkmrpc.Operation_Handlers.Ike.Esa_Select;
 
-package body TKMRPC.Dispatchers.IKE
-is
+package body Tkmrpc.Dispatchers.Ike is
 
    -------------------------------------------------------------------------
 
    procedure Dispatch
-     (Req :     Request.Data_Type;
+     (Req : Request.Data_Type;
       Res : out Response.Data_Type)
    is
    begin
       case Req.Header.Operation is
-         when Operations.IKE.tkm_version =>
-            Operation_Handlers.IKE.tkm_version.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.tkm_limits =>
-            Operation_Handlers.IKE.tkm_limits.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.nc_reset =>
-            Operation_Handlers.IKE.nc_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.nc_create =>
-            Operation_Handlers.IKE.nc_create.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.dh_reset =>
-            Operation_Handlers.IKE.dh_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.dh_create =>
-            Operation_Handlers.IKE.dh_create.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.dh_generate_key =>
-            Operation_Handlers.IKE.dh_generate_key.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.cc_reset =>
-            Operation_Handlers.IKE.cc_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.cc_set_user_certificate =>
-            Operation_Handlers.IKE.cc_set_user_certificate.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.cc_add_certificate =>
-            Operation_Handlers.IKE.cc_add_certificate.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.cc_check_ca =>
-            Operation_Handlers.IKE.cc_check_ca.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.ae_reset =>
-            Operation_Handlers.IKE.ae_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_reset =>
-            Operation_Handlers.IKE.isa_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_create =>
-            Operation_Handlers.IKE.isa_create.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_sign =>
-            Operation_Handlers.IKE.isa_sign.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_auth =>
-            Operation_Handlers.IKE.isa_auth.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_create_child =>
-            Operation_Handlers.IKE.isa_create_child.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.isa_skip_create_first =>
-            Operation_Handlers.IKE.isa_skip_create_first.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.esa_reset =>
-            Operation_Handlers.IKE.esa_reset.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.esa_create =>
-            Operation_Handlers.IKE.esa_create.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.esa_create_no_pfs =>
-            Operation_Handlers.IKE.esa_create_no_pfs.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.esa_create_first =>
-            Operation_Handlers.IKE.esa_create_first.Handle
-              (Req => Req,
-               Res => Res);
-         when Operations.IKE.esa_select =>
-            Operation_Handlers.IKE.esa_select.Handle
-              (Req => Req,
-               Res => Res);
-         when others =>
-            Res := Response.Null_Data;
+      when Operations.Ike.Tkm_Version =>
+         Operation_Handlers.Ike.Tkm_Version.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Tkm_Limits =>
+         Operation_Handlers.Ike.Tkm_Limits.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Nc_Reset =>
+         Operation_Handlers.Ike.Nc_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Nc_Create =>
+         Operation_Handlers.Ike.Nc_Create.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Dh_Reset =>
+         Operation_Handlers.Ike.Dh_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Dh_Create =>
+         Operation_Handlers.Ike.Dh_Create.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Dh_Generate_Key =>
+         Operation_Handlers.Ike.Dh_Generate_Key.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Cc_Reset =>
+         Operation_Handlers.Ike.Cc_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Cc_Set_User_Certificate =>
+         Operation_Handlers.Ike.Cc_Set_User_Certificate.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Cc_Add_Certificate =>
+         Operation_Handlers.Ike.Cc_Add_Certificate.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Cc_Check_Ca =>
+         Operation_Handlers.Ike.Cc_Check_Ca.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Ae_Reset =>
+         Operation_Handlers.Ike.Ae_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Reset =>
+         Operation_Handlers.Ike.Isa_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Create =>
+         Operation_Handlers.Ike.Isa_Create.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Sign =>
+         Operation_Handlers.Ike.Isa_Sign.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Auth =>
+         Operation_Handlers.Ike.Isa_Auth.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Create_Child =>
+         Operation_Handlers.Ike.Isa_Create_Child.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Isa_Skip_Create_First =>
+         Operation_Handlers.Ike.Isa_Skip_Create_First.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Esa_Reset =>
+         Operation_Handlers.Ike.Esa_Reset.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Esa_Create =>
+         Operation_Handlers.Ike.Esa_Create.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Esa_Create_No_Pfs =>
+         Operation_Handlers.Ike.Esa_Create_No_Pfs.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Esa_Create_First =>
+         Operation_Handlers.Ike.Esa_Create_First.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Esa_Select =>
+         Operation_Handlers.Ike.Esa_Select.Handle (Req => Req, Res => Res);
+      when others =>
+         Res := Response.Null_Data;
       end case;
 
-      Res.Header.Request_ID := Req.Header.Request_ID;
+      Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 
-end TKMRPC.Dispatchers.IKE;
+end Tkmrpc.Dispatchers.Ike;

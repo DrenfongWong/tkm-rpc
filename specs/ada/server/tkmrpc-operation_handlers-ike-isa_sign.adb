@@ -1,35 +1,29 @@
-with TKMRPC.Servers.IKE;
-with TKMRPC.Request.IKE.isa_sign.Convert;
-with TKMRPC.Response.IKE.isa_sign.Convert;
+with Tkmrpc.Servers.Ike;
+with Tkmrpc.Request.Ike.Isa_Sign.Convert;
+with Tkmrpc.Response.Ike.Isa_Sign.Convert;
 
-package body TKMRPC.Operation_Handlers.IKE.isa_sign
-is
+package body Tkmrpc.Operation_Handlers.Ike.Isa_Sign is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
-      Specific_Req   : Request.IKE.isa_sign.Request_Type;
-      Specific_Res   : Response.IKE.isa_sign.Response_Type;
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      Specific_Req : Request.Ike.Isa_Sign.Request_Type;
+      Specific_Res : Response.Ike.Isa_Sign.Response_Type;
    begin
-      Specific_Req := Request.IKE.isa_sign.Convert.From_Request
-        (S => Req);
+      Specific_Req := Request.Ike.Isa_Sign.Convert.From_Request (S => Req);
 
-      Servers.IKE.isa_sign
-        (Result => Specific_Res.Header.Result,
-         isa_id => Specific_Req.Data.isa_id,
-         lc_id => Specific_Req.Data.lc_id,
-         init_message => Specific_Req.Data.init_message,
-         signature => Specific_Res.Data.signature);
+      Servers.Ike.Isa_Sign
+        (Result       => Specific_Res.Header.Result,
+         Isa_Id       => Specific_Req.Data.Isa_Id,
+         Lc_Id        => Specific_Req.Data.Lc_Id,
+         Init_Message => Specific_Req.Data.Init_Message,
+         Signature    => Specific_Res.Data.Signature);
 
-      Res := Response.IKE.isa_sign.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Ike.Isa_Sign.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.IKE.isa_sign;
+end Tkmrpc.Operation_Handlers.Ike.Isa_Sign;

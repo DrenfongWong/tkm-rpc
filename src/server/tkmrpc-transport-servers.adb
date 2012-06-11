@@ -1,10 +1,10 @@
 with Ada.Streams;
 with Ada.Text_IO;
 
-with TKMRPC.Request.Convert;
-with TKMRPC.Response.Convert;
+with Tkmrpc.Request.Convert;
+with Tkmrpc.Response.Convert;
 
-package body TKMRPC.Transport.Servers
+package body Tkmrpc.Transport.Servers
 is
 
    --  Placeholder callbacks needed for callback initialization.
@@ -202,4 +202,4 @@ is
       Server.Trigger.Wait_For_Termination;
    end Stop;
 
-end TKMRPC.Transport.Servers;
+end Tkmrpc.Transport.Servers;

@@ -1,20 +1,19 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Request.IKE.cc_add_certificate
-is
+package Tkmrpc.Request.Ike.Cc_Add_Certificate is
 
    Data_Size : constant := 1044;
 
    type Data_Type is record
-      cc_id : Types.cc_id_type;
-      autha_id : Types.autha_id_type;
-      certificate : Types.certificate_type;
+      Cc_Id       : Types.Cc_Id_Type;
+      Autha_Id    : Types.Autha_Id_Type;
+      Certificate : Types.Certificate_Type;
    end record;
 
    for Data_Type use record
-      cc_id at 0 range 0 .. (8 * 8) - 1;
-      autha_id at 8 range 0 .. (8 * 8) - 1;
-      certificate at 16 range 0 .. (1028 * 8) - 1;
+      Cc_Id       at 0 range 0 .. (8 * 8) - 1;
+      Autha_Id    at 8 range 0 .. (8 * 8) - 1;
+      Certificate at 16 range 0 .. (1028 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -29,10 +28,10 @@ is
    end record;
 
    for Request_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
 
-end TKMRPC.Request.IKE.cc_add_certificate;
+end Tkmrpc.Request.Ike.Cc_Add_Certificate;

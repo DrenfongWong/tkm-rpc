@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.nc_create
-is
+package Tkmrpc.Operation_Handlers.Ike.Nc_Create is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the nc_create operation.
 
-end TKMRPC.Operation_Handlers.IKE.nc_create;
+end Tkmrpc.Operation_Handlers.Ike.Nc_Create;

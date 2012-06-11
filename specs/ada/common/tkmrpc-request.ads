@@ -1,20 +1,19 @@
-with TKMRPC.Types;
-with TKMRPC.Operations;
+with Tkmrpc.Types;
+with Tkmrpc.Operations;
 
-package TKMRPC.Request
-is
+package Tkmrpc.Request is
    Request_Size : constant := 2048;
    Header_Size  : constant := 16;
    Body_Size    : constant := Request_Size - Header_Size;
 
    type Header_Type is record
       Operation  : Operations.Operation_Type;
-      Request_ID : Types.request_id_type;
+      Request_Id : Types.Request_Id_Type;
    end record;
 
    for Header_Type use record
       Operation  at 0 range 0 .. (8 * 8) - 1;
-      Request_ID at 8 range 0 .. (8 * 8) - 1;
+      Request_Id at 8 range 0 .. (8 * 8) - 1;
    end record;
    for Header_Type'Size use Header_Size * 8;
 
@@ -27,9 +26,9 @@ is
    end record;
 
    for Data_Type use record
-      Header      at 0           range 0 .. (Header_Size * 8) - 1;
+      Header      at 0 range 0 .. (Header_Size * 8) - 1;
       Padded_Data at Header_Size range 0 .. (Body_Size * 8) - 1;
    end record;
    for Data_Type'Size use Request_Size * 8;
 
-end TKMRPC.Request;
+end Tkmrpc.Request;

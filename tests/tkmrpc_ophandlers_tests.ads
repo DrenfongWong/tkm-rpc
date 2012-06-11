@@ -1,6 +1,6 @@
 with Ahven.Framework;
 
-package TKMRPC_Ophandlers_Tests
+package Tkmrpc_Ophandlers_Tests
 is
    type Testcase is new Ahven.Framework.Test_Case with null record;
 
@@ -10,4 +10,4 @@ is
    procedure Handle_Requests;
    --  Test operation dispatching.
 
-end TKMRPC_Ophandlers_Tests;
+end Tkmrpc_Ophandlers_Tests;

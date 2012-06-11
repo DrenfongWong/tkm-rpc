@@ -1,29 +1,24 @@
-with TKMRPC.Servers.CFG;
-with TKMRPC.Response.CFG.tkm_version.Convert;
+with Tkmrpc.Servers.Cfg;
+with Tkmrpc.Response.Cfg.Tkm_Version.Convert;
 
-package body TKMRPC.Operation_Handlers.CFG.tkm_version
-is
+package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Version is
 
    -------------------------------------------------------------------------
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type)
-   is
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
       pragma Unreferenced (Req);
 
-      Specific_Res   : Response.CFG.tkm_version.Response_Type;
+      Specific_Res : Response.Cfg.Tkm_Version.Response_Type;
    begin
-      Servers.CFG.tkm_version
-        (Result => Specific_Res.Header.Result,
-         version => Specific_Res.Data.version);
+      Servers.Cfg.Tkm_Version
+        (Result  => Specific_Res.Header.Result,
+         Version => Specific_Res.Data.Version);
 
-      Res := Response.CFG.tkm_version.Convert.To_Response
-        (S => Specific_Res);
+      Res := Response.Cfg.Tkm_Version.Convert.To_Response (S => Specific_Res);
 
    exception
       when others =>
          Res := Response.Null_Data;
    end Handle;
 
-end TKMRPC.Operation_Handlers.CFG.tkm_version;
+end Tkmrpc.Operation_Handlers.Cfg.Tkm_Version;

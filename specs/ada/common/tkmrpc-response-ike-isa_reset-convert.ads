@@ -1,16 +1,13 @@
 with Ada.Unchecked_Conversion;
 
-package TKMRPC.Response.IKE.isa_reset.Convert
-is
+package Tkmrpc.Response.Ike.Isa_Reset.Convert is
 
-   function To_Response is new
-     Ada.Unchecked_Conversion
-       (Source => isa_reset.Response_Type,
-        Target => Response.Data_Type);
+   function To_Response is new Ada.Unchecked_Conversion (
+      Source => Isa_Reset.Response_Type,
+      Target => Response.Data_Type);
 
-   function From_Response is new
-     Ada.Unchecked_Conversion
-       (Source => Response.Data_Type,
-        Target => isa_reset.Response_Type);
+   function From_Response is new Ada.Unchecked_Conversion (
+      Source => Response.Data_Type,
+      Target => Isa_Reset.Response_Type);
 
-end TKMRPC.Response.IKE.isa_reset.Convert;
+end Tkmrpc.Response.Ike.Isa_Reset.Convert;

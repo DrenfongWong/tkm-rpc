@@ -4,9 +4,9 @@ with Ada.Exceptions;
 
 with Anet.Sockets;
 
-with TKMRPC.Operation_Handlers;
+with Tkmrpc.Operation_Handlers;
 
-package TKMRPC.Transport.Servers
+package Tkmrpc.Transport.Servers
 is
 
    type Error_Handler_Callback is not null access procedure
@@ -92,4 +92,4 @@ private
       C_Task      : Connection_Task (Parent => Server_Type'Access);
    end record;
 
-end TKMRPC.Transport.Servers;
+end Tkmrpc.Transport.Servers;

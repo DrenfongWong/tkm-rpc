@@ -1,16 +1,13 @@
 with Ada.Unchecked_Conversion;
 
-package TKMRPC.Request.IKE.isa_sign.Convert
-is
+package Tkmrpc.Request.Ike.Isa_Sign.Convert is
 
-   function To_Request is new
-     Ada.Unchecked_Conversion
-       (Source => isa_sign.Request_Type,
-        Target => Request.Data_Type);
+   function To_Request is new Ada.Unchecked_Conversion (
+      Source => Isa_Sign.Request_Type,
+      Target => Request.Data_Type);
 
-   function From_Request is new
-     Ada.Unchecked_Conversion
-       (Source => Request.Data_Type,
-        Target => isa_sign.Request_Type);
+   function From_Request is new Ada.Unchecked_Conversion (
+      Source => Request.Data_Type,
+      Target => Isa_Sign.Request_Type);
 
-end TKMRPC.Request.IKE.isa_sign.Convert;
+end Tkmrpc.Request.Ike.Isa_Sign.Convert;

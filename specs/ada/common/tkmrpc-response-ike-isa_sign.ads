@@ -1,16 +1,15 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Response.IKE.isa_sign
-is
+package Tkmrpc.Response.Ike.Isa_Sign is
 
    Data_Size : constant := 260;
 
    type Data_Type is record
-      signature : Types.signature_type;
+      Signature : Types.Signature_Type;
    end record;
 
    for Data_Type use record
-      signature at 0 range 0 .. (260 * 8) - 1;
+      Signature at 0 range 0 .. (260 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -25,10 +24,10 @@ is
    end record;
 
    for Response_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
 
-end TKMRPC.Response.IKE.isa_sign;
+end Tkmrpc.Response.Ike.Isa_Sign;

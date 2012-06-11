@@ -1,12 +1,9 @@
-with TKMRPC.Request;
-with TKMRPC.Response;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
-package TKMRPC.Operation_Handlers.IKE.tkm_limits
-is
+package Tkmrpc.Operation_Handlers.Ike.Tkm_Limits is
 
-   procedure Handle
-     (Req :     Request.Data_Type;
-      Res : out Response.Data_Type);
+   procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type);
    --  Handler for the tkm_limits operation.
 
-end TKMRPC.Operation_Handlers.IKE.tkm_limits;
+end Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;

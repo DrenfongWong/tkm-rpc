@@ -1,18 +1,17 @@
-with TKMRPC.Types;
+with Tkmrpc.Types;
 
-package TKMRPC.Request.IKE.dh_create
-is
+package Tkmrpc.Request.Ike.Dh_Create is
 
    Data_Size : constant := 16;
 
    type Data_Type is record
-      dh_id : Types.dh_id_type;
-      dha_id : Types.dha_id_type;
+      Dh_Id  : Types.Dh_Id_Type;
+      Dha_Id : Types.Dha_Id_Type;
    end record;
 
    for Data_Type use record
-      dh_id at 0 range 0 .. (8 * 8) - 1;
-      dha_id at 8 range 0 .. (8 * 8) - 1;
+      Dh_Id  at 0 range 0 .. (8 * 8) - 1;
+      Dha_Id at 8 range 0 .. (8 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -27,10 +26,10 @@ is
    end record;
 
    for Request_Type use record
-      Header  at 0                       range 0 .. (Header_Size * 8) - 1;
-      Data    at Header_Size             range 0 .. (Data_Size * 8) - 1;
+      Header  at 0 range 0 .. (Header_Size * 8) - 1;
+      Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
 
-end TKMRPC.Request.IKE.dh_create;
+end Tkmrpc.Request.Ike.Dh_Create;
