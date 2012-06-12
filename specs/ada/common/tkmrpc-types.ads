@@ -3,11 +3,8 @@ with Interfaces;
 package Tkmrpc.Types is
 
    subtype Byte is Interfaces.Unsigned_8;
-
    subtype Byte_Sequence_Range is Natural range 0 .. 2 ** 31 - 2;
-
    type Byte_Sequence is array (Byte_Sequence_Range range <>) of Byte;
-
    type Request_Id_Type is new Interfaces.Unsigned_64;
 
    type Version_Type is new Interfaces.Unsigned_64;
