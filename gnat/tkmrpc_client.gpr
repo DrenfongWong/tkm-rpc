@@ -1,6 +1,6 @@
 with "anet";
 
-project TKMRPC_Client is
+project Tkmrpc_Client is
    for Languages use ("Ada", "C");
    for Source_Dirs use ("../../include/tkmrpc/client",
                         "../../include/tkmrpc/common",
@@ -10,4 +10,4 @@ project TKMRPC_Client is
    for Library_ALI_Dir use "../../lib/tkmrpc";
    for Library_Kind use "static";
    for Externally_Built use "true";
-end TKMRPC_Client;
+end Tkmrpc_Client;

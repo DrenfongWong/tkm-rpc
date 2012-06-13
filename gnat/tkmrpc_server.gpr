@@ -1,6 +1,6 @@
 with "anet";
 
-project TKMRPC_Server is
+project Tkmrpc_Server is
 
    for Source_Dirs use ("../../include/tkmrpc/server",
                         "../../include/tkmrpc/common");
@@ -21,4 +21,4 @@ project TKMRPC_Server is
       for Default_Switches ("ada") use Compiler_Switches;
    end Compiler;
 
-end TKMRPC_Server;
+end Tkmrpc_Server;
