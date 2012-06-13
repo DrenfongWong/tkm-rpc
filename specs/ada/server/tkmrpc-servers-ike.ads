@@ -3,6 +3,12 @@ with Tkmrpc.Results;
 
 package Tkmrpc.Servers.Ike is
 
+   procedure Init;
+   --  Initialize IKE server.
+
+   procedure Finalize;
+   --  Finalize IKE server.
+
    procedure Tkm_Version
      (Result  : out Results.Result_Type;
       Version : out Types.Version_Type);

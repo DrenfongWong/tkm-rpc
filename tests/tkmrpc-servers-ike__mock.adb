@@ -248,6 +248,22 @@ package body Tkmrpc.Servers.Ike is
 
    -------------------------------------------------------------------------
 
+   procedure Finalize
+   is
+   begin
+      null;
+   end Finalize;
+
+   -------------------------------------------------------------------------
+
+   procedure Init
+   is
+   begin
+      null;
+   end Init;
+
+   -------------------------------------------------------------------------
+
    procedure Isa_Auth
      (Result       : out Results.Result_Type;
       Isa_Id       : Types.Isa_Id_Type;

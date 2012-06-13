@@ -3,6 +3,12 @@ with Tkmrpc.Results;
 
 package Tkmrpc.Servers.Cfg is
 
+   procedure Init;
+   --  Initialize CFG server.
+
+   procedure Finalize;
+   --  Finalize CFG server.
+
    procedure Tkm_Version
      (Result  : out Results.Result_Type;
       Version : out Types.Version_Type);
