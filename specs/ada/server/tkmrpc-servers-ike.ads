@@ -55,6 +55,12 @@ package Tkmrpc.Servers.Ike is
       Pubvalue : Types.Dh_Pubvalue_Type);
    --  Create a nonce.
 
+   procedure Dh_Get_Shared_Secret
+     (Result       : out Results.Result_Type;
+      Dh_Id        : Types.Dh_Id_Type;
+      Sharedsecret : out Types.Dh_Key_Type);
+   --  Return the DH shared secret value.
+
    procedure Cc_Reset
      (Result : out Results.Result_Type;
       Cc_Id  : Types.Cc_Id_Type);

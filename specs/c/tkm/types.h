@@ -123,21 +123,21 @@ typedef struct dh_pubvalue_type dh_pubvalue_type;
 
 struct dh_pubvalue_type {
     uint32_t size;
-    byte_t data[256];
+    byte_t data[512];
 };
 
 typedef struct dh_priv_type dh_priv_type;
 
 struct dh_priv_type {
     uint32_t size;
-    byte_t data[256];
+    byte_t data[512];
 };
 
 typedef struct dh_key_type dh_key_type;
 
 struct dh_key_type {
     uint32_t size;
-    byte_t data[256];
+    byte_t data[512];
 };
 
 typedef struct key_type key_type;

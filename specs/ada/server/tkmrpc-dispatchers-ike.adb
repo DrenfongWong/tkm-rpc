@@ -6,6 +6,7 @@ with Tkmrpc.Operation_Handlers.Ike.Nc_Create;
 with Tkmrpc.Operation_Handlers.Ike.Dh_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Dh_Create;
 with Tkmrpc.Operation_Handlers.Ike.Dh_Generate_Key;
+with Tkmrpc.Operation_Handlers.Ike.Dh_Get_Shared_Secret;
 with Tkmrpc.Operation_Handlers.Ike.Cc_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate;
 with Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate;
@@ -47,6 +48,10 @@ package body Tkmrpc.Dispatchers.Ike is
          Operation_Handlers.Ike.Dh_Create.Handle (Req => Req, Res => Res);
       when Operations.Ike.Dh_Generate_Key =>
          Operation_Handlers.Ike.Dh_Generate_Key.Handle
+           (Req => Req,
+            Res => Res);
+      when Operations.Ike.Dh_Get_Shared_Secret =>
+         Operation_Handlers.Ike.Dh_Get_Shared_Secret.Handle
            (Req => Req,
             Res => Res);
       when Operations.Ike.Cc_Reset =>

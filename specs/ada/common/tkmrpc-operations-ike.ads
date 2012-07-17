@@ -14,6 +14,8 @@ package Tkmrpc.Operations.Ike is
 
    Dh_Generate_Key : constant Operation_Type := 16#0202#;
 
+   Dh_Get_Shared_Secret : constant Operation_Type := 16#0299#;
+
    Cc_Reset : constant Operation_Type := 16#0300#;
 
    Cc_Set_User_Certificate : constant Operation_Type := 16#0301#;

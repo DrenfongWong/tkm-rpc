@@ -1,15 +1,15 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Response.Ike.Dh_Create is
+package Tkmrpc.Response.Ike.Dh_Get_Shared_Secret is
 
    Data_Size : constant := 516;
 
    type Data_Type is record
-      Pubvalue : Types.Dh_Pubvalue_Type;
+      Sharedsecret : Types.Dh_Key_Type;
    end record;
 
    for Data_Type use record
-      Pubvalue at 0 range 0 .. (516 * 8) - 1;
+      Sharedsecret at 0 range 0 .. (516 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -30,4 +30,4 @@ package Tkmrpc.Response.Ike.Dh_Create is
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
 
-end Tkmrpc.Response.Ike.Dh_Create;
+end Tkmrpc.Response.Ike.Dh_Get_Shared_Secret;

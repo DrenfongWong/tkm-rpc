@@ -1,15 +1,15 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Response.Ike.Dh_Create is
+package Tkmrpc.Request.Ike.Dh_Get_Shared_Secret is
 
-   Data_Size : constant := 516;
+   Data_Size : constant := 8;
 
    type Data_Type is record
-      Pubvalue : Types.Dh_Pubvalue_Type;
+      Dh_Id : Types.Dh_Id_Type;
    end record;
 
    for Data_Type use record
-      Pubvalue at 0 range 0 .. (516 * 8) - 1;
+      Dh_Id at 0 range 0 .. (8 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
@@ -17,17 +17,17 @@ package Tkmrpc.Response.Ike.Dh_Create is
    subtype Padding_Range is Natural range 1 .. Padding_Size;
    subtype Padding_Type is Types.Byte_Sequence (Padding_Range);
 
-   type Response_Type is record
-      Header  : Response.Header_Type;
+   type Request_Type is record
+      Header  : Request.Header_Type;
       Data    : Data_Type;
       Padding : Padding_Type;
    end record;
 
-   for Response_Type use record
+   for Request_Type use record
       Header  at 0 range 0 .. (Header_Size * 8) - 1;
       Data    at Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Header_Size + Data_Size range 0 .. (Padding_Size * 8) - 1;
    end record;
-   for Response_Type'Size use Response.Response_Size * 8;
+   for Request_Type'Size use Request.Request_Size * 8;
 
-end Tkmrpc.Response.Ike.Dh_Create;
+end Tkmrpc.Request.Ike.Dh_Get_Shared_Secret;

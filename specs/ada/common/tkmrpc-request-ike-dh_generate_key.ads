@@ -2,7 +2,7 @@ with Tkmrpc.Types;
 
 package Tkmrpc.Request.Ike.Dh_Generate_Key is
 
-   Data_Size : constant := 268;
+   Data_Size : constant := 524;
 
    type Data_Type is record
       Dh_Id    : Types.Dh_Id_Type;
@@ -11,7 +11,7 @@ package Tkmrpc.Request.Ike.Dh_Generate_Key is
 
    for Data_Type use record
       Dh_Id    at 0 range 0 .. (8 * 8) - 1;
-      Pubvalue at 8 range 0 .. (260 * 8) - 1;
+      Pubvalue at 8 range 0 .. (516 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

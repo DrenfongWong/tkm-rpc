@@ -115,21 +115,21 @@ package Tkmrpc.Types is
 
    type Dh_Pubvalue_Type is record
       Size : Interfaces.Unsigned_32   := 0;
-      Data : Byte_Sequence (1 .. 256) := (others => 0);
+      Data : Byte_Sequence (1 .. 512) := (others => 0);
    end record;
-   for Dh_Pubvalue_Type'Size use 260 * 8;
+   for Dh_Pubvalue_Type'Size use 516 * 8;
 
    type Dh_Priv_Type is record
       Size : Interfaces.Unsigned_32   := 0;
-      Data : Byte_Sequence (1 .. 256) := (others => 0);
+      Data : Byte_Sequence (1 .. 512) := (others => 0);
    end record;
-   for Dh_Priv_Type'Size use 260 * 8;
+   for Dh_Priv_Type'Size use 516 * 8;
 
    type Dh_Key_Type is record
       Size : Interfaces.Unsigned_32   := 0;
-      Data : Byte_Sequence (1 .. 256) := (others => 0);
+      Data : Byte_Sequence (1 .. 512) := (others => 0);
    end record;
-   for Dh_Key_Type'Size use 260 * 8;
+   for Dh_Key_Type'Size use 516 * 8;
 
    type Key_Type is record
       Size : Interfaces.Unsigned_32  := 0;
