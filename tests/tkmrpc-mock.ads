@@ -13,4 +13,10 @@ is
    --  Calls to Nc_Create will set these vars to the last requested nonce Id
    --  and length.
 
+   Ref_Dh_Pubvalue : constant Types.Dh_Pubvalue_Type
+     := (Size => 8,
+         Data => (others => 16#3b#));
+   --  Reference Diffie-Hellman public value checked in Dh_Generate_Key
+   --  procedure.
+
 end Tkmrpc.Mock;
