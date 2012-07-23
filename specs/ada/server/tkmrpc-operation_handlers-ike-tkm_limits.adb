@@ -21,10 +21,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Tkm_Limits is
          Esa_Contexts        => Specific_Res.Data.Esa_Contexts);
 
       Res := Response.Ike.Tkm_Limits.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;

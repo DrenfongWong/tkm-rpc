@@ -20,10 +20,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
          Signature    => Specific_Req.Data.Signature);
 
       Res := Response.Ike.Isa_Auth.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Auth;

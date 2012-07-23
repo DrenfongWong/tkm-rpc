@@ -15,10 +15,6 @@ package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Version is
          Version => Specific_Res.Data.Version);
 
       Res := Response.Cfg.Tkm_Version.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Cfg.Tkm_Version;

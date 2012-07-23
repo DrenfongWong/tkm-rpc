@@ -4,10 +4,18 @@ with Ada.Exceptions;
 
 with Anet.Sockets;
 
-with Tkmrpc.Operation_Handlers;
+with Tkmrpc.Request;
+with Tkmrpc.Response;
 
 package Tkmrpc.Transport.Servers
 is
+
+   type Op_Handler is not null access procedure
+     (Req :     Request.Data_Type;
+      Res : out Response.Data_Type);
+   --  Operation handler callback. Op handlers take care of operation requests
+   --  identified by operation code (opcode). The Res data out parameter
+   --  designates the response to the request.
 
    type Error_Handler_Callback is not null access procedure
      (E         :        Ada.Exceptions.Exception_Occurrence;
@@ -22,7 +30,7 @@ is
    procedure Listen
      (Server  : in out Server_Type;
       Address :        String;
-      Process :        Operation_Handlers.Op_Handler);
+      Process :        Op_Handler);
    --  Initialize and start RPC server. The server will listen on the given
    --  socket address for client requests. An incoming request is handed to the
    --  specified process callback.
@@ -46,7 +54,7 @@ private
    task type Connection_Task (Parent : not null access Server_Type)
    is
 
-      entry Listen (Cb : Operation_Handlers.Op_Handler);
+      entry Listen (Cb : Op_Handler);
       --  Start listening for request data on parent's socket. The process
       --  callback procedure is called upon reception of a request.
 

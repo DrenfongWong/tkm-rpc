@@ -17,10 +17,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Reset is
          Dh_Id  => Specific_Req.Data.Dh_Id);
 
       Res := Response.Ike.Dh_Reset.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Dh_Reset;

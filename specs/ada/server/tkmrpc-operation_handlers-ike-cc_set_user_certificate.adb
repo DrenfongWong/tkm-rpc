@@ -23,10 +23,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate is
       Res :=
          Response.Ike.Cc_Set_User_Certificate.Convert.To_Response
            (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate;

@@ -17,10 +17,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Reset is
          Isa_Id => Specific_Req.Data.Isa_Id);
 
       Res := Response.Ike.Isa_Reset.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Reset;
