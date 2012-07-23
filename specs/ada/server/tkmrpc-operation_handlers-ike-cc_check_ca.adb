@@ -18,10 +18,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca is
          Ca_Id  => Specific_Req.Data.Ca_Id);
 
       Res := Response.Ike.Cc_Check_Ca.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca;

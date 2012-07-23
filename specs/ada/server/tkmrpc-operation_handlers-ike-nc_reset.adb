@@ -17,10 +17,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Reset is
          Nc_Id  => Specific_Req.Data.Nc_Id);
 
       Res := Response.Ike.Nc_Reset.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Nc_Reset;

@@ -32,10 +32,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Create_Child is
       Res :=
          Response.Ike.Isa_Create_Child.Convert.To_Response
            (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Create_Child;

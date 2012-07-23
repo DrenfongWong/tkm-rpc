@@ -29,10 +29,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Create is
          Sk_Er     => Specific_Res.Data.Sk_Er);
 
       Res := Response.Ike.Isa_Create.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Create;

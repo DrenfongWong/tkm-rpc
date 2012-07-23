@@ -19,10 +19,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Create is
          Pubvalue => Specific_Res.Data.Pubvalue);
 
       Res := Response.Ike.Dh_Create.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Dh_Create;

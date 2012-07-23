@@ -34,10 +34,11 @@ package Tkmrpc.Response is
    end record;
    for Data_Type'Size use Response_Size * 8;
 
-   Null_Data : constant Data_Type :=
-      Data_Type'
-     (Header      =>
-     Header_Type'(Result => Results.Invalid_Operation, others => <>),
-      Padded_Data => <>);
+   Null_Data : constant Data_Type := Data_Type'
+     (Header      => Header_Type'
+        (Operation  => 0,
+         Request_Id => 0,
+         Result     => Results.Invalid_Operation),
+      Padded_Data => Padded_Data_Type'(others => 0));
 
 end Tkmrpc.Response;

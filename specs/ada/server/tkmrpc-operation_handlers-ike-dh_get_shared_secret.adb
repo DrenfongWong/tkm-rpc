@@ -21,10 +21,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Get_Shared_Secret is
       Res :=
          Response.Ike.Dh_Get_Shared_Secret.Convert.To_Response
            (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Dh_Get_Shared_Secret;

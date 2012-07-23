@@ -28,10 +28,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs is
       Res :=
          Response.Ike.Esa_Create_No_Pfs.Convert.To_Response
            (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs;

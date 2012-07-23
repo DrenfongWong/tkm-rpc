@@ -17,10 +17,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Ae_Reset is
          Ae_Id  => Specific_Req.Data.Ae_Id);
 
       Res := Response.Ike.Ae_Reset.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Ae_Reset;

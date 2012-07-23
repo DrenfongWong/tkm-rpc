@@ -23,7 +23,6 @@ is
    procedure C_Test_Client
    is
       use type Tkmrpc.Types.Nc_Id_Type;
-      use type Tkmrpc.Types.Nonce_Length_Type;
 
       RPC_Server : Transport.Servers.Server_Type;
       Args       : GNAT.OS_Lib.Argument_List (1 .. 0);
@@ -64,8 +63,6 @@ is
    is
       use type Tkmrpc.Types.Nonce_Type;
       use type Tkmrpc.Types.Nc_Id_Type;
-      use type Tkmrpc.Types.Nonce_Length_Type;
-      use type Tkmrpc.Results.Result_Type;
 
       RPC_Server : Transport.Servers.Server_Type;
       Nonce      : Types.Nonce_Type;

@@ -25,10 +25,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_First is
       Res :=
          Response.Ike.Esa_Create_First.Convert.To_Response
            (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Esa_Create_First;

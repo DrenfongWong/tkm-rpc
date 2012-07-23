@@ -19,10 +19,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Create is
          Nonce        => Specific_Res.Data.Nonce);
 
       Res := Response.Ike.Nc_Create.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Nc_Create;

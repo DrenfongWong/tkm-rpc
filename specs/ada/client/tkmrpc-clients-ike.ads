@@ -36,7 +36,7 @@ package Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Nc_Id  : Types.Nc_Id_Type);
    pragma Export (C, Nc_Reset, "ike_nc_reset");
-   pragma Export_Valued_Procedure (Nc_Reset);
+   pragma Export_Valued_Procedure (Nc_Reset, Mechanism => (Nc_Id => Value));
    --  Reset a NC context.
 
    procedure Nc_Create
@@ -45,14 +45,16 @@ package Tkmrpc.Clients.Ike is
       Nonce_Length : Types.Nonce_Length_Type;
       Nonce        : out Types.Nonce_Type);
    pragma Export (C, Nc_Create, "ike_nc_create");
-   pragma Export_Valued_Procedure (Nc_Create);
+   pragma Export_Valued_Procedure
+     (Nc_Create,
+      Mechanism => (Nc_Id => Value, Nonce_Length => Value));
    --  Create a nonce.
 
    procedure Dh_Reset
      (Result : out Results.Result_Type;
       Dh_Id  : Types.Dh_Id_Type);
    pragma Export (C, Dh_Reset, "ike_dh_reset");
-   pragma Export_Valued_Procedure (Dh_Reset);
+   pragma Export_Valued_Procedure (Dh_Reset, Mechanism => (Dh_Id => Value));
    --  Reset a DH context.
 
    procedure Dh_Create
@@ -61,7 +63,9 @@ package Tkmrpc.Clients.Ike is
       Dha_Id   : Types.Dha_Id_Type;
       Pubvalue : out Types.Dh_Pubvalue_Type);
    pragma Export (C, Dh_Create, "ike_dh_create");
-   pragma Export_Valued_Procedure (Dh_Create);
+   pragma Export_Valued_Procedure
+     (Dh_Create,
+      Mechanism => (Dh_Id => Value, Dha_Id => Value));
    --  Create a DH secret and return its public value.
 
    procedure Dh_Generate_Key
@@ -69,7 +73,9 @@ package Tkmrpc.Clients.Ike is
       Dh_Id    : Types.Dh_Id_Type;
       Pubvalue : Types.Dh_Pubvalue_Type);
    pragma Export (C, Dh_Generate_Key, "ike_dh_generate_key");
-   pragma Export_Valued_Procedure (Dh_Generate_Key);
+   pragma Export_Valued_Procedure
+     (Dh_Generate_Key,
+      Mechanism => (Dh_Id => Value, Pubvalue => Value));
    --  Create a nonce.
 
    procedure Dh_Get_Shared_Secret
@@ -77,14 +83,16 @@ package Tkmrpc.Clients.Ike is
       Dh_Id        : Types.Dh_Id_Type;
       Sharedsecret : out Types.Dh_Key_Type);
    pragma Export (C, Dh_Get_Shared_Secret, "ike_dh_get_shared_secret");
-   pragma Export_Valued_Procedure (Dh_Get_Shared_Secret);
+   pragma Export_Valued_Procedure
+     (Dh_Get_Shared_Secret,
+      Mechanism => (Dh_Id => Value));
    --  Return the DH shared secret value.
 
    procedure Cc_Reset
      (Result : out Results.Result_Type;
       Cc_Id  : Types.Cc_Id_Type);
    pragma Export (C, Cc_Reset, "ike_cc_reset");
-   pragma Export_Valued_Procedure (Cc_Reset);
+   pragma Export_Valued_Procedure (Cc_Reset, Mechanism => (Cc_Id => Value));
    --  Reset a CC context.
 
    procedure Cc_Set_User_Certificate
@@ -94,7 +102,13 @@ package Tkmrpc.Clients.Ike is
       Autha_Id    : Types.Autha_Id_Type;
       Certificate : Types.Certificate_Type);
    pragma Export (C, Cc_Set_User_Certificate, "ike_cc_set_user_certificate");
-   pragma Export_Valued_Procedure (Cc_Set_User_Certificate);
+   pragma Export_Valued_Procedure
+     (Cc_Set_User_Certificate,
+      Mechanism =>
+     (Cc_Id       => Value,
+      Ri_Id       => Value,
+      Autha_Id    => Value,
+      Certificate => Value));
    --  Initiates a certificate chain starting from the user certificate.
 
    procedure Cc_Add_Certificate
@@ -103,7 +117,9 @@ package Tkmrpc.Clients.Ike is
       Autha_Id    : Types.Autha_Id_Type;
       Certificate : Types.Certificate_Type);
    pragma Export (C, Cc_Add_Certificate, "ike_cc_add_certificate");
-   pragma Export_Valued_Procedure (Cc_Add_Certificate);
+   pragma Export_Valued_Procedure
+     (Cc_Add_Certificate,
+      Mechanism => (Cc_Id => Value, Autha_Id => Value, Certificate => Value));
    --  Add a certificate to a certificate chain.
 
    procedure Cc_Check_Ca
@@ -111,21 +127,25 @@ package Tkmrpc.Clients.Ike is
       Cc_Id  : Types.Cc_Id_Type;
       Ca_Id  : Types.Ca_Id_Type);
    pragma Export (C, Cc_Check_Ca, "ike_cc_check_ca");
-   pragma Export_Valued_Procedure (Cc_Check_Ca);
+   pragma Export_Valued_Procedure
+     (Cc_Check_Ca,
+      Mechanism => (Cc_Id => Value, Ca_Id => Value));
    --  Checks if a cc is based on a trusted CA
 
    procedure Ae_Reset
      (Result : out Results.Result_Type;
       Ae_Id  : Types.Ae_Id_Type);
    pragma Export (C, Ae_Reset, "ike_ae_reset");
-   pragma Export_Valued_Procedure (Ae_Reset);
+   pragma Export_Valued_Procedure (Ae_Reset, Mechanism => (Ae_Id => Value));
    --  Reset an AE context.
 
    procedure Isa_Reset
      (Result : out Results.Result_Type;
       Isa_Id : Types.Isa_Id_Type);
    pragma Export (C, Isa_Reset, "ike_isa_reset");
-   pragma Export_Valued_Procedure (Isa_Reset);
+   pragma Export_Valued_Procedure
+     (Isa_Reset,
+      Mechanism => (Isa_Id => Value));
    --  Reset an ISA context.
 
    procedure Isa_Create
@@ -144,7 +164,18 @@ package Tkmrpc.Clients.Ike is
       Sk_Ei     : out Types.Key_Type;
       Sk_Er     : out Types.Key_Type);
    pragma Export (C, Isa_Create, "ike_isa_create");
-   pragma Export_Valued_Procedure (Isa_Create);
+   pragma Export_Valued_Procedure
+     (Isa_Create,
+      Mechanism =>
+     (Isa_Id    => Value,
+      Ae_Id     => Value,
+      Ia_Id     => Value,
+      Dh_Id     => Value,
+      Nc_Loc_Id => Value,
+      Nonce_Rem => Value,
+      Initiator => Value,
+      Spi_Loc   => Value,
+      Spi_Rem   => Value));
    --  Create an IKE SA context.
 
    procedure Isa_Sign
@@ -154,7 +185,9 @@ package Tkmrpc.Clients.Ike is
       Init_Message : Types.Init_Message_Type;
       Signature    : out Types.Signature_Type);
    pragma Export (C, Isa_Sign, "ike_isa_sign");
-   pragma Export_Valued_Procedure (Isa_Sign);
+   pragma Export_Valued_Procedure
+     (Isa_Sign,
+      Mechanism => (Isa_Id => Value, Lc_Id => Value, Init_Message => Value));
    --  Provide authentication to the remote endpoint.
 
    procedure Isa_Auth
@@ -164,7 +197,13 @@ package Tkmrpc.Clients.Ike is
       Init_Message : Types.Init_Message_Type;
       Signature    : Types.Signature_Type);
    pragma Export (C, Isa_Auth, "ike_isa_auth");
-   pragma Export_Valued_Procedure (Isa_Auth);
+   pragma Export_Valued_Procedure
+     (Isa_Auth,
+      Mechanism =>
+     (Isa_Id       => Value,
+      Cc_Id        => Value,
+      Init_Message => Value,
+      Signature    => Value));
    --  Authenticate the remote endpoint.
 
    procedure Isa_Create_Child
@@ -183,21 +222,36 @@ package Tkmrpc.Clients.Ike is
       Sk_Ei         : out Types.Key_Type;
       Sk_Er         : out Types.Key_Type);
    pragma Export (C, Isa_Create_Child, "ike_isa_create_child");
-   pragma Export_Valued_Procedure (Isa_Create_Child);
+   pragma Export_Valued_Procedure
+     (Isa_Create_Child,
+      Mechanism =>
+     (Isa_Id        => Value,
+      Parent_Isa_Id => Value,
+      Ia_Id         => Value,
+      Dh_Id         => Value,
+      Nc_Loc_Id     => Value,
+      Nonce_Rem     => Value,
+      Initiator     => Value,
+      Spi_Loc       => Value,
+      Spi_Rem       => Value));
    --  Derive an IKE SA context from an existing SA.
 
    procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
       Isa_Id : Types.Isa_Id_Type);
    pragma Export (C, Isa_Skip_Create_First, "ike_isa_skip_create_first");
-   pragma Export_Valued_Procedure (Isa_Skip_Create_First);
+   pragma Export_Valued_Procedure
+     (Isa_Skip_Create_First,
+      Mechanism => (Isa_Id => Value));
    --  Don't create a first child.
 
    procedure Esa_Reset
      (Result : out Results.Result_Type;
       Esa_Id : Types.Esa_Id_Type);
    pragma Export (C, Esa_Reset, "ike_esa_reset");
-   pragma Export_Valued_Procedure (Esa_Reset);
+   pragma Export_Valued_Procedure
+     (Esa_Reset,
+      Mechanism => (Esa_Id => Value));
    --  Reset an ESA context.
 
    procedure Esa_Create
@@ -213,7 +267,19 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type);
    pragma Export (C, Esa_Create, "ike_esa_create");
-   pragma Export_Valued_Procedure (Esa_Create);
+   pragma Export_Valued_Procedure
+     (Esa_Create,
+      Mechanism =>
+     (Esa_Id      => Value,
+      Isa_Id      => Value,
+      Sp_Id       => Value,
+      Ea_Id       => Value,
+      Dh_Id       => Value,
+      Nc_Loc_Id   => Value,
+      Nonce_Rem   => Value,
+      Initiator   => Value,
+      Esp_Spi_Loc => Value,
+      Esp_Spi_Rem => Value));
    --  Creates an ESP SA.
 
    procedure Esa_Create_No_Pfs
@@ -228,7 +294,18 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type);
    pragma Export (C, Esa_Create_No_Pfs, "ike_esa_create_no_pfs");
-   pragma Export_Valued_Procedure (Esa_Create_No_Pfs);
+   pragma Export_Valued_Procedure
+     (Esa_Create_No_Pfs,
+      Mechanism =>
+     (Esa_Id      => Value,
+      Isa_Id      => Value,
+      Sp_Id       => Value,
+      Ea_Id       => Value,
+      Nc_Loc_Id   => Value,
+      Nonce_Rem   => Value,
+      Initiator   => Value,
+      Esp_Spi_Loc => Value,
+      Esp_Spi_Rem => Value));
    --  Creates an ESP SA without PFS.
 
    procedure Esa_Create_First
@@ -240,14 +317,24 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type);
    pragma Export (C, Esa_Create_First, "ike_esa_create_first");
-   pragma Export_Valued_Procedure (Esa_Create_First);
+   pragma Export_Valued_Procedure
+     (Esa_Create_First,
+      Mechanism =>
+     (Esa_Id      => Value,
+      Isa_Id      => Value,
+      Sp_Id       => Value,
+      Ea_Id       => Value,
+      Esp_Spi_Loc => Value,
+      Esp_Spi_Rem => Value));
    --  Creates the first ESP SA for an AE.
 
    procedure Esa_Select
      (Result : out Results.Result_Type;
       Esa_Id : Types.Esa_Id_Type);
    pragma Export (C, Esa_Select, "ike_esa_select");
-   pragma Export_Valued_Procedure (Esa_Select);
+   pragma Export_Valued_Procedure
+     (Esa_Select,
+      Mechanism => (Esa_Id => Value));
    --  Selects an ESA context for outgoing traffic.
 
 end Tkmrpc.Clients.Ike;

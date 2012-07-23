@@ -31,10 +31,6 @@ package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Limits is
          Dha_Contexts        => Specific_Res.Data.Dha_Contexts);
 
       Res := Response.Cfg.Tkm_Limits.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Cfg.Tkm_Limits;

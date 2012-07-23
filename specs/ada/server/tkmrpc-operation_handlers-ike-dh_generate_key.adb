@@ -20,10 +20,6 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Generate_Key is
 
       Res :=
          Response.Ike.Dh_Generate_Key.Convert.To_Response (S => Specific_Res);
-
-   exception
-      when others =>
-         Res := Response.Null_Data;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Dh_Generate_Key;
