@@ -25,12 +25,15 @@ static void check_result (const result_type res, const char const *name)
 
 int main()
 {
+	printf("client: initializing tkm library\n");
 	tkmlib_init();
 
+	printf("client: initializing ike interface\n");
 	result_type result;
 	result = ike_init("/tmp/tkm.rpc");
 	check_result(result, "ike_init");
 
+	printf("client: calling ike_nc_create\n");
 	nonce_type nonce;
 	result = ike_nc_create(1, 128, &nonce);
 	check_result(result, "ike_nc_create");
@@ -39,7 +42,6 @@ int main()
 	printf("client: remote call status %" PRId64 "\n", result);
 	printf("client: nonce received (length: %d)\n", nonce.size);
 	printf("client: nonce first char '%c'\n", nonce.data[0]);
-
 
 	/* The mock server sets the result to Ok if the pubvalue was correct */
 	result = ike_dh_generate_key(1, ref_dh_pubval);
