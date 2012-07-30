@@ -17,3 +17,7 @@ enum version_type {
     TKM_IKE_VERSION = 0x0000000000000000,
 };
 
+enum dh_algorithm_type {
+    TKM_MODP_4096 = 0x0000000000000010,
+};
+
