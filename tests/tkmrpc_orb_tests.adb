@@ -46,13 +46,13 @@ is
               Message   => "Last nonce length mismatch");
 
       Transport.Servers.Stop (Server => RPC_Server);
-      Mock.Last_Nonce_Id     := 0;
+      Mock.Last_Nonce_Id     := Types.Nc_Id_Type'Last;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
          Transport.Servers.Stop (Server => RPC_Server);
-         Mock.Last_Nonce_Id     := 0;
+         Mock.Last_Nonce_Id     := Types.Nc_Id_Type'Last;
          Mock.Last_Nonce_Length := 16;
          raise;
    end C_Test_Client;
@@ -82,7 +82,7 @@ is
       Assert (Condition => Result = Results.Ok,
               Message   => "IKE init failed");
 
-      Clients.Ike.Nc_Create (Nc_Id        => 123,
+      Clients.Ike.Nc_Create (Nc_Id        => 23,
                              Nonce_Length => 243,
                              Nonce        => Nonce,
                              Result       => Result);
@@ -91,19 +91,19 @@ is
               Message   => "Remote call failed");
       Assert (Condition => Nonce = Mock.Ref_Nonce,
               Message   => "Nonce incorrect");
-      Assert (Condition => Mock.Last_Nonce_Id = 123,
+      Assert (Condition => Mock.Last_Nonce_Id = 23,
               Message   => "Last nonce id mismatch");
       Assert (Condition => Mock.Last_Nonce_Length = 243,
               Message   => "Last nonce length mismatch");
 
       Transport.Servers.Stop (Server => RPC_Server);
-      Mock.Last_Nonce_Id     := 0;
+      Mock.Last_Nonce_Id     := Types.Nc_Id_Type'Last;
       Mock.Last_Nonce_Length := 16;
 
    exception
       when others =>
          Transport.Servers.Stop (Server => RPC_Server);
-         Mock.Last_Nonce_Id     := 0;
+         Mock.Last_Nonce_Id     := Types.Nc_Id_Type'Last;
          Mock.Last_Nonce_Length := 16;
          raise;
    end Client_Server_ORBs;

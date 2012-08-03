@@ -1,7 +1,8 @@
 with Tkmrpc.Types;
 with Tkmrpc.Results;
 
-package Tkmrpc.Servers.Ike is
+package Tkmrpc.Servers.Ike
+is
 
    procedure Init;
    --  Initialize IKE server.

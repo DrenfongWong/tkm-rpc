@@ -10,7 +10,7 @@ project Tkmrpc_Server is
 
    Compiler_Switches := ("-gnatygAdISuxo",
                          "-gnatVa",
-                         "-gnat05",
+                         "-gnat2012",
                          "-gnatf",
                          "-gnatwal",
                          "-fstack-check",
