@@ -1,7 +1,8 @@
 with Tkmrpc.Types;
 with Tkmrpc.Results;
 
-package Tkmrpc.Servers.Cfg is
+package Tkmrpc.Servers.Cfg
+is
 
    procedure Init;
    --  Initialize CFG server.

@@ -58,6 +58,12 @@ typedef uint64_t isa_id_type;
 
 typedef uint64_t esa_id_type;
 
+typedef uint64_t esp_enc_id_type;
+
+typedef uint64_t esp_dec_id_type;
+
+typedef uint64_t esp_map_id_type;
+
 typedef uint64_t abs_time_type;
 
 typedef uint64_t rel_time_type;

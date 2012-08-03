@@ -12,49 +12,55 @@ package Tkmrpc.Types is
 
    subtype Active_Requests_Type is Interfaces.Unsigned_64;
 
-   subtype Authag_Id_Type is Interfaces.Unsigned_64;
+   subtype Authag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Cag_Id_Type is Interfaces.Unsigned_64;
+   subtype Cag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Li_Id_Type is Interfaces.Unsigned_64;
+   subtype Li_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ri_Id_Type is Interfaces.Unsigned_64;
+   subtype Ri_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Iag_Id_Type is Interfaces.Unsigned_64;
+   subtype Iag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Eag_Id_Type is Interfaces.Unsigned_64;
+   subtype Eag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dhag_Id_Type is Interfaces.Unsigned_64;
+   subtype Dhag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Sp_Id_Type is Interfaces.Unsigned_64;
+   subtype Sp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Authp_Id_Type is Interfaces.Unsigned_64;
+   subtype Authp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dhp_Id_Type is Interfaces.Unsigned_64;
+   subtype Dhp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Autha_Id_Type is Interfaces.Unsigned_64;
+   subtype Autha_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ca_Id_Type is Interfaces.Unsigned_64;
+   subtype Ca_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Lc_Id_Type is Interfaces.Unsigned_64;
+   subtype Lc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ia_Id_Type is Interfaces.Unsigned_64;
+   subtype Ia_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ea_Id_Type is Interfaces.Unsigned_64;
+   subtype Ea_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dha_Id_Type is Interfaces.Unsigned_64;
+   subtype Dha_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Nc_Id_Type is Interfaces.Unsigned_64;
+   subtype Nc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dh_Id_Type is Interfaces.Unsigned_64;
+   subtype Dh_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Cc_Id_Type is Interfaces.Unsigned_64;
+   subtype Cc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ae_Id_Type is Interfaces.Unsigned_64;
+   subtype Ae_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Isa_Id_Type is Interfaces.Unsigned_64;
+   subtype Isa_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Esa_Id_Type is Interfaces.Unsigned_64;
+   subtype Esa_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+
+   subtype Esp_Enc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+
+   subtype Esp_Dec_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+
+   subtype Esp_Map_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
    subtype Abs_Time_Type is Interfaces.Unsigned_64;
 

@@ -23,11 +23,6 @@ package body Tkmrpc.Dispatchers.Cfg is
       end case;
 
       Res.Header.Request_Id := Req.Header.Request_Id;
-
-   exception
-      when others =>
-         Res                   := Response.Null_Data;
-         Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 
 end Tkmrpc.Dispatchers.Cfg;
