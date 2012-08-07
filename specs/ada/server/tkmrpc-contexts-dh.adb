@@ -111,7 +111,7 @@ package body Tkmrpc.Contexts.Dh is
 
    function Has_Creation_Time
      (Id            : Types.Dh_Id_Type;
-      Creation_time : Types.Rel_Time_Type)
+      Creation_Time : Types.Rel_Time_Type)
       return Boolean
    is (Context_Array (Id).Creation_Time = Creation_Time);
 

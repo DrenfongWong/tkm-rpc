@@ -49,7 +49,7 @@ package body Tkmrpc.Contexts.Nc is
 
    -------------------------------------------------------------------------
 
-   function Has_nonce
+   function Has_Nonce
      (Id    : Types.Nc_Id_Type;
       Nonce : Types.Nonce_Type)
       return Boolean
@@ -74,7 +74,7 @@ package body Tkmrpc.Contexts.Nc is
 
    pragma Warnings
      (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.nc_id_type) return Boolean
+   function Is_Valid (Id : Types.Nc_Id_Type) return Boolean
    is (Context_Array'First <= Id and Id <= Context_Array'Last);
    pragma Warnings
      (On, "condition can only be False if invalid values present");
