@@ -1,6 +1,7 @@
 with Tkmrpc.Operations.Ike;
 with Tkmrpc.Operation_Handlers.Ike.Tkm_Version;
 with Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;
+with Tkmrpc.Operation_Handlers.Ike.Tkm_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Nc_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Nc_Create;
 with Tkmrpc.Operation_Handlers.Ike.Dh_Reset;
@@ -15,7 +16,9 @@ with Tkmrpc.Operation_Handlers.Ike.Ae_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Reset;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Create;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Sign;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Sign_Psk;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Auth;
+with Tkmrpc.Operation_Handlers.Ike.Isa_Auth_Psk;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Create_Child;
 with Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First;
 with Tkmrpc.Operation_Handlers.Ike.Esa_Reset;
@@ -38,6 +41,8 @@ package body Tkmrpc.Dispatchers.Ike is
          Operation_Handlers.Ike.Tkm_Version.Handle (Req => Req, Res => Res);
       when Operations.Ike.Tkm_Limits =>
          Operation_Handlers.Ike.Tkm_Limits.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Tkm_Reset =>
+         Operation_Handlers.Ike.Tkm_Reset.Handle (Req => Req, Res => Res);
       when Operations.Ike.Nc_Reset =>
          Operation_Handlers.Ike.Nc_Reset.Handle (Req => Req, Res => Res);
       when Operations.Ike.Nc_Create =>
@@ -74,8 +79,12 @@ package body Tkmrpc.Dispatchers.Ike is
          Operation_Handlers.Ike.Isa_Create.Handle (Req => Req, Res => Res);
       when Operations.Ike.Isa_Sign =>
          Operation_Handlers.Ike.Isa_Sign.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Sign_Psk =>
+         Operation_Handlers.Ike.Isa_Sign_Psk.Handle (Req => Req, Res => Res);
       when Operations.Ike.Isa_Auth =>
          Operation_Handlers.Ike.Isa_Auth.Handle (Req => Req, Res => Res);
+      when Operations.Ike.Isa_Auth_Psk =>
+         Operation_Handlers.Ike.Isa_Auth_Psk.Handle (Req => Req, Res => Res);
       when Operations.Ike.Isa_Create_Child =>
          Operation_Handlers.Ike.Isa_Create_Child.Handle
            (Req => Req,

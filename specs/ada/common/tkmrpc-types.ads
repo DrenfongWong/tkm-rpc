@@ -113,7 +113,7 @@ package Tkmrpc.Types is
    for Init_Message_Type'Size use 1504 * 8;
 
    Null_Init_Message_Type : constant Init_Message_Type :=
-      Init_Message_Type'
+     Init_Message_Type'
      (Size => Init_Message_Type_Range'First,
       Data => Init_Message_Type_Data_Type'(others => 0));
 
@@ -128,7 +128,7 @@ package Tkmrpc.Types is
    for Certificate_Type'Size use 1028 * 8;
 
    Null_Certificate_Type : constant Certificate_Type :=
-      Certificate_Type'
+     Certificate_Type'
      (Size => Certificate_Type_Range'First,
       Data => Certificate_Type_Data_Type'(others => 0));
 
@@ -142,7 +142,7 @@ package Tkmrpc.Types is
    for Nonce_Type'Size use 260 * 8;
 
    Null_Nonce_Type : constant Nonce_Type :=
-      Nonce_Type'
+     Nonce_Type'
      (Size => Nonce_Type_Range'First,
       Data => Nonce_Type_Data_Type'(others => 0));
 
@@ -157,7 +157,7 @@ package Tkmrpc.Types is
    for Dh_Pubvalue_Type'Size use 516 * 8;
 
    Null_Dh_Pubvalue_Type : constant Dh_Pubvalue_Type :=
-      Dh_Pubvalue_Type'
+     Dh_Pubvalue_Type'
      (Size => Dh_Pubvalue_Type_Range'First,
       Data => Dh_Pubvalue_Type_Data_Type'(others => 0));
 
@@ -171,7 +171,7 @@ package Tkmrpc.Types is
    for Dh_Priv_Type'Size use 516 * 8;
 
    Null_Dh_Priv_Type : constant Dh_Priv_Type :=
-      Dh_Priv_Type'
+     Dh_Priv_Type'
      (Size => Dh_Priv_Type_Range'First,
       Data => Dh_Priv_Type_Data_Type'(others => 0));
 
@@ -185,7 +185,7 @@ package Tkmrpc.Types is
    for Dh_Key_Type'Size use 516 * 8;
 
    Null_Dh_Key_Type : constant Dh_Key_Type :=
-      Dh_Key_Type'
+     Dh_Key_Type'
      (Size => Dh_Key_Type_Range'First,
       Data => Dh_Key_Type_Data_Type'(others => 0));
 
@@ -199,7 +199,7 @@ package Tkmrpc.Types is
    for Key_Type'Size use 68 * 8;
 
    Null_Key_Type : constant Key_Type :=
-      Key_Type'
+     Key_Type'
      (Size => Key_Type_Range'First,
       Data => Key_Type_Data_Type'(others => 0));
 
@@ -213,7 +213,7 @@ package Tkmrpc.Types is
    for Identity_Type'Size use 68 * 8;
 
    Null_Identity_Type : constant Identity_Type :=
-      Identity_Type'
+     Identity_Type'
      (Size => Identity_Type_Range'First,
       Data => Identity_Type_Data_Type'(others => 0));
 
@@ -227,9 +227,23 @@ package Tkmrpc.Types is
    for Signature_Type'Size use 260 * 8;
 
    Null_Signature_Type : constant Signature_Type :=
-      Signature_Type'
+     Signature_Type'
      (Size => Signature_Type_Range'First,
       Data => Signature_Type_Data_Type'(others => 0));
+
+   subtype Idx_Type_Range is Byte_Sequence_Range range 1 .. 128;
+   subtype Idx_Type_Data_Type is Byte_Sequence (Idx_Type_Range);
+
+   type Idx_Type is record
+      Size : Idx_Type_Range;
+      Data : Idx_Type_Data_Type;
+   end record;
+   for Idx_Type'Size use 132 * 8;
+
+   Null_Idx_Type : constant Idx_Type :=
+     Idx_Type'
+     (Size => Idx_Type_Range'First,
+      Data => Idx_Type_Data_Type'(others => 0));
 
    subtype Auth_Parameter_Type_Range is Byte_Sequence_Range range 1 .. 1024;
    subtype Auth_Parameter_Type_Data_Type is Byte_Sequence (
@@ -242,7 +256,7 @@ package Tkmrpc.Types is
    for Auth_Parameter_Type'Size use 1028 * 8;
 
    Null_Auth_Parameter_Type : constant Auth_Parameter_Type :=
-      Auth_Parameter_Type'
+     Auth_Parameter_Type'
      (Size => Auth_Parameter_Type_Range'First,
       Data => Auth_Parameter_Type_Data_Type'(others => 0));
 
@@ -257,7 +271,7 @@ package Tkmrpc.Types is
    for Dh_Parameter_Type'Size use 1028 * 8;
 
    Null_Dh_Parameter_Type : constant Dh_Parameter_Type :=
-      Dh_Parameter_Type'
+     Dh_Parameter_Type'
      (Size => Dh_Parameter_Type_Range'First,
       Data => Dh_Parameter_Type_Data_Type'(others => 0));
 

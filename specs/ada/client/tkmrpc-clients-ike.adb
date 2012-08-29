@@ -2,6 +2,7 @@ with Tkmrpc.Transport.Client;
 with Tkmrpc.Operations.Ike;
 with Tkmrpc.Request.Ike.Tkm_Version.Convert;
 with Tkmrpc.Request.Ike.Tkm_Limits.Convert;
+with Tkmrpc.Request.Ike.Tkm_Reset.Convert;
 with Tkmrpc.Request.Ike.Nc_Reset.Convert;
 with Tkmrpc.Request.Ike.Nc_Create.Convert;
 with Tkmrpc.Request.Ike.Dh_Reset.Convert;
@@ -16,7 +17,9 @@ with Tkmrpc.Request.Ike.Ae_Reset.Convert;
 with Tkmrpc.Request.Ike.Isa_Reset.Convert;
 with Tkmrpc.Request.Ike.Isa_Create.Convert;
 with Tkmrpc.Request.Ike.Isa_Sign.Convert;
+with Tkmrpc.Request.Ike.Isa_Sign_Psk.Convert;
 with Tkmrpc.Request.Ike.Isa_Auth.Convert;
+with Tkmrpc.Request.Ike.Isa_Auth_Psk.Convert;
 with Tkmrpc.Request.Ike.Isa_Create_Child.Convert;
 with Tkmrpc.Request.Ike.Isa_Skip_Create_First.Convert;
 with Tkmrpc.Request.Ike.Esa_Reset.Convert;
@@ -26,6 +29,7 @@ with Tkmrpc.Request.Ike.Esa_Create_First.Convert;
 with Tkmrpc.Request.Ike.Esa_Select.Convert;
 with Tkmrpc.Response.Ike.Tkm_Version.Convert;
 with Tkmrpc.Response.Ike.Tkm_Limits.Convert;
+with Tkmrpc.Response.Ike.Tkm_Reset.Convert;
 with Tkmrpc.Response.Ike.Nc_Reset.Convert;
 with Tkmrpc.Response.Ike.Nc_Create.Convert;
 with Tkmrpc.Response.Ike.Dh_Reset.Convert;
@@ -40,7 +44,9 @@ with Tkmrpc.Response.Ike.Ae_Reset.Convert;
 with Tkmrpc.Response.Ike.Isa_Reset.Convert;
 with Tkmrpc.Response.Ike.Isa_Create.Convert;
 with Tkmrpc.Response.Ike.Isa_Sign.Convert;
+with Tkmrpc.Response.Ike.Isa_Sign_Psk.Convert;
 with Tkmrpc.Response.Ike.Isa_Auth.Convert;
+with Tkmrpc.Response.Ike.Isa_Auth_Psk.Convert;
 with Tkmrpc.Response.Ike.Isa_Create_Child.Convert;
 with Tkmrpc.Response.Ike.Isa_Skip_Create_First.Convert;
 with Tkmrpc.Response.Ike.Esa_Reset.Convert;
@@ -480,6 +486,35 @@ package body Tkmrpc.Clients.Ike is
 
    -------------------------------------------------------------------------
 
+   procedure Isa_Auth_Psk
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Idx          : Types.Idx_Type;
+      Signature    : out Types.Signature_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Isa_Auth_Psk.Request_Type;
+      Res  : Response.Ike.Isa_Auth_Psk.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation  := Operations.Ike.Isa_Auth_Psk;
+      Req.Data.Isa_Id       := Isa_Id;
+      Req.Data.Init_Message := Init_Message;
+      Req.Data.Idx          := Idx;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Isa_Auth_Psk.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Isa_Auth_Psk.Convert.From_Response (S => Data);
+
+      Signature := Res.Data.Signature;
+      Result    := Res.Header.Result;
+   end Isa_Auth_Psk;
+
+   -------------------------------------------------------------------------
+
    procedure Isa_Create
      (Result    : out Results.Result_Type;
       Isa_Id    : Types.Isa_Id_Type;
@@ -626,6 +661,35 @@ package body Tkmrpc.Clients.Ike is
 
    -------------------------------------------------------------------------
 
+   procedure Isa_Sign_Psk
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Idx          : Types.Idx_Type;
+      Signature    : out Types.Signature_Type)
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Isa_Sign_Psk.Request_Type;
+      Res  : Response.Ike.Isa_Sign_Psk.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation  := Operations.Ike.Isa_Sign_Psk;
+      Req.Data.Isa_Id       := Isa_Id;
+      Req.Data.Init_Message := Init_Message;
+      Req.Data.Idx          := Idx;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Isa_Sign_Psk.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Isa_Sign_Psk.Convert.From_Response (S => Data);
+
+      Signature := Res.Data.Signature;
+      Result    := Res.Header.Result;
+   end Isa_Sign_Psk;
+
+   -------------------------------------------------------------------------
+
    procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
       Isa_Id : Types.Isa_Id_Type)
@@ -733,6 +797,25 @@ package body Tkmrpc.Clients.Ike is
       Esa_Contexts        := Res.Data.Esa_Contexts;
       Result              := Res.Header.Result;
    end Tkm_Limits;
+
+   -------------------------------------------------------------------------
+
+   procedure Tkm_Reset (Result : out Results.Result_Type) is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Ike.Tkm_Reset.Request_Type;
+      Res  : Response.Ike.Tkm_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Ike.Tkm_Reset;
+
+      Transport.Client.Send
+        (Data => Request.Ike.Tkm_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Ike.Tkm_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Tkm_Reset;
 
    -------------------------------------------------------------------------
 

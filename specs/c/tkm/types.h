@@ -167,6 +167,13 @@ struct signature_type {
     byte_t data[256];
 };
 
+typedef struct idx_type idx_type;
+
+struct idx_type {
+    uint32_t size;
+    byte_t data[128];
+};
+
 typedef struct auth_parameter_type auth_parameter_type;
 
 struct auth_parameter_type {
