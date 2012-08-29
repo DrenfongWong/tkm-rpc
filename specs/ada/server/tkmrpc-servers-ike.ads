@@ -26,6 +26,9 @@ is
       Esa_Contexts        : out Types.Esa_Id_Type);
    --  Returns limits of fixed length of TKM.
 
+   procedure Tkm_Reset (Result : out Results.Result_Type);
+   --  Reset the TKM - IKE interface to a known initial state.
+
    procedure Nc_Reset
      (Result : out Results.Result_Type;
       Nc_Id  : Types.Nc_Id_Type);
@@ -123,6 +126,14 @@ is
       Signature    : out Types.Signature_Type);
    --  Provide authentication to the remote endpoint.
 
+   procedure Isa_Sign_Psk
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Idx          : Types.Idx_Type;
+      Signature    : out Types.Signature_Type);
+   --  Provide authentication to the remote endpoint using PSK.
+
    procedure Isa_Auth
      (Result       : out Results.Result_Type;
       Isa_Id       : Types.Isa_Id_Type;
@@ -130,6 +141,14 @@ is
       Init_Message : Types.Init_Message_Type;
       Signature    : Types.Signature_Type);
    --  Authenticate the remote endpoint.
+
+   procedure Isa_Auth_Psk
+     (Result       : out Results.Result_Type;
+      Isa_Id       : Types.Isa_Id_Type;
+      Init_Message : Types.Init_Message_Type;
+      Idx          : Types.Idx_Type;
+      Signature    : out Types.Signature_Type);
+   --  Authenticate the remote endpoint using PSK.
 
    procedure Isa_Create_Child
      (Result        : out Results.Result_Type;

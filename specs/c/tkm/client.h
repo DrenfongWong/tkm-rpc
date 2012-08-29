@@ -71,6 +71,11 @@ extern result_type ike_tkm_limits(active_requests_type *max_active_requests,
                 esa_id_type *esa_contexts);
 
 /**
+ * Reset the TKM - IKE interface to a known initial state.
+ */
+extern result_type ike_tkm_reset();
+
+/**
  * Reset a NC context.
  */
 extern result_type ike_nc_reset(const nc_id_type nc_id);
@@ -168,12 +173,28 @@ extern result_type ike_isa_sign(const isa_id_type isa_id,
                 signature_type *signature);
 
 /**
+ * Provide authentication to the remote endpoint using PSK.
+ */
+extern result_type ike_isa_sign_psk(const isa_id_type isa_id,
+                const init_message_type init_message,
+                const idx_type idx,
+                signature_type *signature);
+
+/**
  * Authenticate the remote endpoint.
  */
 extern result_type ike_isa_auth(const isa_id_type isa_id,
                 const cc_id_type cc_id,
                 const init_message_type init_message,
                 const signature_type signature);
+
+/**
+ * Authenticate the remote endpoint using PSK.
+ */
+extern result_type ike_isa_auth_psk(const isa_id_type isa_id,
+                const init_message_type init_message,
+                const idx_type idx,
+                signature_type *signature);
 
 /**
  * Derive an IKE SA context from an existing SA.

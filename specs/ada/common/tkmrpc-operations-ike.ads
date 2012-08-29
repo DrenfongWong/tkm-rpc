@@ -5,6 +5,8 @@ package Tkmrpc.Operations.Ike is
 
    Tkm_Limits : constant Operations.Operation_Type := 16#0001#;
 
+   Tkm_Reset : constant Operations.Operation_Type := 16#0002#;
+
    Nc_Reset : constant Operations.Operation_Type := 16#0100#;
 
    Nc_Create : constant Operations.Operation_Type := 16#0101#;
@@ -33,7 +35,11 @@ package Tkmrpc.Operations.Ike is
 
    Isa_Sign : constant Operations.Operation_Type := 16#0902#;
 
+   Isa_Sign_Psk : constant Operations.Operation_Type := 16#0998#;
+
    Isa_Auth : constant Operations.Operation_Type := 16#0903#;
+
+   Isa_Auth_Psk : constant Operations.Operation_Type := 16#0999#;
 
    Isa_Create_Child : constant Operations.Operation_Type := 16#0904#;
 
