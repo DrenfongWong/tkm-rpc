@@ -1,6 +1,7 @@
 with Tkmrpc.Operations.Cfg;
 with Tkmrpc.Operation_Handlers.Cfg.Tkm_Version;
 with Tkmrpc.Operation_Handlers.Cfg.Tkm_Limits;
+with Tkmrpc.Operation_Handlers.Cfg.Tkm_Reset;
 
 package body Tkmrpc.Dispatchers.Cfg is
 
@@ -18,6 +19,8 @@ package body Tkmrpc.Dispatchers.Cfg is
                Res => Res);
          when Operations.Cfg.Tkm_Limits =>
             Operation_Handlers.Cfg.Tkm_Limits.Handle (Req => Req, Res => Res);
+         when Operations.Cfg.Tkm_Reset =>
+            Operation_Handlers.Cfg.Tkm_Reset.Handle (Req => Req, Res => Res);
          when others =>
             Res := Response.Null_Data;
       end case;

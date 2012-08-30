@@ -200,12 +200,17 @@ package Tkmrpc.Clients.Ike is
       Isa_Id       : Types.Isa_Id_Type;
       Init_Message : Types.Init_Message_Type;
       Idx          : Types.Idx_Type;
+      Verify       : Types.Verify_Type;
       Signature    : out Types.Signature_Type);
    pragma Export (C, Isa_Sign_Psk, "ike_isa_sign_psk");
    pragma Export_Valued_Procedure
      (Isa_Sign_Psk,
-      Mechanism => (Isa_Id => Value, Init_Message => Value, Idx => Value));
-   --  Provide authentication to the remote endpoint using PSK.
+      Mechanism =>
+     (Isa_Id       => Value,
+      Init_Message => Value,
+      Idx          => Value,
+      Verify       => Value));
+   --  Provide authentication octets using PSK.
 
    procedure Isa_Auth
      (Result       : out Results.Result_Type;
@@ -224,15 +229,13 @@ package Tkmrpc.Clients.Ike is
    --  Authenticate the remote endpoint.
 
    procedure Isa_Auth_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Signature    : out Types.Signature_Type);
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Signature : Types.Signature_Type);
    pragma Export (C, Isa_Auth_Psk, "ike_isa_auth_psk");
    pragma Export_Valued_Procedure
      (Isa_Auth_Psk,
-      Mechanism => (Isa_Id => Value, Init_Message => Value, Idx => Value));
+      Mechanism => (Isa_Id => Value, Signature => Value));
    --  Authenticate the remote endpoint using PSK.
 
    procedure Isa_Create_Child

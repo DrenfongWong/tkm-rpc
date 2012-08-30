@@ -1,6 +1,6 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Response.Ike.Isa_Auth_Psk is
+package Tkmrpc.Response.Cfg.Tkm_Reset is
 
    Data_Size : constant := 0;
 
@@ -20,4 +20,4 @@ package Tkmrpc.Response.Ike.Isa_Auth_Psk is
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
 
-end Tkmrpc.Response.Ike.Isa_Auth_Psk;
+end Tkmrpc.Response.Cfg.Tkm_Reset;

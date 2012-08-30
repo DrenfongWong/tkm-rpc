@@ -2,8 +2,10 @@ with Tkmrpc.Transport.Client;
 with Tkmrpc.Operations.Cfg;
 with Tkmrpc.Request.Cfg.Tkm_Version.Convert;
 with Tkmrpc.Request.Cfg.Tkm_Limits.Convert;
+with Tkmrpc.Request.Cfg.Tkm_Reset.Convert;
 with Tkmrpc.Response.Cfg.Tkm_Version.Convert;
 with Tkmrpc.Response.Cfg.Tkm_Limits.Convert;
+with Tkmrpc.Response.Cfg.Tkm_Reset.Convert;
 
 package body Tkmrpc.Clients.Cfg is
 
@@ -67,6 +69,25 @@ package body Tkmrpc.Clients.Cfg is
       Dha_Contexts        := Res.Data.Dha_Contexts;
       Result              := Res.Header.Result;
    end Tkm_Limits;
+
+   -------------------------------------------------------------------------
+
+   procedure Tkm_Reset (Result : out Results.Result_Type) is
+      use type Tkmrpc.Results.Result_Type;
+
+      Req  : Request.Cfg.Tkm_Reset.Request_Type;
+      Res  : Response.Cfg.Tkm_Reset.Response_Type;
+      Data : Response.Data_Type;
+   begin
+      Req.Header.Operation := Operations.Cfg.Tkm_Reset;
+
+      Transport.Client.Send
+        (Data => Request.Cfg.Tkm_Reset.Convert.To_Request (S => Req));
+      Transport.Client.Receive (Data => Data);
+      Res := Response.Cfg.Tkm_Reset.Convert.From_Response (S => Data);
+
+      Result := Res.Header.Result;
+   end Tkm_Reset;
 
    -------------------------------------------------------------------------
 

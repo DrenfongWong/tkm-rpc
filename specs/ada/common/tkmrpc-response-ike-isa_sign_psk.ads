@@ -27,7 +27,7 @@ package Tkmrpc.Response.Ike.Isa_Sign_Psk is
       Header  at 0 range 0 .. (Response.Header_Size * 8) - 1;
       Data    at Response.Header_Size range 0 .. (Data_Size * 8) - 1;
       Padding at Response.Header_Size + Data_Size range
-        0 .. (Padding_Size * 8) - 1;
+         0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
 

@@ -42,4 +42,9 @@ package Tkmrpc.Clients.Cfg is
    pragma Export_Valued_Procedure (Tkm_Limits);
    --  Returns limits of fixed length of TKM.
 
+   procedure Tkm_Reset (Result : out Results.Result_Type);
+   pragma Export (C, Tkm_Reset, "cfg_tkm_reset");
+   pragma Export_Valued_Procedure (Tkm_Reset);
+   --  Reset the TKM - CFG interface to a known initial state.
+
 end Tkmrpc.Clients.Cfg;

@@ -14,11 +14,9 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth_Psk is
          Request.Ike.Isa_Auth_Psk.Convert.From_Request (S => Req);
 
       Servers.Ike.Isa_Auth_Psk
-        (Result       => Specific_Res.Header.Result,
-         Isa_Id       => Specific_Req.Data.Isa_Id,
-         Init_Message => Specific_Req.Data.Init_Message,
-         Idx          => Specific_Req.Data.Idx,
-         Signature    => Specific_Res.Data.Signature);
+        (Result    => Specific_Res.Header.Result,
+         Isa_Id    => Specific_Req.Data.Isa_Id,
+         Signature => Specific_Req.Data.Signature);
 
       Res :=
          Response.Ike.Isa_Auth_Psk.Convert.To_Response (S => Specific_Res);

@@ -1,6 +1,6 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Request.Ike.Tkm_Reset is
+package Tkmrpc.Request.Cfg.Tkm_Reset is
 
    Data_Size : constant := 0;
 
@@ -20,4 +20,4 @@ package Tkmrpc.Request.Ike.Tkm_Reset is
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
 
-end Tkmrpc.Request.Ike.Tkm_Reset;
+end Tkmrpc.Request.Cfg.Tkm_Reset;

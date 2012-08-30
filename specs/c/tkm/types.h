@@ -98,6 +98,8 @@ typedef uint64_t block_length_bits_type;
 
 typedef uint64_t init_type;
 
+typedef uint8_t verify_type;
+
 typedef uint64_t ike_spi_type;
 
 typedef uint32_t esp_spi_type;
