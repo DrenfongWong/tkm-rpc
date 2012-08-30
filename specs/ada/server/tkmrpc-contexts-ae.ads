@@ -290,7 +290,8 @@ is
      (Id : Types.ae_id_type)
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
+           (Has_State (Id, unauth) or
+            Has_State (Id, active) or
             Has_State (Id, authenticated) or
             Has_State (Id, clean) or
             Has_State (Id, invalid) or
