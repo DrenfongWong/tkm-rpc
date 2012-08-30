@@ -96,6 +96,8 @@ package Tkmrpc.Types is
 
    subtype Init_Type is Interfaces.Unsigned_64;
 
+   subtype Verify_Type is Interfaces.Unsigned_8;
+
    subtype Ike_Spi_Type is Interfaces.Unsigned_64;
 
    subtype Esp_Spi_Type is Interfaces.Unsigned_32;

@@ -45,6 +45,11 @@ extern result_type cfg_tkm_limits(active_requests_type *max_active_requests,
                 dha_id_type *dha_contexts);
 
 /**
+ * Reset the TKM - CFG interface to a known initial state.
+ */
+extern result_type cfg_tkm_reset();
+
+/**
  * Interface : IKE
  * Summary   : The TKM - IKE interface
  */
@@ -173,11 +178,12 @@ extern result_type ike_isa_sign(const isa_id_type isa_id,
                 signature_type *signature);
 
 /**
- * Provide authentication to the remote endpoint using PSK.
+ * Provide authentication octets using PSK.
  */
 extern result_type ike_isa_sign_psk(const isa_id_type isa_id,
                 const init_message_type init_message,
                 const idx_type idx,
+                const verify_type verify,
                 signature_type *signature);
 
 /**
@@ -192,9 +198,7 @@ extern result_type ike_isa_auth(const isa_id_type isa_id,
  * Authenticate the remote endpoint using PSK.
  */
 extern result_type ike_isa_auth_psk(const isa_id_type isa_id,
-                const init_message_type init_message,
-                const idx_type idx,
-                signature_type *signature);
+                const signature_type signature);
 
 /**
  * Derive an IKE SA context from an existing SA.

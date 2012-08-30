@@ -36,4 +36,7 @@ is
       Dha_Contexts        : out Types.Dha_Id_Type);
    --  Returns limits of fixed length of TKM.
 
+   procedure Tkm_Reset (Result : out Results.Result_Type);
+   --  Reset the TKM - CFG interface to a known initial state.
+
 end Tkmrpc.Servers.Cfg;

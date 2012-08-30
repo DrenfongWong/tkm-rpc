@@ -309,15 +309,11 @@ package body Tkmrpc.Servers.Ike is
    -------------------------------------------------------------------------
 
    procedure Isa_Auth_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Signature    : out Types.Signature_Type)
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Signature : Types.Signature_Type)
    is
       pragma Unreferenced (Isa_Id);
-      pragma Unreferenced (Init_Message);
-      pragma Unreferenced (Idx);
       pragma Unreferenced (Signature);
    begin
 
@@ -443,11 +439,13 @@ package body Tkmrpc.Servers.Ike is
       Isa_Id       : Types.Isa_Id_Type;
       Init_Message : Types.Init_Message_Type;
       Idx          : Types.Idx_Type;
+      Verify       : Types.Verify_Type;
       Signature    : out Types.Signature_Type)
    is
       pragma Unreferenced (Isa_Id);
       pragma Unreferenced (Init_Message);
       pragma Unreferenced (Idx);
+      pragma Unreferenced (Verify);
       pragma Unreferenced (Signature);
    begin
 

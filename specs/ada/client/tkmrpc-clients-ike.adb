@@ -487,11 +487,9 @@ package body Tkmrpc.Clients.Ike is
    -------------------------------------------------------------------------
 
    procedure Isa_Auth_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Signature    : out Types.Signature_Type)
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Signature : Types.Signature_Type)
    is
       use type Tkmrpc.Results.Result_Type;
 
@@ -499,18 +497,16 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Auth_Psk.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation  := Operations.Ike.Isa_Auth_Psk;
-      Req.Data.Isa_Id       := Isa_Id;
-      Req.Data.Init_Message := Init_Message;
-      Req.Data.Idx          := Idx;
+      Req.Header.Operation := Operations.Ike.Isa_Auth_Psk;
+      Req.Data.Isa_Id      := Isa_Id;
+      Req.Data.Signature   := Signature;
 
       Transport.Client.Send
         (Data => Request.Ike.Isa_Auth_Psk.Convert.To_Request (S => Req));
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Isa_Auth_Psk.Convert.From_Response (S => Data);
 
-      Signature := Res.Data.Signature;
-      Result    := Res.Header.Result;
+      Result := Res.Header.Result;
    end Isa_Auth_Psk;
 
    -------------------------------------------------------------------------
@@ -666,6 +662,7 @@ package body Tkmrpc.Clients.Ike is
       Isa_Id       : Types.Isa_Id_Type;
       Init_Message : Types.Init_Message_Type;
       Idx          : Types.Idx_Type;
+      Verify       : Types.Verify_Type;
       Signature    : out Types.Signature_Type)
    is
       use type Tkmrpc.Results.Result_Type;
@@ -678,6 +675,7 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Isa_Id       := Isa_Id;
       Req.Data.Init_Message := Init_Message;
       Req.Data.Idx          := Idx;
+      Req.Data.Verify       := Verify;
 
       Transport.Client.Send
         (Data => Request.Ike.Isa_Sign_Psk.Convert.To_Request (S => Req));

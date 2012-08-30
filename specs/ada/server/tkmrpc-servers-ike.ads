@@ -131,8 +131,9 @@ is
       Isa_Id       : Types.Isa_Id_Type;
       Init_Message : Types.Init_Message_Type;
       Idx          : Types.Idx_Type;
+      Verify       : Types.Verify_Type;
       Signature    : out Types.Signature_Type);
-   --  Provide authentication to the remote endpoint using PSK.
+   --  Provide authentication octets using PSK.
 
    procedure Isa_Auth
      (Result       : out Results.Result_Type;
@@ -143,11 +144,9 @@ is
    --  Authenticate the remote endpoint.
 
    procedure Isa_Auth_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Signature    : out Types.Signature_Type);
+     (Result    : out Results.Result_Type;
+      Isa_Id    : Types.Isa_Id_Type;
+      Signature : Types.Signature_Type);
    --  Authenticate the remote endpoint using PSK.
 
    procedure Isa_Create_Child

@@ -18,6 +18,7 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Sign_Psk is
          Isa_Id       => Specific_Req.Data.Isa_Id,
          Init_Message => Specific_Req.Data.Init_Message,
          Idx          => Specific_Req.Data.Idx,
+         Verify       => Specific_Req.Data.Verify,
          Signature    => Specific_Res.Data.Signature);
 
       Res :=
