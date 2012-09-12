@@ -8,8 +8,7 @@ project Tkmrpc_Server is
    Obj_Dir := external ("OBJ_DIR", "obj");
    for Object_Dir use Obj_Dir;
 
-   Compiler_Switches := ("-gnatygAdISuxo",
-                         "-gnata",
+   Compiler_Switches := ("-gnata",
                          "-gnatVa",
                          "-gnat2012",
                          "-gnatf",
