@@ -1,177 +1,180 @@
-package body Tkmrpc.Contexts.Dh is
+package body Tkmrpc.Contexts.dh
+is
 
    pragma Warnings
-     (Off,
-      "* already use-visible through previous use type clause");
-   use type Types.Dh_Id_Type;
-   use type Types.Dha_Id_Type;
-   use type Types.Rel_Time_Type;
-   use type Types.Dh_Priv_Type;
-   use type Types.Dh_Key_Type;
+     (Off, "* already use-visible through previous use type clause");
+   use type Types.dh_id_type;
+   use type Types.dha_id_type;
+   use type Types.rel_time_type;
+   use type Types.dh_priv_type;
+   use type Types.dh_key_type;
    pragma Warnings
-     (On,
-      "* already use-visible through previous use type clause");
+     (On, "* already use-visible through previous use type clause");
 
-   type Dh_Fsm_Type is record
-      State         : Dh_State_Type;
-      Dha_Id        : Types.Dha_Id_Type;
-      Creation_Time : Types.Rel_Time_Type;
-      Priv          : Types.Dh_Priv_Type;
-      Key           : Types.Dh_Key_Type;
+   type dh_FSM_Type is record
+      State : dh_State_Type;
+      dha_id : Types.dha_id_type;
+      creation_time : Types.rel_time_type;
+      priv : Types.dh_priv_type;
+      key : Types.dh_key_type;
    end record;
    --  Diffie Hellman Context
 
-   Null_Dh_Fsm : constant Dh_Fsm_Type :=
-     Dh_Fsm_Type'
-     (State         => Clean,
-      Dha_Id        => Types.Dha_Id_Type'First,
-      Creation_Time => Types.Rel_Time_Type'First,
-      Priv          => Types.Null_Dh_Priv_Type,
-      Key           => Types.Null_Dh_Key_Type);
+   Null_dh_FSM : constant dh_FSM_Type
+     := dh_FSM_Type'
+      (State => clean,
+       dha_id => Types.dha_id_type'First,
+       creation_time => Types.rel_time_type'First,
+       priv => Types.Null_dh_priv_type,
+       key => Types.Null_dh_key_type);
 
-   type Context_Array_Type is array (Types.Dh_Id_Type) of Dh_Fsm_Type;
+   type Context_Array_Type is
+     array (Types.dh_id_type) of dh_FSM_Type;
 
-   Context_Array : Context_Array_Type :=
-     Context_Array_Type'(others => (Null_Dh_Fsm));
+   Context_Array : Context_Array_Type := Context_Array_Type'
+     (others => (Null_dh_FSM));
 
    -------------------------------------------------------------------------
 
-   procedure Consume
-     (Id     :     Types.Dh_Id_Type;
-      Dh_Key : out Types.Dh_Key_Type)
+   function Get_State
+     (Id : Types.dh_id_type)
+      return dh_State_Type
    is
-   begin
-      Dh_Key                           := Context_Array (Id).Key;
-      Context_Array (Id).Dha_Id        := Types.Dha_Id_Type'First;
-      Context_Array (Id).Creation_Time := Types.Rel_Time_Type'First;
-      Context_Array (Id).Priv          := Types.Null_Dh_Priv_Type;
-      Context_Array (Id).Key           := Types.Null_Dh_Key_Type;
-      Context_Array (Id).State         := Clean;
-   end Consume;
-
-   -------------------------------------------------------------------------
-
-   procedure Create
-     (Id       : Types.Dh_Id_Type;
-      Dha_Id   : Types.Dha_Id_Type;
-      Secvalue : Types.Dh_Priv_Type)
-   is
-   begin
-      Context_Array (Id).Dha_Id := Dha_Id;
-      Context_Array (Id).Priv   := Secvalue;
-      Context_Array (Id).State  := Created;
-   end Create;
-
-   -------------------------------------------------------------------------
-
-   procedure Generate
-     (Id        : Types.Dh_Id_Type;
-      Dh_Key    : Types.Dh_Key_Type;
-      Timestamp : Types.Rel_Time_Type)
-   is
-   begin
-      Context_Array (Id).Key           := Dh_Key;
-      Context_Array (Id).Creation_Time := Timestamp;
-      Context_Array (Id).Priv          := Types.Null_Dh_Priv_Type;
-      Context_Array (Id).State         := Generated;
-   end Generate;
-
-   -------------------------------------------------------------------------
-
-   function Get_Dha_Id (Id : Types.Dh_Id_Type) return Types.Dha_Id_Type is
-   begin
-      return Context_Array (Id).Dha_Id;
-   end Get_Dha_Id;
-
-   -------------------------------------------------------------------------
-
-   function Get_Secvalue (Id : Types.Dh_Id_Type) return Types.Dh_Priv_Type is
-   begin
-      return Context_Array (Id).Priv;
-   end Get_Secvalue;
-
-   -------------------------------------------------------------------------
-
-   function Get_Shared_Secret
-     (Id   : Types.Dh_Id_Type)
-      return Types.Dh_Key_Type
-   is
-   begin
-      return Context_Array (Id).Key;
-   end Get_Shared_Secret;
-
-   -------------------------------------------------------------------------
-
-   function Get_State (Id : Types.Dh_Id_Type) return Dh_State_Type is
    begin
       return Context_Array (Id).State;
    end Get_State;
 
    -------------------------------------------------------------------------
 
-   function Has_Creation_Time
-     (Id            : Types.Dh_Id_Type;
-      Creation_Time : Types.Rel_Time_Type)
+   function Has_creation_time
+     (Id : Types.dh_id_type;
+      creation_time : Types.rel_time_type)
       return Boolean
-   is (Context_Array (Id).Creation_Time = Creation_Time);
+   is (Context_Array (Id).creation_time = creation_time);
 
    -------------------------------------------------------------------------
 
-   function Has_Dha_Id
-     (Id     : Types.Dh_Id_Type;
-      Dha_Id : Types.Dha_Id_Type)
+   function Has_dha_id
+     (Id : Types.dh_id_type;
+      dha_id : Types.dha_id_type)
       return Boolean
-   is (Context_Array (Id).Dha_Id = Dha_Id);
+   is (Context_Array (Id).dha_id = dha_id);
 
    -------------------------------------------------------------------------
 
-   function Has_Key
-     (Id  : Types.Dh_Id_Type;
-      Key : Types.Dh_Key_Type)
+   function Has_key
+     (Id : Types.dh_id_type;
+      key : Types.dh_key_type)
       return Boolean
-   is (Context_Array (Id).Key = Key);
+   is (Context_Array (Id).key = key);
 
    -------------------------------------------------------------------------
 
-   function Has_Priv
-     (Id   : Types.Dh_Id_Type;
-      Priv : Types.Dh_Priv_Type)
+   function Has_priv
+     (Id : Types.dh_id_type;
+      priv : Types.dh_priv_type)
       return Boolean
-   is (Context_Array (Id).Priv = Priv);
+   is (Context_Array (Id).priv = priv);
 
    -------------------------------------------------------------------------
 
    function Has_State
-     (Id    : Types.Dh_Id_Type;
-      State : Dh_State_Type)
+     (Id : Types.dh_id_type;
+      State : dh_State_Type)
       return Boolean
    is (Context_Array (Id).State = State);
 
    -------------------------------------------------------------------------
 
-   procedure Invalidate (Id : Types.Dh_Id_Type) is
-   begin
-      Context_Array (Id).State := Invalid;
-   end Invalidate;
-
-   -------------------------------------------------------------------------
-
    pragma Warnings
      (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.Dh_Id_Type) return Boolean
+   function Is_Valid (Id : Types.dh_id_type) return Boolean
    is (Context_Array'First <= Id and Id <= Context_Array'Last);
    pragma Warnings
      (On, "condition can only be False if invalid values present");
 
    -------------------------------------------------------------------------
 
-   procedure Reset (Id : Types.Dh_Id_Type) is
+   procedure consume
+     (Id : Types.dh_id_type;
+      dh_key : out Types.dh_key_type)
+   is
    begin
-      Context_Array (Id).Dha_Id        := Types.Dha_Id_Type'First;
-      Context_Array (Id).Creation_Time := Types.Rel_Time_Type'First;
-      Context_Array (Id).Priv          := Types.Null_Dh_Priv_Type;
-      Context_Array (Id).Key           := Types.Null_Dh_Key_Type;
-      Context_Array (Id).State         := Clean;
-   end Reset;
+      dh_key := Context_Array (Id).key;
+      Context_Array (Id).dha_id := Types.dha_id_type'First;
+      Context_Array (Id).creation_time := Types.rel_time_type'First;
+      Context_Array (Id).priv := Types.Null_dh_priv_type;
+      Context_Array (Id).key := Types.Null_dh_key_type;
+      Context_Array (Id).State := clean;
+   end consume;
 
-end Tkmrpc.Contexts.Dh;
+   -------------------------------------------------------------------------
+
+   procedure create
+     (Id : Types.dh_id_type;
+      dha_id : Types.dha_id_type;
+      secvalue : Types.dh_priv_type)
+   is
+   begin
+      Context_Array (Id).dha_id := dha_id;
+      Context_Array (Id).priv := secvalue;
+      Context_Array (Id).State := created;
+   end create;
+
+   -------------------------------------------------------------------------
+
+   procedure generate
+     (Id : Types.dh_id_type;
+      dh_key : Types.dh_key_type;
+      timestamp : Types.rel_time_type)
+   is
+   begin
+      Context_Array (Id).key := dh_key;
+      Context_Array (Id).creation_time := timestamp;
+      Context_Array (Id).priv := Types.Null_dh_priv_type;
+      Context_Array (Id).State := generated;
+   end generate;
+
+   -------------------------------------------------------------------------
+
+   function get_dha_id
+     (Id : Types.dh_id_type)
+      return Types.dha_id_type
+   is
+   begin
+      return Context_Array (Id).dha_id;
+   end get_dha_id;
+
+   -------------------------------------------------------------------------
+
+   function get_secvalue
+     (Id : Types.dh_id_type)
+      return Types.dh_priv_type
+   is
+   begin
+      return Context_Array (Id).priv;
+   end get_secvalue;
+
+   -------------------------------------------------------------------------
+
+   procedure invalidate
+     (Id : Types.dh_id_type)
+   is
+   begin
+      Context_Array (Id).State := invalid;
+   end invalidate;
+
+   -------------------------------------------------------------------------
+
+   procedure reset
+     (Id : Types.dh_id_type)
+   is
+   begin
+      Context_Array (Id).dha_id := Types.dha_id_type'First;
+      Context_Array (Id).creation_time := Types.rel_time_type'First;
+      Context_Array (Id).priv := Types.Null_dh_priv_type;
+      Context_Array (Id).key := Types.Null_dh_key_type;
+      Context_Array (Id).State := clean;
+   end reset;
+
+end Tkmrpc.Contexts.dh;

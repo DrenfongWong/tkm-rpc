@@ -111,12 +111,6 @@ extern result_type ike_dh_generate_key(const dh_id_type dh_id,
                 const dh_pubvalue_type pubvalue);
 
 /**
- * Return the DH shared secret value.
- */
-extern result_type ike_dh_get_shared_secret(const dh_id_type dh_id,
-                dh_key_type *sharedsecret);
-
-/**
  * Reset a CC context.
  */
 extern result_type ike_cc_reset(const cc_id_type cc_id);

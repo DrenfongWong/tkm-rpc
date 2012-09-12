@@ -83,16 +83,6 @@ package Tkmrpc.Clients.Ike is
       Mechanism => (Dh_Id => Value, Pubvalue => Value));
    --  Create a nonce.
 
-   procedure Dh_Get_Shared_Secret
-     (Result       : out Results.Result_Type;
-      Dh_Id        : Types.Dh_Id_Type;
-      Sharedsecret : out Types.Dh_Key_Type);
-   pragma Export (C, Dh_Get_Shared_Secret, "ike_dh_get_shared_secret");
-   pragma Export_Valued_Procedure
-     (Dh_Get_Shared_Secret,
-      Mechanism => (Dh_Id => Value));
-   --  Return the DH shared secret value.
-
    procedure Cc_Reset
      (Result : out Results.Result_Type;
       Cc_Id  : Types.Cc_Id_Type);
