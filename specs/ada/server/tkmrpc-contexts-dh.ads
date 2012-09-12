@@ -1,140 +1,141 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Contexts.Dh is
+package Tkmrpc.Contexts.dh
+is
 
-   type Dh_State_Type is (
-     Clean,
-   --  No nonce present.
-     Invalid,
-   --  Error state.
-     Stale,
-   --  DH Context stale.
-     Created,
-   --  Waiting for remote pubvalue.
-     Generated
-   --  Ready.
-     );
+   type dh_State_Type is
+      (clean,
+       --  No nonce present.
+       invalid,
+       --  Error state.
+       stale,
+       --  DH Context stale.
+       created,
+       --  Waiting for remote pubvalue.
+       generated
+       --  Ready.
+      );
 
-   function Get_State (Id : Types.Dh_Id_Type) return Dh_State_Type
+   function Get_State
+     (Id : Types.dh_id_type)
+      return dh_State_Type
    with
      Pre => Is_Valid (Id);
 
-   function Is_Valid (Id : Types.Dh_Id_Type) return Boolean;
+   function Is_Valid (Id : Types.dh_id_type) return Boolean;
    --  Returns True if the given id has a valid value.
 
-   function Has_Creation_Time
-     (Id            : Types.Dh_Id_Type;
-      Creation_Time : Types.Rel_Time_Type)
-      return          Boolean
+   function Has_creation_time
+     (Id : Types.dh_id_type;
+      creation_time : Types.rel_time_type)
+      return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  creation_time value.
 
-   function Has_Dha_Id
-     (Id     : Types.Dh_Id_Type;
-      Dha_Id : Types.Dha_Id_Type)
-      return   Boolean
+   function Has_dha_id
+     (Id : Types.dh_id_type;
+      dha_id : Types.dha_id_type)
+      return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  dha_id value.
 
-   function Has_Key
-     (Id   : Types.Dh_Id_Type;
-      Key  : Types.Dh_Key_Type)
+   function Has_key
+     (Id : Types.dh_id_type;
+      key : Types.dh_key_type)
       return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  key value.
 
-   function Has_Priv
-     (Id   : Types.Dh_Id_Type;
-      Priv : Types.Dh_Priv_Type)
+   function Has_priv
+     (Id : Types.dh_id_type;
+      priv : Types.dh_priv_type)
       return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  priv value.
 
    function Has_State
-     (Id    : Types.Dh_Id_Type;
-      State : Dh_State_Type)
-      return  Boolean
+     (Id : Types.dh_id_type;
+      State : dh_State_Type)
+      return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  State value.
 
-   procedure Consume
-     (Id     : Types.Dh_Id_Type;
-      Dh_Key : out Types.Dh_Key_Type)
+   procedure consume
+     (Id : Types.dh_id_type;
+      dh_key : out Types.dh_key_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Generated)),
-     Post => Has_State (Id, Clean);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, generated)),
+     Post => Has_State (Id, clean);
 
-   procedure Create
-     (Id       : Types.Dh_Id_Type;
-      Dha_Id   : Types.Dha_Id_Type;
-      Secvalue : Types.Dh_Priv_Type)
+   procedure create
+     (Id : Types.dh_id_type;
+      dha_id : Types.dha_id_type;
+      secvalue : Types.dh_priv_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean)),
-     Post => Has_State (Id, Created) and
-             Has_Dha_Id (Id, Dha_Id) and
-             Has_Priv (Id, Secvalue);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean)),
+     Post => Has_State (Id, created) and
+             Has_dha_id (Id, dha_id) and
+             Has_priv (Id, secvalue);
 
-   procedure Generate
-     (Id        : Types.Dh_Id_Type;
-      Dh_Key    : Types.Dh_Key_Type;
-      Timestamp : Types.Rel_Time_Type)
+   procedure generate
+     (Id : Types.dh_id_type;
+      dh_key : Types.dh_key_type;
+      timestamp : Types.rel_time_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Created)),
-     Post => Has_State (Id, Generated) and
-             Has_Key (Id, Dh_Key) and
-             Has_Creation_Time (Id, Timestamp);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, created)),
+     Post => Has_State (Id, generated) and
+             Has_key (Id, dh_key) and
+             Has_creation_time (Id, timestamp);
 
-   function Get_Dha_Id (Id : Types.Dh_Id_Type) return Types.Dha_Id_Type
+   function get_dha_id
+     (Id : Types.dh_id_type)
+      return Types.dha_id_type
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Created)),
-     Post => Has_Dha_Id (Id, Get_Dha_Id'Result);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, created)),
+     Post => Has_dha_id (Id, get_dha_id'Result);
 
-   function Get_Secvalue (Id : Types.Dh_Id_Type) return Types.Dh_Priv_Type
+   function get_secvalue
+     (Id : Types.dh_id_type)
+      return Types.dh_priv_type
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Created)),
-     Post => Has_Priv (Id, Get_Secvalue'Result);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, created)),
+     Post => Has_priv (Id, get_secvalue'Result);
 
-   function Get_Shared_Secret
-     (Id   : Types.Dh_Id_Type)
-      return Types.Dh_Key_Type
+   procedure invalidate
+     (Id : Types.dh_id_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Generated)),
-     Post => Has_Key (Id, Get_Shared_Secret'Result);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean) or
+            Has_State (Id, created) or
+            Has_State (Id, generated) or
+            Has_State (Id, invalid) or
+            Has_State (Id, stale)),
+     Post => Has_State (Id, invalid);
 
-   procedure Invalidate (Id : Types.Dh_Id_Type)
+   procedure reset
+     (Id : Types.dh_id_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean) or
-             Has_State (Id, Created) or
-             Has_State (Id, Generated) or
-             Has_State (Id, Invalid) or
-             Has_State (Id, Stale)),
-     Post => Has_State (Id, Invalid);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean) or
+            Has_State (Id, created) or
+            Has_State (Id, generated) or
+            Has_State (Id, invalid) or
+            Has_State (Id, stale)),
+     Post => Has_State (Id, clean);
 
-   procedure Reset (Id : Types.Dh_Id_Type)
-   with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean) or
-             Has_State (Id, Created) or
-             Has_State (Id, Generated) or
-             Has_State (Id, Invalid) or
-             Has_State (Id, Stale)),
-     Post => Has_State (Id, Clean);
-
-end Tkmrpc.Contexts.Dh;
+end Tkmrpc.Contexts.dh;

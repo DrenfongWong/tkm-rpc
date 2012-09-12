@@ -1,68 +1,77 @@
 with Tkmrpc.Types;
 
-package Tkmrpc.Contexts.Nc is
+package Tkmrpc.Contexts.nc
+is
 
-   type Nc_State_Type is (
-     Clean,
-   --  No nonce present.
-     Invalid,
-   --  Error state.
-     Created
-   --  Nonce available.
-     );
+   type nc_State_Type is
+      (clean,
+       --  No nonce present.
+       invalid,
+       --  Error state.
+       created
+       --  Nonce available.
+      );
 
-   function Get_State (Id : Types.Nc_Id_Type) return Nc_State_Type
+   function Get_State
+     (Id : Types.nc_id_type)
+      return nc_State_Type
    with
      Pre => Is_Valid (Id);
 
-   function Is_Valid (Id : Types.Nc_Id_Type) return Boolean;
+   function Is_Valid (Id : Types.nc_id_type) return Boolean;
    --  Returns True if the given id has a valid value.
 
-   function Has_Nonce
-     (Id    : Types.Nc_Id_Type;
-      Nonce : Types.Nonce_Type)
+   function Has_nonce
+     (Id : Types.nc_id_type;
+      nonce : Types.nonce_type)
       return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  nonce value.
 
    function Has_State
-     (Id    : Types.Nc_Id_Type;
-      State : Nc_State_Type)
+     (Id : Types.nc_id_type;
+      State : nc_State_Type)
       return Boolean
    with
-     Pre => Is_Valid (Id);
+      Pre => Is_Valid (Id);
    --  Returns True if the context specified by id has the given
    --  State value.
 
-   procedure Consume (Id : Types.Nc_Id_Type; Nonce : out Types.Nonce_Type)
+   procedure consume
+     (Id : Types.nc_id_type;
+      nonce : out Types.nonce_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Created)),
-     Post => Has_State (Id, Clean);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, created)),
+     Post => Has_State (Id, clean);
 
-   procedure Create (Id : Types.Nc_Id_Type; Nonce : Types.Nonce_Type)
+   procedure create
+     (Id : Types.nc_id_type;
+      nonce : Types.nonce_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean)),
-     Post => Has_State (Id, Created) and
-             Has_Nonce (Id, Nonce);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean)),
+     Post => Has_State (Id, created) and
+             Has_nonce (Id, nonce);
 
-   procedure Invalidate (Id : Types.Nc_Id_Type)
+   procedure invalidate
+     (Id : Types.nc_id_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean) or
-             Has_State (Id, Created) or
-             Has_State (Id, Invalid)),
-     Post => Has_State (Id, Invalid);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean) or
+            Has_State (Id, created) or
+            Has_State (Id, invalid)),
+     Post => Has_State (Id, invalid);
 
-   procedure Reset (Id : Types.Nc_Id_Type)
+   procedure reset
+     (Id : Types.nc_id_type)
    with
-     Pre  => Is_Valid (Id) and then
-            (Has_State (Id, Clean) or
-             Has_State (Id, Created) or
-             Has_State (Id, Invalid)),
-     Post => Has_State (Id, Clean);
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, clean) or
+            Has_State (Id, created) or
+            Has_State (Id, invalid)),
+     Post => Has_State (Id, clean);
 
-end Tkmrpc.Contexts.Nc;
+end Tkmrpc.Contexts.nc;

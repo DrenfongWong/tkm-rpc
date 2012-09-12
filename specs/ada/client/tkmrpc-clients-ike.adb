@@ -8,7 +8,6 @@ with Tkmrpc.Request.Ike.Nc_Create.Convert;
 with Tkmrpc.Request.Ike.Dh_Reset.Convert;
 with Tkmrpc.Request.Ike.Dh_Create.Convert;
 with Tkmrpc.Request.Ike.Dh_Generate_Key.Convert;
-with Tkmrpc.Request.Ike.Dh_Get_Shared_Secret.Convert;
 with Tkmrpc.Request.Ike.Cc_Reset.Convert;
 with Tkmrpc.Request.Ike.Cc_Set_User_Certificate.Convert;
 with Tkmrpc.Request.Ike.Cc_Add_Certificate.Convert;
@@ -35,7 +34,6 @@ with Tkmrpc.Response.Ike.Nc_Create.Convert;
 with Tkmrpc.Response.Ike.Dh_Reset.Convert;
 with Tkmrpc.Response.Ike.Dh_Create.Convert;
 with Tkmrpc.Response.Ike.Dh_Generate_Key.Convert;
-with Tkmrpc.Response.Ike.Dh_Get_Shared_Secret.Convert;
 with Tkmrpc.Response.Ike.Cc_Reset.Convert;
 with Tkmrpc.Response.Ike.Cc_Set_User_Certificate.Convert;
 with Tkmrpc.Response.Ike.Cc_Add_Certificate.Convert;
@@ -239,33 +237,6 @@ package body Tkmrpc.Clients.Ike is
 
       Result := Res.Header.Result;
    end Dh_Generate_Key;
-
-   -------------------------------------------------------------------------
-
-   procedure Dh_Get_Shared_Secret
-     (Result       : out Results.Result_Type;
-      Dh_Id        : Types.Dh_Id_Type;
-      Sharedsecret : out Types.Dh_Key_Type)
-   is
-      use type Tkmrpc.Results.Result_Type;
-
-      Req  : Request.Ike.Dh_Get_Shared_Secret.Request_Type;
-      Res  : Response.Ike.Dh_Get_Shared_Secret.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req.Header.Operation := Operations.Ike.Dh_Get_Shared_Secret;
-      Req.Data.Dh_Id       := Dh_Id;
-
-      Transport.Client.Send
-        (Data =>
-            Request.Ike.Dh_Get_Shared_Secret.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res :=
-         Response.Ike.Dh_Get_Shared_Secret.Convert.From_Response (S => Data);
-
-      Sharedsecret := Res.Data.Sharedsecret;
-      Result       := Res.Header.Result;
-   end Dh_Get_Shared_Secret;
 
    -------------------------------------------------------------------------
 
