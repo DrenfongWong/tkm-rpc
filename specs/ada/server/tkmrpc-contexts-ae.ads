@@ -264,14 +264,7 @@ is
    procedure invalidate
      (Id : Types.ae_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, clean) or
-            Has_State (Id, invalid) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, stale)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, invalid);
 
    function is_initiator
@@ -289,15 +282,7 @@ is
    procedure reset
      (Id : Types.ae_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, unauth) or
-            Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, clean) or
-            Has_State (Id, invalid) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, stale)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, clean);
 
    procedure sign

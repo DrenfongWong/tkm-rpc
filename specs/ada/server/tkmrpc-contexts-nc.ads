@@ -59,19 +59,13 @@ is
    procedure invalidate
      (Id : Types.nc_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, clean) or
-            Has_State (Id, created) or
-            Has_State (Id, invalid)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, invalid);
 
    procedure reset
      (Id : Types.nc_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, clean) or
-            Has_State (Id, created) or
-            Has_State (Id, invalid)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, clean);
 
 end Tkmrpc.Contexts.nc;
