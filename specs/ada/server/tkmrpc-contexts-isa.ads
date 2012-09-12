@@ -111,21 +111,13 @@ is
    procedure invalidate
      (Id : Types.isa_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, clean) or
-            Has_State (Id, invalid) or
-            Has_State (Id, stale)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, invalid);
 
    procedure reset
      (Id : Types.isa_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, clean) or
-            Has_State (Id, invalid) or
-            Has_State (Id, stale)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, clean);
 
 end Tkmrpc.Contexts.isa;

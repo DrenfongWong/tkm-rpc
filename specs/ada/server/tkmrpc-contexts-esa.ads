@@ -74,14 +74,16 @@ is
              Has_ea_id (Id, ea_id) and
              Has_sp_id (Id, sp_id);
 
+   procedure invalidate
+     (Id : Types.esa_id_type)
+   with
+     Pre => Is_Valid (Id),
+     Post => Has_State (Id, invalid);
+
    procedure reset
      (Id : Types.esa_id_type)
    with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, invalid) or
-            Has_State (Id, stale) or
-            Has_State (Id, active) or
-            Has_State (Id, selected)),
+     Pre => Is_Valid (Id),
      Post => Has_State (Id, clean);
 
    procedure select_sa
