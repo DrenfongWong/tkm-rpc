@@ -76,6 +76,8 @@ typedef uint64_t pfs_flag_type;
 
 typedef uint64_t cc_time_flag_type;
 
+typedef uint8_t expiry_flag_type;
+
 typedef uint64_t auth_algorithm_type;
 
 typedef uint64_t dh_algorithm_type;
@@ -95,6 +97,8 @@ typedef uint64_t eenc_algorithm_type;
 typedef uint64_t key_length_bits_type;
 
 typedef uint64_t block_length_bits_type;
+
+typedef uint32_t protocol_type;
 
 typedef uint64_t init_type;
 

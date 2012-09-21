@@ -8,4 +8,7 @@ package Tkmrpc.Constants is
    Modp_3072 : constant Types.Dh_Algorithm_Type := 16#000000000000000f#;
    Modp_4096 : constant Types.Dh_Algorithm_Type := 16#0000000000000010#;
 
+   Proto_Esp : constant Types.Protocol_Type := 16#32#;
+   Proto_Ah  : constant Types.Protocol_Type := 16#33#;
+
 end Tkmrpc.Constants;
