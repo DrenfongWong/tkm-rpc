@@ -74,6 +74,8 @@ package Tkmrpc.Types is
 
    subtype Cc_Time_Flag_Type is Interfaces.Unsigned_64;
 
+   subtype Expiry_Flag_Type is Interfaces.Unsigned_8;
+
    subtype Auth_Algorithm_Type is Interfaces.Unsigned_64;
 
    subtype Dh_Algorithm_Type is Interfaces.Unsigned_64;
@@ -93,6 +95,8 @@ package Tkmrpc.Types is
    subtype Key_Length_Bits_Type is Interfaces.Unsigned_64;
 
    subtype Block_Length_Bits_Type is Interfaces.Unsigned_64;
+
+   subtype Protocol_Type is Interfaces.Unsigned_32;
 
    subtype Init_Type is Interfaces.Unsigned_64;
 

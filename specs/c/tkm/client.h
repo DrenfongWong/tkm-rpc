@@ -263,3 +263,26 @@ extern result_type ike_esa_create_first(const esa_id_type esa_id,
  */
 extern result_type ike_esa_select(const esa_id_type esa_id);
 
+/**
+ * Interface : EES
+ * Summary   : The TKM - ESA Event Service (EES) interface
+ */
+
+/**
+ * Initialize EES client with given address
+ */
+extern result_type ees_init(const char const *address);
+
+/**
+ * Trigger 'Acquire' event for an ESP SA.
+ */
+extern result_type ees_esa_acquire(const sp_id_type sp_id);
+
+/**
+ * Trigger 'Expire' event for an ESP SA.
+ */
+extern result_type ees_esa_expire(const sp_id_type sp_id,
+                const esp_spi_type spi_rem,
+                const protocol_type protocol,
+                const expiry_flag_type hard);
+
