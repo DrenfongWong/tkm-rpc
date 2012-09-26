@@ -1,0 +1,18 @@
+with "tkmrpc_switches";
+
+library project Tkmrpc_Commonlib is
+
+   for Source_Dirs use ("specs/ada/common");
+   for Object_Dir use "obj/commonlib";
+   for Library_Dir use "lib";
+   for Library_Kind use "static";
+   for Library_Name use "tkmrpc-common";
+
+   Ada_Compiler_Switches := Tkmrpc_Switches.Ada_Compiler_Switches & "-gnatwale";
+
+   package Compiler is
+      for Default_Switches ("ada") use Ada_Compiler_Switches;
+   end Compiler;
+
+end Tkmrpc_Commonlib;
+

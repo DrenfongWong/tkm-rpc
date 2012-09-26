@@ -1,0 +1,10 @@
+with "anet";
+
+project Tkmrpc_Common is
+   for Source_Dirs use ("../../include/tkmrpc/common");
+   for Library_Name use "tkmrpc-common";
+   for Library_Dir use "../../lib";
+   for Library_ALI_Dir use "../../lib/tkmrpc";
+   for Library_Kind use "static";
+   for Externally_Built use "true";
+end Tkmrpc_Common;

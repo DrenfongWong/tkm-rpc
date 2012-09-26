@@ -1,9 +1,8 @@
-with "anet";
+with "tkmrpc_common";
 
 project Tkmrpc_Client is
    for Languages use ("Ada", "C");
    for Source_Dirs use ("../../include/tkmrpc/client",
-                        "../../include/tkmrpc/common",
                         "../../include/tkmrpc/c");
    for Library_Name use "tkmrpc-client";
    for Library_Dir use "../../lib";
