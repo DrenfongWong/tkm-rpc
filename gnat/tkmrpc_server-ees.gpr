@@ -1,0 +1,5 @@
+project Tkmrpc_Server.Ees extends "tkmrpc_server" is
+
+   for Source_Dirs use ("../../include/tkmrpc/server/ees");
+
+end Tkmrpc_Server.Ees;

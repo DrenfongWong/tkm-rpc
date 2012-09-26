@@ -29,12 +29,17 @@ install_lib: build_clientlib
 	install -d $(PREFIX)/include/tkmrpc/c/tkm
 	install -d $(PREFIX)/include/tkmrpc/common
 	install -d $(PREFIX)/include/tkmrpc/client
-	install -d $(PREFIX)/include/tkmrpc/server
+	install -d $(PREFIX)/include/tkmrpc/server/cfg
+	install -d $(PREFIX)/include/tkmrpc/server/ees
+	install -d $(PREFIX)/include/tkmrpc/server/ike
 	install -m 644 src/client/* $(PREFIX)/include/tkmrpc/client
 	install -m 644 src/server/* $(PREFIX)/include/tkmrpc/server
 	install -m 644 specs/ada/common/* $(PREFIX)/include/tkmrpc/common
 	install -m 644 specs/ada/client/* $(PREFIX)/include/tkmrpc/client
-	install -m 644 specs/ada/server/* $(PREFIX)/include/tkmrpc/server
+	install -m 644 specs/ada/server/*.ad* $(PREFIX)/include/tkmrpc/server
+	install -m 644 specs/ada/server/cfg/* $(PREFIX)/include/tkmrpc/server/cfg
+	install -m 644 specs/ada/server/ees/* $(PREFIX)/include/tkmrpc/server/ees
+	install -m 644 specs/ada/server/ike/* $(PREFIX)/include/tkmrpc/server/ike
 	install -m 644 specs/c/tkm/*.[ch] $(PREFIX)/include/tkmrpc/c/tkm
 	install -m 444 $(LIBDIR)/*.ali $(PREFIX)/lib/tkmrpc
 	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
