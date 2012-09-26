@@ -1,6 +1,6 @@
 with "anet";
 
-project TKMRPC_Common is
+project TKMRPC_Switches is
 
    for Source_Dirs use ();
 
@@ -17,5 +17,5 @@ project TKMRPC_Common is
 
    Binder_Switches := ("-E");
 
-end TKMRPC_Common;
+end TKMRPC_Switches;
 

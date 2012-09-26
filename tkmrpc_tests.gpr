@@ -1,5 +1,5 @@
 with "ahven";
-with "tkmrpc_common";
+with "tkmrpc_switches";
 with "tkmrpc_clientlib";
 
 project TKMRPC_Tests is
@@ -7,7 +7,7 @@ project TKMRPC_Tests is
    type Build_Type is ("tests", "coverage");
    Build : Build_Type := external ("BUILD", "tests");
 
-   Compiler_Switches := TKMRPC_Common.Ada_Compiler_Switches & "-gnatwal";
+   Compiler_Switches := TKMRPC_Switches.Ada_Compiler_Switches & "-gnatwal";
    Linker_Switches   := ();
 
    for Main use ("test_runner.adb");
@@ -39,7 +39,7 @@ project TKMRPC_Tests is
    end Linker;
 
    package Binder is
-      for Default_Switches ("ada") use TKMRPC_Common.Binder_Switches;
+      for Default_Switches ("ada") use TKMRPC_Switches.Binder_Switches;
    end Binder;
 
 end TKMRPC_Tests;
