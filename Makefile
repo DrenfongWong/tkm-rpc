@@ -39,6 +39,7 @@ install_lib: build_clientlib
 	install -m 444 $(LIBDIR)/*.ali $(PREFIX)/lib/tkmrpc
 	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
 	install -m 444 $(LIBDIR)/libtkmrpc-client.a $(PREFIX)/lib
+	install -m 444 $(LIBDIR)/libtkmrpc-common.a $(PREFIX)/lib
 
 cov: build_tests
 	@rm -f $(COVDIR)/*.gcda

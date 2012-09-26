@@ -1,9 +1,8 @@
-with "anet";
+with "tkmrpc_common";
 
 project Tkmrpc_Server is
 
-   for Source_Dirs use ("../../include/tkmrpc/server",
-                        "../../include/tkmrpc/common");
+   for Source_Dirs use ("../../include/tkmrpc/server");
 
    Obj_Dir := external ("OBJ_DIR", "obj");
    for Object_Dir use Obj_Dir;
