@@ -1,7 +1,7 @@
 with Ada.Streams;
-with Ada.Strings.Unbounded;
 
-with Anet.Sockets;
+with Anet.Types;
+with Anet.Sockets.Unix;
 
 with Tkmrpc.Request.Convert;
 with Tkmrpc.Response.Convert;
@@ -9,34 +9,26 @@ with Tkmrpc.Response.Convert;
 package body Tkmrpc.Transport.Client
 is
 
-   Socket : Anet.Sockets.Socket_Type;
+   Socket : Anet.Sockets.Unix.TCP_Socket_Type;
 
    -------------------------------------------------------------------------
 
    procedure Connect (Address : String)
    is
    begin
-      Socket.Create
-        (Family => Anet.Sockets.Family_Unix,
-         Mode   => Anet.Sockets.Stream_Socket);
-      Socket.Connect
-        (Dst =>
-           (Family => Anet.Sockets.Family_Unix,
-            Path   => Ada.Strings.Unbounded.To_Unbounded_String
-              (Address)));
+      Socket.Init;
+      Socket.Connect (Path => Anet.Types.Unix_Path_Type (Address));
    end Connect;
 
    -------------------------------------------------------------------------
 
    procedure Receive (Data : out Response.Data_Type)
    is
-      Sender : Anet.Sockets.Socket_Addr_Type;
       Buffer : Ada.Streams.Stream_Element_Array (1 .. Response.Response_Size);
       Last   : Ada.Streams.Stream_Element_Offset;
    begin
       Socket.Receive
-        (Src  => Sender,
-         Item => Buffer,
+        (Item => Buffer,
          Last => Last);
 
       Data := Response.Convert.From_Stream (S => Buffer);

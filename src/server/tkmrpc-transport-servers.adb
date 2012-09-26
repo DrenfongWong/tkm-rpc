@@ -1,6 +1,8 @@
 with Ada.Streams;
 with Ada.Text_IO;
 
+with Anet.Types;
+
 with Tkmrpc.Request.Convert;
 with Tkmrpc.Response.Convert;
 
@@ -112,13 +114,10 @@ is
                declare
                   use type Ada.Streams.Stream_Element_Offset;
 
-                  Sender : Anet.Sockets.Socket_Addr_Type
-                    (Family => Anet.Sockets.Family_Unix);
                   Buffer : Ada.Streams.Stream_Element_Array (1 .. 2048);
                   Last   : Ada.Streams.Stream_Element_Offset;
                begin
-                  Parent.Sock_Comm.Receive (Src  => Sender,
-                                            Item => Buffer,
+                  Parent.Sock_Comm.Receive (Item => Buffer,
                                             Last => Last);
 
                   --  Exit request processing loop on connection close.
@@ -172,11 +171,8 @@ is
       Process :        Op_Handler)
    is
    begin
-      Server.Sock_Listen.Create
-        (Family => Anet.Sockets.Family_Unix,
-         Mode   => Anet.Sockets.Stream_Socket);
-      Server.Sock_Listen.Bind_Unix
-        (Path => Anet.Sockets.Unix_Path_Type (Address));
+      Server.Sock_Listen.Init;
+      Server.Sock_Listen.Bind (Path => Anet.Types.Unix_Path_Type (Address));
       Server.Sock_Listen.Listen;
 
       Server.Trigger.Activate;

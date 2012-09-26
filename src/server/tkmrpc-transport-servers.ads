@@ -2,7 +2,7 @@ pragma Detect_Blocking;
 
 with Ada.Exceptions;
 
-with Anet.Sockets;
+with Anet.Sockets.Unix;
 
 with Tkmrpc.Request;
 with Tkmrpc.Response;
@@ -94,8 +94,8 @@ private
    end Trigger_Type;
 
    type Server_Type is limited record
-      Sock_Listen : Anet.Sockets.Socket_Type;
-      Sock_Comm   : Anet.Sockets.Socket_Type;
+      Sock_Listen : Anet.Sockets.Unix.TCP_Socket_Type;
+      Sock_Comm   : Anet.Sockets.Unix.TCP_Socket_Type;
       Trigger     : Trigger_Type;
       C_Task      : Connection_Task (Parent => Server_Type'Access);
    end record;
