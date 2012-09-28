@@ -1,6 +1,6 @@
 with "tkmrpc_common";
 
-project Tkmrpc_Client is
+library project Tkmrpc_Client is
    for Languages use ("Ada", "C");
    for Source_Dirs use ("../../include/tkmrpc/client",
                         "../../include/tkmrpc/c");
