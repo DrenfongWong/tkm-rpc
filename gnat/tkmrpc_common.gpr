@@ -1,6 +1,6 @@
 with "anet";
 
-project Tkmrpc_Common is
+library project Tkmrpc_Common is
    for Source_Dirs use ("../../include/tkmrpc/common");
    for Library_Name use "tkmrpc-common";
    for Library_Dir use "../../lib";
