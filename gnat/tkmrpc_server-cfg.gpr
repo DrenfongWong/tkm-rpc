@@ -1,5 +1,6 @@
 project Tkmrpc_Server.Cfg extends "tkmrpc_server" is
 
    for Source_Dirs use ("../../include/tkmrpc/server/cfg");
+   for Object_Dir use Tkmrpc_Server.Obj_Dir;
 
 end Tkmrpc_Server.Cfg;
