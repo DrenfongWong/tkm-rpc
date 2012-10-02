@@ -23,14 +23,19 @@ static void check_result (const result_type res, const char const *name)
 	}
 }
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc != 2)
+	{
+		return EXIT_FAILURE;
+	}
+
 	printf("client: initializing tkm library\n");
 	tkmlib_init();
 
 	printf("client: initializing ike interface\n");
 	result_type result;
-	result = ike_init("/tmp/tkm.rpc");
+	result = ike_init(argv[1]);
 	check_result(result, "ike_init");
 
 	printf("client: calling ike_nc_create\n");
