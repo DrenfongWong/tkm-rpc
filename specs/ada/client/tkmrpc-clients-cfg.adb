@@ -50,24 +50,26 @@ package body Tkmrpc.Clients.Cfg is
       Transport.Client.Receive (Data => Data);
       Res := Response.Cfg.Tkm_Limits.Convert.From_Response (S => Data);
 
-      Max_Active_Requests := Res.Data.Max_Active_Requests;
-      Authag_Contexts     := Res.Data.Authag_Contexts;
-      Cag_Contexts        := Res.Data.Cag_Contexts;
-      Li_Contexts         := Res.Data.Li_Contexts;
-      Ri_Contexts         := Res.Data.Ri_Contexts;
-      Iag_Contexts        := Res.Data.Iag_Contexts;
-      Eag_Contexts        := Res.Data.Eag_Contexts;
-      Dhag_Contexts       := Res.Data.Dhag_Contexts;
-      Sp_Contexts         := Res.Data.Sp_Contexts;
-      Authp_Contexts      := Res.Data.Authp_Contexts;
-      Dhp_Contexts        := Res.Data.Dhp_Contexts;
-      Autha_Contexts      := Res.Data.Autha_Contexts;
-      Ca_Contexts         := Res.Data.Ca_Contexts;
-      Lc_Contexts         := Res.Data.Lc_Contexts;
-      Ia_Contexts         := Res.Data.Ia_Contexts;
-      Ea_Contexts         := Res.Data.Ea_Contexts;
-      Dha_Contexts        := Res.Data.Dha_Contexts;
-      Result              := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Max_Active_Requests := Res.Data.Max_Active_Requests;
+         Authag_Contexts     := Res.Data.Authag_Contexts;
+         Cag_Contexts        := Res.Data.Cag_Contexts;
+         Li_Contexts         := Res.Data.Li_Contexts;
+         Ri_Contexts         := Res.Data.Ri_Contexts;
+         Iag_Contexts        := Res.Data.Iag_Contexts;
+         Eag_Contexts        := Res.Data.Eag_Contexts;
+         Dhag_Contexts       := Res.Data.Dhag_Contexts;
+         Sp_Contexts         := Res.Data.Sp_Contexts;
+         Authp_Contexts      := Res.Data.Authp_Contexts;
+         Dhp_Contexts        := Res.Data.Dhp_Contexts;
+         Autha_Contexts      := Res.Data.Autha_Contexts;
+         Ca_Contexts         := Res.Data.Ca_Contexts;
+         Lc_Contexts         := Res.Data.Lc_Contexts;
+         Ia_Contexts         := Res.Data.Ia_Contexts;
+         Ea_Contexts         := Res.Data.Ea_Contexts;
+         Dha_Contexts        := Res.Data.Dha_Contexts;
+      end if;
    end Tkm_Limits;
 
    -------------------------------------------------------------------------
@@ -108,8 +110,10 @@ package body Tkmrpc.Clients.Cfg is
       Transport.Client.Receive (Data => Data);
       Res := Response.Cfg.Tkm_Version.Convert.From_Response (S => Data);
 
-      Version := Res.Data.Version;
-      Result  := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Version := Res.Data.Version;
+      end if;
    end Tkm_Version;
 
 end Tkmrpc.Clients.Cfg;

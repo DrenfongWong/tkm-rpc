@@ -209,8 +209,10 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Dh_Create.Convert.From_Response (S => Data);
 
-      Pubvalue := Res.Data.Pubvalue;
-      Result   := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Pubvalue := Res.Data.Pubvalue;
+      end if;
    end Dh_Create;
 
    -------------------------------------------------------------------------
@@ -520,11 +522,13 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Isa_Create.Convert.From_Response (S => Data);
 
-      Sk_Ai  := Res.Data.Sk_Ai;
-      Sk_Ar  := Res.Data.Sk_Ar;
-      Sk_Ei  := Res.Data.Sk_Ei;
-      Sk_Er  := Res.Data.Sk_Er;
       Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Sk_Ai := Res.Data.Sk_Ai;
+         Sk_Ar := Res.Data.Sk_Ar;
+         Sk_Ei := Res.Data.Sk_Ei;
+         Sk_Er := Res.Data.Sk_Er;
+      end if;
    end Isa_Create;
 
    -------------------------------------------------------------------------
@@ -567,11 +571,13 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Isa_Create_Child.Convert.From_Response (S => Data);
 
-      Sk_Ai  := Res.Data.Sk_Ai;
-      Sk_Ar  := Res.Data.Sk_Ar;
-      Sk_Ei  := Res.Data.Sk_Ei;
-      Sk_Er  := Res.Data.Sk_Er;
       Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Sk_Ai := Res.Data.Sk_Ai;
+         Sk_Ar := Res.Data.Sk_Ar;
+         Sk_Ei := Res.Data.Sk_Ei;
+         Sk_Er := Res.Data.Sk_Er;
+      end if;
    end Isa_Create_Child;
 
    -------------------------------------------------------------------------
@@ -622,8 +628,10 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Isa_Sign.Convert.From_Response (S => Data);
 
-      Signature := Res.Data.Signature;
-      Result    := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Signature := Res.Data.Signature;
+      end if;
    end Isa_Sign;
 
    -------------------------------------------------------------------------
@@ -653,8 +661,10 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Isa_Sign_Psk.Convert.From_Response (S => Data);
 
-      Signature := Res.Data.Signature;
-      Result    := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Signature := Res.Data.Signature;
+      end if;
    end Isa_Sign_Psk;
 
    -------------------------------------------------------------------------
@@ -705,8 +715,10 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Nc_Create.Convert.From_Response (S => Data);
 
-      Nonce  := Res.Data.Nonce;
       Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Nonce := Res.Data.Nonce;
+      end if;
    end Nc_Create;
 
    -------------------------------------------------------------------------
@@ -757,14 +769,16 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Tkm_Limits.Convert.From_Response (S => Data);
 
-      Max_Active_Requests := Res.Data.Max_Active_Requests;
-      Nc_Contexts         := Res.Data.Nc_Contexts;
-      Dh_Contexts         := Res.Data.Dh_Contexts;
-      Cc_Contexts         := Res.Data.Cc_Contexts;
-      Ae_Contexts         := Res.Data.Ae_Contexts;
-      Isa_Contexts        := Res.Data.Isa_Contexts;
-      Esa_Contexts        := Res.Data.Esa_Contexts;
-      Result              := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Max_Active_Requests := Res.Data.Max_Active_Requests;
+         Nc_Contexts         := Res.Data.Nc_Contexts;
+         Dh_Contexts         := Res.Data.Dh_Contexts;
+         Cc_Contexts         := Res.Data.Cc_Contexts;
+         Ae_Contexts         := Res.Data.Ae_Contexts;
+         Isa_Contexts        := Res.Data.Isa_Contexts;
+         Esa_Contexts        := Res.Data.Esa_Contexts;
+      end if;
    end Tkm_Limits;
 
    -------------------------------------------------------------------------
@@ -805,8 +819,10 @@ package body Tkmrpc.Clients.Ike is
       Transport.Client.Receive (Data => Data);
       Res := Response.Ike.Tkm_Version.Convert.From_Response (S => Data);
 
-      Version := Res.Data.Version;
-      Result  := Res.Header.Result;
+      Result := Res.Header.Result;
+      if Result = Results.Ok then
+         Version := Res.Data.Version;
+      end if;
    end Tkm_Version;
 
 end Tkmrpc.Clients.Ike;
