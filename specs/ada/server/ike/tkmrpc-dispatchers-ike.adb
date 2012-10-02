@@ -106,6 +106,7 @@ package body Tkmrpc.Dispatchers.Ike is
          Res := Response.Null_Data;
       end case;
 
+      Res.Header.Operation  := Req.Header.Operation;
       Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 

@@ -6,6 +6,6 @@ package Tkmrpc.Dispatchers.Ees is
    procedure Dispatch
      (Req : Request.Data_Type;
       Res : out Response.Data_Type);
-   --  Dispatch EES  request to concrete operation handler.
+   --  Dispatch EES request to concrete operation handler.
 
 end Tkmrpc.Dispatchers.Ees;
