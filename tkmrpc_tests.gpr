@@ -11,7 +11,7 @@ project Tkmrpc_Tests is
    Linker_Switches   := ();
 
    for Main use ("test_runner.adb");
-   for Source_Dirs use ("tests", "src/server", "specs/ada/server/**");
+   for Source_Dirs use ("tests", "specs/ada/server/**");
 
    case Build is
       when "tests" =>

@@ -5,8 +5,6 @@ with Ahven.Framework;
 
 with Tkmrpc_Request_Tests;
 with Tkmrpc_Response_Tests;
-with Tkmrpc_Transport_Tests;
-with Tkmrpc_Ophandlers_Tests;
 with Tkmrpc_ORB_Tests;
 
 procedure Test_Runner
@@ -20,10 +18,6 @@ begin
              T     => new Tkmrpc_Request_Tests.Testcase);
    Add_Test (Suite => S.all,
              T     => new Tkmrpc_Response_Tests.Testcase);
-   Add_Test (Suite => S.all,
-             T     => new Tkmrpc_Transport_Tests.Testcase);
-   Add_Test (Suite => S.all,
-             T     => new Tkmrpc_Ophandlers_Tests.Testcase);
    Add_Test (Suite => S.all,
              T     => new Tkmrpc_ORB_Tests.Testcase);
 
