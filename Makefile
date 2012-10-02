@@ -35,6 +35,7 @@ install_lib: build_clientlib
 	install -m 644 src/client/* $(PREFIX)/include/tkmrpc/client
 	install -m 644 specs/ada/common/* $(PREFIX)/include/tkmrpc/common
 	install -m 644 specs/ada/client/* $(PREFIX)/include/tkmrpc/client
+	install -m 644 src/server/* $(PREFIX)/include/tkmrpc/server
 	install -m 644 specs/ada/server/*.ad* $(PREFIX)/include/tkmrpc/server
 	install -m 644 specs/ada/server/cfg/* $(PREFIX)/include/tkmrpc/server/cfg
 	install -m 644 specs/ada/server/ees/* $(PREFIX)/include/tkmrpc/server/ees

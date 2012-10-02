@@ -1,5 +1,3 @@
-with Ada.Streams;
-
 with Interfaces.C.Strings;
 
 with GNAT.OS_Lib;
@@ -11,13 +9,13 @@ with Anet.Receivers.Stream;
 
 with Tkmrpc.Types;
 with Tkmrpc.Clients.Ike;
-with Tkmrpc.Request.Convert;
-with Tkmrpc.Response.Convert;
 with Tkmrpc.Dispatchers.Ike;
 with Tkmrpc.Mock;
 with Tkmrpc.Results;
+with Tkmrpc.Process_Stream;
 
 pragma Elaborate_All (Anet.Receivers.Stream);
+pragma Elaborate_All (Tkmrpc.Process_Stream);
 
 package body Tkmrpc_ORB_Tests
 is
@@ -29,14 +27,10 @@ is
    package Unix_TCP_Receiver is new Anet.Receivers.Stream
      (Socket_Type => Anet.Sockets.Unix.TCP_Socket_Type);
 
-   Socket_Path : constant String := "/tmp/tkm.rpc-";
+   procedure Dispatch is new Process_Stream
+     (Dispatch => Tkmrpc.Dispatchers.Ike.Dispatch);
 
-   procedure Dispatch_Ike_Request
-     (Recv_Data :     Ada.Streams.Stream_Element_Array;
-      Send_Data : out Ada.Streams.Stream_Element_Array;
-      Send_Last : out Ada.Streams.Stream_Element_Offset);
-   --  Convert given data to Tkmrpc request/response objects and pass them on
-   --  to the Tkmrpc IKE dispatcher.
+   Socket_Path : constant String := "/tmp/tkm.rpc-";
 
    -------------------------------------------------------------------------
 
@@ -54,7 +48,7 @@ is
       Sock.Init;
       Sock.Bind (Path => Anet.Types.Unix_Path_Type (Path));
 
-      Receiver.Listen (Callback => Dispatch_Ike_Request'Access);
+      Receiver.Listen (Callback => Dispatch'Access);
 
       Args (1) := new String'(Path);
       GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
@@ -103,7 +97,7 @@ is
       Sock.Init;
       Sock.Bind (Path => Anet.Types.Unix_Path_Type (Path));
 
-      Receiver.Listen (Callback => Dispatch_Ike_Request'Access);
+      Receiver.Listen (Callback => Dispatch'Access);
 
       Clients.Ike.Init (Result  => Result,
                         Address => Address);
@@ -137,34 +131,6 @@ is
          Mock.Last_Nonce_Length := 16;
          raise;
    end Client_Server_ORBs;
-
-   -------------------------------------------------------------------------
-
-   procedure Dispatch_Ike_Request
-     (Recv_Data :     Ada.Streams.Stream_Element_Array;
-      Send_Data : out Ada.Streams.Stream_Element_Array;
-      Send_Last : out Ada.Streams.Stream_Element_Offset)
-   is
-      use type Ada.Streams.Stream_Element_Offset;
-
-      Req : constant Tkmrpc.Request.Data_Type
-        := Tkmrpc.Request.Convert.From_Stream (S => Recv_Data);
-      Res : Tkmrpc.Response.Data_Type;
-   begin
-      begin
-         Tkmrpc.Dispatchers.Ike.Dispatch (Req => Req,
-                                          Res => Res);
-
-      exception
-         when others =>
-            Res                   := Tkmrpc.Response.Null_Data;
-            Res.Header.Request_Id := Req.Header.Request_Id;
-      end;
-
-      Send_Last := Res'Size / 8;
-      Send_Data (Send_Data'First .. Send_Last)
-        := Tkmrpc.Response.Convert.To_Stream (S => Res);
-   end Dispatch_Ike_Request;
 
    -------------------------------------------------------------------------
 
