@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Isa_Auth is
 
@@ -36,5 +37,17 @@ package Tkmrpc.Request.Ike.Isa_Auth is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
+
+   Null_Request : constant Request_Type :=
+      Request_Type'
+     (Header  =>
+     Request.Header_Type'(Operation  => Operations.Ike.Isa_Auth,
+                          Request_Id => 0),
+      Data    =>
+     Data_Type'(Isa_Id       => Types.Isa_Id_Type'First,
+                Cc_Id        => Types.Cc_Id_Type'First,
+                Init_Message => Types.Null_Init_Message_Type,
+                Signature    => Types.Null_Signature_Type),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Request.Ike.Isa_Auth;

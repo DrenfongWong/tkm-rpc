@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First is
       Specific_Req : Request.Ike.Isa_Skip_Create_First.Request_Type;
       Specific_Res : Response.Ike.Isa_Skip_Create_First.Response_Type;
    begin
+      Specific_Res := Response.Ike.Isa_Skip_Create_First.Null_Response;
+
       Specific_Req :=
          Request.Ike.Isa_Skip_Create_First.Convert.From_Request (S => Req);
 

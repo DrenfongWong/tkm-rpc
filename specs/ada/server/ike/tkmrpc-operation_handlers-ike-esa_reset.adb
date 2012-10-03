@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Reset is
       Specific_Req : Request.Ike.Esa_Reset.Request_Type;
       Specific_Res : Response.Ike.Esa_Reset.Response_Type;
    begin
+      Specific_Res := Response.Ike.Esa_Reset.Null_Response;
+
       Specific_Req := Request.Ike.Esa_Reset.Convert.From_Request (S => Req);
 
       Servers.Ike.Esa_Reset

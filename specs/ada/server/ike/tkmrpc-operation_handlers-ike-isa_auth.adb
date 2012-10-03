@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
       Specific_Req : Request.Ike.Isa_Auth.Request_Type;
       Specific_Res : Response.Ike.Isa_Auth.Response_Type;
    begin
+      Specific_Res := Response.Ike.Isa_Auth.Null_Response;
+
       Specific_Req := Request.Ike.Isa_Auth.Convert.From_Request (S => Req);
 
       Servers.Ike.Isa_Auth

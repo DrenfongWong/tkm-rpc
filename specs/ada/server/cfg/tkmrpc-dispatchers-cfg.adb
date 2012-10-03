@@ -22,10 +22,10 @@ package body Tkmrpc.Dispatchers.Cfg is
          when Operations.Cfg.Tkm_Reset =>
             Operation_Handlers.Cfg.Tkm_Reset.Handle (Req => Req, Res => Res);
          when others =>
-            Res := Response.Null_Data;
+            Res                  := Response.Null_Data;
+            Res.Header.Operation := Req.Header.Operation;
       end case;
 
-      Res.Header.Operation  := Req.Header.Operation;
       Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 

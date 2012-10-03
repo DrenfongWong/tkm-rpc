@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Limits is
 
       Specific_Res : Response.Cfg.Tkm_Limits.Response_Type;
    begin
+      Specific_Res := Response.Cfg.Tkm_Limits.Null_Response;
+
       Servers.Cfg.Tkm_Limits
         (Result              => Specific_Res.Header.Result,
          Max_Active_Requests => Specific_Res.Data.Max_Active_Requests,

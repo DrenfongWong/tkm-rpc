@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ees;
 
 package Tkmrpc.Request.Ees.Esa_Expire is
 
@@ -36,5 +37,17 @@ package Tkmrpc.Request.Ees.Esa_Expire is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
+
+   Null_Request : constant Request_Type :=
+      Request_Type'
+     (Header  =>
+     Request.Header_Type'(Operation  => Operations.Ees.Esa_Expire,
+                          Request_Id => 0),
+      Data    =>
+     Data_Type'(Sp_Id    => Types.Sp_Id_Type'First,
+                Spi_Rem  => Types.Esp_Spi_Type'First,
+                Protocol => Types.Protocol_Type'First,
+                Hard     => Types.Expiry_Flag_Type'First),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Request.Ees.Esa_Expire;

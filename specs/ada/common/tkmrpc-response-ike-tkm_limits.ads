@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Response.Ike.Tkm_Limits is
 
@@ -42,5 +43,21 @@ package Tkmrpc.Response.Ike.Tkm_Limits is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
+
+   Null_Response : constant Response_Type :=
+      Response_Type'
+     (Header  =>
+     Response.Header_Type'(Operation  => Operations.Ike.Tkm_Limits,
+                           Result     => Results.Invalid_Operation,
+                           Request_Id => 0),
+      Data    =>
+     Data_Type'(Max_Active_Requests => Types.Active_Requests_Type'First,
+                Nc_Contexts         => Types.Nc_Id_Type'First,
+                Dh_Contexts         => Types.Dh_Id_Type'First,
+                Cc_Contexts         => Types.Cc_Id_Type'First,
+                Ae_Contexts         => Types.Ae_Id_Type'First,
+                Isa_Contexts        => Types.Isa_Id_Type'First,
+                Esa_Contexts        => Types.Esa_Id_Type'First),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Response.Ike.Tkm_Limits;

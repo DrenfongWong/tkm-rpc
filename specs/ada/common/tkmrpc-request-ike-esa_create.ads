@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Esa_Create is
 
@@ -48,5 +49,23 @@ package Tkmrpc.Request.Ike.Esa_Create is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
+
+   Null_Request : constant Request_Type :=
+      Request_Type'
+     (Header  =>
+     Request.Header_Type'(Operation  => Operations.Ike.Esa_Create,
+                          Request_Id => 0),
+      Data    =>
+     Data_Type'(Esa_Id      => Types.Esa_Id_Type'First,
+                Isa_Id      => Types.Isa_Id_Type'First,
+                Sp_Id       => Types.Sp_Id_Type'First,
+                Ea_Id       => Types.Ea_Id_Type'First,
+                Dh_Id       => Types.Dh_Id_Type'First,
+                Nc_Loc_Id   => Types.Nc_Id_Type'First,
+                Nonce_Rem   => Types.Null_Nonce_Type,
+                Initiator   => Types.Init_Type'First,
+                Esp_Spi_Loc => Types.Esp_Spi_Type'First,
+                Esp_Spi_Rem => Types.Esp_Spi_Type'First),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Request.Ike.Esa_Create;

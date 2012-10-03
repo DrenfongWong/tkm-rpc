@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Response.Ike.Isa_Create_Child is
 
@@ -36,5 +37,18 @@ package Tkmrpc.Response.Ike.Isa_Create_Child is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
+
+   Null_Response : constant Response_Type :=
+      Response_Type'
+     (Header  =>
+     Response.Header_Type'(Operation  => Operations.Ike.Isa_Create_Child,
+                           Result     => Results.Invalid_Operation,
+                           Request_Id => 0),
+      Data    =>
+     Data_Type'(Sk_Ai => Types.Null_Key_Type,
+                Sk_Ar => Types.Null_Key_Type,
+                Sk_Ei => Types.Null_Key_Type,
+                Sk_Er => Types.Null_Key_Type),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Response.Ike.Isa_Create_Child;

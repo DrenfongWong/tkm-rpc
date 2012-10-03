@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Response.Ike.Cc_Reset is
 
@@ -19,5 +20,13 @@ package Tkmrpc.Response.Ike.Cc_Reset is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
+
+   Null_Response : constant Response_Type :=
+      Response_Type'
+     (Header  =>
+     Response.Header_Type'(Operation  => Operations.Ike.Cc_Reset,
+                           Result     => Results.Invalid_Operation,
+                           Request_Id => 0),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Response.Ike.Cc_Reset;

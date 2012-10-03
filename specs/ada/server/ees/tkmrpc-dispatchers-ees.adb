@@ -19,10 +19,10 @@ package body Tkmrpc.Dispatchers.Ees is
          when Operations.Ees.Esa_Expire =>
             Operation_Handlers.Ees.Esa_Expire.Handle (Req => Req, Res => Res);
          when others =>
-            Res := Response.Null_Data;
+            Res                  := Response.Null_Data;
+            Res.Header.Operation := Req.Header.Operation;
       end case;
 
-      Res.Header.Operation  := Req.Header.Operation;
       Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 

@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Response.Ike.Dh_Create is
 
@@ -30,5 +31,14 @@ package Tkmrpc.Response.Ike.Dh_Create is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
+
+   Null_Response : constant Response_Type :=
+      Response_Type'
+     (Header  =>
+     Response.Header_Type'(Operation  => Operations.Ike.Dh_Create,
+                           Result     => Results.Invalid_Operation,
+                           Request_Id => 0),
+      Data    => Data_Type'(Pubvalue => Types.Null_Dh_Pubvalue_Type),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Response.Ike.Dh_Create;

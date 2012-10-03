@@ -1,5 +1,4 @@
 with Tkmrpc.Transport.Client;
-with Tkmrpc.Operations.Ees;
 with Tkmrpc.Request.Ees.Esa_Acquire.Convert;
 with Tkmrpc.Request.Ees.Esa_Expire.Convert;
 with Tkmrpc.Response.Ees.Esa_Acquire.Convert;
@@ -19,8 +18,8 @@ package body Tkmrpc.Clients.Ees is
       Res  : Response.Ees.Esa_Acquire.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.Ees.Esa_Acquire;
-      Req.Data.Sp_Id       := Sp_Id;
+      Req            := Request.Ees.Esa_Acquire.Null_Request;
+      Req.Data.Sp_Id := Sp_Id;
 
       Transport.Client.Send
         (Data => Request.Ees.Esa_Acquire.Convert.To_Request (S => Req));
@@ -45,11 +44,11 @@ package body Tkmrpc.Clients.Ees is
       Res  : Response.Ees.Esa_Expire.Response_Type;
       Data : Response.Data_Type;
    begin
-      Req.Header.Operation := Operations.Ees.Esa_Expire;
-      Req.Data.Sp_Id       := Sp_Id;
-      Req.Data.Spi_Rem     := Spi_Rem;
-      Req.Data.Protocol    := Protocol;
-      Req.Data.Hard        := Hard;
+      Req               := Request.Ees.Esa_Expire.Null_Request;
+      Req.Data.Sp_Id    := Sp_Id;
+      Req.Data.Spi_Rem  := Spi_Rem;
+      Req.Data.Protocol := Protocol;
+      Req.Data.Hard     := Hard;
 
       Transport.Client.Send
         (Data => Request.Ees.Esa_Expire.Convert.To_Request (S => Req));

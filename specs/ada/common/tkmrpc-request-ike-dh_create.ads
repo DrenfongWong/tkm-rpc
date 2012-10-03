@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Dh_Create is
 
@@ -32,5 +33,15 @@ package Tkmrpc.Request.Ike.Dh_Create is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
+
+   Null_Request : constant Request_Type :=
+      Request_Type'
+     (Header  =>
+     Request.Header_Type'(Operation  => Operations.Ike.Dh_Create,
+                          Request_Id => 0),
+      Data    =>
+     Data_Type'(Dh_Id  => Types.Dh_Id_Type'First,
+                Dha_Id => Types.Dha_Id_Type'First),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Request.Ike.Dh_Create;

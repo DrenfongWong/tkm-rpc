@@ -1,4 +1,5 @@
-with Tkmrpc.Servers.Ike;
+with
+  Tkmrpc.Servers.Ike;
 with Tkmrpc.Request.Ike.Nc_Create.Convert;
 with Tkmrpc.Response.Ike.Nc_Create.Convert;
 
@@ -10,6 +11,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Create is
       Specific_Req : Request.Ike.Nc_Create.Request_Type;
       Specific_Res : Response.Ike.Nc_Create.Response_Type;
    begin
+      Specific_Res := Response.Ike.Nc_Create.Null_Response;
+
       Specific_Req := Request.Ike.Nc_Create.Convert.From_Request (S => Req);
 
       Servers.Ike.Nc_Create

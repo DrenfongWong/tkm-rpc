@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Create_Child is
       Specific_Req : Request.Ike.Isa_Create_Child.Request_Type;
       Specific_Res : Response.Ike.Isa_Create_Child.Response_Type;
    begin
+      Specific_Res := Response.Ike.Isa_Create_Child.Null_Response;
+
       Specific_Req :=
          Request.Ike.Isa_Create_Child.Convert.From_Request (S => Req);
 

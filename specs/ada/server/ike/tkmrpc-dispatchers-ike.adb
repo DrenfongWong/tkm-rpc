@@ -103,10 +103,10 @@ package body Tkmrpc.Dispatchers.Ike is
       when Operations.Ike.Esa_Select =>
          Operation_Handlers.Ike.Esa_Select.Handle (Req => Req, Res => Res);
       when others =>
-         Res := Response.Null_Data;
+         Res                  := Response.Null_Data;
+         Res.Header.Operation := Req.Header.Operation;
       end case;
 
-      Res.Header.Operation  := Req.Header.Operation;
       Res.Header.Request_Id := Req.Header.Request_Id;
    end Dispatch;
 

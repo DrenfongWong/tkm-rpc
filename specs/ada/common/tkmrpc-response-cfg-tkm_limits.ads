@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Cfg;
 
 package Tkmrpc.Response.Cfg.Tkm_Limits is
 
@@ -62,5 +63,31 @@ package Tkmrpc.Response.Cfg.Tkm_Limits is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Response_Type'Size use Response.Response_Size * 8;
+
+   Null_Response : constant Response_Type :=
+      Response_Type'
+     (Header  =>
+     Response.Header_Type'(Operation  => Operations.Cfg.Tkm_Limits,
+                           Result     => Results.Invalid_Operation,
+                           Request_Id => 0),
+      Data    =>
+     Data_Type'(Max_Active_Requests => Types.Active_Requests_Type'First,
+                Authag_Contexts     => Types.Authag_Id_Type'First,
+                Cag_Contexts        => Types.Cag_Id_Type'First,
+                Li_Contexts         => Types.Li_Id_Type'First,
+                Ri_Contexts         => Types.Ri_Id_Type'First,
+                Iag_Contexts        => Types.Iag_Id_Type'First,
+                Eag_Contexts        => Types.Eag_Id_Type'First,
+                Dhag_Contexts       => Types.Dhag_Id_Type'First,
+                Sp_Contexts         => Types.Sp_Id_Type'First,
+                Authp_Contexts      => Types.Authp_Id_Type'First,
+                Dhp_Contexts        => Types.Dhp_Id_Type'First,
+                Autha_Contexts      => Types.Autha_Id_Type'First,
+                Ca_Contexts         => Types.Ca_Id_Type'First,
+                Lc_Contexts         => Types.Lc_Id_Type'First,
+                Ia_Contexts         => Types.Ia_Id_Type'First,
+                Ea_Contexts         => Types.Ea_Id_Type'First,
+                Dha_Contexts        => Types.Dha_Id_Type'First),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Response.Cfg.Tkm_Limits;

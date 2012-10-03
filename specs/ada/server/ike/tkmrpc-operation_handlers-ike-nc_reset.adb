@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Reset is
       Specific_Req : Request.Ike.Nc_Reset.Request_Type;
       Specific_Res : Response.Ike.Nc_Reset.Response_Type;
    begin
+      Specific_Res := Response.Ike.Nc_Reset.Null_Response;
+
       Specific_Req := Request.Ike.Nc_Reset.Convert.From_Request (S => Req);
 
       Servers.Ike.Nc_Reset

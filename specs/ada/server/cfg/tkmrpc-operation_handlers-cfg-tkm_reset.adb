@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Reset is
 
       Specific_Res : Response.Cfg.Tkm_Reset.Response_Type;
    begin
+      Specific_Res := Response.Cfg.Tkm_Reset.Null_Response;
+
       Servers.Cfg.Tkm_Reset (Result => Specific_Res.Header.Result);
 
       Res := Response.Cfg.Tkm_Reset.Convert.To_Response (S => Specific_Res);

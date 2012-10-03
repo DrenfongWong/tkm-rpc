@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Expire is
       Specific_Req : Request.Ees.Esa_Expire.Request_Type;
       Specific_Res : Response.Ees.Esa_Expire.Response_Type;
    begin
+      Specific_Res := Response.Ees.Esa_Expire.Null_Response;
+
       Specific_Req := Request.Ees.Esa_Expire.Convert.From_Request (S => Req);
 
       Servers.Ees.Esa_Expire

@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Acquire is
       Specific_Req : Request.Ees.Esa_Acquire.Request_Type;
       Specific_Res : Response.Ees.Esa_Acquire.Response_Type;
    begin
+      Specific_Res := Response.Ees.Esa_Acquire.Null_Response;
+
       Specific_Req := Request.Ees.Esa_Acquire.Convert.From_Request (S => Req);
 
       Servers.Ees.Esa_Acquire

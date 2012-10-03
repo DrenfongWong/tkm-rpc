@@ -1,4 +1,5 @@
 with Tkmrpc.Types;
+with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Cc_Set_User_Certificate is
 
@@ -36,5 +37,18 @@ package Tkmrpc.Request.Ike.Cc_Set_User_Certificate is
          0 .. (Padding_Size * 8) - 1;
    end record;
    for Request_Type'Size use Request.Request_Size * 8;
+
+   Null_Request : constant Request_Type :=
+      Request_Type'
+     (Header  =>
+     Request.Header_Type'(Operation  =>
+     Operations.Ike.Cc_Set_User_Certificate,
+                          Request_Id => 0),
+      Data    =>
+     Data_Type'(Cc_Id       => Types.Cc_Id_Type'First,
+                Ri_Id       => Types.Ri_Id_Type'First,
+                Autha_Id    => Types.Autha_Id_Type'First,
+                Certificate => Types.Null_Certificate_Type),
+      Padding => Padding_Type'(others => 0));
 
 end Tkmrpc.Request.Ike.Cc_Set_User_Certificate;

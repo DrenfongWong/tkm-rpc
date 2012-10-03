@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create is
       Specific_Req : Request.Ike.Esa_Create.Request_Type;
       Specific_Res : Response.Ike.Esa_Create.Response_Type;
    begin
+      Specific_Res := Response.Ike.Esa_Create.Null_Response;
+
       Specific_Req := Request.Ike.Esa_Create.Convert.From_Request (S => Req);
 
       Servers.Ike.Esa_Create
