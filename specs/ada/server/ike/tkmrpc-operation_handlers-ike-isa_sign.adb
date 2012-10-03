@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Sign is
       Specific_Req : Request.Ike.Isa_Sign.Request_Type;
       Specific_Res : Response.Ike.Isa_Sign.Response_Type;
    begin
+      Specific_Res := Response.Ike.Isa_Sign.Null_Response;
+
       Specific_Req := Request.Ike.Isa_Sign.Convert.From_Request (S => Req);
 
       Servers.Ike.Isa_Sign

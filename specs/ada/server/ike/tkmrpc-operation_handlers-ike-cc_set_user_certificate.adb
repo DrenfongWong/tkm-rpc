@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Set_User_Certificate is
       Specific_Req : Request.Ike.Cc_Set_User_Certificate.Request_Type;
       Specific_Res : Response.Ike.Cc_Set_User_Certificate.Response_Type;
    begin
+      Specific_Res := Response.Ike.Cc_Set_User_Certificate.Null_Response;
+
       Specific_Req :=
          Request.Ike.Cc_Set_User_Certificate.Convert.From_Request (S => Req);
 

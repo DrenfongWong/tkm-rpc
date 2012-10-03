@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Reset is
       Specific_Req : Request.Ike.Dh_Reset.Request_Type;
       Specific_Res : Response.Ike.Dh_Reset.Response_Type;
    begin
+      Specific_Res := Response.Ike.Dh_Reset.Null_Response;
+
       Specific_Req := Request.Ike.Dh_Reset.Convert.From_Request (S => Req);
 
       Servers.Ike.Dh_Reset

@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_No_Pfs is
       Specific_Req : Request.Ike.Esa_Create_No_Pfs.Request_Type;
       Specific_Res : Response.Ike.Esa_Create_No_Pfs.Response_Type;
    begin
+      Specific_Res := Response.Ike.Esa_Create_No_Pfs.Null_Response;
+
       Specific_Req :=
          Request.Ike.Esa_Create_No_Pfs.Convert.From_Request (S => Req);
 

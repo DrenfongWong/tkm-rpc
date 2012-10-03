@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Generate_Key is
       Specific_Req : Request.Ike.Dh_Generate_Key.Request_Type;
       Specific_Res : Response.Ike.Dh_Generate_Key.Response_Type;
    begin
+      Specific_Res := Response.Ike.Dh_Generate_Key.Null_Response;
+
       Specific_Req :=
          Request.Ike.Dh_Generate_Key.Convert.From_Request (S => Req);
 

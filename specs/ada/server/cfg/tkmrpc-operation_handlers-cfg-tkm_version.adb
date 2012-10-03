@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Cfg.Tkm_Version is
 
       Specific_Res : Response.Cfg.Tkm_Version.Response_Type;
    begin
+      Specific_Res := Response.Cfg.Tkm_Version.Null_Response;
+
       Servers.Cfg.Tkm_Version
         (Result  => Specific_Res.Header.Result,
          Version => Specific_Res.Data.Version);

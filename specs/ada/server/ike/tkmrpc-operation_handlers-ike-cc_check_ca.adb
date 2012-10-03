@@ -10,6 +10,8 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Check_Ca is
       Specific_Req : Request.Ike.Cc_Check_Ca.Request_Type;
       Specific_Res : Response.Ike.Cc_Check_Ca.Response_Type;
    begin
+      Specific_Res := Response.Ike.Cc_Check_Ca.Null_Response;
+
       Specific_Req := Request.Ike.Cc_Check_Ca.Convert.From_Request (S => Req);
 
       Servers.Ike.Cc_Check_Ca
