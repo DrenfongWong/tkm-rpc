@@ -2,7 +2,6 @@ with Interfaces.C.Strings;
 
 with GNAT.OS_Lib;
 
-with Anet.Types;
 with Anet.Util;
 with Anet.Sockets.Unix;
 with Anet.Receivers.Stream;
@@ -46,7 +45,7 @@ is
         := Socket_Path & Anet.Util.Random_String (Len => 8);
    begin
       Sock.Init;
-      Sock.Bind (Path => Anet.Types.Unix_Path_Type (Path));
+      Sock.Bind (Path => Anet.Sockets.Unix.Path_Type (Path));
 
       Receiver.Listen (Callback => Dispatch'Access);
 
@@ -95,7 +94,7 @@ is
         := ICS.New_String (Str => Path);
    begin
       Sock.Init;
-      Sock.Bind (Path => Anet.Types.Unix_Path_Type (Path));
+      Sock.Bind (Path => Anet.Sockets.Unix.Path_Type (Path));
 
       Receiver.Listen (Callback => Dispatch'Access);
 
