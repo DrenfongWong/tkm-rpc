@@ -1,6 +1,5 @@
 with Ada.Streams;
 
-with Anet.Types;
 with Anet.Sockets.Unix;
 
 with Tkmrpc.Request.Convert;
@@ -17,7 +16,7 @@ is
    is
    begin
       Socket.Init;
-      Socket.Connect (Path => Anet.Types.Unix_Path_Type (Address));
+      Socket.Connect (Path => Anet.Sockets.Unix.Path_Type (Address));
    end Connect;
 
    -------------------------------------------------------------------------
