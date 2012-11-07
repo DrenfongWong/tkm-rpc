@@ -52,6 +52,15 @@ is
    --  Returns True if the context specified by id has the given
    --  certificate value.
 
+   function Has_last_cert
+     (Id : Types.cc_id_type;
+      last_cert : Types.certificate_type)
+      return Boolean
+   with
+      Pre => Is_Valid (Id);
+   --  Returns True if the context specified by id has the given
+   --  last_cert value.
+
    function Has_not_after
      (Id : Types.cc_id_type;
       not_after : Types.abs_time_type)
@@ -97,7 +106,7 @@ is
      Pre => Is_Valid (Id) and then
            (Has_State (Id, linked)),
      Post => Has_State (Id, Get_State (Id)'Old) and
-             Has_certificate (Id, certificate) and
+             Has_last_cert (Id, certificate) and
              Has_not_before (Id, not_before) and
              Has_not_after (Id, not_after);
 
@@ -115,6 +124,7 @@ is
       authag_id : Types.authag_id_type;
       ri_id : Types.ri_id_type;
       certificate : Types.certificate_type;
+      last_cert : Types.certificate_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
    with
@@ -124,6 +134,7 @@ is
              Has_authag_id (Id, authag_id) and
              Has_ri_id (Id, ri_id) and
              Has_certificate (Id, certificate) and
+             Has_last_cert (Id, last_cert) and
              Has_not_before (Id, not_before) and
              Has_not_after (Id, not_after);
 
@@ -132,8 +143,16 @@ is
       return Types.certificate_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
+           (Has_State (Id, checked)),
      Post => Has_certificate (Id, get_certificate'Result);
+
+   function get_last_cert
+     (Id : Types.cc_id_type)
+      return Types.certificate_type
+   with
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, linked)),
+     Post => Has_last_cert (Id, get_last_cert'Result);
 
    function get_not_after
      (Id : Types.cc_id_type)

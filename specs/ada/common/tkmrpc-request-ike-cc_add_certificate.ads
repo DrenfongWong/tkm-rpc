@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Cc_Add_Certificate is
 
-   Data_Size : constant := 1044;
+   Data_Size : constant := 1520;
 
    type Data_Type is record
       Cc_Id       : Types.Cc_Id_Type;
@@ -14,7 +14,7 @@ package Tkmrpc.Request.Ike.Cc_Add_Certificate is
    for Data_Type use record
       Cc_Id       at 0 range 0 .. (8 * 8) - 1;
       Autha_Id    at 8 range 0 .. (8 * 8) - 1;
-      Certificate at 16 range 0 .. (1028 * 8) - 1;
+      Certificate at 16 range 0 .. (1504 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

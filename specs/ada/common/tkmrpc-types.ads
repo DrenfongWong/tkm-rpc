@@ -123,7 +123,7 @@ package Tkmrpc.Types is
      (Size => Init_Message_Type_Range'First,
       Data => Init_Message_Type_Data_Type'(others => 0));
 
-   subtype Certificate_Type_Range is Byte_Sequence_Range range 1 .. 1024;
+   subtype Certificate_Type_Range is Byte_Sequence_Range range 1 .. 1500;
    subtype Certificate_Type_Data_Type is Byte_Sequence (Certificate_Type_Range)
 ;
 
@@ -131,7 +131,7 @@ package Tkmrpc.Types is
       Size : Certificate_Type_Range;
       Data : Certificate_Type_Data_Type;
    end record;
-   for Certificate_Type'Size use 1028 * 8;
+   for Certificate_Type'Size use 1504 * 8;
 
    Null_Certificate_Type : constant Certificate_Type :=
      Certificate_Type'
