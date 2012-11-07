@@ -121,7 +121,7 @@ typedef struct certificate_type certificate_type;
 
 struct certificate_type {
     uint32_t size;
-    byte_t data[1024];
+    byte_t data[1500];
 };
 
 typedef struct nonce_type nonce_type;

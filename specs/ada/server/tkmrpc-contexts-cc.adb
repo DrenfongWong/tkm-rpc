@@ -5,6 +5,7 @@ is
      (Off, "* already use-visible through previous use type clause");
    use type Types.cc_id_type;
    use type Types.certificate_type;
+   use type Types.certificate_type;
    use type Types.ca_id_type;
    use type Types.ri_id_type;
    use type Types.authag_id_type;
@@ -16,6 +17,7 @@ is
    type cc_FSM_Type is record
       State : cc_State_Type;
       certificate : Types.certificate_type;
+      last_cert : Types.certificate_type;
       ca_id : Types.ca_id_type;
       ri_id : Types.ri_id_type;
       authag_id : Types.authag_id_type;
@@ -28,6 +30,7 @@ is
      := cc_FSM_Type'
       (State => clean,
        certificate => Types.Null_certificate_type,
+       last_cert => Types.Null_certificate_type,
        ca_id => Types.ca_id_type'First,
        ri_id => Types.ri_id_type'First,
        authag_id => Types.authag_id_type'First,
@@ -73,6 +76,14 @@ is
       certificate : Types.certificate_type)
       return Boolean
    is (Context_Array (Id).certificate = certificate);
+
+   -------------------------------------------------------------------------
+
+   function Has_last_cert
+     (Id : Types.cc_id_type;
+      last_cert : Types.certificate_type)
+      return Boolean
+   is (Context_Array (Id).last_cert = last_cert);
 
    -------------------------------------------------------------------------
 
@@ -124,7 +135,7 @@ is
       not_after : Types.abs_time_type)
    is
    begin
-      Context_Array (Id).certificate := certificate;
+      Context_Array (Id).last_cert := certificate;
       Context_Array (Id).not_before := not_before;
       Context_Array (Id).not_after := not_after;
    end add_certificate;
@@ -147,6 +158,7 @@ is
       authag_id : Types.authag_id_type;
       ri_id : Types.ri_id_type;
       certificate : Types.certificate_type;
+      last_cert : Types.certificate_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
    is
@@ -154,6 +166,7 @@ is
       Context_Array (Id).authag_id := authag_id;
       Context_Array (Id).ri_id := ri_id;
       Context_Array (Id).certificate := certificate;
+      Context_Array (Id).last_cert := last_cert;
       Context_Array (Id).not_before := not_before;
       Context_Array (Id).not_after := not_after;
       Context_Array (Id).State := linked;
@@ -168,6 +181,16 @@ is
    begin
       return Context_Array (Id).certificate;
    end get_certificate;
+
+   -------------------------------------------------------------------------
+
+   function get_last_cert
+     (Id : Types.cc_id_type)
+      return Types.certificate_type
+   is
+   begin
+      return Context_Array (Id).last_cert;
+   end get_last_cert;
 
    -------------------------------------------------------------------------
 
