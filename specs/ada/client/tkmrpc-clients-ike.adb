@@ -15,9 +15,7 @@ with Tkmrpc.Request.Ike.Ae_Reset.Convert;
 with Tkmrpc.Request.Ike.Isa_Reset.Convert;
 with Tkmrpc.Request.Ike.Isa_Create.Convert;
 with Tkmrpc.Request.Ike.Isa_Sign.Convert;
-with Tkmrpc.Request.Ike.Isa_Sign_Psk.Convert;
 with Tkmrpc.Request.Ike.Isa_Auth.Convert;
-with Tkmrpc.Request.Ike.Isa_Auth_Psk.Convert;
 with Tkmrpc.Request.Ike.Isa_Create_Child.Convert;
 with Tkmrpc.Request.Ike.Isa_Skip_Create_First.Convert;
 with Tkmrpc.Request.Ike.Esa_Reset.Convert;
@@ -41,9 +39,7 @@ with Tkmrpc.Response.Ike.Ae_Reset.Convert;
 with Tkmrpc.Response.Ike.Isa_Reset.Convert;
 with Tkmrpc.Response.Ike.Isa_Create.Convert;
 with Tkmrpc.Response.Ike.Isa_Sign.Convert;
-with Tkmrpc.Response.Ike.Isa_Sign_Psk.Convert;
 with Tkmrpc.Response.Ike.Isa_Auth.Convert;
-with Tkmrpc.Response.Ike.Isa_Auth_Psk.Convert;
 with Tkmrpc.Response.Ike.Isa_Create_Child.Convert;
 with Tkmrpc.Response.Ike.Isa_Skip_Create_First.Convert;
 with Tkmrpc.Response.Ike.Esa_Reset.Convert;
@@ -459,31 +455,6 @@ package body Tkmrpc.Clients.Ike is
 
    -------------------------------------------------------------------------
 
-   procedure Isa_Auth_Psk
-     (Result    : out Results.Result_Type;
-      Isa_Id    : Types.Isa_Id_Type;
-      Signature : Types.Signature_Type)
-   is
-      use type Tkmrpc.Results.Result_Type;
-
-      Req  : Request.Ike.Isa_Auth_Psk.Request_Type;
-      Res  : Response.Ike.Isa_Auth_Psk.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req                := Request.Ike.Isa_Auth_Psk.Null_Request;
-      Req.Data.Isa_Id    := Isa_Id;
-      Req.Data.Signature := Signature;
-
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Auth_Psk.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.Ike.Isa_Auth_Psk.Convert.From_Response (S => Data);
-
-      Result := Res.Header.Result;
-   end Isa_Auth_Psk;
-
-   -------------------------------------------------------------------------
-
    procedure Isa_Create
      (Result    : out Results.Result_Type;
       Isa_Id    : Types.Isa_Id_Type;
@@ -633,39 +604,6 @@ package body Tkmrpc.Clients.Ike is
          Signature := Res.Data.Signature;
       end if;
    end Isa_Sign;
-
-   -------------------------------------------------------------------------
-
-   procedure Isa_Sign_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Verify       : Types.Verify_Type;
-      Signature    : out Types.Signature_Type)
-   is
-      use type Tkmrpc.Results.Result_Type;
-
-      Req  : Request.Ike.Isa_Sign_Psk.Request_Type;
-      Res  : Response.Ike.Isa_Sign_Psk.Response_Type;
-      Data : Response.Data_Type;
-   begin
-      Req                   := Request.Ike.Isa_Sign_Psk.Null_Request;
-      Req.Data.Isa_Id       := Isa_Id;
-      Req.Data.Init_Message := Init_Message;
-      Req.Data.Idx          := Idx;
-      Req.Data.Verify       := Verify;
-
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Sign_Psk.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
-      Res := Response.Ike.Isa_Sign_Psk.Convert.From_Response (S => Data);
-
-      Result := Res.Header.Result;
-      if Result = Results.Ok then
-         Signature := Res.Data.Signature;
-      end if;
-   end Isa_Sign_Psk;
 
    -------------------------------------------------------------------------
 

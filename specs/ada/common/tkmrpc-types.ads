@@ -100,8 +100,6 @@ package Tkmrpc.Types is
 
    subtype Init_Type is Interfaces.Unsigned_64;
 
-   subtype Verify_Type is Interfaces.Unsigned_8;
-
    subtype Ike_Spi_Type is Interfaces.Unsigned_64;
 
    subtype Esp_Spi_Type is Interfaces.Unsigned_32;
@@ -236,20 +234,6 @@ package Tkmrpc.Types is
      Signature_Type'
      (Size => Signature_Type_Range'First,
       Data => Signature_Type_Data_Type'(others => 0));
-
-   subtype Idx_Type_Range is Byte_Sequence_Range range 1 .. 128;
-   subtype Idx_Type_Data_Type is Byte_Sequence (Idx_Type_Range);
-
-   type Idx_Type is record
-      Size : Idx_Type_Range;
-      Data : Idx_Type_Data_Type;
-   end record;
-   for Idx_Type'Size use 132 * 8;
-
-   Null_Idx_Type : constant Idx_Type :=
-     Idx_Type'
-     (Size => Idx_Type_Range'First,
-      Data => Idx_Type_Data_Type'(others => 0));
 
    subtype Auth_Parameter_Type_Range is Byte_Sequence_Range range 1 .. 1024;
    subtype Auth_Parameter_Type_Data_Type is Byte_Sequence (
