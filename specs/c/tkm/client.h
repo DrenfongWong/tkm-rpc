@@ -172,26 +172,11 @@ extern result_type ike_isa_sign(const isa_id_type isa_id,
                 signature_type *signature);
 
 /**
- * Provide authentication octets using PSK.
- */
-extern result_type ike_isa_sign_psk(const isa_id_type isa_id,
-                const init_message_type init_message,
-                const idx_type idx,
-                const verify_type verify,
-                signature_type *signature);
-
-/**
  * Authenticate the remote endpoint.
  */
 extern result_type ike_isa_auth(const isa_id_type isa_id,
                 const cc_id_type cc_id,
                 const init_message_type init_message,
-                const signature_type signature);
-
-/**
- * Authenticate the remote endpoint using PSK.
- */
-extern result_type ike_isa_auth_psk(const isa_id_type isa_id,
                 const signature_type signature);
 
 /**

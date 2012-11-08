@@ -102,8 +102,6 @@ typedef uint32_t protocol_type;
 
 typedef uint64_t init_type;
 
-typedef uint8_t verify_type;
-
 typedef uint64_t ike_spi_type;
 
 typedef uint32_t esp_spi_type;
@@ -171,13 +169,6 @@ typedef struct signature_type signature_type;
 struct signature_type {
     uint32_t size;
     byte_t data[256];
-};
-
-typedef struct idx_type idx_type;
-
-struct idx_type {
-    uint32_t size;
-    byte_t data[128];
 };
 
 typedef struct auth_parameter_type auth_parameter_type;

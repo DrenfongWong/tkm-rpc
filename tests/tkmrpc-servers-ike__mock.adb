@@ -292,22 +292,6 @@ package body Tkmrpc.Servers.Ike is
 
    -------------------------------------------------------------------------
 
-   procedure Isa_Auth_Psk
-     (Result    : out Results.Result_Type;
-      Isa_Id    : Types.Isa_Id_Type;
-      Signature : Types.Signature_Type)
-   is
-      pragma Unreferenced (Isa_Id);
-      pragma Unreferenced (Signature);
-   begin
-
-      --  Auto-generated stub.
-
-      Result := Results.Invalid_Operation;
-   end Isa_Auth_Psk;
-
-   -------------------------------------------------------------------------
-
    procedure Isa_Create
      (Result    : out Results.Result_Type;
       Isa_Id    : Types.Isa_Id_Type;
@@ -415,28 +399,6 @@ package body Tkmrpc.Servers.Ike is
 
       Result := Results.Invalid_Operation;
    end Isa_Sign;
-
-   -------------------------------------------------------------------------
-
-   procedure Isa_Sign_Psk
-     (Result       : out Results.Result_Type;
-      Isa_Id       : Types.Isa_Id_Type;
-      Init_Message : Types.Init_Message_Type;
-      Idx          : Types.Idx_Type;
-      Verify       : Types.Verify_Type;
-      Signature    : out Types.Signature_Type)
-   is
-      pragma Unreferenced (Isa_Id);
-      pragma Unreferenced (Init_Message);
-      pragma Unreferenced (Idx);
-      pragma Unreferenced (Verify);
-      pragma Unreferenced (Signature);
-   begin
-
-      --  Auto-generated stub.
-
-      Result := Results.Invalid_Operation;
-   end Isa_Sign_Psk;
 
    -------------------------------------------------------------------------
 
