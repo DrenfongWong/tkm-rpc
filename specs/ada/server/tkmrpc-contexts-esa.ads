@@ -5,15 +5,15 @@ is
 
    type esa_State_Type is
       (clean,
-       --  esa not defined.
+       --  Initial clean state.
        invalid,
-       --  esa invalid.
+       --  Error state.
        stale,
-       --  esa stale.
+       --  ESA context is stale.
        selected,
-       --  esa selected.
+       --  ESA is selected.
        active
-       --  esa active.
+       --  ESP SA is active.
       );
 
    function Get_State

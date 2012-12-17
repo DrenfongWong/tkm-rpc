@@ -5,15 +5,15 @@ is
 
    type dh_State_Type is
       (clean,
-       --  No nonce present.
+       --  Initial clean state.
        invalid,
        --  Error state.
        stale,
-       --  DH Context stale.
+       --  DH context is stale.
        created,
        --  Waiting for remote pubvalue.
        generated
-       --  Ready.
+       --  Diffie-Hellman shared secret has been calculated and is ready to be used.
       );
 
    function Get_State

@@ -24,7 +24,7 @@ is
       Ae_Contexts         : out Types.Ae_Id_Type;
       Isa_Contexts        : out Types.Isa_Id_Type;
       Esa_Contexts        : out Types.Esa_Id_Type);
-   --  Returns limits of fixed length of TKM.
+   --  Returns limits of fixed length of TKM IKE.
 
    procedure Tkm_Reset (Result : out Results.Result_Type);
    --  Reset the TKM - IKE interface to a known initial state.
@@ -57,7 +57,7 @@ is
      (Result   : out Results.Result_Type;
       Dh_Id    : Types.Dh_Id_Type;
       Pubvalue : Types.Dh_Pubvalue_Type);
-   --  Create a nonce.
+   --  Generate a DH shared secret.
 
    procedure Cc_Reset
      (Result : out Results.Result_Type;

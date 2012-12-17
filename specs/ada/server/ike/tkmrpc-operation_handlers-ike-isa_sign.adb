@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Isa_Sign.Convert;
 with Tkmrpc.Response.Ike.Isa_Sign.Convert;
 
@@ -13,6 +14,14 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Sign is
       Specific_Res := Response.Ike.Isa_Sign.Null_Response;
 
       Specific_Req := Request.Ike.Isa_Sign.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Isa_Id'Valid and
+              Specific_Req.Data.Lc_Id'Valid and
+              Specific_Req.Data.Init_Message.Size'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Isa_Sign
         (Result       => Specific_Res.Header.Result,

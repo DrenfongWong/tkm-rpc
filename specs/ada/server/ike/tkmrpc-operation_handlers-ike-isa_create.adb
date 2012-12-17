@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Isa_Create.Convert;
 with Tkmrpc.Response.Ike.Isa_Create.Convert;
 
@@ -13,6 +14,20 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Create is
       Specific_Res := Response.Ike.Isa_Create.Null_Response;
 
       Specific_Req := Request.Ike.Isa_Create.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Isa_Id'Valid and
+              Specific_Req.Data.Ae_Id'Valid and
+              Specific_Req.Data.Ia_Id'Valid and
+              Specific_Req.Data.Dh_Id'Valid and
+              Specific_Req.Data.Nc_Loc_Id'Valid and
+              Specific_Req.Data.Nonce_Rem.Size'Valid and
+              Specific_Req.Data.Initiator'Valid and
+              Specific_Req.Data.Spi_Loc'Valid and
+              Specific_Req.Data.Spi_Rem'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Isa_Create
         (Result    => Specific_Res.Header.Result,

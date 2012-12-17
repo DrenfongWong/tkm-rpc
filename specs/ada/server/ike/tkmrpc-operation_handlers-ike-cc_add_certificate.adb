@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Cc_Add_Certificate.Convert;
 with Tkmrpc.Response.Ike.Cc_Add_Certificate.Convert;
 
@@ -14,6 +15,14 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate is
 
       Specific_Req :=
          Request.Ike.Cc_Add_Certificate.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Cc_Id'Valid and
+              Specific_Req.Data.Autha_Id'Valid and
+              Specific_Req.Data.Certificate.Size'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Cc_Add_Certificate
         (Result      => Specific_Res.Header.Result,

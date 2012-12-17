@@ -62,6 +62,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Ae_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Ae_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ike.Ae_Reset.Null_Request;
       Req.Data.Ae_Id := Ae_Id;
 
@@ -87,6 +92,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Cc_Add_Certificate.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Cc_Id'Valid and Autha_Id'Valid and Certificate.Size'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                  := Request.Ike.Cc_Add_Certificate.Null_Request;
       Req.Data.Cc_Id       := Cc_Id;
       Req.Data.Autha_Id    := Autha_Id;
@@ -114,6 +124,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Cc_Check_Ca.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Cc_Id'Valid and Ca_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ike.Cc_Check_Ca.Null_Request;
       Req.Data.Cc_Id := Cc_Id;
       Req.Data.Ca_Id := Ca_Id;
@@ -138,6 +153,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Cc_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Cc_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ike.Cc_Reset.Null_Request;
       Req.Data.Cc_Id := Cc_Id;
 
@@ -164,6 +184,15 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Cc_Set_User_Certificate.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Cc_Id'Valid and
+              Ri_Id'Valid and
+              Autha_Id'Valid and
+              Certificate.Size'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                  :=
         Request.Ike.Cc_Set_User_Certificate.Null_Request;
       Req.Data.Cc_Id       := Cc_Id;
@@ -196,6 +225,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Dh_Create.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Dh_Id'Valid and Dha_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req             := Request.Ike.Dh_Create.Null_Request;
       Req.Data.Dh_Id  := Dh_Id;
       Req.Data.Dha_Id := Dha_Id;
@@ -224,6 +258,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Dh_Generate_Key.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Dh_Id'Valid and Pubvalue.Size'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req               := Request.Ike.Dh_Generate_Key.Null_Request;
       Req.Data.Dh_Id    := Dh_Id;
       Req.Data.Pubvalue := Pubvalue;
@@ -248,6 +287,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Dh_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Dh_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ike.Dh_Reset.Null_Request;
       Req.Data.Dh_Id := Dh_Id;
 
@@ -280,6 +324,21 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Esa_Create.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Esa_Id'Valid and
+              Isa_Id'Valid and
+              Sp_Id'Valid and
+              Ea_Id'Valid and
+              Dh_Id'Valid and
+              Nc_Loc_Id'Valid and
+              Nonce_Rem.Size'Valid and
+              Initiator'Valid and
+              Esp_Spi_Loc'Valid and
+              Esp_Spi_Rem'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                  := Request.Ike.Esa_Create.Null_Request;
       Req.Data.Esa_Id      := Esa_Id;
       Req.Data.Isa_Id      := Isa_Id;
@@ -317,6 +376,17 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Esa_Create_First.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Esa_Id'Valid and
+              Isa_Id'Valid and
+              Sp_Id'Valid and
+              Ea_Id'Valid and
+              Esp_Spi_Loc'Valid and
+              Esp_Spi_Rem'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                  := Request.Ike.Esa_Create_First.Null_Request;
       Req.Data.Esa_Id      := Esa_Id;
       Req.Data.Isa_Id      := Isa_Id;
@@ -353,6 +423,20 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Esa_Create_No_Pfs.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Esa_Id'Valid and
+              Isa_Id'Valid and
+              Sp_Id'Valid and
+              Ea_Id'Valid and
+              Nc_Loc_Id'Valid and
+              Nonce_Rem.Size'Valid and
+              Initiator'Valid and
+              Esp_Spi_Loc'Valid and
+              Esp_Spi_Rem'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                  := Request.Ike.Esa_Create_No_Pfs.Null_Request;
       Req.Data.Esa_Id      := Esa_Id;
       Req.Data.Isa_Id      := Isa_Id;
@@ -384,6 +468,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Esa_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Esa_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req             := Request.Ike.Esa_Reset.Null_Request;
       Req.Data.Esa_Id := Esa_Id;
 
@@ -407,6 +496,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Esa_Select.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Esa_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req             := Request.Ike.Esa_Select.Null_Request;
       Req.Data.Esa_Id := Esa_Id;
 
@@ -439,6 +533,15 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Auth.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid and
+              Cc_Id'Valid and
+              Init_Message.Size'Valid and
+              Signature.Size'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                   := Request.Ike.Isa_Auth.Null_Request;
       Req.Data.Isa_Id       := Isa_Id;
       Req.Data.Cc_Id        := Cc_Id;
@@ -477,6 +580,20 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Create.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid and
+              Ae_Id'Valid and
+              Ia_Id'Valid and
+              Dh_Id'Valid and
+              Nc_Loc_Id'Valid and
+              Nonce_Rem.Size'Valid and
+              Initiator'Valid and
+              Spi_Loc'Valid and
+              Spi_Rem'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                := Request.Ike.Isa_Create.Null_Request;
       Req.Data.Isa_Id    := Isa_Id;
       Req.Data.Ae_Id     := Ae_Id;
@@ -526,6 +643,20 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Create_Child.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid and
+              Parent_Isa_Id'Valid and
+              Ia_Id'Valid and
+              Dh_Id'Valid and
+              Nc_Loc_Id'Valid and
+              Nonce_Rem.Size'Valid and
+              Initiator'Valid and
+              Spi_Loc'Valid and
+              Spi_Rem'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                    := Request.Ike.Isa_Create_Child.Null_Request;
       Req.Data.Isa_Id        := Isa_Id;
       Req.Data.Parent_Isa_Id := Parent_Isa_Id;
@@ -563,6 +694,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req             := Request.Ike.Isa_Reset.Null_Request;
       Req.Data.Isa_Id := Isa_Id;
 
@@ -589,6 +725,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Sign.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid and Lc_Id'Valid and Init_Message.Size'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                   := Request.Ike.Isa_Sign.Null_Request;
       Req.Data.Isa_Id       := Isa_Id;
       Req.Data.Lc_Id        := Lc_Id;
@@ -617,6 +758,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Isa_Skip_Create_First.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Isa_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req             := Request.Ike.Isa_Skip_Create_First.Null_Request;
       Req.Data.Isa_Id := Isa_Id;
 
@@ -644,6 +790,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Nc_Create.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Nc_Id'Valid and Nonce_Length'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req                   := Request.Ike.Nc_Create.Null_Request;
       Req.Data.Nc_Id        := Nc_Id;
       Req.Data.Nonce_Length := Nonce_Length;
@@ -671,6 +822,11 @@ package body Tkmrpc.Clients.Ike is
       Res  : Response.Ike.Nc_Reset.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Nc_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ike.Nc_Reset.Null_Request;
       Req.Data.Nc_Id := Nc_Id;
 

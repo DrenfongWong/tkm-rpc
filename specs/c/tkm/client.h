@@ -65,7 +65,7 @@ extern result_type ike_init(const char const *address);
 extern result_type ike_tkm_version(version_type *version);
 
 /**
- * Returns limits of fixed length  of TKM.
+ * Returns limits of fixed length of TKM IKE.
  */
 extern result_type ike_tkm_limits(active_requests_type *max_active_requests,
                 nc_id_type *nc_contexts,
@@ -105,7 +105,7 @@ extern result_type ike_dh_create(const dh_id_type dh_id,
                 dh_pubvalue_type *pubvalue);
 
 /**
- * Create a nonce.
+ * Generate a DH shared secret.
  */
 extern result_type ike_dh_generate_key(const dh_id_type dh_id,
                 const dh_pubvalue_type pubvalue);
@@ -250,7 +250,7 @@ extern result_type ike_esa_select(const esa_id_type esa_id);
 
 /**
  * Interface : EES
- * Summary   : The TKM - ESA Event Service (EES) interface
+ * Summary   : The TKM - ESA Event Service (EES) interface is used to signal ESP SA events such as acquire or expire.
  */
 
 /**

@@ -5,15 +5,15 @@ is
 
    type cc_State_Type is
       (clean,
-       --  cc not defined.
+       --  Initial clean state.
        invalid,
-       --  cc invalid.
+       --  Error state.
        stale,
-       --  cc stale.
+       --  CC context is stale.
        linked,
-       --  cc linked.
+       --  CC is linked.
        checked
-       --  cc checked.
+       --  CC has been checked and verified.
       );
 
    function Get_State
@@ -169,6 +169,12 @@ is
      Pre => Is_Valid (Id) and then
            (Has_State (Id, linked)),
      Post => Has_not_before (Id, get_not_before'Result);
+
+   procedure invalidate
+     (Id : Types.cc_id_type)
+   with
+     Pre => Is_Valid (Id),
+     Post => Has_State (Id, invalid);
 
    procedure reset
      (Id : Types.cc_id_type)

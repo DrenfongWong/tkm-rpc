@@ -3,6 +3,7 @@ with Tkmrpc.Types;
 package Tkmrpc.Constants is
 
    Cfg_Version : constant Types.Version_Type := 16#0000000000000000#;
+   Ees_Version : constant Types.Version_Type := 16#0000000000000000#;
    Ike_Version : constant Types.Version_Type := 16#0000000000000000#;
 
    Modp_3072 : constant Types.Dh_Algorithm_Type := 16#000000000000000f#;

@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Esa_Reset.Convert;
 with Tkmrpc.Response.Ike.Esa_Reset.Convert;
 
@@ -13,6 +14,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Reset is
       Specific_Res := Response.Ike.Esa_Reset.Null_Response;
 
       Specific_Req := Request.Ike.Esa_Reset.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Esa_Id'Valid) then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Esa_Reset
         (Result => Specific_Res.Header.Result,

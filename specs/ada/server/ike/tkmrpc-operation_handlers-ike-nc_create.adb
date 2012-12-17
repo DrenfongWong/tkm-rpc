@@ -1,5 +1,6 @@
 with
   Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Nc_Create.Convert;
 with Tkmrpc.Response.Ike.Nc_Create.Convert;
 
@@ -14,6 +15,13 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Create is
       Specific_Res := Response.Ike.Nc_Create.Null_Response;
 
       Specific_Req := Request.Ike.Nc_Create.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Nc_Id'Valid and
+              Specific_Req.Data.Nonce_Length'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Nc_Create
         (Result       => Specific_Res.Header.Result,

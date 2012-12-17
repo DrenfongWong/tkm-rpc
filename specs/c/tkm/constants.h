@@ -14,6 +14,7 @@ enum result_type {
 
 enum version_type {
     TKM_CFG_VERSION = 0x0000000000000000,
+    TKM_EES_VERSION = 0x0000000000000000,
     TKM_IKE_VERSION = 0x0000000000000000,
 };
 
