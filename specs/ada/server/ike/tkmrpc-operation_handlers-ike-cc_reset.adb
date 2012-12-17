@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Cc_Reset.Convert;
 with Tkmrpc.Response.Ike.Cc_Reset.Convert;
 
@@ -13,6 +14,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Reset is
       Specific_Res := Response.Ike.Cc_Reset.Null_Response;
 
       Specific_Req := Request.Ike.Cc_Reset.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Cc_Id'Valid) then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Cc_Reset
         (Result => Specific_Res.Header.Result,

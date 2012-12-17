@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ees;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ees.Esa_Acquire.Convert;
 with Tkmrpc.Response.Ees.Esa_Acquire.Convert;
 
@@ -13,6 +14,11 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Acquire is
       Specific_Res := Response.Ees.Esa_Acquire.Null_Response;
 
       Specific_Req := Request.Ees.Esa_Acquire.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Sp_Id'Valid) then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ees.Esa_Acquire
         (Result => Specific_Res.Header.Result,

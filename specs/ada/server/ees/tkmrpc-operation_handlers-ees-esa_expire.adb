@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ees;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ees.Esa_Expire.Convert;
 with Tkmrpc.Response.Ees.Esa_Expire.Convert;
 
@@ -13,6 +14,15 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Expire is
       Specific_Res := Response.Ees.Esa_Expire.Null_Response;
 
       Specific_Req := Request.Ees.Esa_Expire.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Sp_Id'Valid and
+              Specific_Req.Data.Spi_Rem'Valid and
+              Specific_Req.Data.Protocol'Valid and
+              Specific_Req.Data.Hard'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ees.Esa_Expire
         (Result   => Specific_Res.Header.Result,

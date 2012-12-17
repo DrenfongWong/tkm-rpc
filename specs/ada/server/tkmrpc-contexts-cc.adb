@@ -214,6 +214,15 @@ is
 
    -------------------------------------------------------------------------
 
+   procedure invalidate
+     (Id : Types.cc_id_type)
+   is
+   begin
+      Context_Array (Id).State := invalid;
+   end invalidate;
+
+   -------------------------------------------------------------------------
+
    procedure reset
      (Id : Types.cc_id_type)
    is

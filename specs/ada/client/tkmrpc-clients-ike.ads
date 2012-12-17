@@ -30,7 +30,7 @@ package Tkmrpc.Clients.Ike is
       Esa_Contexts        : out Types.Esa_Id_Type);
    pragma Export (C, Tkm_Limits, "ike_tkm_limits");
    pragma Export_Valued_Procedure (Tkm_Limits);
-   --  Returns limits of fixed length of TKM.
+   --  Returns limits of fixed length of TKM IKE.
 
    procedure Tkm_Reset (Result : out Results.Result_Type);
    pragma Export (C, Tkm_Reset, "ike_tkm_reset");
@@ -81,7 +81,7 @@ package Tkmrpc.Clients.Ike is
    pragma Export_Valued_Procedure
      (Dh_Generate_Key,
       Mechanism => (Dh_Id => Value, Pubvalue => Value));
-   --  Create a nonce.
+   --  Generate a DH shared secret.
 
    procedure Cc_Reset
      (Result : out Results.Result_Type;

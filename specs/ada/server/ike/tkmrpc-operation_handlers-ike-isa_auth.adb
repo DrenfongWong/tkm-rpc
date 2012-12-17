@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Isa_Auth.Convert;
 with Tkmrpc.Response.Ike.Isa_Auth.Convert;
 
@@ -13,6 +14,15 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
       Specific_Res := Response.Ike.Isa_Auth.Null_Response;
 
       Specific_Req := Request.Ike.Isa_Auth.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Isa_Id'Valid and
+              Specific_Req.Data.Cc_Id'Valid and
+              Specific_Req.Data.Init_Message.Size'Valid and
+              Specific_Req.Data.Signature.Size'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Isa_Auth
         (Result       => Specific_Res.Header.Result,

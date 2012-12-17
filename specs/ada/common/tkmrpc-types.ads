@@ -78,19 +78,19 @@ package Tkmrpc.Types is
 
    subtype Auth_Algorithm_Type is Interfaces.Unsigned_64;
 
-   subtype Dh_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Dh_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Iprf_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Iprf_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Iint_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Iint_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Ienc_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Ienc_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Eprf_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Eprf_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Eint_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Eint_Algorithm_Type is Interfaces.Unsigned_16;
 
-   subtype Eenc_Algorithm_Type is Interfaces.Unsigned_64;
+   subtype Eenc_Algorithm_Type is Interfaces.Unsigned_16;
 
    subtype Key_Length_Bits_Type is Interfaces.Unsigned_64;
 

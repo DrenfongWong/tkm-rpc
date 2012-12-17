@@ -18,7 +18,7 @@ is
       priv : Types.dh_priv_type;
       key : Types.dh_key_type;
    end record;
-   --  Diffie Hellman Context
+   --  Diffie-Hellman Context
 
    Null_dh_FSM : constant dh_FSM_Type
      := dh_FSM_Type'

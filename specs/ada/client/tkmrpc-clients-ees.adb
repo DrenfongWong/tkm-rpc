@@ -18,6 +18,11 @@ package body Tkmrpc.Clients.Ees is
       Res  : Response.Ees.Esa_Acquire.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Sp_Id'Valid) then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req            := Request.Ees.Esa_Acquire.Null_Request;
       Req.Data.Sp_Id := Sp_Id;
 
@@ -44,6 +49,15 @@ package body Tkmrpc.Clients.Ees is
       Res  : Response.Ees.Esa_Expire.Response_Type;
       Data : Response.Data_Type;
    begin
+      if not (Sp_Id'Valid and
+              Spi_Rem'Valid and
+              Protocol'Valid and
+              Hard'Valid)
+      then
+         Result := Results.Invalid_Parameter;
+         return;
+      end if;
+
       Req               := Request.Ees.Esa_Expire.Null_Request;
       Req.Data.Sp_Id    := Sp_Id;
       Req.Data.Spi_Rem  := Spi_Rem;

@@ -1,4 +1,5 @@
 with Tkmrpc.Servers.Ike;
+with Tkmrpc.Results;
 with Tkmrpc.Request.Ike.Esa_Create_First.Convert;
 with Tkmrpc.Response.Ike.Esa_Create_First.Convert;
 
@@ -14,6 +15,17 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_First is
 
       Specific_Req :=
          Request.Ike.Esa_Create_First.Convert.From_Request (S => Req);
+
+      if not (Specific_Req.Data.Esa_Id'Valid and
+              Specific_Req.Data.Isa_Id'Valid and
+              Specific_Req.Data.Sp_Id'Valid and
+              Specific_Req.Data.Ea_Id'Valid and
+              Specific_Req.Data.Esp_Spi_Loc'Valid and
+              Specific_Req.Data.Esp_Spi_Rem'Valid)
+      then
+         Res.Header.Result := Results.Invalid_Parameter;
+         return;
+      end if;
 
       Servers.Ike.Esa_Create_First
         (Result      => Specific_Res.Header.Result,

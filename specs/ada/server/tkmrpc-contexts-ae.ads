@@ -5,21 +5,21 @@ is
 
    type ae_State_Type is
       (clean,
-       --  ae not defined.
+       --  Initial clean state.
        invalid,
-       --  ae invalid.
+       --  Error state.
        stale,
-       --  ae stale.
+       --  AE context is stale.
        unauth,
-       --  ae unauthenticated.
+       --  AE context is unauthenticated.
        loc_auth,
-       --  ae local authentication.
+       --  Local identity of AE is authenticated.
        rem_auth,
-       --  ae remote authentication.
+       --  Remote identity of AE is authenticated.
        authenticated,
-       --  ae authenticated.
+       --  AE is authenticated.
        active
-       --  ae authenticated and in use.
+       --  AE is authenticated and in use.
       );
 
    function Get_State

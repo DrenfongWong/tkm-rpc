@@ -5,13 +5,13 @@ is
 
    type isa_State_Type is
       (clean,
-       --  isa not defined.
+       --  Initial clean state
        invalid,
-       --  isa invalid.
+       --  Error state
        stale,
-       --  isa stale.
+       --  IKE SA stale.
        active
-       --  isa active.
+       --  IKE SA is in active use.
       );
 
    function Get_State

@@ -80,19 +80,19 @@ typedef uint8_t expiry_flag_type;
 
 typedef uint64_t auth_algorithm_type;
 
-typedef uint64_t dh_algorithm_type;
+typedef uint16_t dh_algorithm_type;
 
-typedef uint64_t iprf_algorithm_type;
+typedef uint16_t iprf_algorithm_type;
 
-typedef uint64_t iint_algorithm_type;
+typedef uint16_t iint_algorithm_type;
 
-typedef uint64_t ienc_algorithm_type;
+typedef uint16_t ienc_algorithm_type;
 
-typedef uint64_t eprf_algorithm_type;
+typedef uint16_t eprf_algorithm_type;
 
-typedef uint64_t eint_algorithm_type;
+typedef uint16_t eint_algorithm_type;
 
-typedef uint64_t eenc_algorithm_type;
+typedef uint16_t eenc_algorithm_type;
 
 typedef uint64_t key_length_bits_type;
 
