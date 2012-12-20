@@ -82,17 +82,11 @@ typedef uint64_t auth_algorithm_type;
 
 typedef uint16_t dh_algorithm_type;
 
-typedef uint16_t iprf_algorithm_type;
+typedef uint16_t prf_algorithm_type;
 
-typedef uint16_t iint_algorithm_type;
+typedef uint16_t int_algorithm_type;
 
-typedef uint16_t ienc_algorithm_type;
-
-typedef uint16_t eprf_algorithm_type;
-
-typedef uint16_t eint_algorithm_type;
-
-typedef uint16_t eenc_algorithm_type;
+typedef uint16_t enc_algorithm_type;
 
 typedef uint64_t key_length_bits_type;
 
