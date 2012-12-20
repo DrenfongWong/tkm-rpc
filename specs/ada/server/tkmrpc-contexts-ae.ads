@@ -14,8 +14,6 @@ is
        --  AE context is unauthenticated.
        loc_auth,
        --  Local identity of AE is authenticated.
-       rem_auth,
-       --  Remote identity of AE is authenticated.
        authenticated,
        --  AE is authenticated.
        active
@@ -218,11 +216,8 @@ is
       return Types.nonce_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, unauth)),
+           (Has_State (Id, authenticated) or
+            Has_State (Id, loc_auth)),
      Post => Has_nonce_loc (Id, get_nonce_loc'Result);
 
    function get_nonce_rem
@@ -230,10 +225,7 @@ is
       return Types.nonce_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
+           (Has_State (Id, authenticated) or
             Has_State (Id, unauth)),
      Post => Has_nonce_rem (Id, get_nonce_rem'Result);
 
@@ -242,11 +234,7 @@ is
       return Types.key_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, unauth)),
+           (Has_State (Id, unauth)),
      Post => Has_sk_ike_auth_loc (Id, get_sk_ike_auth_loc'Result);
 
    function get_sk_ike_auth_rem
@@ -254,11 +242,7 @@ is
       return Types.key_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, unauth)),
+           (Has_State (Id, loc_auth)),
      Post => Has_sk_ike_auth_rem (Id, get_sk_ike_auth_rem'Result);
 
    procedure invalidate
@@ -272,11 +256,7 @@ is
       return Types.init_type
    with
      Pre => Is_Valid (Id) and then
-           (Has_State (Id, active) or
-            Has_State (Id, authenticated) or
-            Has_State (Id, loc_auth) or
-            Has_State (Id, rem_auth) or
-            Has_State (Id, unauth)),
+           (Has_State (Id, authenticated)),
      Post => Has_initiator (Id, is_initiator'Result);
 
    procedure reset
