@@ -50,7 +50,7 @@ is
       Receiver.Listen (Callback => Dispatch'Access);
 
       Args (1) := new String'(Path);
-      GNAT.OS_Lib.Spawn (Program_Name => "obj/test_client",
+      GNAT.OS_Lib.Spawn (Program_Name => "./test_client",
                          Args         => Args,
                          Success      => Success);
       GNAT.OS_Lib.Free (X => Args (1));

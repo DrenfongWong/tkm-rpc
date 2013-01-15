@@ -19,7 +19,7 @@ build_testclient: build_clientlib
 	@gprbuild $(BUILD_OPTS) -Ptkmrpc_testclient
 
 tests: build_tests
-	@$(OBJDIR)/$(TESTDIR)/test_runner
+	@cd $(OBJDIR)/$(TESTDIR) && ./test_runner
 
 install: install_lib
 
@@ -45,6 +45,11 @@ install_lib: build_clientlib
 	install -m 644 $(GPR_FILES) $(PREFIX)/lib/gnat
 	install -m 444 $(LIBDIR)/libtkmrpc-client.a $(PREFIX)/lib
 	install -m 444 $(LIBDIR)/libtkmrpc-common.a $(PREFIX)/lib
+
+install_tests: build_tests
+	install -v -d $(PREFIX)/$(TESTDIR)
+	install -m 755 $(OBJDIR)/$(TESTDIR)/test_runner $(PREFIX)/$(TESTDIR)
+	install -m 755 $(OBJDIR)/$(TESTDIR)/test_client $(PREFIX)/$(TESTDIR)
 
 cov: build_tests
 	@rm -f $(COVDIR)/*.gcda
