@@ -15,23 +15,24 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Expire is
 
       Specific_Req := Request.Ees.Esa_Expire.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Sp_Id'Valid and
-              Specific_Req.Data.Spi_Rem'Valid and
-              Specific_Req.Data.Protocol'Valid and
-              Specific_Req.Data.Hard'Valid)
+      if Specific_Req.Data.Sp_Id'Valid and
+         Specific_Req.Data.Spi_Rem'Valid and
+         Specific_Req.Data.Protocol'Valid and
+         Specific_Req.Data.Hard'Valid
       then
+         Servers.Ees.Esa_Expire
+           (Result   => Specific_Res.Header.Result,
+            Sp_Id    => Specific_Req.Data.Sp_Id,
+            Spi_Rem  => Specific_Req.Data.Spi_Rem,
+            Protocol => Specific_Req.Data.Protocol,
+            Hard     => Specific_Req.Data.Hard);
+
+         Res :=
+            Response.Ees.Esa_Expire.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ees.Esa_Expire
-        (Result   => Specific_Res.Header.Result,
-         Sp_Id    => Specific_Req.Data.Sp_Id,
-         Spi_Rem  => Specific_Req.Data.Spi_Rem,
-         Protocol => Specific_Req.Data.Protocol,
-         Hard     => Specific_Req.Data.Hard);
-
-      Res := Response.Ees.Esa_Expire.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ees.Esa_Expire;

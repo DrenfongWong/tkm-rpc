@@ -16,20 +16,21 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Create is
 
       Specific_Req := Request.Ike.Nc_Create.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Nc_Id'Valid and
-              Specific_Req.Data.Nonce_Length'Valid)
+      if Specific_Req.Data.Nc_Id'Valid and
+         Specific_Req.Data.Nonce_Length'Valid
       then
+         Servers.Ike.Nc_Create
+           (Result       => Specific_Res.Header.Result,
+            Nc_Id        => Specific_Req.Data.Nc_Id,
+            Nonce_Length => Specific_Req.Data.Nonce_Length,
+            Nonce        => Specific_Res.Data.Nonce);
+
+         Res :=
+            Response.Ike.Nc_Create.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Nc_Create
-        (Result       => Specific_Res.Header.Result,
-         Nc_Id        => Specific_Req.Data.Nc_Id,
-         Nonce_Length => Specific_Req.Data.Nonce_Length,
-         Nonce        => Specific_Res.Data.Nonce);
-
-      Res := Response.Ike.Nc_Create.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Nc_Create;

@@ -15,16 +15,17 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Reset is
 
       Specific_Req := Request.Ike.Esa_Reset.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Esa_Id'Valid) then
+      if Specific_Req.Data.Esa_Id'Valid then
+         Servers.Ike.Esa_Reset
+           (Result => Specific_Res.Header.Result,
+            Esa_Id => Specific_Req.Data.Esa_Id);
+
+         Res :=
+            Response.Ike.Esa_Reset.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Esa_Reset
-        (Result => Specific_Res.Header.Result,
-         Esa_Id => Specific_Req.Data.Esa_Id);
-
-      Res := Response.Ike.Esa_Reset.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Esa_Reset;

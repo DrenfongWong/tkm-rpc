@@ -15,16 +15,17 @@ package body Tkmrpc.Operation_Handlers.Ees.Esa_Acquire is
 
       Specific_Req := Request.Ees.Esa_Acquire.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Sp_Id'Valid) then
+      if Specific_Req.Data.Sp_Id'Valid then
+         Servers.Ees.Esa_Acquire
+           (Result => Specific_Res.Header.Result,
+            Sp_Id  => Specific_Req.Data.Sp_Id);
+
+         Res :=
+            Response.Ees.Esa_Acquire.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ees.Esa_Acquire
-        (Result => Specific_Res.Header.Result,
-         Sp_Id  => Specific_Req.Data.Sp_Id);
-
-      Res := Response.Ees.Esa_Acquire.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ees.Esa_Acquire;

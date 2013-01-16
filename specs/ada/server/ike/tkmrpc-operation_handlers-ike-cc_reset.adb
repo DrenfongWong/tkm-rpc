@@ -15,16 +15,16 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Reset is
 
       Specific_Req := Request.Ike.Cc_Reset.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Cc_Id'Valid) then
+      if Specific_Req.Data.Cc_Id'Valid then
+         Servers.Ike.Cc_Reset
+           (Result => Specific_Res.Header.Result,
+            Cc_Id  => Specific_Req.Data.Cc_Id);
+
+         Res := Response.Ike.Cc_Reset.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Cc_Reset
-        (Result => Specific_Res.Header.Result,
-         Cc_Id  => Specific_Req.Data.Cc_Id);
-
-      Res := Response.Ike.Cc_Reset.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Cc_Reset;

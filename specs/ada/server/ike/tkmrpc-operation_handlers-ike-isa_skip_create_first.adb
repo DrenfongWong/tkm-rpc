@@ -16,18 +16,18 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First is
       Specific_Req :=
          Request.Ike.Isa_Skip_Create_First.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Isa_Id'Valid) then
+      if Specific_Req.Data.Isa_Id'Valid then
+         Servers.Ike.Isa_Skip_Create_First
+           (Result => Specific_Res.Header.Result,
+            Isa_Id => Specific_Req.Data.Isa_Id);
+
+         Res :=
+            Response.Ike.Isa_Skip_Create_First.Convert.To_Response
+              (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Isa_Skip_Create_First
-        (Result => Specific_Res.Header.Result,
-         Isa_Id => Specific_Req.Data.Isa_Id);
-
-      Res :=
-         Response.Ike.Isa_Skip_Create_First.Convert.To_Response
-           (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Skip_Create_First;

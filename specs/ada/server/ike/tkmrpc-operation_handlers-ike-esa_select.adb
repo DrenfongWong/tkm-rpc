@@ -15,16 +15,17 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Select is
 
       Specific_Req := Request.Ike.Esa_Select.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Esa_Id'Valid) then
+      if Specific_Req.Data.Esa_Id'Valid then
+         Servers.Ike.Esa_Select
+           (Result => Specific_Res.Header.Result,
+            Esa_Id => Specific_Req.Data.Esa_Id);
+
+         Res :=
+            Response.Ike.Esa_Select.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Esa_Select
-        (Result => Specific_Res.Header.Result,
-         Esa_Id => Specific_Req.Data.Esa_Id);
-
-      Res := Response.Ike.Esa_Select.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Esa_Select;
