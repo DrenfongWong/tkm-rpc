@@ -16,23 +16,23 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate is
       Specific_Req :=
          Request.Ike.Cc_Add_Certificate.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Cc_Id'Valid and
-              Specific_Req.Data.Autha_Id'Valid and
-              Specific_Req.Data.Certificate.Size'Valid)
+      if Specific_Req.Data.Cc_Id'Valid and
+         Specific_Req.Data.Autha_Id'Valid and
+         Specific_Req.Data.Certificate.Size'Valid
       then
+         Servers.Ike.Cc_Add_Certificate
+           (Result      => Specific_Res.Header.Result,
+            Cc_Id       => Specific_Req.Data.Cc_Id,
+            Autha_Id    => Specific_Req.Data.Autha_Id,
+            Certificate => Specific_Req.Data.Certificate);
+
+         Res :=
+            Response.Ike.Cc_Add_Certificate.Convert.To_Response
+              (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Cc_Add_Certificate
-        (Result      => Specific_Res.Header.Result,
-         Cc_Id       => Specific_Req.Data.Cc_Id,
-         Autha_Id    => Specific_Req.Data.Autha_Id,
-         Certificate => Specific_Req.Data.Certificate);
-
-      Res :=
-         Response.Ike.Cc_Add_Certificate.Convert.To_Response
-           (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate;

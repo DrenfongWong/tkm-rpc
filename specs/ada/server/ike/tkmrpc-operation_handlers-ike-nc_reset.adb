@@ -15,16 +15,16 @@ package body Tkmrpc.Operation_Handlers.Ike.Nc_Reset is
 
       Specific_Req := Request.Ike.Nc_Reset.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Nc_Id'Valid) then
+      if Specific_Req.Data.Nc_Id'Valid then
+         Servers.Ike.Nc_Reset
+           (Result => Specific_Res.Header.Result,
+            Nc_Id  => Specific_Req.Data.Nc_Id);
+
+         Res := Response.Ike.Nc_Reset.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Nc_Reset
-        (Result => Specific_Res.Header.Result,
-         Nc_Id  => Specific_Req.Data.Nc_Id);
-
-      Res := Response.Ike.Nc_Reset.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Nc_Reset;

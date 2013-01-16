@@ -15,22 +15,22 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Sign is
 
       Specific_Req := Request.Ike.Isa_Sign.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Isa_Id'Valid and
-              Specific_Req.Data.Lc_Id'Valid and
-              Specific_Req.Data.Init_Message.Size'Valid)
+      if Specific_Req.Data.Isa_Id'Valid and
+         Specific_Req.Data.Lc_Id'Valid and
+         Specific_Req.Data.Init_Message.Size'Valid
       then
+         Servers.Ike.Isa_Sign
+           (Result       => Specific_Res.Header.Result,
+            Isa_Id       => Specific_Req.Data.Isa_Id,
+            Lc_Id        => Specific_Req.Data.Lc_Id,
+            Init_Message => Specific_Req.Data.Init_Message,
+            Signature    => Specific_Res.Data.Signature);
+
+         Res := Response.Ike.Isa_Sign.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Isa_Sign
-        (Result       => Specific_Res.Header.Result,
-         Isa_Id       => Specific_Req.Data.Isa_Id,
-         Lc_Id        => Specific_Req.Data.Lc_Id,
-         Init_Message => Specific_Req.Data.Init_Message,
-         Signature    => Specific_Res.Data.Signature);
-
-      Res := Response.Ike.Isa_Sign.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Sign;

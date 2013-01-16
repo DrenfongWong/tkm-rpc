@@ -16,20 +16,21 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Create is
 
       Specific_Req := Request.Ike.Dh_Create.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Dh_Id'Valid and
-              Specific_Req.Data.Dha_Id'Valid)
+      if Specific_Req.Data.Dh_Id'Valid and
+         Specific_Req.Data.Dha_Id'Valid
       then
+         Servers.Ike.Dh_Create
+           (Result   => Specific_Res.Header.Result,
+            Dh_Id    => Specific_Req.Data.Dh_Id,
+            Dha_Id   => Specific_Req.Data.Dha_Id,
+            Pubvalue => Specific_Res.Data.Pubvalue);
+
+         Res :=
+            Response.Ike.Dh_Create.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Dh_Create
-        (Result   => Specific_Res.Header.Result,
-         Dh_Id    => Specific_Req.Data.Dh_Id,
-         Dha_Id   => Specific_Req.Data.Dha_Id,
-         Pubvalue => Specific_Res.Data.Pubvalue);
-
-      Res := Response.Ike.Dh_Create.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Dh_Create;

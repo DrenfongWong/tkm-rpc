@@ -15,23 +15,23 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
 
       Specific_Req := Request.Ike.Isa_Auth.Convert.From_Request (S => Req);
 
-      if not (Specific_Req.Data.Isa_Id'Valid and
-              Specific_Req.Data.Cc_Id'Valid and
-              Specific_Req.Data.Init_Message.Size'Valid and
-              Specific_Req.Data.Signature.Size'Valid)
+      if Specific_Req.Data.Isa_Id'Valid and
+         Specific_Req.Data.Cc_Id'Valid and
+         Specific_Req.Data.Init_Message.Size'Valid and
+         Specific_Req.Data.Signature.Size'Valid
       then
+         Servers.Ike.Isa_Auth
+           (Result       => Specific_Res.Header.Result,
+            Isa_Id       => Specific_Req.Data.Isa_Id,
+            Cc_Id        => Specific_Req.Data.Cc_Id,
+            Init_Message => Specific_Req.Data.Init_Message,
+            Signature    => Specific_Req.Data.Signature);
+
+         Res := Response.Ike.Isa_Auth.Convert.To_Response (S => Specific_Res);
+
+      else
          Res.Header.Result := Results.Invalid_Parameter;
-         return;
       end if;
-
-      Servers.Ike.Isa_Auth
-        (Result       => Specific_Res.Header.Result,
-         Isa_Id       => Specific_Req.Data.Isa_Id,
-         Cc_Id        => Specific_Req.Data.Cc_Id,
-         Init_Message => Specific_Req.Data.Init_Message,
-         Signature    => Specific_Req.Data.Signature);
-
-      Res := Response.Ike.Isa_Auth.Convert.To_Response (S => Specific_Res);
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Isa_Auth;
