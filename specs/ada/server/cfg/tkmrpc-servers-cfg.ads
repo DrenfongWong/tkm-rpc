@@ -1,19 +1,36 @@
 with Tkmrpc.Types;
 with Tkmrpc.Results;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Results;
+
 package Tkmrpc.Servers.Cfg
+   --# own State : State_Type;
+   --# initializes State;
 is
+
+   --# type State_Type is abstract;
 
    procedure Init;
    --  Initialize CFG server.
+   --# global State;
+   --# derives State from *;
 
    procedure Finalize;
    --  Finalize CFG server.
+   --# global State;
+   --# derives State from *;
 
    procedure Tkm_Version
      (Result  : out Results.Result_Type;
       Version : out Types.Version_Type);
    --  Returns the version of TKM.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    version
+   --#          from State;
 
    procedure Tkm_Limits
      (Result              : out Results.Result_Type;
@@ -35,8 +52,33 @@ is
       Ea_Contexts         : out Types.Ea_Id_Type;
       Dha_Contexts        : out Types.Dha_Id_Type);
    --  Returns limits of fixed length of TKM.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    max_active_requests,
+   --#    authag_contexts,
+   --#    cag_contexts,
+   --#    li_contexts,
+   --#    ri_contexts,
+   --#    iag_contexts,
+   --#    eag_contexts,
+   --#    dhag_contexts,
+   --#    sp_contexts,
+   --#    authp_contexts,
+   --#    dhp_contexts,
+   --#    autha_contexts,
+   --#    ca_contexts,
+   --#    lc_contexts,
+   --#    ia_contexts,
+   --#    ea_contexts,
+   --#    dha_contexts
+   --#          from State;
 
    procedure Tkm_Reset (Result : out Results.Result_Type);
    --  Reset the TKM - CFG interface to a known initial state.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State;
 
 end Tkmrpc.Servers.Cfg;

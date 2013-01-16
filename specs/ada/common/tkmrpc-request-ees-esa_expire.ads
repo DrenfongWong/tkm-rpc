@@ -1,6 +1,11 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations.Ees;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Operations.EES;
+
 package Tkmrpc.Request.Ees.Esa_Expire is
 
    Data_Size : constant := 13;

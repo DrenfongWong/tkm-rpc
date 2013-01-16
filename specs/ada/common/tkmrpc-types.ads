@@ -1,5 +1,8 @@
 with Interfaces;
 
+--# inherit
+--#    Interfaces;
+
 package Tkmrpc.Types is
 
    subtype Byte is Interfaces.Unsigned_8;

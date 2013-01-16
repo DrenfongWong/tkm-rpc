@@ -1,7 +1,14 @@
 with Tkmrpc.Types;
 
+--# inherit
+--#    Tkmrpc.Types;
+
 package Tkmrpc.Contexts.cc
+--# own State : State_Type;
+--# initializes State;
 is
+
+   --# type State_Type is abstract;
 
    type cc_State_Type is
       (clean,
@@ -18,106 +25,34 @@ is
 
    function Get_State
      (Id : Types.cc_id_type)
-      return cc_State_Type
-   with
-     Pre => Is_Valid (Id);
-
-   function Is_Valid (Id : Types.cc_id_type) return Boolean;
-   --  Returns True if the given id has a valid value.
-
-   function Has_authag_id
-     (Id : Types.cc_id_type;
-      authag_id : Types.authag_id_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  authag_id value.
-
-   function Has_ca_id
-     (Id : Types.cc_id_type;
-      ca_id : Types.ca_id_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  ca_id value.
-
-   function Has_certificate
-     (Id : Types.cc_id_type;
-      certificate : Types.certificate_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  certificate value.
-
-   function Has_last_cert
-     (Id : Types.cc_id_type;
-      last_cert : Types.certificate_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  last_cert value.
-
-   function Has_not_after
-     (Id : Types.cc_id_type;
-      not_after : Types.abs_time_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  not_after value.
-
-   function Has_not_before
-     (Id : Types.cc_id_type;
-      not_before : Types.abs_time_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  not_before value.
-
-   function Has_ri_id
-     (Id : Types.cc_id_type;
-      ri_id : Types.ri_id_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  ri_id value.
-
-   function Has_State
-     (Id : Types.cc_id_type;
-      State : cc_State_Type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  State value.
+      return cc_State_Type;
+   --# global State;
 
    procedure add_certificate
      (Id : Types.cc_id_type;
       certificate : Types.certificate_type;
       not_before : Types.abs_time_type;
-      not_after : Types.abs_time_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
-     Post => Has_State (Id, Get_State (Id)'Old) and
-             Has_last_cert (Id, certificate) and
-             Has_not_before (Id, not_before) and
-             Has_not_after (Id, not_after);
+      not_after : Types.abs_time_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          certificate,
+   --#          not_before,
+   --#          not_after;
 
    procedure check
      (Id : Types.cc_id_type;
-      ca_id : Types.ca_id_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
-     Post => Has_State (Id, checked) and
-             Has_ca_id (Id, ca_id);
+      ca_id : Types.ca_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          ca_id;
 
    procedure create
      (Id : Types.cc_id_type;
@@ -126,68 +61,61 @@ is
       certificate : Types.certificate_type;
       last_cert : Types.certificate_type;
       not_before : Types.abs_time_type;
-      not_after : Types.abs_time_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, clean)),
-     Post => Has_State (Id, linked) and
-             Has_authag_id (Id, authag_id) and
-             Has_ri_id (Id, ri_id) and
-             Has_certificate (Id, certificate) and
-             Has_last_cert (Id, last_cert) and
-             Has_not_before (Id, not_before) and
-             Has_not_after (Id, not_after);
+      not_after : Types.abs_time_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          authag_id,
+   --#          ri_id,
+   --#          certificate,
+   --#          last_cert,
+   --#          not_before,
+   --#          not_after;
 
    function get_certificate
      (Id : Types.cc_id_type)
-      return Types.certificate_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, checked)),
-     Post => Has_certificate (Id, get_certificate'Result);
+      return Types.certificate_type;
+   --# global State;
 
    function get_last_cert
      (Id : Types.cc_id_type)
-      return Types.certificate_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
-     Post => Has_last_cert (Id, get_last_cert'Result);
+      return Types.certificate_type;
+   --# global State;
 
    function get_not_after
      (Id : Types.cc_id_type)
-      return Types.abs_time_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
-     Post => Has_not_after (Id, get_not_after'Result);
+      return Types.abs_time_type;
+   --# global State;
 
    function get_not_before
      (Id : Types.cc_id_type)
-      return Types.abs_time_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, linked)),
-     Post => Has_not_before (Id, get_not_before'Result);
+      return Types.abs_time_type;
+   --# global State;
 
    function get_remote_id
      (Id : Types.cc_id_type)
-      return Types.ri_id_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, checked)),
-     Post => Has_ri_id (Id, get_remote_id'Result);
+      return Types.ri_id_type;
+   --# global State;
 
    procedure invalidate
-     (Id : Types.cc_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, invalid);
+     (Id : Types.cc_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
    procedure reset
-     (Id : Types.cc_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, clean);
+     (Id : Types.cc_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
 end Tkmrpc.Contexts.cc;

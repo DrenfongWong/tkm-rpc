@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Request.IKE.tkm_version;
+
 package Tkmrpc.Request.Ike.Tkm_Version.Convert is
 
    function To_Request is new Ada.Unchecked_Conversion (

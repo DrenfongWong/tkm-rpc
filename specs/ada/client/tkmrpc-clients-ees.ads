@@ -20,6 +20,11 @@ package Tkmrpc.Clients.Ees is
      (Esa_Acquire,
       Mechanism => (Sp_Id => Value));
    --  Trigger 'Acquire' event for an ESP SA.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               sp_id;
 
    procedure Esa_Expire
      (Result   : out Results.Result_Type;
@@ -36,5 +41,13 @@ package Tkmrpc.Clients.Ees is
       Protocol => Value,
       Hard     => Value));
    --  Trigger 'Expire' event for an ESP SA.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               sp_id,
+   --#               spi_rem,
+   --#               protocol,
+   --#               hard;
 
 end Tkmrpc.Clients.Ees;

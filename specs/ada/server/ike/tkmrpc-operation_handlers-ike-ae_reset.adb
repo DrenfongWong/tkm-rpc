@@ -13,14 +13,22 @@ package body Tkmrpc.Operation_Handlers.Ike.Ae_Reset is
    begin
       Specific_Res := Response.Ike.Ae_Reset.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.ae_reset.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req := Request.Ike.Ae_Reset.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Ae_Id'Valid then
          Servers.Ike.Ae_Reset
            (Result => Specific_Res.Header.Result,
             Ae_Id  => Specific_Req.Data.Ae_Id);
 
+         --# accept W, 13,
+         --#        Response.IKE.ae_reset.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res := Response.Ike.Ae_Reset.Convert.To_Response (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;

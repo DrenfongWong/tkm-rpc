@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Response,
+--#    Tkmrpc.Response.IKE.dh_create;
+
 package Tkmrpc.Response.Ike.Dh_Create.Convert is
 
    function To_Response is new Ada.Unchecked_Conversion (

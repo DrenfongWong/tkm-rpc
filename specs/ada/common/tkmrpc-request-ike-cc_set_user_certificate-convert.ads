@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Request.IKE.cc_set_user_certificate;
+
 package Tkmrpc.Request.Ike.Cc_Set_User_Certificate.Convert is
 
    function To_Request is new Ada.Unchecked_Conversion (

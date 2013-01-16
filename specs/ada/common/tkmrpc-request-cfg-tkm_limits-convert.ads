@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Request.CFG.tkm_limits;
+
 package Tkmrpc.Request.Cfg.Tkm_Limits.Convert is
 
    function To_Request is new Ada.Unchecked_Conversion (

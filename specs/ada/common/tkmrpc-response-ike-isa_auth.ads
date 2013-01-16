@@ -1,6 +1,12 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations.Ike;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Response,
+--#    Tkmrpc.Operations.IKE,
+--#    Tkmrpc.Results;
+
 package Tkmrpc.Response.Ike.Isa_Auth is
 
    Data_Size : constant := 0;

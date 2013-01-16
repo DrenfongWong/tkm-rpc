@@ -13,7 +13,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
    begin
       Specific_Res := Response.Ike.Isa_Auth.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.isa_auth.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req := Request.Ike.Isa_Auth.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Isa_Id'Valid and
          Specific_Req.Data.Cc_Id'Valid and
@@ -27,7 +31,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Auth is
             Init_Message => Specific_Req.Data.Init_Message,
             Signature    => Specific_Req.Data.Signature);
 
+         --# accept W, 13,
+         --#        Response.IKE.isa_auth.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res := Response.Ike.Isa_Auth.Convert.To_Response (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;

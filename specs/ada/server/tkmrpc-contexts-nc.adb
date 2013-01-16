@@ -1,12 +1,6 @@
 package body Tkmrpc.Contexts.nc
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.nc_id_type;
-   use type Types.nonce_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type nc_FSM_Type is record
       State : nc_State_Type;
@@ -30,6 +24,8 @@ is
    function Get_State
      (Id : Types.nc_id_type)
       return nc_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
@@ -37,34 +33,20 @@ is
 
    -------------------------------------------------------------------------
 
-   function Has_nonce
-     (Id : Types.nc_id_type;
-      nonce : Types.nonce_type)
-      return Boolean
-   is (Context_Array (Id).nonce = nonce);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.nc_id_type;
-      State : nc_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.nc_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
-
-   -------------------------------------------------------------------------
-
    procedure consume
      (Id : Types.nc_id_type;
       nonce : out Types.nonce_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array,
+   --#    nonce
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# pre
+   --#   Context_Array (Id).State = created;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       nonce := Context_Array (Id).nonce;
@@ -77,6 +59,17 @@ is
    procedure create
      (Id : Types.nc_id_type;
       nonce : Types.nonce_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          nonce;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = created;
    is
    begin
       Context_Array (Id).nonce := nonce;
@@ -87,6 +80,14 @@ is
 
    procedure invalidate
      (Id : Types.nc_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -96,6 +97,14 @@ is
 
    procedure reset
      (Id : Types.nc_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).nonce := Types.Null_nonce_type;

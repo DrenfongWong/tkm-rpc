@@ -1,14 +1,6 @@
 package body Tkmrpc.Contexts.esa
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.esa_id_type;
-   use type Types.ae_id_type;
-   use type Types.ea_id_type;
-   use type Types.sp_id_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type esa_FSM_Type is record
       State : esa_State_Type;
@@ -36,51 +28,12 @@ is
    function Get_State
      (Id : Types.esa_id_type)
       return esa_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
    end Get_State;
-
-   -------------------------------------------------------------------------
-
-   function Has_ae_id
-     (Id : Types.esa_id_type;
-      ae_id : Types.ae_id_type)
-      return Boolean
-   is (Context_Array (Id).ae_id = ae_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_ea_id
-     (Id : Types.esa_id_type;
-      ea_id : Types.ea_id_type)
-      return Boolean
-   is (Context_Array (Id).ea_id = ea_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_sp_id
-     (Id : Types.esa_id_type;
-      sp_id : Types.sp_id_type)
-      return Boolean
-   is (Context_Array (Id).sp_id = sp_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.esa_id_type;
-      State : esa_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.esa_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
 
    -------------------------------------------------------------------------
 
@@ -89,6 +42,19 @@ is
       ae_id : Types.ae_id_type;
       ea_id : Types.ea_id_type;
       sp_id : Types.sp_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          ae_id,
+   --#          ea_id,
+   --#          sp_id;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = active;
    is
    begin
       Context_Array (Id).ae_id := ae_id;
@@ -101,6 +67,14 @@ is
 
    procedure invalidate
      (Id : Types.esa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -110,6 +84,14 @@ is
 
    procedure reset
      (Id : Types.esa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).ae_id := Types.ae_id_type'First;
@@ -122,6 +104,16 @@ is
 
    procedure select_sa
      (Id : Types.esa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# pre
+   --#   Context_Array (Id).State = active;
+   --# post
+   --#   Context_Array (Id).State = selected;
    is
    begin
       Context_Array (Id).State := selected;
@@ -131,6 +123,16 @@ is
 
    procedure unselect_sa
      (Id : Types.esa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# pre
+   --#   Context_Array (Id).State = selected;
+   --# post
+   --#   Context_Array (Id).State = active;
    is
    begin
       Context_Array (Id).State := active;

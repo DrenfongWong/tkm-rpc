@@ -18,6 +18,11 @@ package Tkmrpc.Clients.Cfg is
    pragma Export (C, Tkm_Version, "cfg_tkm_version");
    pragma Export_Valued_Procedure (Tkm_Version);
    --  Returns the version of TKM.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    version
+   --#          from State;
 
    procedure Tkm_Limits
      (Result              : out Results.Result_Type;
@@ -41,10 +46,35 @@ package Tkmrpc.Clients.Cfg is
    pragma Export (C, Tkm_Limits, "cfg_tkm_limits");
    pragma Export_Valued_Procedure (Tkm_Limits);
    --  Returns limits of fixed length of TKM.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    max_active_requests,
+   --#    authag_contexts,
+   --#    cag_contexts,
+   --#    li_contexts,
+   --#    ri_contexts,
+   --#    iag_contexts,
+   --#    eag_contexts,
+   --#    dhag_contexts,
+   --#    sp_contexts,
+   --#    authp_contexts,
+   --#    dhp_contexts,
+   --#    autha_contexts,
+   --#    ca_contexts,
+   --#    lc_contexts,
+   --#    ia_contexts,
+   --#    ea_contexts,
+   --#    dha_contexts
+   --#          from State;
 
    procedure Tkm_Reset (Result : out Results.Result_Type);
    pragma Export (C, Tkm_Reset, "cfg_tkm_reset");
    pragma Export_Valued_Procedure (Tkm_Reset);
    --  Reset the TKM - CFG interface to a known initial state.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State;
 
 end Tkmrpc.Clients.Cfg;

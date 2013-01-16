@@ -1,6 +1,12 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations.Ike;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Response,
+--#    Tkmrpc.Operations.IKE,
+--#    Tkmrpc.Results;
+
 package Tkmrpc.Response.Ike.Cc_Set_User_Certificate is
 
    Data_Size : constant := 0;

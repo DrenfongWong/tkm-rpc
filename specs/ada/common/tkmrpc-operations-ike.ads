@@ -1,3 +1,5 @@
+--# inherit
+--#    Tkmrpc.Operations;
 
 package Tkmrpc.Operations.Ike is
 

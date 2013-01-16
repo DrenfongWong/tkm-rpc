@@ -18,6 +18,11 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Tkm_Version, "ike_tkm_version");
    pragma Export_Valued_Procedure (Tkm_Version);
    --  Returns the version of TKM.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    version
+   --#          from State;
 
    procedure Tkm_Limits
      (Result              : out Results.Result_Type;
@@ -31,11 +36,26 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Tkm_Limits, "ike_tkm_limits");
    pragma Export_Valued_Procedure (Tkm_Limits);
    --  Returns limits of fixed length of TKM IKE.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    max_active_requests,
+   --#    nc_contexts,
+   --#    dh_contexts,
+   --#    cc_contexts,
+   --#    ae_contexts,
+   --#    isa_contexts,
+   --#    esa_contexts
+   --#          from State;
 
    procedure Tkm_Reset (Result : out Results.Result_Type);
    pragma Export (C, Tkm_Reset, "ike_tkm_reset");
    pragma Export_Valued_Procedure (Tkm_Reset);
    --  Reset the TKM - IKE interface to a known initial state.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State;
 
    procedure Nc_Reset
      (Result : out Results.Result_Type;
@@ -43,6 +63,11 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Nc_Reset, "ike_nc_reset");
    pragma Export_Valued_Procedure (Nc_Reset, Mechanism => (Nc_Id => Value));
    --  Reset a NC context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               nc_id;
 
    procedure Nc_Create
      (Result       : out Results.Result_Type;
@@ -54,6 +79,13 @@ package Tkmrpc.Clients.Ike is
      (Nc_Create,
       Mechanism => (Nc_Id => Value, Nonce_Length => Value));
    --  Create a nonce.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    nonce
+   --#          from State,
+   --#               nc_id,
+   --#               nonce_length;
 
    procedure Dh_Reset
      (Result : out Results.Result_Type;
@@ -61,6 +93,11 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Dh_Reset, "ike_dh_reset");
    pragma Export_Valued_Procedure (Dh_Reset, Mechanism => (Dh_Id => Value));
    --  Reset a DH context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               dh_id;
 
    procedure Dh_Create
      (Result   : out Results.Result_Type;
@@ -72,6 +109,13 @@ package Tkmrpc.Clients.Ike is
      (Dh_Create,
       Mechanism => (Dh_Id => Value, Dha_Id => Value));
    --  Create a DH secret and return its public value.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    pubvalue
+   --#          from State,
+   --#               dh_id,
+   --#               dha_id;
 
    procedure Dh_Generate_Key
      (Result   : out Results.Result_Type;
@@ -82,6 +126,12 @@ package Tkmrpc.Clients.Ike is
      (Dh_Generate_Key,
       Mechanism => (Dh_Id => Value, Pubvalue => Value));
    --  Generate a DH shared secret.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               dh_id,
+   --#               pubvalue;
 
    procedure Cc_Reset
      (Result : out Results.Result_Type;
@@ -89,6 +139,11 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Cc_Reset, "ike_cc_reset");
    pragma Export_Valued_Procedure (Cc_Reset, Mechanism => (Cc_Id => Value));
    --  Reset a CC context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               cc_id;
 
    procedure Cc_Set_User_Certificate
      (Result      : out Results.Result_Type;
@@ -105,6 +160,14 @@ package Tkmrpc.Clients.Ike is
       Autha_Id    => Value,
       Certificate => Value));
    --  Initiates a certificate chain starting from the user certificate.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               cc_id,
+   --#               ri_id,
+   --#               autha_id,
+   --#               certificate;
 
    procedure Cc_Add_Certificate
      (Result      : out Results.Result_Type;
@@ -116,6 +179,13 @@ package Tkmrpc.Clients.Ike is
      (Cc_Add_Certificate,
       Mechanism => (Cc_Id => Value, Autha_Id => Value, Certificate => Value));
    --  Add a certificate to a certificate chain.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               cc_id,
+   --#               autha_id,
+   --#               certificate;
 
    procedure Cc_Check_Ca
      (Result : out Results.Result_Type;
@@ -126,6 +196,12 @@ package Tkmrpc.Clients.Ike is
      (Cc_Check_Ca,
       Mechanism => (Cc_Id => Value, Ca_Id => Value));
    --  Checks if a cc is based on a trusted CA
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               cc_id,
+   --#               ca_id;
 
    procedure Ae_Reset
      (Result : out Results.Result_Type;
@@ -133,6 +209,11 @@ package Tkmrpc.Clients.Ike is
    pragma Export (C, Ae_Reset, "ike_ae_reset");
    pragma Export_Valued_Procedure (Ae_Reset, Mechanism => (Ae_Id => Value));
    --  Reset an AE context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               ae_id;
 
    procedure Isa_Reset
      (Result : out Results.Result_Type;
@@ -142,6 +223,11 @@ package Tkmrpc.Clients.Ike is
      (Isa_Reset,
       Mechanism => (Isa_Id => Value));
    --  Reset an ISA context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               isa_id;
 
    procedure Isa_Create
      (Result    : out Results.Result_Type;
@@ -172,6 +258,23 @@ package Tkmrpc.Clients.Ike is
       Spi_Loc   => Value,
       Spi_Rem   => Value));
    --  Create an IKE SA context.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    sk_ai,
+   --#    sk_ar,
+   --#    sk_ei,
+   --#    sk_er
+   --#          from State,
+   --#               isa_id,
+   --#               ae_id,
+   --#               ia_id,
+   --#               dh_id,
+   --#               nc_loc_id,
+   --#               nonce_rem,
+   --#               initiator,
+   --#               spi_loc,
+   --#               spi_rem;
 
    procedure Isa_Sign
      (Result       : out Results.Result_Type;
@@ -184,6 +287,14 @@ package Tkmrpc.Clients.Ike is
      (Isa_Sign,
       Mechanism => (Isa_Id => Value, Lc_Id => Value, Init_Message => Value));
    --  Provide authentication to the remote endpoint.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    signature
+   --#          from State,
+   --#               isa_id,
+   --#               lc_id,
+   --#               init_message;
 
    procedure Isa_Auth
      (Result       : out Results.Result_Type;
@@ -200,6 +311,14 @@ package Tkmrpc.Clients.Ike is
       Init_Message => Value,
       Signature    => Value));
    --  Authenticate the remote endpoint.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               isa_id,
+   --#               cc_id,
+   --#               init_message,
+   --#               signature;
 
    procedure Isa_Create_Child
      (Result        : out Results.Result_Type;
@@ -230,6 +349,23 @@ package Tkmrpc.Clients.Ike is
       Spi_Loc       => Value,
       Spi_Rem       => Value));
    --  Derive an IKE SA context from an existing SA.
+   --# global State;
+   --# derives
+   --#    Result,
+   --#    sk_ai,
+   --#    sk_ar,
+   --#    sk_ei,
+   --#    sk_er
+   --#          from State,
+   --#               isa_id,
+   --#               parent_isa_id,
+   --#               ia_id,
+   --#               dh_id,
+   --#               nc_loc_id,
+   --#               nonce_rem,
+   --#               initiator,
+   --#               spi_loc,
+   --#               spi_rem;
 
    procedure Isa_Skip_Create_First
      (Result : out Results.Result_Type;
@@ -239,6 +375,11 @@ package Tkmrpc.Clients.Ike is
      (Isa_Skip_Create_First,
       Mechanism => (Isa_Id => Value));
    --  Don't create a first child.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               isa_id;
 
    procedure Esa_Reset
      (Result : out Results.Result_Type;
@@ -248,6 +389,11 @@ package Tkmrpc.Clients.Ike is
      (Esa_Reset,
       Mechanism => (Esa_Id => Value));
    --  Reset an ESA context.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               esa_id;
 
    procedure Esa_Create
      (Result      : out Results.Result_Type;
@@ -276,6 +422,20 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc => Value,
       Esp_Spi_Rem => Value));
    --  Creates an ESP SA.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               esa_id,
+   --#               isa_id,
+   --#               sp_id,
+   --#               ea_id,
+   --#               dh_id,
+   --#               nc_loc_id,
+   --#               nonce_rem,
+   --#               initiator,
+   --#               esp_spi_loc,
+   --#               esp_spi_rem;
 
    procedure Esa_Create_No_Pfs
      (Result      : out Results.Result_Type;
@@ -302,6 +462,19 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc => Value,
       Esp_Spi_Rem => Value));
    --  Creates an ESP SA without PFS.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               esa_id,
+   --#               isa_id,
+   --#               sp_id,
+   --#               ea_id,
+   --#               nc_loc_id,
+   --#               nonce_rem,
+   --#               initiator,
+   --#               esp_spi_loc,
+   --#               esp_spi_rem;
 
    procedure Esa_Create_First
      (Result      : out Results.Result_Type;
@@ -322,6 +495,16 @@ package Tkmrpc.Clients.Ike is
       Esp_Spi_Loc => Value,
       Esp_Spi_Rem => Value));
    --  Creates the first ESP SA for an AE.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               esa_id,
+   --#               isa_id,
+   --#               sp_id,
+   --#               ea_id,
+   --#               esp_spi_loc,
+   --#               esp_spi_rem;
 
    procedure Esa_Select
      (Result : out Results.Result_Type;
@@ -331,5 +514,10 @@ package Tkmrpc.Clients.Ike is
      (Esa_Select,
       Mechanism => (Esa_Id => Value));
    --  Selects an ESA context for outgoing traffic.
+   --# global State;
+   --# derives
+   --#    Result
+   --#          from State,
+   --#               esa_id;
 
 end Tkmrpc.Clients.Ike;

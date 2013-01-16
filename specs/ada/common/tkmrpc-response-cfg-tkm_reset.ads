@@ -1,6 +1,12 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations.Cfg;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Response,
+--#    Tkmrpc.Operations.CFG,
+--#    Tkmrpc.Results;
+
 package Tkmrpc.Response.Cfg.Tkm_Reset is
 
    Data_Size : constant := 0;

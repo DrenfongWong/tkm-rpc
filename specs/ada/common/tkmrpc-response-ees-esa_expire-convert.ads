@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Response,
+--#    Tkmrpc.Response.EES.esa_expire;
+
 package Tkmrpc.Response.Ees.Esa_Expire.Convert is
 
    function To_Response is new Ada.Unchecked_Conversion (

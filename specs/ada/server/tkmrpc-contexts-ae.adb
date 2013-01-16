@@ -1,25 +1,6 @@
 package body Tkmrpc.Contexts.ae
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.ae_id_type;
-   use type Types.iag_id_type;
-   use type Types.dhag_id_type;
-   use type Types.ca_id_type;
-   use type Types.lc_id_type;
-   use type Types.ri_id_type;
-   use type Types.authag_id_type;
-   use type Types.init_type;
-   use type Types.nonce_type;
-   use type Types.nonce_type;
-   use type Types.key_type;
-   use type Types.key_type;
-   use type Types.rel_time_type;
-   use type Types.abs_time_type;
-   use type Types.abs_time_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type ae_FSM_Type is record
       State : ae_State_Type;
@@ -69,6 +50,8 @@ is
    function Get_State
      (Id : Types.ae_id_type)
       return ae_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
@@ -76,137 +59,18 @@ is
 
    -------------------------------------------------------------------------
 
-   function Has_authag_id
-     (Id : Types.ae_id_type;
-      authag_id : Types.authag_id_type)
-      return Boolean
-   is (Context_Array (Id).authag_id = authag_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_ca_id
-     (Id : Types.ae_id_type;
-      ca_id : Types.ca_id_type)
-      return Boolean
-   is (Context_Array (Id).ca_id = ca_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_cc_not_after
-     (Id : Types.ae_id_type;
-      cc_not_after : Types.abs_time_type)
-      return Boolean
-   is (Context_Array (Id).cc_not_after = cc_not_after);
-
-   -------------------------------------------------------------------------
-
-   function Has_cc_not_before
-     (Id : Types.ae_id_type;
-      cc_not_before : Types.abs_time_type)
-      return Boolean
-   is (Context_Array (Id).cc_not_before = cc_not_before);
-
-   -------------------------------------------------------------------------
-
-   function Has_creation_time
-     (Id : Types.ae_id_type;
-      creation_time : Types.rel_time_type)
-      return Boolean
-   is (Context_Array (Id).creation_time = creation_time);
-
-   -------------------------------------------------------------------------
-
-   function Has_dhag_id
-     (Id : Types.ae_id_type;
-      dhag_id : Types.dhag_id_type)
-      return Boolean
-   is (Context_Array (Id).dhag_id = dhag_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_iag_id
-     (Id : Types.ae_id_type;
-      iag_id : Types.iag_id_type)
-      return Boolean
-   is (Context_Array (Id).iag_id = iag_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_initiator
-     (Id : Types.ae_id_type;
-      initiator : Types.init_type)
-      return Boolean
-   is (Context_Array (Id).initiator = initiator);
-
-   -------------------------------------------------------------------------
-
-   function Has_lc_id
-     (Id : Types.ae_id_type;
-      lc_id : Types.lc_id_type)
-      return Boolean
-   is (Context_Array (Id).lc_id = lc_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_nonce_loc
-     (Id : Types.ae_id_type;
-      nonce_loc : Types.nonce_type)
-      return Boolean
-   is (Context_Array (Id).nonce_loc = nonce_loc);
-
-   -------------------------------------------------------------------------
-
-   function Has_nonce_rem
-     (Id : Types.ae_id_type;
-      nonce_rem : Types.nonce_type)
-      return Boolean
-   is (Context_Array (Id).nonce_rem = nonce_rem);
-
-   -------------------------------------------------------------------------
-
-   function Has_ri_id
-     (Id : Types.ae_id_type;
-      ri_id : Types.ri_id_type)
-      return Boolean
-   is (Context_Array (Id).ri_id = ri_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_sk_ike_auth_loc
-     (Id : Types.ae_id_type;
-      sk_ike_auth_loc : Types.key_type)
-      return Boolean
-   is (Context_Array (Id).sk_ike_auth_loc = sk_ike_auth_loc);
-
-   -------------------------------------------------------------------------
-
-   function Has_sk_ike_auth_rem
-     (Id : Types.ae_id_type;
-      sk_ike_auth_rem : Types.key_type)
-      return Boolean
-   is (Context_Array (Id).sk_ike_auth_rem = sk_ike_auth_rem);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.ae_id_type;
-      State : ae_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.ae_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
-
-   -------------------------------------------------------------------------
-
    procedure activate
      (Id : Types.ae_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# pre
+   --#   Context_Array (Id).State = authenticated;
+   --# post
+   --#   Context_Array (Id).State = active;
    is
    begin
       Context_Array (Id).State := active;
@@ -221,6 +85,21 @@ is
       ri_id : Types.ri_id_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          ca_context,
+   --#          authag_id,
+   --#          ri_id,
+   --#          not_before,
+   --#          not_after;
+   --# pre
+   --#   Context_Array (Id).State = loc_auth;
+   --# post
+   --#   Context_Array (Id).State = authenticated;
    is
    begin
       Context_Array (Id).ca_id := ca_context;
@@ -243,6 +122,24 @@ is
       sk_ike_auth_rem : Types.key_type;
       nonce_loc : Types.nonce_type;
       nonce_rem : Types.nonce_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          iag_id,
+   --#          dhag_id,
+   --#          creation_time,
+   --#          initiator,
+   --#          sk_ike_auth_loc,
+   --#          sk_ike_auth_rem,
+   --#          nonce_loc,
+   --#          nonce_rem;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = unauth;
    is
    begin
       Context_Array (Id).iag_id := iag_id;
@@ -261,6 +158,11 @@ is
    function get_lc_id
      (Id : Types.ae_id_type)
       return Types.lc_id_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = authenticated or
+   --#   Context_Array (Id).State = active;
+   --# return Context_Array (Id).lc_id;
    is
    begin
       return Context_Array (Id).lc_id;
@@ -271,6 +173,11 @@ is
    function get_nonce_loc
      (Id : Types.ae_id_type)
       return Types.nonce_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = authenticated or
+   --#   Context_Array (Id).State = loc_auth;
+   --# return Context_Array (Id).nonce_loc;
    is
    begin
       return Context_Array (Id).nonce_loc;
@@ -281,6 +188,11 @@ is
    function get_nonce_rem
      (Id : Types.ae_id_type)
       return Types.nonce_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = authenticated or
+   --#   Context_Array (Id).State = unauth;
+   --# return Context_Array (Id).nonce_rem;
    is
    begin
       return Context_Array (Id).nonce_rem;
@@ -291,6 +203,11 @@ is
    function get_ri_id
      (Id : Types.ae_id_type)
       return Types.ri_id_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = authenticated or
+   --#   Context_Array (Id).State = active;
+   --# return Context_Array (Id).ri_id;
    is
    begin
       return Context_Array (Id).ri_id;
@@ -301,6 +218,10 @@ is
    function get_sk_ike_auth_loc
      (Id : Types.ae_id_type)
       return Types.key_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = unauth;
+   --# return Context_Array (Id).sk_ike_auth_loc;
    is
    begin
       return Context_Array (Id).sk_ike_auth_loc;
@@ -311,6 +232,10 @@ is
    function get_sk_ike_auth_rem
      (Id : Types.ae_id_type)
       return Types.key_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = loc_auth;
+   --# return Context_Array (Id).sk_ike_auth_rem;
    is
    begin
       return Context_Array (Id).sk_ike_auth_rem;
@@ -320,6 +245,14 @@ is
 
    procedure invalidate
      (Id : Types.ae_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -330,6 +263,10 @@ is
    function is_initiator
      (Id : Types.ae_id_type)
       return Types.init_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = authenticated;
+   --# return Context_Array (Id).initiator;
    is
    begin
       return Context_Array (Id).initiator;
@@ -339,6 +276,14 @@ is
 
    procedure reset
      (Id : Types.ae_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).iag_id := Types.iag_id_type'First;
@@ -363,6 +308,17 @@ is
    procedure sign
      (Id : Types.ae_id_type;
       lc_id : Types.lc_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          lc_id;
+   --# pre
+   --#   Context_Array (Id).State = unauth;
+   --# post
+   --#   Context_Array (Id).State = loc_auth;
    is
    begin
       Context_Array (Id).lc_id := lc_id;

@@ -1,6 +1,11 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations.Cfg;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Operations.CFG;
+
 package Tkmrpc.Request.Cfg.Tkm_Version is
 
    Data_Size : constant := 0;

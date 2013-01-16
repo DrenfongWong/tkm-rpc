@@ -1,6 +1,10 @@
 with Tkmrpc.Types;
 with Tkmrpc.Operations;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Operations;
+
 package Tkmrpc.Request is
    Request_Size : constant := 2048;
    Header_Size  : constant := 16;

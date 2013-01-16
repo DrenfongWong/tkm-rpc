@@ -1,5 +1,8 @@
 with Tkmrpc.Types;
 
+--# inherit
+--#    Tkmrpc.Types;
+
 package Tkmrpc.Constants is
 
    Cfg_Version : constant Types.Version_Type := 16#0000000000000000#;

@@ -14,7 +14,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Create is
    begin
       Specific_Res := Response.Ike.Dh_Create.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.dh_create.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req := Request.Ike.Dh_Create.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Dh_Id'Valid and
          Specific_Req.Data.Dha_Id'Valid
@@ -25,8 +29,12 @@ package body Tkmrpc.Operation_Handlers.Ike.Dh_Create is
             Dha_Id   => Specific_Req.Data.Dha_Id,
             Pubvalue => Specific_Res.Data.Pubvalue);
 
+         --# accept W, 13,
+         --#        Response.IKE.dh_create.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res :=
             Response.Ike.Dh_Create.Convert.To_Response (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;

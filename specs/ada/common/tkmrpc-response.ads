@@ -2,6 +2,11 @@ with Tkmrpc.Types;
 with Tkmrpc.Results;
 with Tkmrpc.Operations;
 
+--# inherit
+--#    Tkmrpc.Types,
+--#    Tkmrpc.Results,
+--#    Tkmrpc.Operations;
+
 package Tkmrpc.Response is
    Response_Size : constant := 1024;
    Header_Size   : constant := 24;

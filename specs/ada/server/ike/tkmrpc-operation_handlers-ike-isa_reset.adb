@@ -13,15 +13,23 @@ package body Tkmrpc.Operation_Handlers.Ike.Isa_Reset is
    begin
       Specific_Res := Response.Ike.Isa_Reset.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.isa_reset.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req := Request.Ike.Isa_Reset.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Isa_Id'Valid then
          Servers.Ike.Isa_Reset
            (Result => Specific_Res.Header.Result,
             Isa_Id => Specific_Req.Data.Isa_Id);
 
+         --# accept W, 13,
+         --#        Response.IKE.isa_reset.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res :=
             Response.Ike.Isa_Reset.Convert.To_Response (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;

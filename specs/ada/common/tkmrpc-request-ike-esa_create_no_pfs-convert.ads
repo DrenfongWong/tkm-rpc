@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Request.IKE.esa_create_no_pfs;
+
 package Tkmrpc.Request.Ike.Esa_Create_No_Pfs.Convert is
 
    function To_Request is new Ada.Unchecked_Conversion (

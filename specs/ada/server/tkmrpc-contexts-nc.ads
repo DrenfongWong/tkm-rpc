@@ -1,7 +1,14 @@
 with Tkmrpc.Types;
 
+--# inherit
+--#    Tkmrpc.Types;
+
 package Tkmrpc.Contexts.nc
+--# own State : State_Type;
+--# initializes State;
 is
+
+   --# type State_Type is abstract;
 
    type nc_State_Type is
       (clean,
@@ -14,58 +21,47 @@ is
 
    function Get_State
      (Id : Types.nc_id_type)
-      return nc_State_Type
-   with
-     Pre => Is_Valid (Id);
-
-   function Is_Valid (Id : Types.nc_id_type) return Boolean;
-   --  Returns True if the given id has a valid value.
-
-   function Has_nonce
-     (Id : Types.nc_id_type;
-      nonce : Types.nonce_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  nonce value.
-
-   function Has_State
-     (Id : Types.nc_id_type;
-      State : nc_State_Type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  State value.
+      return nc_State_Type;
+   --# global State;
 
    procedure consume
      (Id : Types.nc_id_type;
-      nonce : out Types.nonce_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, created)),
-     Post => Has_State (Id, clean);
+      nonce : out Types.nonce_type);
+   --# global in out State;
+   --# derives
+   --#    State,
+   --#    nonce
+   --#       from
+   --#          State,
+   --#          Id;
 
    procedure create
      (Id : Types.nc_id_type;
-      nonce : Types.nonce_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, clean)),
-     Post => Has_State (Id, created) and
-             Has_nonce (Id, nonce);
+      nonce : Types.nonce_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          nonce;
 
    procedure invalidate
-     (Id : Types.nc_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, invalid);
+     (Id : Types.nc_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
    procedure reset
-     (Id : Types.nc_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, clean);
+     (Id : Types.nc_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
 end Tkmrpc.Contexts.nc;

@@ -1,15 +1,6 @@
 package body Tkmrpc.Contexts.dh
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.dh_id_type;
-   use type Types.dha_id_type;
-   use type Types.rel_time_type;
-   use type Types.dh_priv_type;
-   use type Types.dh_key_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type dh_FSM_Type is record
       State : dh_State_Type;
@@ -39,6 +30,8 @@ is
    function Get_State
      (Id : Types.dh_id_type)
       return dh_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
@@ -46,58 +39,20 @@ is
 
    -------------------------------------------------------------------------
 
-   function Has_creation_time
-     (Id : Types.dh_id_type;
-      creation_time : Types.rel_time_type)
-      return Boolean
-   is (Context_Array (Id).creation_time = creation_time);
-
-   -------------------------------------------------------------------------
-
-   function Has_dha_id
-     (Id : Types.dh_id_type;
-      dha_id : Types.dha_id_type)
-      return Boolean
-   is (Context_Array (Id).dha_id = dha_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_key
-     (Id : Types.dh_id_type;
-      key : Types.dh_key_type)
-      return Boolean
-   is (Context_Array (Id).key = key);
-
-   -------------------------------------------------------------------------
-
-   function Has_priv
-     (Id : Types.dh_id_type;
-      priv : Types.dh_priv_type)
-      return Boolean
-   is (Context_Array (Id).priv = priv);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.dh_id_type;
-      State : dh_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.dh_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
-
-   -------------------------------------------------------------------------
-
    procedure consume
      (Id : Types.dh_id_type;
       dh_key : out Types.dh_key_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array,
+   --#    dh_key
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# pre
+   --#   Context_Array (Id).State = generated;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       dh_key := Context_Array (Id).key;
@@ -114,6 +69,18 @@ is
      (Id : Types.dh_id_type;
       dha_id : Types.dha_id_type;
       secvalue : Types.dh_priv_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          dha_id,
+   --#          secvalue;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = created;
    is
    begin
       Context_Array (Id).dha_id := dha_id;
@@ -127,6 +94,18 @@ is
      (Id : Types.dh_id_type;
       dh_key : Types.dh_key_type;
       timestamp : Types.rel_time_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          dh_key,
+   --#          timestamp;
+   --# pre
+   --#   Context_Array (Id).State = created;
+   --# post
+   --#   Context_Array (Id).State = generated;
    is
    begin
       Context_Array (Id).key := dh_key;
@@ -140,6 +119,10 @@ is
    function get_dha_id
      (Id : Types.dh_id_type)
       return Types.dha_id_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = created;
+   --# return Context_Array (Id).dha_id;
    is
    begin
       return Context_Array (Id).dha_id;
@@ -150,6 +133,10 @@ is
    function get_secvalue
      (Id : Types.dh_id_type)
       return Types.dh_priv_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = created;
+   --# return Context_Array (Id).priv;
    is
    begin
       return Context_Array (Id).priv;
@@ -159,6 +146,14 @@ is
 
    procedure invalidate
      (Id : Types.dh_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -168,6 +163,14 @@ is
 
    procedure reset
      (Id : Types.dh_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).dha_id := Types.dha_id_type'First;

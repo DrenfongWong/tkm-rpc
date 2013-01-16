@@ -1,5 +1,8 @@
 with Interfaces;
 
+--# inherit
+--#    Interfaces;
+
 package Tkmrpc.Results is
 
    subtype Result_Type is Interfaces.Unsigned_64;

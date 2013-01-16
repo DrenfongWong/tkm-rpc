@@ -6,7 +6,9 @@ package body Tkmrpc.Operation_Handlers.Ike.Tkm_Limits is
    -------------------------------------------------------------------------
 
    procedure Handle (Req : Request.Data_Type; Res : out Response.Data_Type) is
+      --# accept W, 3, "Ignore Unreferenced pragma";
       pragma Unreferenced (Req);
+      --# end accept;
 
       Specific_Res : Response.Ike.Tkm_Limits.Response_Type;
    begin
@@ -22,7 +24,11 @@ package body Tkmrpc.Operation_Handlers.Ike.Tkm_Limits is
          Isa_Contexts        => Specific_Res.Data.Isa_Contexts,
          Esa_Contexts        => Specific_Res.Data.Esa_Contexts);
 
+      --# accept W, 13,
+      --#        Response.IKE.tkm_limits.Convert.To_Response,
+      --#        "Validity is assured by preconditions";
       Res := Response.Ike.Tkm_Limits.Convert.To_Response (S => Specific_Res);
+      --# end accept;
    end Handle;
 
 end Tkmrpc.Operation_Handlers.Ike.Tkm_Limits;

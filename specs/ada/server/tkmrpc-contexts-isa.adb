@@ -1,16 +1,6 @@
 package body Tkmrpc.Contexts.isa
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.isa_id_type;
-   use type Types.ae_id_type;
-   use type Types.ia_id_type;
-   use type Types.key_type;
-   use type Types.rel_time_type;
-   use type Types.duration_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type isa_FSM_Type is record
       State : isa_State_Type;
@@ -42,67 +32,12 @@ is
    function Get_State
      (Id : Types.isa_id_type)
       return isa_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
    end Get_State;
-
-   -------------------------------------------------------------------------
-
-   function Has_ae_id
-     (Id : Types.isa_id_type;
-      ae_id : Types.ae_id_type)
-      return Boolean
-   is (Context_Array (Id).ae_id = ae_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_creation_time
-     (Id : Types.isa_id_type;
-      creation_time : Types.rel_time_type)
-      return Boolean
-   is (Context_Array (Id).creation_time = creation_time);
-
-   -------------------------------------------------------------------------
-
-   function Has_ia_id
-     (Id : Types.isa_id_type;
-      ia_id : Types.ia_id_type)
-      return Boolean
-   is (Context_Array (Id).ia_id = ia_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_max_rekey_age
-     (Id : Types.isa_id_type;
-      max_rekey_age : Types.duration_type)
-      return Boolean
-   is (Context_Array (Id).max_rekey_age = max_rekey_age);
-
-   -------------------------------------------------------------------------
-
-   function Has_sk_d
-     (Id : Types.isa_id_type;
-      sk_d : Types.key_type)
-      return Boolean
-   is (Context_Array (Id).sk_d = sk_d);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.isa_id_type;
-      State : isa_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.isa_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
 
    -------------------------------------------------------------------------
 
@@ -112,6 +47,20 @@ is
       ia_id : Types.ia_id_type;
       sk_d : Types.key_type;
       creation_time : Types.rel_time_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          ae_id,
+   --#          ia_id,
+   --#          sk_d,
+   --#          creation_time;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = active;
    is
    begin
       Context_Array (Id).ae_id := ae_id;
@@ -126,6 +75,10 @@ is
    function get_ae_id
      (Id : Types.isa_id_type)
       return Types.ae_id_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = active;
+   --# return Context_Array (Id).ae_id;
    is
    begin
       return Context_Array (Id).ae_id;
@@ -136,6 +89,10 @@ is
    function get_sk_d
      (Id : Types.isa_id_type)
       return Types.key_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = active;
+   --# return Context_Array (Id).sk_d;
    is
    begin
       return Context_Array (Id).sk_d;
@@ -145,6 +102,14 @@ is
 
    procedure invalidate
      (Id : Types.isa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -154,6 +119,14 @@ is
 
    procedure reset
      (Id : Types.isa_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).ae_id := Types.ae_id_type'First;

@@ -1,18 +1,6 @@
 package body Tkmrpc.Contexts.cc
+--# own State is Context_Array;
 is
-
-   pragma Warnings
-     (Off, "* already use-visible through previous use type clause");
-   use type Types.cc_id_type;
-   use type Types.certificate_type;
-   use type Types.certificate_type;
-   use type Types.ca_id_type;
-   use type Types.ri_id_type;
-   use type Types.authag_id_type;
-   use type Types.abs_time_type;
-   use type Types.abs_time_type;
-   pragma Warnings
-     (On, "* already use-visible through previous use type clause");
 
    type cc_FSM_Type is record
       State : cc_State_Type;
@@ -48,83 +36,12 @@ is
    function Get_State
      (Id : Types.cc_id_type)
       return cc_State_Type
+   --# global Context_Array;
+   --# return Context_Array (Id).State;
    is
    begin
       return Context_Array (Id).State;
    end Get_State;
-
-   -------------------------------------------------------------------------
-
-   function Has_authag_id
-     (Id : Types.cc_id_type;
-      authag_id : Types.authag_id_type)
-      return Boolean
-   is (Context_Array (Id).authag_id = authag_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_ca_id
-     (Id : Types.cc_id_type;
-      ca_id : Types.ca_id_type)
-      return Boolean
-   is (Context_Array (Id).ca_id = ca_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_certificate
-     (Id : Types.cc_id_type;
-      certificate : Types.certificate_type)
-      return Boolean
-   is (Context_Array (Id).certificate = certificate);
-
-   -------------------------------------------------------------------------
-
-   function Has_last_cert
-     (Id : Types.cc_id_type;
-      last_cert : Types.certificate_type)
-      return Boolean
-   is (Context_Array (Id).last_cert = last_cert);
-
-   -------------------------------------------------------------------------
-
-   function Has_not_after
-     (Id : Types.cc_id_type;
-      not_after : Types.abs_time_type)
-      return Boolean
-   is (Context_Array (Id).not_after = not_after);
-
-   -------------------------------------------------------------------------
-
-   function Has_not_before
-     (Id : Types.cc_id_type;
-      not_before : Types.abs_time_type)
-      return Boolean
-   is (Context_Array (Id).not_before = not_before);
-
-   -------------------------------------------------------------------------
-
-   function Has_ri_id
-     (Id : Types.cc_id_type;
-      ri_id : Types.ri_id_type)
-      return Boolean
-   is (Context_Array (Id).ri_id = ri_id);
-
-   -------------------------------------------------------------------------
-
-   function Has_State
-     (Id : Types.cc_id_type;
-      State : cc_State_Type)
-      return Boolean
-   is (Context_Array (Id).State = State);
-
-   -------------------------------------------------------------------------
-
-   pragma Warnings
-     (Off, "condition can only be False if invalid values present");
-   function Is_Valid (Id : Types.cc_id_type) return Boolean
-   is (Context_Array'First <= Id and Id <= Context_Array'Last);
-   pragma Warnings
-     (On, "condition can only be False if invalid values present");
 
    -------------------------------------------------------------------------
 
@@ -133,6 +50,19 @@ is
       certificate : Types.certificate_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          certificate,
+   --#          not_before,
+   --#          not_after;
+   --# pre
+   --#   Context_Array (Id).State = linked;
+   --# post
+   --#   Context_Array (Id).State =  ~Context_Array (Id).State;
    is
    begin
       Context_Array (Id).last_cert := certificate;
@@ -145,6 +75,17 @@ is
    procedure check
      (Id : Types.cc_id_type;
       ca_id : Types.ca_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          ca_id;
+   --# pre
+   --#   Context_Array (Id).State = linked;
+   --# post
+   --#   Context_Array (Id).State = checked;
    is
    begin
       Context_Array (Id).ca_id := ca_id;
@@ -161,6 +102,22 @@ is
       last_cert : Types.certificate_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id,
+   --#          authag_id,
+   --#          ri_id,
+   --#          certificate,
+   --#          last_cert,
+   --#          not_before,
+   --#          not_after;
+   --# pre
+   --#   Context_Array (Id).State = clean;
+   --# post
+   --#   Context_Array (Id).State = linked;
    is
    begin
       Context_Array (Id).authag_id := authag_id;
@@ -177,6 +134,10 @@ is
    function get_certificate
      (Id : Types.cc_id_type)
       return Types.certificate_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = checked;
+   --# return Context_Array (Id).certificate;
    is
    begin
       return Context_Array (Id).certificate;
@@ -187,6 +148,10 @@ is
    function get_last_cert
      (Id : Types.cc_id_type)
       return Types.certificate_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = linked;
+   --# return Context_Array (Id).last_cert;
    is
    begin
       return Context_Array (Id).last_cert;
@@ -197,6 +162,10 @@ is
    function get_not_after
      (Id : Types.cc_id_type)
       return Types.abs_time_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = linked;
+   --# return Context_Array (Id).not_after;
    is
    begin
       return Context_Array (Id).not_after;
@@ -207,6 +176,10 @@ is
    function get_not_before
      (Id : Types.cc_id_type)
       return Types.abs_time_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = linked;
+   --# return Context_Array (Id).not_before;
    is
    begin
       return Context_Array (Id).not_before;
@@ -217,6 +190,10 @@ is
    function get_remote_id
      (Id : Types.cc_id_type)
       return Types.ri_id_type
+   --# global Context_Array;
+   --# pre
+   --#   Context_Array (Id).State = checked;
+   --# return Context_Array (Id).ri_id;
    is
    begin
       return Context_Array (Id).ri_id;
@@ -226,6 +203,14 @@ is
 
    procedure invalidate
      (Id : Types.cc_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = invalid;
    is
    begin
       Context_Array (Id).State := invalid;
@@ -235,6 +220,14 @@ is
 
    procedure reset
      (Id : Types.cc_id_type)
+   --# global in out Context_Array;
+   --# derives
+   --#    Context_Array
+   --#       from
+   --#          Context_Array,
+   --#          Id;
+   --# post
+   --#   Context_Array (Id).State = clean;
    is
    begin
       Context_Array (Id).ca_id := Types.ca_id_type'First;

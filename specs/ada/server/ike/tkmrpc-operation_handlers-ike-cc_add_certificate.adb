@@ -13,8 +13,12 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate is
    begin
       Specific_Res := Response.Ike.Cc_Add_Certificate.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.cc_add_certificate.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req :=
          Request.Ike.Cc_Add_Certificate.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Cc_Id'Valid and
          Specific_Req.Data.Autha_Id'Valid and
@@ -26,9 +30,13 @@ package body Tkmrpc.Operation_Handlers.Ike.Cc_Add_Certificate is
             Autha_Id    => Specific_Req.Data.Autha_Id,
             Certificate => Specific_Req.Data.Certificate);
 
+         --# accept W, 13,
+         --#        Response.IKE.cc_add_certificate.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res :=
             Response.Ike.Cc_Add_Certificate.Convert.To_Response
               (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;

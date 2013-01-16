@@ -1,7 +1,14 @@
 with Tkmrpc.Types;
 
+--# inherit
+--#    Tkmrpc.Types;
+
 package Tkmrpc.Contexts.dh
+--# own State : State_Type;
+--# initializes State;
 is
+
+   --# type State_Type is abstract;
 
    type dh_State_Type is
       (clean,
@@ -18,114 +25,72 @@ is
 
    function Get_State
      (Id : Types.dh_id_type)
-      return dh_State_Type
-   with
-     Pre => Is_Valid (Id);
-
-   function Is_Valid (Id : Types.dh_id_type) return Boolean;
-   --  Returns True if the given id has a valid value.
-
-   function Has_creation_time
-     (Id : Types.dh_id_type;
-      creation_time : Types.rel_time_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  creation_time value.
-
-   function Has_dha_id
-     (Id : Types.dh_id_type;
-      dha_id : Types.dha_id_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  dha_id value.
-
-   function Has_key
-     (Id : Types.dh_id_type;
-      key : Types.dh_key_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  key value.
-
-   function Has_priv
-     (Id : Types.dh_id_type;
-      priv : Types.dh_priv_type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  priv value.
-
-   function Has_State
-     (Id : Types.dh_id_type;
-      State : dh_State_Type)
-      return Boolean
-   with
-      Pre => Is_Valid (Id);
-   --  Returns True if the context specified by id has the given
-   --  State value.
+      return dh_State_Type;
+   --# global State;
 
    procedure consume
      (Id : Types.dh_id_type;
-      dh_key : out Types.dh_key_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, generated)),
-     Post => Has_State (Id, clean);
+      dh_key : out Types.dh_key_type);
+   --# global in out State;
+   --# derives
+   --#    State,
+   --#    dh_key
+   --#       from
+   --#          State,
+   --#          Id;
 
    procedure create
      (Id : Types.dh_id_type;
       dha_id : Types.dha_id_type;
-      secvalue : Types.dh_priv_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, clean)),
-     Post => Has_State (Id, created) and
-             Has_dha_id (Id, dha_id) and
-             Has_priv (Id, secvalue);
+      secvalue : Types.dh_priv_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          dha_id,
+   --#          secvalue;
 
    procedure generate
      (Id : Types.dh_id_type;
       dh_key : Types.dh_key_type;
-      timestamp : Types.rel_time_type)
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, created)),
-     Post => Has_State (Id, generated) and
-             Has_key (Id, dh_key) and
-             Has_creation_time (Id, timestamp);
+      timestamp : Types.rel_time_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id,
+   --#          dh_key,
+   --#          timestamp;
 
    function get_dha_id
      (Id : Types.dh_id_type)
-      return Types.dha_id_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, created)),
-     Post => Has_dha_id (Id, get_dha_id'Result);
+      return Types.dha_id_type;
+   --# global State;
 
    function get_secvalue
      (Id : Types.dh_id_type)
-      return Types.dh_priv_type
-   with
-     Pre => Is_Valid (Id) and then
-           (Has_State (Id, created)),
-     Post => Has_priv (Id, get_secvalue'Result);
+      return Types.dh_priv_type;
+   --# global State;
 
    procedure invalidate
-     (Id : Types.dh_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, invalid);
+     (Id : Types.dh_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
    procedure reset
-     (Id : Types.dh_id_type)
-   with
-     Pre => Is_Valid (Id),
-     Post => Has_State (Id, clean);
+     (Id : Types.dh_id_type);
+   --# global in out State;
+   --# derives
+   --#    State
+   --#       from
+   --#          State,
+   --#          Id;
 
 end Tkmrpc.Contexts.dh;

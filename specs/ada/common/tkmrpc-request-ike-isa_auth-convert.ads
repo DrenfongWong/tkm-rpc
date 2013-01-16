@@ -1,5 +1,10 @@
 with Ada.Unchecked_Conversion;
 
+--# inherit
+--#    Ada.Unchecked_Conversion,
+--#    Tkmrpc.Request,
+--#    Tkmrpc.Request.IKE.isa_auth;
+
 package Tkmrpc.Request.Ike.Isa_Auth.Convert is
 
    function To_Request is new Ada.Unchecked_Conversion (

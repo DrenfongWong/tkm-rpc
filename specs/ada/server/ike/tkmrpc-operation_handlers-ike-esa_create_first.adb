@@ -13,8 +13,12 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_First is
    begin
       Specific_Res := Response.Ike.Esa_Create_First.Null_Response;
 
+      --# accept W, 13,
+      --#        Request.IKE.esa_create_first.Convert.From_Request,
+      --#        "Validity is assured by preconditions";
       Specific_Req :=
          Request.Ike.Esa_Create_First.Convert.From_Request (S => Req);
+      --# end accept;
 
       if Specific_Req.Data.Esa_Id'Valid and
          Specific_Req.Data.Isa_Id'Valid and
@@ -32,9 +36,13 @@ package body Tkmrpc.Operation_Handlers.Ike.Esa_Create_First is
             Esp_Spi_Loc => Specific_Req.Data.Esp_Spi_Loc,
             Esp_Spi_Rem => Specific_Req.Data.Esp_Spi_Rem);
 
+         --# accept W, 13,
+         --#        Response.IKE.esa_create_first.Convert.To_Response,
+         --#        "Validity is assured by preconditions";
          Res :=
             Response.Ike.Esa_Create_First.Convert.To_Response
               (S => Specific_Res);
+      --# end accept;
 
       else
          Res.Header.Result := Results.Invalid_Parameter;
