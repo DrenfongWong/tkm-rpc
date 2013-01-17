@@ -49,7 +49,7 @@ install_lib: build_clientlib
 install_tests: build_tests
 	install -v -d $(PREFIX)/$(TESTDIR)
 	install -m 755 $(OBJDIR)/$(TESTDIR)/test_runner $(PREFIX)/$(TESTDIR)
-	install -m 755 $(OBJDIR)/$(TESTDIR)/test_client $(PREFIX)/$(TESTDIR)
+	install -m 755 $(OBJDIR)/$(TESTDIR)/client $(PREFIX)/$(TESTDIR)
 
 cov: build_tests
 	@rm -f $(COVDIR)/*.gcda
