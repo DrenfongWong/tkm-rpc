@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Ees;
 
 package Tkmrpc.Request.Ees.Esa_Expire is
 
-   Data_Size : constant := 17;
+   Data_Size : constant := 13;
 
    type Data_Type is record
       Sp_Id    : Types.Sp_Id_Type;
@@ -13,10 +13,10 @@ package Tkmrpc.Request.Ees.Esa_Expire is
    end record;
 
    for Data_Type use record
-      Sp_Id    at 0 range 0 .. (8 * 8) - 1;
-      Spi_Rem  at 8 range 0 .. (4 * 8) - 1;
-      Protocol at 12 range 0 .. (4 * 8) - 1;
-      Hard     at 16 range 0 .. (1 * 8) - 1;
+      Sp_Id    at 0 range 0 .. (4 * 8) - 1;
+      Spi_Rem  at 4 range 0 .. (4 * 8) - 1;
+      Protocol at 8 range 0 .. (4 * 8) - 1;
+      Hard     at 12 range 0 .. (1 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

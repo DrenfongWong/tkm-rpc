@@ -28,7 +28,7 @@ typedef uint64_t eag_id_type;
 
 typedef uint64_t dhag_id_type;
 
-typedef uint64_t sp_id_type;
+typedef uint32_t sp_id_type;
 
 typedef uint64_t authp_id_type;
 

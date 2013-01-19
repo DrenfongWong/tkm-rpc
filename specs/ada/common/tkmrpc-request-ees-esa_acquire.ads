@@ -3,14 +3,14 @@ with Tkmrpc.Operations.Ees;
 
 package Tkmrpc.Request.Ees.Esa_Acquire is
 
-   Data_Size : constant := 8;
+   Data_Size : constant := 4;
 
    type Data_Type is record
       Sp_Id : Types.Sp_Id_Type;
    end record;
 
    for Data_Type use record
-      Sp_Id at 0 range 0 .. (8 * 8) - 1;
+      Sp_Id at 0 range 0 .. (4 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

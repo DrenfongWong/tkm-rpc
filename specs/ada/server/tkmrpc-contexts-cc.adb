@@ -214,6 +214,16 @@ is
 
    -------------------------------------------------------------------------
 
+   function get_remote_id
+     (Id : Types.cc_id_type)
+      return Types.ri_id_type
+   is
+   begin
+      return Context_Array (Id).ri_id;
+   end get_remote_id;
+
+   -------------------------------------------------------------------------
+
    procedure invalidate
      (Id : Types.cc_id_type)
    is
