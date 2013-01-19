@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Esa_Create_First is
 
-   Data_Size : constant := 40;
+   Data_Size : constant := 36;
 
    type Data_Type is record
       Esa_Id      : Types.Esa_Id_Type;
@@ -17,10 +17,10 @@ package Tkmrpc.Request.Ike.Esa_Create_First is
    for Data_Type use record
       Esa_Id      at 0 range 0 .. (8 * 8) - 1;
       Isa_Id      at 8 range 0 .. (8 * 8) - 1;
-      Sp_Id       at 16 range 0 .. (8 * 8) - 1;
-      Ea_Id       at 24 range 0 .. (8 * 8) - 1;
-      Esp_Spi_Loc at 32 range 0 .. (4 * 8) - 1;
-      Esp_Spi_Rem at 36 range 0 .. (4 * 8) - 1;
+      Sp_Id       at 16 range 0 .. (4 * 8) - 1;
+      Ea_Id       at 20 range 0 .. (8 * 8) - 1;
+      Esp_Spi_Loc at 28 range 0 .. (4 * 8) - 1;
+      Esp_Spi_Rem at 32 range 0 .. (4 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

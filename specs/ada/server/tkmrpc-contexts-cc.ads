@@ -170,6 +170,14 @@ is
            (Has_State (Id, linked)),
      Post => Has_not_before (Id, get_not_before'Result);
 
+   function get_remote_id
+     (Id : Types.cc_id_type)
+      return Types.ri_id_type
+   with
+     Pre => Is_Valid (Id) and then
+           (Has_State (Id, checked)),
+     Post => Has_ri_id (Id, get_remote_id'Result);
+
    procedure invalidate
      (Id : Types.cc_id_type)
    with

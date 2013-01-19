@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Esa_Create_No_Pfs is
 
-   Data_Size : constant := 316;
+   Data_Size : constant := 312;
 
    type Data_Type is record
       Esa_Id      : Types.Esa_Id_Type;
@@ -20,13 +20,13 @@ package Tkmrpc.Request.Ike.Esa_Create_No_Pfs is
    for Data_Type use record
       Esa_Id      at 0 range 0 .. (8 * 8) - 1;
       Isa_Id      at 8 range 0 .. (8 * 8) - 1;
-      Sp_Id       at 16 range 0 .. (8 * 8) - 1;
-      Ea_Id       at 24 range 0 .. (8 * 8) - 1;
-      Nc_Loc_Id   at 32 range 0 .. (8 * 8) - 1;
-      Nonce_Rem   at 40 range 0 .. (260 * 8) - 1;
-      Initiator   at 300 range 0 .. (8 * 8) - 1;
-      Esp_Spi_Loc at 308 range 0 .. (4 * 8) - 1;
-      Esp_Spi_Rem at 312 range 0 .. (4 * 8) - 1;
+      Sp_Id       at 16 range 0 .. (4 * 8) - 1;
+      Ea_Id       at 20 range 0 .. (8 * 8) - 1;
+      Nc_Loc_Id   at 28 range 0 .. (8 * 8) - 1;
+      Nonce_Rem   at 36 range 0 .. (260 * 8) - 1;
+      Initiator   at 296 range 0 .. (8 * 8) - 1;
+      Esp_Spi_Loc at 304 range 0 .. (4 * 8) - 1;
+      Esp_Spi_Rem at 308 range 0 .. (4 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

@@ -26,7 +26,7 @@ package Tkmrpc.Types is
 
    subtype Dhag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Sp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   subtype Sp_Id_Type is Interfaces.Unsigned_32 range 1 .. 100;
 
    subtype Authp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
 

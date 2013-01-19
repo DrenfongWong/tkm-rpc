@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Cfg;
 
 package Tkmrpc.Response.Cfg.Tkm_Limits is
 
-   Data_Size : constant := 136;
+   Data_Size : constant := 132;
 
    type Data_Type is record
       Max_Active_Requests : Types.Active_Requests_Type;
@@ -34,15 +34,15 @@ package Tkmrpc.Response.Cfg.Tkm_Limits is
       Iag_Contexts        at 40 range 0 .. (8 * 8) - 1;
       Eag_Contexts        at 48 range 0 .. (8 * 8) - 1;
       Dhag_Contexts       at 56 range 0 .. (8 * 8) - 1;
-      Sp_Contexts         at 64 range 0 .. (8 * 8) - 1;
-      Authp_Contexts      at 72 range 0 .. (8 * 8) - 1;
-      Dhp_Contexts        at 80 range 0 .. (8 * 8) - 1;
-      Autha_Contexts      at 88 range 0 .. (8 * 8) - 1;
-      Ca_Contexts         at 96 range 0 .. (8 * 8) - 1;
-      Lc_Contexts         at 104 range 0 .. (8 * 8) - 1;
-      Ia_Contexts         at 112 range 0 .. (8 * 8) - 1;
-      Ea_Contexts         at 120 range 0 .. (8 * 8) - 1;
-      Dha_Contexts        at 128 range 0 .. (8 * 8) - 1;
+      Sp_Contexts         at 64 range 0 .. (4 * 8) - 1;
+      Authp_Contexts      at 68 range 0 .. (8 * 8) - 1;
+      Dhp_Contexts        at 76 range 0 .. (8 * 8) - 1;
+      Autha_Contexts      at 84 range 0 .. (8 * 8) - 1;
+      Ca_Contexts         at 92 range 0 .. (8 * 8) - 1;
+      Lc_Contexts         at 100 range 0 .. (8 * 8) - 1;
+      Ia_Contexts         at 108 range 0 .. (8 * 8) - 1;
+      Ea_Contexts         at 116 range 0 .. (8 * 8) - 1;
+      Dha_Contexts        at 124 range 0 .. (8 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 
