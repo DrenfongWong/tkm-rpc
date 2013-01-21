@@ -217,15 +217,15 @@ is
    procedure authenticate
      (Id : Types.ae_id_type;
       ca_context : Types.ca_id_type;
-      ra_id : Types.authag_id_type;
-      remote_identity : Types.ri_id_type;
+      authag_id : Types.authag_id_type;
+      ri_id : Types.ri_id_type;
       not_before : Types.abs_time_type;
       not_after : Types.abs_time_type)
    is
    begin
       Context_Array (Id).ca_id := ca_context;
-      Context_Array (Id).authag_id := ra_id;
-      Context_Array (Id).ri_id := remote_identity;
+      Context_Array (Id).authag_id := authag_id;
+      Context_Array (Id).ri_id := ri_id;
       Context_Array (Id).cc_not_before := not_before;
       Context_Array (Id).cc_not_after := not_after;
       Context_Array (Id).State := authenticated;
@@ -258,6 +258,16 @@ is
 
    -------------------------------------------------------------------------
 
+   function get_lc_id
+     (Id : Types.ae_id_type)
+      return Types.lc_id_type
+   is
+   begin
+      return Context_Array (Id).lc_id;
+   end get_lc_id;
+
+   -------------------------------------------------------------------------
+
    function get_nonce_loc
      (Id : Types.ae_id_type)
       return Types.nonce_type
@@ -275,6 +285,16 @@ is
    begin
       return Context_Array (Id).nonce_rem;
    end get_nonce_rem;
+
+   -------------------------------------------------------------------------
+
+   function get_ri_id
+     (Id : Types.ae_id_type)
+      return Types.ri_id_type
+   is
+   begin
+      return Context_Array (Id).ri_id;
+   end get_ri_id;
 
    -------------------------------------------------------------------------
 
