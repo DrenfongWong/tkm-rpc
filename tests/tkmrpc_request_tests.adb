@@ -28,8 +28,11 @@
 --  SUCH DAMAGE.
 --
 
-with Tkmrpc.Operations;
 with Tkmrpc.Request.Convert;
+with Tkmrpc.Response;
+with Tkmrpc.Operations.Ike;
+with Tkmrpc.Operation_Handlers.Ike.Nc_Create;
+with Tkmrpc.Results;
 
 with Test_Utils;
 
@@ -47,7 +50,42 @@ is
       T.Add_Test_Routine
         (Routine => Stream_Conversion'Access,
          Name    => "To/from stream conversions");
+      T.Add_Test_Routine
+        (Routine => Request_Validation'Access,
+         Name    => "Request validation");
    end Initialize;
+
+   -------------------------------------------------------------------------
+
+   procedure Request_Validation
+   is
+      use type Tkmrpc.Results.Result_Type;
+
+      Invalid_Id  : constant Request.Data_Type
+        := (Header      => (Operation => Operations.Ike.Nc_Create,
+                            Request_Id => 1),
+            Padded_Data => (others => 0));
+      Invalid_Len : constant Request.Data_Type
+        := (Header      => (Operation => Operations.Ike.Nc_Create,
+                            Request_Id => 1),
+            Padded_Data => (0, 0, 0, 0, 0, 0, 0, 1,
+                            16#ff#, 16#ff#, 16#ff#, 16#ff#, 16#ff#, 16#ff#,
+                            16#ff#, 16#ff#, others => 0));
+      Res         : Response.Data_Type := Tkmrpc.Response.Null_Data;
+   begin
+      Tkmrpc.Operation_Handlers.Ike.Nc_Create.Handle
+        (Req => Invalid_Id,
+         Res => Res);
+      Assert (Condition => Res.Header.Result = Results.Invalid_Parameter,
+              Message   => "Invalid Nc_Create request not caugth (nc_id)");
+
+      Tkmrpc.Operation_Handlers.Ike.Nc_Create.Handle
+        (Req => Invalid_Len,
+         Res => Res);
+      Assert
+        (Condition => Res.Header.Result = Results.Invalid_Parameter,
+         Message   => "Invalid Nc_Create request not caugth (nonce_length)");
+   end Request_Validation;
 
    -------------------------------------------------------------------------
 
