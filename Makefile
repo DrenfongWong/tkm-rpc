@@ -5,7 +5,9 @@ COVDIR    = $(OBJDIR)/cov
 LIBDIR    = lib
 GPR_FILES = gnat/*.gpr
 
-BUILD_OPTS = -p
+NUM_CPUS := $(shell getconf _NPROCESSORS_ONLN)
+
+BUILD_OPTS = -p -j$(NUM_CPUS)
 
 all: build_tests
 
