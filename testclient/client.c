@@ -83,6 +83,17 @@ int main(int argc, char **argv)
 	check_result(result, "ike_dh_generate_key");
 	printf("client: DH public value matched\n");
 
+	/* Check that passing an invalid parameter is handled */
+	result = ike_nc_reset(0);
+	if (result != TKM_INVALID_PARAMETER)
+	{
+		printf("client: invalid parameter not caught (status %" PRId64 ")\n",
+				result);
+		tkmlib_final();
+		exit(EXIT_FAILURE);
+	}
+	printf("client: Invalid parameter caught\n");
+
 	tkmlib_final();
 	return EXIT_SUCCESS;
 }
