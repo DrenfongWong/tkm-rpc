@@ -40,4 +40,7 @@ is
    procedure Stream_Conversion;
    --  Verify request data to/from stream conversions.
 
+   procedure Request_Validation;
+   --  Verify request data validity checks.
+
 end Tkmrpc_Request_Tests;
