@@ -48,10 +48,11 @@ begin
 
    exception
       when E : others =>
-         Exception_Handler (Ex => E);
-
          Res                   := Tkmrpc.Response.Null_Data;
+         Res.Header.Operation  := Req.Header.Operation;
          Res.Header.Request_Id := Req.Header.Request_Id;
+         Exception_Handler (Ex     => E,
+                            Result => Res.Header.Result);
    end;
 
    Send_Last := Res'Size / 8;

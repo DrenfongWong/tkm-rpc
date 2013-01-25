@@ -31,6 +31,7 @@
 with Ada.Streams;
 with Ada.Exceptions;
 
+with Tkmrpc.Results;
 with Tkmrpc.Request;
 with Tkmrpc.Response;
 
@@ -44,7 +45,8 @@ generic
       Res : out Response.Data_Type);
 
    with procedure Exception_Handler
-     (Ex : Ada.Exceptions.Exception_Occurrence) is null;
+     (Ex     : Ada.Exceptions.Exception_Occurrence;
+      Result : in out Tkmrpc.Results.Result_Type) is null;
 
 procedure Tkmrpc.Process_Stream
   (Recv_Data :     Ada.Streams.Stream_Element_Array;
