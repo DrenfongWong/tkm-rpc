@@ -19,6 +19,7 @@ enum version_type {
 };
 
 enum dh_algorithm_type {
+    TKM_MODP_2048 = 0x000000000000000e,
     TKM_MODP_3072 = 0x000000000000000f,
     TKM_MODP_4096 = 0x0000000000000010,
 };
