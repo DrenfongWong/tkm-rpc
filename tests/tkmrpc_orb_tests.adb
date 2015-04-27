@@ -66,6 +66,7 @@ is
    procedure C_Test_Client
    is
       use type Tkmrpc.Types.Nc_Id_Type;
+      use type Tkmrpc.Types.Nonce_Length_Type;
 
       Sock     : aliased Anet.Sockets.Unix.TCP_Socket_Type;
       Receiver : Unix_TCP_Receiver.Receiver_Type (S => Sock'Access);
@@ -112,7 +113,9 @@ is
    procedure Client_Server_ORBs
    is
       use type Tkmrpc.Types.Nonce_Type;
+      use type Tkmrpc.Types.Nonce_Length_Type;
       use type Tkmrpc.Types.Nc_Id_Type;
+      use type Tkmrpc.Results.Result_Type;
 
       Sock     : aliased Anet.Sockets.Unix.TCP_Socket_Type;
       Receiver : Unix_TCP_Receiver.Receiver_Type (S => Sock'Access);

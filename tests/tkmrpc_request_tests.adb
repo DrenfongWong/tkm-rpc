@@ -33,6 +33,7 @@ with Tkmrpc.Response;
 with Tkmrpc.Operations.Ike;
 with Tkmrpc.Operation_Handlers.Ike.Nc_Create;
 with Tkmrpc.Results;
+with Tkmrpc.Types;
 
 with Test_Utils;
 
@@ -94,6 +95,7 @@ is
       use Tkmrpc.Request;
       use type Tkmrpc.Operations.Operation_Type;
       use type Tkmrpc.Request.Padded_Data_Type;
+      use type Tkmrpc.Types.Request_Id_Type;
 
       Stream : constant Convert.Stream_Type
         := Convert.To_Stream (S => Test_Utils.Test_Request);

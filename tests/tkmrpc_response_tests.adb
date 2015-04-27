@@ -30,6 +30,7 @@
 
 with Tkmrpc.Operations;
 with Tkmrpc.Response.Convert;
+with Tkmrpc.Types;
 
 with Test_Utils;
 
@@ -56,6 +57,7 @@ is
       use Tkmrpc.Response;
       use type Tkmrpc.Operations.Operation_Type;
       use type Tkmrpc.Response.Padded_Data_Type;
+      use type Tkmrpc.Types.Request_Id_Type;
 
       Stream : constant Convert.Stream_Type
         := Convert.To_Stream (S => Test_Utils.Test_Response);
