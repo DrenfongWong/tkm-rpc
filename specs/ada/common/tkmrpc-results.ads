@@ -2,7 +2,7 @@ with Interfaces;
 
 package Tkmrpc.Results is
 
-   subtype Result_Type is Interfaces.Unsigned_64;
+   type Result_Type is new Interfaces.Unsigned_64;
 
    Ok                : constant Result_Type := 16#0000000000000000#;
    Invalid_Operation : constant Result_Type := 16#0000000000000101#;

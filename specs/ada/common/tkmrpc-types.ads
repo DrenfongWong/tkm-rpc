@@ -6,99 +6,99 @@ package Tkmrpc.Types is
    subtype Byte_Sequence_Range is Natural range 0 .. 2 ** 31 - 2;
    type Byte_Sequence is array (Byte_Sequence_Range range <>) of Byte;
 
-   subtype Request_Id_Type is Interfaces.Unsigned_64;
+   type Request_Id_Type is new Interfaces.Unsigned_64;
 
-   subtype Version_Type is Interfaces.Unsigned_64;
+   type Version_Type is new Interfaces.Unsigned_64;
 
-   subtype Active_Requests_Type is Interfaces.Unsigned_64;
+   type Active_Requests_Type is new Interfaces.Unsigned_64;
 
-   subtype Authag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Authag_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Cag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Cag_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Li_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Li_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ri_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Ri_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Iag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Iag_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Eag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Eag_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dhag_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Dhag_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Sp_Id_Type is Interfaces.Unsigned_32 range 1 .. 100;
+   type Sp_Id_Type is new Interfaces.Unsigned_32 range 1 .. 100;
 
-   subtype Authp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Authp_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dhp_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Dhp_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Autha_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Autha_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ca_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Ca_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Lc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Lc_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ia_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Ia_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ea_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Ea_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dha_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Dha_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Nc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Nc_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Dh_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Dh_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Cc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Cc_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Ae_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Ae_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Isa_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Isa_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Esa_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Esa_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Esp_Enc_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Esp_Enc_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Esp_Dec_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Esp_Dec_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Esp_Map_Id_Type is Interfaces.Unsigned_64 range 1 .. 100;
+   type Esp_Map_Id_Type is new Interfaces.Unsigned_64 range 1 .. 100;
 
-   subtype Abs_Time_Type is Interfaces.Unsigned_64;
+   type Abs_Time_Type is new Interfaces.Unsigned_64;
 
-   subtype Rel_Time_Type is Interfaces.Unsigned_64;
+   type Rel_Time_Type is new Interfaces.Unsigned_64;
 
-   subtype Duration_Type is Interfaces.Unsigned_64;
+   type Duration_Type is new Interfaces.Unsigned_64;
 
-   subtype Counter_Type is Interfaces.Unsigned_64;
+   type Counter_Type is new Interfaces.Unsigned_64;
 
-   subtype Pfs_Flag_Type is Interfaces.Unsigned_64;
+   type Pfs_Flag_Type is new Interfaces.Unsigned_64;
 
-   subtype Cc_Time_Flag_Type is Interfaces.Unsigned_64;
+   type Cc_Time_Flag_Type is new Interfaces.Unsigned_64;
 
-   subtype Expiry_Flag_Type is Interfaces.Unsigned_8;
+   type Expiry_Flag_Type is new Interfaces.Unsigned_8;
 
-   subtype Auth_Algorithm_Type is Interfaces.Unsigned_64;
+   type Auth_Algorithm_Type is new Interfaces.Unsigned_64;
 
-   subtype Dh_Algorithm_Type is Interfaces.Unsigned_16;
+   type Dh_Algorithm_Type is new Interfaces.Unsigned_16;
 
-   subtype Prf_Algorithm_Type is Interfaces.Unsigned_16;
+   type Prf_Algorithm_Type is new Interfaces.Unsigned_16;
 
-   subtype Int_Algorithm_Type is Interfaces.Unsigned_16;
+   type Int_Algorithm_Type is new Interfaces.Unsigned_16;
 
-   subtype Enc_Algorithm_Type is Interfaces.Unsigned_16;
+   type Enc_Algorithm_Type is new Interfaces.Unsigned_16;
 
-   subtype Key_Length_Bits_Type is Interfaces.Unsigned_64;
+   type Key_Length_Bits_Type is new Interfaces.Unsigned_64;
 
-   subtype Block_Length_Bits_Type is Interfaces.Unsigned_64;
+   type Block_Length_Bits_Type is new Interfaces.Unsigned_64;
 
-   subtype Protocol_Type is Interfaces.Unsigned_32;
+   type Protocol_Type is new Interfaces.Unsigned_32;
 
-   subtype Init_Type is Interfaces.Unsigned_64;
+   type Init_Type is new Interfaces.Unsigned_64;
 
-   subtype Ike_Spi_Type is Interfaces.Unsigned_64;
+   type Ike_Spi_Type is new Interfaces.Unsigned_64;
 
-   subtype Esp_Spi_Type is Interfaces.Unsigned_32;
+   type Esp_Spi_Type is new Interfaces.Unsigned_32;
 
-   subtype Nonce_Length_Type is Interfaces.Unsigned_64;
+   type Nonce_Length_Type is new Interfaces.Unsigned_64;
 
    subtype Init_Message_Type_Range is Byte_Sequence_Range range 1 .. 1500;
    subtype Init_Message_Type_Data_Type is Byte_Sequence (
