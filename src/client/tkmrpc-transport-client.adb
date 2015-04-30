@@ -51,24 +51,19 @@ is
 
    -------------------------------------------------------------------------
 
-   procedure Receive (Data : out Response.Data_Type)
+   procedure Send_Receive
+     (Req_Data :     Request.Data_Type;
+      Res_Data : out Response.Data_Type)
    is
       Buffer : Ada.Streams.Stream_Element_Array (1 .. Response.Response_Size);
       Last   : Ada.Streams.Stream_Element_Offset;
    begin
+      Socket.Send (Item => Request.Convert.To_Stream (S => Req_Data));
       Socket.Receive
         (Item => Buffer,
          Last => Last);
 
-      Data := Response.Convert.From_Stream (S => Buffer);
-   end Receive;
-
-   -------------------------------------------------------------------------
-
-   procedure Send (Data : Request.Data_Type)
-   is
-   begin
-      Socket.Send (Item => Request.Convert.To_Stream (S => Data));
-   end Send;
+      Res_Data := Response.Convert.From_Stream (S => Buffer);
+   end Send_Receive;
 
 end Tkmrpc.Transport.Client;
