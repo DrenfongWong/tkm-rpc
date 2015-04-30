@@ -26,9 +26,9 @@ package body Tkmrpc.Clients.Ees is
       Req            := Request.Ees.Esa_Acquire.Null_Request;
       Req.Data.Sp_Id := Sp_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ees.Esa_Acquire.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ees.Esa_Acquire.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ees.Esa_Acquire.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -64,9 +64,9 @@ package body Tkmrpc.Clients.Ees is
       Req.Data.Protocol := Protocol;
       Req.Data.Hard     := Hard;
 
-      Transport.Client.Send
-        (Data => Request.Ees.Esa_Expire.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ees.Esa_Expire.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ees.Esa_Expire.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;

@@ -70,9 +70,9 @@ package body Tkmrpc.Clients.Ike is
       Req            := Request.Ike.Ae_Reset.Null_Request;
       Req.Data.Ae_Id := Ae_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Ae_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Ae_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Ae_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -102,9 +102,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Autha_Id    := Autha_Id;
       Req.Data.Certificate := Certificate;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Cc_Add_Certificate.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Cc_Add_Certificate.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res :=
          Response.Ike.Cc_Add_Certificate.Convert.From_Response (S => Data);
 
@@ -133,9 +134,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Cc_Id := Cc_Id;
       Req.Data.Ca_Id := Ca_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Cc_Check_Ca.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Cc_Check_Ca.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Cc_Check_Ca.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -161,9 +162,9 @@ package body Tkmrpc.Clients.Ike is
       Req            := Request.Ike.Cc_Reset.Null_Request;
       Req.Data.Cc_Id := Cc_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Cc_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Cc_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Cc_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -200,10 +201,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Autha_Id    := Autha_Id;
       Req.Data.Certificate := Certificate;
 
-      Transport.Client.Send
-        (Data =>
-            Request.Ike.Cc_Set_User_Certificate.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Cc_Set_User_Certificate.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res :=
          Response.Ike.Cc_Set_User_Certificate.Convert.From_Response
            (S => Data);
@@ -234,9 +235,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Dh_Id  := Dh_Id;
       Req.Data.Dha_Id := Dha_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Dh_Create.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Dh_Create.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Dh_Create.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -267,9 +268,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Dh_Id    := Dh_Id;
       Req.Data.Pubvalue := Pubvalue;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Dh_Generate_Key.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Dh_Generate_Key.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Dh_Generate_Key.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -295,9 +297,9 @@ package body Tkmrpc.Clients.Ike is
       Req            := Request.Ike.Dh_Reset.Null_Request;
       Req.Data.Dh_Id := Dh_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Dh_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Dh_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Dh_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -351,9 +353,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
       Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Esa_Create.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Esa_Create.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Esa_Create.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -395,9 +397,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
       Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Esa_Create_First.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Esa_Create_First.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Esa_Create_First.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -448,9 +451,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Esp_Spi_Loc := Esp_Spi_Loc;
       Req.Data.Esp_Spi_Rem := Esp_Spi_Rem;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Esa_Create_No_Pfs.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Esa_Create_No_Pfs.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Esa_Create_No_Pfs.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -476,9 +480,9 @@ package body Tkmrpc.Clients.Ike is
       Req             := Request.Ike.Esa_Reset.Null_Request;
       Req.Data.Esa_Id := Esa_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Esa_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Esa_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Esa_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -504,9 +508,9 @@ package body Tkmrpc.Clients.Ike is
       Req             := Request.Ike.Esa_Select.Null_Request;
       Req.Data.Esa_Id := Esa_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Esa_Select.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Esa_Select.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Esa_Select.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -548,9 +552,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Init_Message := Init_Message;
       Req.Data.Signature    := Signature;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Auth.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Isa_Auth.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Isa_Auth.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -605,9 +609,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Spi_Loc   := Spi_Loc;
       Req.Data.Spi_Rem   := Spi_Rem;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Create.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Isa_Create.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Isa_Create.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -668,9 +672,10 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Spi_Loc       := Spi_Loc;
       Req.Data.Spi_Rem       := Spi_Rem;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Create_Child.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Isa_Create_Child.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Isa_Create_Child.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -702,9 +707,9 @@ package body Tkmrpc.Clients.Ike is
       Req             := Request.Ike.Isa_Reset.Null_Request;
       Req.Data.Isa_Id := Isa_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Isa_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Isa_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -735,9 +740,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Lc_Id        := Lc_Id;
       Req.Data.Init_Message := Init_Message;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Isa_Sign.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Isa_Sign.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Isa_Sign.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -766,10 +771,10 @@ package body Tkmrpc.Clients.Ike is
       Req             := Request.Ike.Isa_Skip_Create_First.Null_Request;
       Req.Data.Isa_Id := Isa_Id;
 
-      Transport.Client.Send
-        (Data =>
-            Request.Ike.Isa_Skip_Create_First.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data =>
+            Request.Ike.Isa_Skip_Create_First.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res :=
          Response.Ike.Isa_Skip_Create_First.Convert.From_Response (S => Data);
 
@@ -799,9 +804,9 @@ package body Tkmrpc.Clients.Ike is
       Req.Data.Nc_Id        := Nc_Id;
       Req.Data.Nonce_Length := Nonce_Length;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Nc_Create.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Nc_Create.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Nc_Create.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -830,9 +835,9 @@ package body Tkmrpc.Clients.Ike is
       Req            := Request.Ike.Nc_Reset.Null_Request;
       Req.Data.Nc_Id := Nc_Id;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Nc_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Nc_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Nc_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -858,9 +863,9 @@ package body Tkmrpc.Clients.Ike is
    begin
       Req := Request.Ike.Tkm_Limits.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Tkm_Limits.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Tkm_Limits.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Tkm_Limits.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -886,9 +891,9 @@ package body Tkmrpc.Clients.Ike is
    begin
       Req := Request.Ike.Tkm_Reset.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Tkm_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Tkm_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Tkm_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -908,9 +913,9 @@ package body Tkmrpc.Clients.Ike is
    begin
       Req := Request.Ike.Tkm_Version.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Ike.Tkm_Version.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Ike.Tkm_Version.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Ike.Tkm_Version.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;

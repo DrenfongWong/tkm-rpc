@@ -44,9 +44,9 @@ package body Tkmrpc.Clients.Cfg is
    begin
       Req := Request.Cfg.Tkm_Limits.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Cfg.Tkm_Limits.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Cfg.Tkm_Limits.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Cfg.Tkm_Limits.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -82,9 +82,9 @@ package body Tkmrpc.Clients.Cfg is
    begin
       Req := Request.Cfg.Tkm_Reset.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Cfg.Tkm_Reset.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Cfg.Tkm_Reset.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Cfg.Tkm_Reset.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
@@ -104,9 +104,9 @@ package body Tkmrpc.Clients.Cfg is
    begin
       Req := Request.Cfg.Tkm_Version.Null_Request;
 
-      Transport.Client.Send
-        (Data => Request.Cfg.Tkm_Version.Convert.To_Request (S => Req));
-      Transport.Client.Receive (Data => Data);
+      Transport.Client.Send_Receive
+        (Req_Data => Request.Cfg.Tkm_Version.Convert.To_Request (S => Req),
+         Res_Data => Data);
       Res := Response.Cfg.Tkm_Version.Convert.From_Response (S => Data);
 
       Result := Res.Header.Result;
