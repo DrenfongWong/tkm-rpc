@@ -38,15 +38,33 @@ with Tkmrpc.Response.Convert;
 package body Tkmrpc.Transport.Client
 is
 
-   Socket : Anet.Sockets.Unix.TCP_Socket_Type;
+   --  This socket type serializes access to the communication socket.
+   protected type Serialized_Socket
+   is
+
+      --  Connect socket to given address.
+      procedure Connect (Address : String);
+
+      --  Send request data and return received response.
+      procedure Send_Receive
+        (Req_Data :     Request.Data_Type;
+         Res_Data : out Response.Data_Type);
+
+   private
+
+      --  Socket used for communication with server.
+      Socket : Anet.Sockets.Unix.TCP_Socket_Type;
+
+   end Serialized_Socket;
+
+   Sock : Serialized_Socket;
 
    -------------------------------------------------------------------------
 
    procedure Connect (Address : String)
    is
    begin
-      Socket.Init;
-      Socket.Connect (Path => Anet.Sockets.Unix.Path_Type (Address));
+      Sock.Connect (Address => Address);
    end Connect;
 
    -------------------------------------------------------------------------
@@ -55,15 +73,43 @@ is
      (Req_Data :     Request.Data_Type;
       Res_Data : out Response.Data_Type)
    is
-      Buffer : Ada.Streams.Stream_Element_Array (1 .. Response.Response_Size);
-      Last   : Ada.Streams.Stream_Element_Offset;
    begin
-      Socket.Send (Item => Request.Convert.To_Stream (S => Req_Data));
-      Socket.Receive
-        (Item => Buffer,
-         Last => Last);
-
-      Res_Data := Response.Convert.From_Stream (S => Buffer);
+      Sock.Send_Receive (Req_Data => Req_Data,
+                         Res_Data => Res_Data);
    end Send_Receive;
+
+   -------------------------------------------------------------------------
+
+   protected body Serialized_Socket
+   is
+
+      ----------------------------------------------------------------------
+
+      procedure Connect (Address : String)
+      is
+      begin
+         Socket.Init;
+         Socket.Connect (Path => Anet.Sockets.Unix.Path_Type (Address));
+      end Connect;
+
+      ----------------------------------------------------------------------
+
+      procedure Send_Receive
+        (Req_Data :     Request.Data_Type;
+         Res_Data : out Response.Data_Type)
+      is
+         Buffer : Ada.Streams.Stream_Element_Array
+           (1 .. Response.Response_Size);
+         Last   : Ada.Streams.Stream_Element_Offset;
+      begin
+         Socket.Send (Item => Request.Convert.To_Stream (S => Req_Data));
+         Socket.Receive
+           (Item => Buffer,
+            Last => Last);
+
+         Res_Data := Response.Convert.From_Stream (S => Buffer);
+      end Send_Receive;
+
+   end Serialized_Socket;
 
 end Tkmrpc.Transport.Client;
