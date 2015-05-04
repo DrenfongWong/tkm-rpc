@@ -35,6 +35,8 @@ with Anet.Sockets.Unix;
 with Tkmrpc.Request.Convert;
 with Tkmrpc.Response.Convert;
 
+pragma Elaborate_All (Anet.Sockets.Unix);
+
 package body Tkmrpc.Transport.Client
 is
 
