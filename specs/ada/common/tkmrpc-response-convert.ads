@@ -2,7 +2,6 @@ with Ada.Streams;
 with Ada.Unchecked_Conversion;
 
 package Tkmrpc.Response.Convert is
-   use type Ada.Streams.Stream_Element_Offset;
 
    subtype Stream_Range is Ada.Streams.Stream_Element_Offset range
       1 .. Response_Size;

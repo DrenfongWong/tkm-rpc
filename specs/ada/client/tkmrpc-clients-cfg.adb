@@ -74,8 +74,6 @@ package body Tkmrpc.Clients.Cfg is
    -------------------------------------------------------------------------
 
    procedure Tkm_Reset (Result : out Results.Result_Type) is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Cfg.Tkm_Reset.Request_Type;
       Res  : Response.Cfg.Tkm_Reset.Response_Type;
       Data : Response.Data_Type;

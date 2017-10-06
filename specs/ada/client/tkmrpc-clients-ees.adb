@@ -12,8 +12,6 @@ package body Tkmrpc.Clients.Ees is
      (Result : out Results.Result_Type;
       Sp_Id  : Types.Sp_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ees.Esa_Acquire.Request_Type;
       Res  : Response.Ees.Esa_Acquire.Response_Type;
       Data : Response.Data_Type;
@@ -43,8 +41,6 @@ package body Tkmrpc.Clients.Ees is
       Protocol : Types.Protocol_Type;
       Hard     : Types.Expiry_Flag_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ees.Esa_Expire.Request_Type;
       Res  : Response.Ees.Esa_Expire.Response_Type;
       Data : Response.Data_Type;

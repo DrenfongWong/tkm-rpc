@@ -56,8 +56,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Ae_Id  : Types.Ae_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Ae_Reset.Request_Type;
       Res  : Response.Ike.Ae_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -86,8 +84,6 @@ package body Tkmrpc.Clients.Ike is
       Autha_Id    : Types.Autha_Id_Type;
       Certificate : Types.Certificate_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Cc_Add_Certificate.Request_Type;
       Res  : Response.Ike.Cc_Add_Certificate.Response_Type;
       Data : Response.Data_Type;
@@ -119,8 +115,6 @@ package body Tkmrpc.Clients.Ike is
       Cc_Id  : Types.Cc_Id_Type;
       Ca_Id  : Types.Ca_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Cc_Check_Ca.Request_Type;
       Res  : Response.Ike.Cc_Check_Ca.Response_Type;
       Data : Response.Data_Type;
@@ -148,8 +142,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Cc_Id  : Types.Cc_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Cc_Reset.Request_Type;
       Res  : Response.Ike.Cc_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -179,8 +171,6 @@ package body Tkmrpc.Clients.Ike is
       Autha_Id    : Types.Autha_Id_Type;
       Certificate : Types.Certificate_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Cc_Set_User_Certificate.Request_Type;
       Res  : Response.Ike.Cc_Set_User_Certificate.Response_Type;
       Data : Response.Data_Type;
@@ -253,8 +243,6 @@ package body Tkmrpc.Clients.Ike is
       Dh_Id    : Types.Dh_Id_Type;
       Pubvalue : Types.Dh_Pubvalue_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Dh_Generate_Key.Request_Type;
       Res  : Response.Ike.Dh_Generate_Key.Response_Type;
       Data : Response.Data_Type;
@@ -283,8 +271,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Dh_Id  : Types.Dh_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Dh_Reset.Request_Type;
       Res  : Response.Ike.Dh_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -320,8 +306,6 @@ package body Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Esa_Create.Request_Type;
       Res  : Response.Ike.Esa_Create.Response_Type;
       Data : Response.Data_Type;
@@ -372,8 +356,6 @@ package body Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Esa_Create_First.Request_Type;
       Res  : Response.Ike.Esa_Create_First.Response_Type;
       Data : Response.Data_Type;
@@ -420,8 +402,6 @@ package body Tkmrpc.Clients.Ike is
       Esp_Spi_Loc : Types.Esp_Spi_Type;
       Esp_Spi_Rem : Types.Esp_Spi_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Esa_Create_No_Pfs.Request_Type;
       Res  : Response.Ike.Esa_Create_No_Pfs.Response_Type;
       Data : Response.Data_Type;
@@ -466,8 +446,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Esa_Id : Types.Esa_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Esa_Reset.Request_Type;
       Res  : Response.Ike.Esa_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -494,8 +472,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Esa_Id : Types.Esa_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Esa_Select.Request_Type;
       Res  : Response.Ike.Esa_Select.Response_Type;
       Data : Response.Data_Type;
@@ -531,8 +507,6 @@ package body Tkmrpc.Clients.Ike is
       Init_Message : Types.Init_Message_Type;
       Signature    : Types.Signature_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Isa_Auth.Request_Type;
       Res  : Response.Ike.Isa_Auth.Response_Type;
       Data : Response.Data_Type;
@@ -693,8 +667,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Isa_Id : Types.Isa_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Isa_Reset.Request_Type;
       Res  : Response.Ike.Isa_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -757,8 +729,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Isa_Id : Types.Isa_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Isa_Skip_Create_First.Request_Type;
       Res  : Response.Ike.Isa_Skip_Create_First.Response_Type;
       Data : Response.Data_Type;
@@ -821,8 +791,6 @@ package body Tkmrpc.Clients.Ike is
      (Result : out Results.Result_Type;
       Nc_Id  : Types.Nc_Id_Type)
    is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Nc_Reset.Request_Type;
       Res  : Response.Ike.Nc_Reset.Response_Type;
       Data : Response.Data_Type;
@@ -883,8 +851,6 @@ package body Tkmrpc.Clients.Ike is
    -------------------------------------------------------------------------
 
    procedure Tkm_Reset (Result : out Results.Result_Type) is
-      use type Tkmrpc.Results.Result_Type;
-
       Req  : Request.Ike.Tkm_Reset.Request_Type;
       Res  : Response.Ike.Tkm_Reset.Response_Type;
       Data : Response.Data_Type;
