@@ -28,8 +28,6 @@
 --  SUCH DAMAGE.
 --
 
-with Interfaces;
-
 with Tkmrpc.Mock;
 
 package body Tkmrpc.Servers.Ike is
@@ -142,7 +140,6 @@ package body Tkmrpc.Servers.Ike is
       Pubvalue : Types.Dh_Pubvalue_Type)
    is
       pragma Unreferenced (Dh_Id);
-      use type Interfaces.Unsigned_32;
       use type Types.Byte_Sequence;
 
       Size : constant Natural := Natural (Pubvalue.Size);
