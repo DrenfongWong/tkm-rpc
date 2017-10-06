@@ -32,10 +32,13 @@ with Tkmrpc.Request.Convert;
 with Tkmrpc.Response.Convert;
 
 procedure Tkmrpc.Process_Stream
-  (Recv_Data :     Ada.Streams.Stream_Element_Array;
+  (Src       :     Address_Type;
+   Recv_Data :     Ada.Streams.Stream_Element_Array;
    Send_Data : out Ada.Streams.Stream_Element_Array;
    Send_Last : out Ada.Streams.Stream_Element_Offset)
 is
+   pragma Unreferenced (Src);
+
    use type Ada.Streams.Stream_Element_Offset;
 
    Req : constant Tkmrpc.Request.Data_Type

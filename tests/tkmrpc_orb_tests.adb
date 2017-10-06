@@ -54,10 +54,13 @@ is
    package ICS renames Interfaces.C.Strings;
 
    package Unix_TCP_Receiver is new Anet.Receivers.Stream
-     (Socket_Type => Anet.Sockets.Unix.TCP_Socket_Type);
+     (Socket_Type       => Anet.Sockets.Unix.TCP_Socket_Type,
+      Address_Type      => Anet.Sockets.Unix.Full_Path_Type,
+      Accept_Connection => Anet.Sockets.Unix.Accept_Connection);
 
    procedure Dispatch is new Process_Stream
-     (Dispatch => Tkmrpc.Dispatchers.Ike.Dispatch);
+     (Address_Type => Anet.Sockets.Unix.Full_Path_Type,
+      Dispatch     => Tkmrpc.Dispatchers.Ike.Dispatch);
 
    Socket_Path : constant String := "/tmp/tkm.rpc-";
 

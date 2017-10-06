@@ -46,7 +46,10 @@ generic
    with procedure Exception_Handler
      (Ex : Ada.Exceptions.Exception_Occurrence) is null;
 
+   type Address_Type is private;
+
 procedure Tkmrpc.Process_Stream
-  (Recv_Data :     Ada.Streams.Stream_Element_Array;
+  (Src       :     Address_Type;
+   Recv_Data :     Ada.Streams.Stream_Element_Array;
    Send_Data : out Ada.Streams.Stream_Element_Array;
    Send_Last : out Ada.Streams.Stream_Element_Offset);
