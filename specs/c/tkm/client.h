@@ -16,7 +16,7 @@ void tkmlib_final(void);
 /**
  * Initialize CFG client with given address
  */
-extern result_type cfg_init(const char const *address);
+extern result_type cfg_init(const char * const address);
 
 /**
  * Returns the version of TKM.
@@ -57,7 +57,7 @@ extern result_type cfg_tkm_reset();
 /**
  * Initialize IKE client with given address
  */
-extern result_type ike_init(const char const *address);
+extern result_type ike_init(const char * const address);
 
 /**
  * Returns the version of TKM.
@@ -256,7 +256,7 @@ extern result_type ike_esa_select(const esa_id_type esa_id);
 /**
  * Initialize EES client with given address
  */
-extern result_type ees_init(const char const *address);
+extern result_type ees_init(const char * const address);
 
 /**
  * Trigger 'Acquire' event for an ESP SA.
