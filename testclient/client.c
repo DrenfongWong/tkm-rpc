@@ -42,7 +42,7 @@ const dh_pubvalue_type ref_dh_pubval = {
 };
 
 /* Check call result, exit on failure */
-static void check_result (const result_type res, const char const *name)
+static void check_result (const result_type res, const char * const name)
 {
 	if (res != TKM_OK)
 	{
