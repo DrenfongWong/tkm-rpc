@@ -3,14 +3,14 @@ with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Response.Ike.Isa_Sign is
 
-   Data_Size : constant := 260;
+   Data_Size : constant := 388;
 
    type Data_Type is record
       Signature : Types.Signature_Type;
    end record;
 
    for Data_Type use record
-      Signature at 0 range 0 .. (260 * 8) - 1;
+      Signature at 0 range 0 .. (388 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

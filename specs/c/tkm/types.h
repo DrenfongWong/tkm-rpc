@@ -162,7 +162,7 @@ typedef struct signature_type signature_type;
 
 struct signature_type {
     uint32_t size;
-    byte_t data[256];
+    byte_t data[384];
 };
 
 typedef struct auth_parameter_type auth_parameter_type;

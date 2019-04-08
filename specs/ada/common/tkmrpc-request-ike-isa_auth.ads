@@ -3,7 +3,7 @@ with Tkmrpc.Operations.Ike;
 
 package Tkmrpc.Request.Ike.Isa_Auth is
 
-   Data_Size : constant := 1780;
+   Data_Size : constant := 1908;
 
    type Data_Type is record
       Isa_Id       : Types.Isa_Id_Type;
@@ -16,7 +16,7 @@ package Tkmrpc.Request.Ike.Isa_Auth is
       Isa_Id       at 0 range 0 .. (8 * 8) - 1;
       Cc_Id        at 8 range 0 .. (8 * 8) - 1;
       Init_Message at 16 range 0 .. (1504 * 8) - 1;
-      Signature    at 1520 range 0 .. (260 * 8) - 1;
+      Signature    at 1520 range 0 .. (388 * 8) - 1;
    end record;
    for Data_Type'Size use Data_Size * 8;
 

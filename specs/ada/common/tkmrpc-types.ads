@@ -215,14 +215,14 @@ package Tkmrpc.Types is
      (Size => Identity_Type_Range'First,
       Data => Identity_Type_Data_Type'(others => 0));
 
-   subtype Signature_Type_Range is Byte_Sequence_Range range 1 .. 256;
+   subtype Signature_Type_Range is Byte_Sequence_Range range 1 .. 384;
    subtype Signature_Type_Data_Type is Byte_Sequence (Signature_Type_Range);
 
    type Signature_Type is record
       Size : Signature_Type_Range;
       Data : Signature_Type_Data_Type;
    end record;
-   for Signature_Type'Size use 260 * 8;
+   for Signature_Type'Size use 388 * 8;
 
    Null_Signature_Type : constant Signature_Type :=
      Signature_Type'
